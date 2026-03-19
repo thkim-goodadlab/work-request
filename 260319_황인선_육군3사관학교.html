@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>황인선 작업요청서</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap");
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#1a2744;--blue:#2563eb;--blue-light:#dbeafe;--green:#059669;--green-light:#d1fae5;--red:#dc2626;--red-light:#fef2f2;--orange:#ea580c;--orange-light:#fff7ed;--yellow:#d97706;--purple:#7c3aed;--purple-light:#f5f3ff;--teal:#0d9488;--teal-light:#ccfbf1;--gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;--gray-400:#94a3b8;--gray-600:#475569;--gray-800:#1e293b;--radius:14px}
+body{font-family:"Noto Sans KR",sans-serif;background:var(--gray-100);color:var(--gray-800);min-height:100vh}
+.tab-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;box-shadow:0 -2px 12px rgba(0,0,0,.1);z-index:200}
+.tab-btn{flex:1;padding:10px 0 16px;text-align:center;font-size:12px;font-weight:700;color:var(--gray-400);border:none;background:none;cursor:pointer;border-top:3px solid transparent;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.tab-btn.active{color:var(--navy);border-top-color:var(--navy)}
+.tab-btn .tab-icon{display:block;font-size:20px;margin-bottom:2px}
+.page{display:none;padding-bottom:90px}.page.active{display:block}
+.summary-header{background:linear-gradient(135deg,var(--navy),#2e4a7a);color:#fff;padding:20px 16px 16px}
+.summary-header h1{font-size:22px;font-weight:900;margin-bottom:4px}
+.summary-header .sub{font-size:13px;opacity:.7}
+.updated-tag{margin-top:4px;background:rgba(255,255,255,.15);display:inline-block;padding:2px 10px;border-radius:6px;font-size:11px}
+.totals-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 12px 0}
+.total-card{background:#fff;border-radius:var(--radius);padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.total-card .label{font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.5px}
+.total-card .value{font-size:28px;font-weight:900;margin-top:2px}
+.total-card .unit{font-size:14px;font-weight:500;color:var(--gray-400)}
+.total-card.poster .value{color:var(--blue)}.total-card.banner .value{color:var(--orange)}
+.total-card.schools .value{color:var(--navy)}.total-card.visits .value{color:var(--green)}
+.camp-summary{margin:14px 12px 0;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.camp-summary-title{padding:12px 16px 8px;font-size:13px;font-weight:900;color:var(--gray-400)}
+.camp-sum-row{display:flex;align-items:center;padding:10px 16px;gap:10px;border-top:1px solid var(--gray-100)}
+.camp-sum-dday{font-size:11px;font-weight:900;padding:3px 8px;border-radius:6px;min-width:44px;text-align:center;flex-shrink:0}
+.camp-sum-info{flex:1;min-width:0}
+.camp-sum-name{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.camp-sum-approval{display:inline-block;font-size:10px;font-weight:900;padding:2px 8px;border-radius:4px;margin-top:3px}
+.camp-sum-request{font-size:11px;color:var(--teal);font-weight:700;margin-top:3px}
+.camp-sum-qty{text-align:right;flex-shrink:0;font-size:12px;line-height:1.6}
+.q-poster{color:var(--blue);font-weight:700}.q-banner{color:var(--orange);font-weight:700}
+.approval-yes{background:var(--green-light);color:var(--green)}
+.approval-no{background:var(--red-light);color:var(--red)}
+.approval-partial{background:#fef9c3;color:#92400e}
+.school-list-section{margin:14px 12px 0}
+.school-list-title{font-size:13px;font-weight:900;color:var(--gray-400);margin-bottom:8px}
+.school-table{width:100%;border-radius:var(--radius);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06);border-collapse:collapse}
+.school-table thead th{background:var(--navy);color:#fff;font-size:11px;font-weight:700;padding:10px 6px;text-align:center}
+.school-table thead th:first-child{text-align:left;padding-left:12px}
+.school-table tbody td{font-size:12px;padding:9px 6px;text-align:center;border-bottom:1px solid var(--gray-100);background:#fff}
+.school-table tbody td:first-child{text-align:left;padding-left:12px;font-weight:700;max-width:120px}
+.school-table tbody td:nth-child(2){text-align:left;color:var(--gray-600);font-size:11px}
+.school-table tbody tr.dup-row td:first-child{position:relative;padding-left:20px}
+.school-table tbody tr.dup-row td:first-child::before{content:"🔁";position:absolute;left:4px;font-size:10px}
+.school-table tfoot td{background:var(--navy);color:#fff;font-size:12px;font-weight:900;padding:10px 6px;text-align:center}
+.school-table tfoot td:first-child{text-align:left;padding-left:12px}
+.region-row td{background:var(--gray-200)!important;font-size:11px!important;font-weight:900!important;color:var(--gray-600)!important;padding:6px 12px!important;text-align:left!important}
+.detail-header{background:linear-gradient(135deg,var(--navy),#2e4a7a);color:#fff;padding:20px 16px 16px;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.detail-header-top{display:flex;justify-content:space-between;align-items:center}
+.detail-header h1{font-size:22px;font-weight:900}
+.school-count-badge{background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:13px;font-weight:500}
+.deadline-banner{margin:12px 12px 0;border-radius:var(--radius);overflow:hidden}
+.deadline-item{display:flex;align-items:center;padding:10px 14px;gap:10px;border-bottom:1px solid rgba(0,0,0,.05)}
+.deadline-item:last-child{border-bottom:none}
+.deadline-item.urgent{background:var(--red-light)}.deadline-item.soon{background:var(--orange-light)}.deadline-item.normal{background:#fff}
+.dday-badge{font-size:13px;font-weight:900;min-width:48px;text-align:center;padding:3px 8px;border-radius:8px;flex-shrink:0}
+.dday-badge.urgent,.camp-dday.urgent,.camp-sum-dday.urgent{background:var(--red);color:#fff}
+.dday-badge.soon,.camp-dday.soon,.camp-sum-dday.soon{background:var(--orange);color:#fff}
+.dday-badge.normal,.camp-dday.normal,.camp-sum-dday.normal{background:var(--gray-200);color:var(--gray-800)}
+.deadline-camp-name{font-size:12px;font-weight:700;flex:1}
+.deadline-approval{font-size:10px;font-weight:900;padding:3px 8px;border-radius:6px;flex-shrink:0}
+.deadline-date{font-size:11px;color:var(--gray-600);flex-shrink:0}
+.dup-banner{margin:10px 12px 0;background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--radius);padding:12px 16px}
+.dup-banner-title{font-size:13px;font-weight:900;color:var(--purple);margin-bottom:6px}
+.dup-school-name{display:inline-block;background:#fff;border:1px solid var(--purple);color:var(--purple);border-radius:6px;padding:2px 8px;margin:2px 4px 2px 0;font-weight:700;font-size:12px}
+.region-divider{display:flex;align-items:center;gap:10px;margin:20px 16px 10px}
+.region-divider .label{font-size:12px;font-weight:700;color:var(--gray-400);white-space:nowrap}
+.region-divider .line{flex:1;height:1px;background:var(--gray-200)}
+.card{background:#fff;margin:0 12px 10px;border-radius:var(--radius);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06);position:relative}
+.card.duplicate{border-left:4px solid var(--purple)}
+.dup-tag{position:absolute;top:10px;right:16px;background:var(--purple);color:#fff;font-size:10px;font-weight:900;padding:2px 8px;border-radius:6px}
+.card-header{display:flex;align-items:center;padding:14px 16px 6px;gap:10px}
+.card-num{width:28px;height:28px;background:var(--navy);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0}
+.card-school{font-size:16px;font-weight:900;flex:1}
+.card-addr{padding:2px 16px 6px 54px;font-size:13px;color:var(--gray-600)}
+.approval-places{padding:4px 16px 8px 54px;display:flex;flex-direction:column;gap:3px}
+.ap-item{font-size:12px;color:var(--green);font-weight:700}
+.camp-block{margin:4px 16px 6px;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200)}
+.camp-block-header{display:flex;align-items:center;padding:8px 12px;font-size:12px;font-weight:700;gap:6px;flex-wrap:wrap}
+.camp-block-header .camp-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.camp-block-header .camp-dday{font-size:11px;font-weight:900;padding:2px 8px;border-radius:6px;flex-shrink:0}
+.approval-badge{font-size:10px;font-weight:900;padding:2px 8px;border-radius:4px;flex-shrink:0}
+.camp-block-body{padding:6px 12px 10px;background:var(--gray-50);font-size:12px;line-height:1.8}
+.camp-detail-row{display:flex;gap:6px;align-items:baseline}
+.camp-detail-label{color:var(--gray-400);min-width:60px;flex-shrink:0;font-weight:500;font-size:11px}
+.camp-detail-value{color:var(--gray-800)}
+.photo-btn{display:flex;align-items:center;gap:3px;background:var(--blue-light);color:var(--blue);border:1.5px solid var(--blue);border-radius:8px;padding:4px 8px;font-size:13px;font-weight:900;text-decoration:none;flex-shrink:0;touch-action:manipulation;transition:background .15s;cursor:pointer}
+.photo-btn:active{background:#bfdbfe}
+.photo-btn-text{font-size:11px;font-weight:900}
+.photo-btn-disabled{display:flex;align-items:center;background:var(--gray-100);color:var(--gray-400);border:1.5px solid var(--gray-200);border-radius:8px;padding:4px 8px;font-size:13px;flex-shrink:0;opacity:.5}
+.request-row .camp-detail-label{color:var(--teal)}
+.request-text{color:var(--teal);font-weight:700}
+.note-row{margin-top:4px;padding-top:4px;border-top:1px dashed var(--gray-200)}
+.note-input{flex:1;border:1px solid var(--gray-200);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:#fff;outline:none;min-width:0}
+.note-input:focus{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue-light)}
+.note-saved{font-size:10px;color:var(--green);font-weight:700;margin-left:4px;opacity:0;transition:opacity .3s}
+.note-saved.show{opacity:1}
+.camp-check{width:26px;height:26px;border:2.5px solid var(--gray-200);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0;background:#fff;touch-action:manipulation}
+.camp-check.checked{background:var(--green);border-color:var(--green)}
+.camp-check.checked::after{content:"✓";color:#fff;font-size:13px;font-weight:700}
+.camp-block.done{opacity:.4}
+.card.all-done{opacity:.4}
+.card-actions{border-top:1px solid var(--gray-100);padding:10px 16px;display:flex;gap:8px}
+.btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:11px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;border:none;cursor:pointer}
+.btn-navi{background:var(--gray-100);color:var(--gray-800)}
+.progress-float{position:fixed;bottom:70px;left:12px;right:12px;background:#fff;padding:10px 16px;border-radius:var(--radius);box-shadow:0 2px 12px rgba(0,0,0,.12);z-index:150;display:none}
+.progress-text{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:6px}
+.progress-track{height:7px;background:var(--gray-200);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--green),#34d399);border-radius:4px;transition:width .4s ease}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+</style></head><body>
+<div class="toast" id="toast"></div>
+<div class="page active" id="pageSummary">
+<div class="summary-header"><h1>황인선 작업요청서</h1>
+<div class="sub">전체 요약</div>
+<div class="updated-tag">🔄 최종: 3/19 15:38 — 수시로 새로고침</div></div>
+<div class="totals-grid">
+<div class="total-card schools"><div class="label">총 학교</div><div class="value">4<span class="unit">개교</span></div></div>
+<div class="total-card visits"><div class="label">실 방문</div><div class="value">4<span class="unit">곳</span></div></div>
+<div class="total-card poster"><div class="label">포스터</div><div class="value">40<span class="unit">장</span></div></div>
+<div class="total-card banner"><div class="label">현수막</div><div class="value">4<span class="unit">장</span></div></div>
+</div>
+<div class="camp-summary"><div class="camp-summary-title">캠페인별 현황</div>
+<div class="camp-sum-row"><div class="camp-sum-dday normal">D-9</div><div class="camp-sum-info"><div class="camp-sum-name">육군3사관학교</div><span class="camp-sum-approval approval-yes">✓ 승인</span></div><div class="camp-sum-qty"><div class="q-poster">포스터 40장</div><div class="q-banner">현수막 4장</div></div></div></div>
+<div class="school-list-section"><div class="school-list-title">전체 학교 리스트</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+<table class="school-table"><thead><tr>
+<th style="min-width:100px">학교명</th><th style="min-width:80px">지역</th><th>포스터</th><th>현수막</th>
+</tr></thead><tbody><tr class="region-row"><td colspan="4">📍 강원 (4개교)</td></tr><tr><td>송곡대학교</td><td>강원도_춘천시_남산면_송곡대학길_34</td><td></td><td>2</td></tr><tr><td>한림성심대학교</td><td>강원도_춘천시_동면_장학길_48</td><td></td><td>2</td></tr><tr><td>강원대학교_춘천캠퍼스</td><td>강원특별자치도_춘천시_강원대학길_1</td><td>20</td><td></td></tr><tr><td>한림대학교</td><td>강원특별자치도_춘천시_한림대학길_1</td><td>20</td><td></td></tr></tbody>
+<tfoot><tr><td>합계</td><td>4개교</td><td>40</td><td>4</td></tr></tfoot>
+</table></div></div></div>
+<div class="page" id="pageDetail">
+<div class="detail-header"><div class="detail-header-top">
+<h1>작업 상세</h1><span class="school-count-badge">4곳 · 4건</span>
+</div></div>
+<div class="deadline-banner"><div class="deadline-item normal"><div class="dday-badge normal">D-9</div><div class="deadline-camp-name">육군3사관학교</div><span class="deadline-approval approval-yes">✓ 승인</span><div class="deadline-date">3/27</div></div></div>
+
+<div class="region-divider"><span class="label">📍 강원</span><span class="line"></span></div><div class="card" onclick="toggleCard(this)"><div class="card-header"><div class="card-num">1</div><div class="card-school">송곡대학교</div></div><div class="card-addr">강원도_춘천시_남산면_송곡대학길_34</div><div class="camp-block" data-school="송곡대학교" data-camp="육군3사관학교"><div class="camp-block-header"><a href="https://drive.google.com/drive/folders/1b979AJouYQfmqAW9cMzJRIEscLBQbXbo" target="_blank" class="photo-btn" onclick="event.stopPropagation()" title="사진 업로드 폴더">📷<span class="photo-btn-text">사진</span></a><div class="camp-check" onclick="event.stopPropagation(); toggleCampDone(this)"></div><span class="camp-name">육군3사관학교</span><span class="approval-badge approval-yes">✓ 승인</span><span class="camp-dday normal">D-9</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="camp-detail-label">현수막</span><span class="camp-detail-value">2장 · 학생회관 및 유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="camp-detail-label">비고</span><input type="text" class="note-input" placeholder="특이사항 입력" value="" onclick="event.stopPropagation()" onblur="saveNote(this)" /></div></div></div><div class="card-actions"><a href="https://map.naver.com/v5/search/%EC%86%A1%EA%B3%A1%EB%8C%80%ED%95%99%EA%B5%90" class="btn btn-navi" onclick="event.stopPropagation()" target="_blank">🧭 길찾기</a></div></div><div class="card" onclick="toggleCard(this)"><div class="card-header"><div class="card-num">2</div><div class="card-school">한림성심대학교</div></div><div class="card-addr">강원도_춘천시_동면_장학길_48</div><div class="camp-block" data-school="한림성심대학교" data-camp="육군3사관학교"><div class="camp-block-header"><a href="https://drive.google.com/drive/folders/1Jg-MSubhSYVYL5mkuij9ubWUbo5Q-csS" target="_blank" class="photo-btn" onclick="event.stopPropagation()" title="사진 업로드 폴더">📷<span class="photo-btn-text">사진</span></a><div class="camp-check" onclick="event.stopPropagation(); toggleCampDone(this)"></div><span class="camp-name">육군3사관학교</span><span class="approval-badge approval-yes">✓ 승인</span><span class="camp-dday normal">D-9</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="camp-detail-label">현수막</span><span class="camp-detail-value">2장 · 학생회관 및 유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="camp-detail-label">비고</span><input type="text" class="note-input" placeholder="특이사항 입력" value="" onclick="event.stopPropagation()" onblur="saveNote(this)" /></div></div></div><div class="card-actions"><a href="https://map.naver.com/v5/search/%ED%95%9C%EB%A6%BC%EC%84%B1%EC%8B%AC%EB%8C%80%ED%95%99%EA%B5%90" class="btn btn-navi" onclick="event.stopPropagation()" target="_blank">🧭 길찾기</a></div></div><div class="card" onclick="toggleCard(this)"><div class="card-header"><div class="card-num">3</div><div class="card-school">강원대학교_춘천캠퍼스</div></div><div class="card-addr">강원특별자치도_춘천시_강원대학길_1</div><div class="approval-places"><span class="ap-item">📌 포스터: 천지관_3층_총학생회실_10장_7일_각과_행정사무실</span><span class="ap-item">📌 현수막: 검토_후_승인</span></div><div class="camp-block" data-school="강원대학교_춘천캠퍼스" data-camp="육군3사관학교"><div class="camp-block-header"><a href="https://drive.google.com/drive/folders/1w7KOB9InoyShRgNk_JfaWTJecMYs32ui" target="_blank" class="photo-btn" onclick="event.stopPropagation()" title="사진 업로드 폴더">📷<span class="photo-btn-text">사진</span></a><div class="camp-check" onclick="event.stopPropagation(); toggleCampDone(this)"></div><span class="camp-name">육군3사관학교</span><span class="approval-badge approval-yes">✓ 승인</span><span class="camp-dday normal">D-9</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="camp-detail-label">포스터</span><span class="camp-detail-value">20장</span></div><div class="camp-detail-row note-row"><span class="camp-detail-label">비고</span><input type="text" class="note-input" placeholder="특이사항 입력" value="" onclick="event.stopPropagation()" onblur="saveNote(this)" /></div></div></div><div class="card-actions"><a href="https://map.naver.com/v5/search/%EA%B0%95%EC%9B%90%EB%8C%80%ED%95%99%EA%B5%90_%EC%B6%98%EC%B2%9C%EC%BA%A0%ED%8D%BC%EC%8A%A4" class="btn btn-navi" onclick="event.stopPropagation()" target="_blank">🧭 길찾기</a></div></div><div class="card" onclick="toggleCard(this)"><div class="card-header"><div class="card-num">4</div><div class="card-school">한림대학교</div></div><div class="card-addr">강원특별자치도_춘천시_한림대학길_1</div><div class="approval-places"><span class="ap-item">📌 포스터: 캠퍼스라이프센터3층</span><span class="ap-item">📌 현수막: 캠퍼스라이프센터3층</span></div><div class="camp-block" data-school="한림대학교" data-camp="육군3사관학교"><div class="camp-block-header"><a href="https://drive.google.com/drive/folders/1jse16LYleHcrBU8qi7XqNsCWM6ltXQOb" target="_blank" class="photo-btn" onclick="event.stopPropagation()" title="사진 업로드 폴더">📷<span class="photo-btn-text">사진</span></a><div class="camp-check" onclick="event.stopPropagation(); toggleCampDone(this)"></div><span class="camp-name">육군3사관학교</span><span class="approval-badge approval-yes">✓ 승인</span><span class="camp-dday normal">D-9</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="camp-detail-label">포스터</span><span class="camp-detail-value">20장</span></div><div class="camp-detail-row note-row"><span class="camp-detail-label">비고</span><input type="text" class="note-input" placeholder="특이사항 입력" value="" onclick="event.stopPropagation()" onblur="saveNote(this)" /></div></div></div><div class="card-actions"><a href="https://map.naver.com/v5/search/%ED%95%9C%EB%A6%BC%EB%8C%80%ED%95%99%EA%B5%90" class="btn btn-navi" onclick="event.stopPropagation()" target="_blank">🧭 길찾기</a></div></div>
+</div>
+<div class="progress-float" id="progressFloat"><div class="progress-text">
+<span>캠페인 작업 완료</span><span id="progressCount">0 / 4</span>
+</div><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div></div>
+<div class="tab-nav">
+<button class="tab-btn active" ontouchend="event.preventDefault();switchPage('pageSummary',this)" onclick="switchPage('pageSummary',this)"><span class="tab-icon">📊</span>요약</button>
+<button class="tab-btn" ontouchend="event.preventDefault();switchPage('pageDetail',this)" onclick="switchPage('pageDetail',this)"><span class="tab-icon">📋</span>작업 상세</button>
+</div>
+<script>
+var WEB_APP_URL="https://script.google.com/macros/s/AKfycbzl7mY-tnpMFE_6R3kWCXQ2YAso9K9JasI7t2cRwBdbHh8kNXND-Xy4pdXWv-RghCVO/exec";
+function switchPage(id,btn){document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active")});document.getElementById(id).classList.add("active");document.querySelectorAll(".tab-btn").forEach(function(b){b.classList.remove("active")});btn.classList.add("active");document.getElementById("progressFloat").style.display=(id==="pageDetail")?"block":"none";window.scrollTo(0,0)}
+function toggleCard(el){el.classList.toggle("expanded")}
+function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},2000)}
+function callWebApp(params){try{var img=new Image();img.src=WEB_APP_URL+"?"+new URLSearchParams(params).toString();}catch(e){console.log("웹앱 호출 실패:",e)}}
+var totalTasks=document.querySelectorAll(".camp-check").length;var doneCount=0;
+function toggleCampDone(el){el.classList.toggle("checked");var block=el.closest(".camp-block");var card=el.closest(".card");var school=block.getAttribute("data-school");var camp=block.getAttribute("data-camp");if(el.classList.contains("checked")){block.classList.add("done");doneCount++;var now=new Date();var ts=(now.getMonth()+1)+"/"+now.getDate()+" "+now.getHours().toString().padStart(2,"0")+":"+now.getMinutes().toString().padStart(2,"0");callWebApp({action:"complete",school:school,camp:camp,time:ts});showToast("✅ "+school+" 완료 기록됨")}else{block.classList.remove("done");doneCount--;callWebApp({action:"complete",school:school,camp:camp,time:""});showToast("↩ "+school+" 완료 취소")}var all=card.querySelectorAll(".camp-check");var allDone=true;all.forEach(function(c){if(!c.classList.contains("checked"))allDone=false});if(allDone)card.classList.add("all-done");else card.classList.remove("all-done");document.getElementById("progressCount").textContent=doneCount+" / "+totalTasks;document.getElementById("progressFill").style.width=(doneCount/totalTasks*100).toFixed(0)+"%"}
+function saveNote(inputEl){var block=inputEl.closest(".camp-block");var school=block.getAttribute("data-school");var camp=block.getAttribute("data-camp");var text=inputEl.value.trim();callWebApp({action:"note",school:school,camp:camp,text:text});showToast("📝 "+school+" 비고 저장됨")}
+</script></body></html>
