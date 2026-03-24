@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>웍스피어_Kirk 결과보고서</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F8FAFB;--surface:#FFFFFF;--surface-alt:#F1F5F9;
+  --border:#E2E8F0;--border-light:#F1F5F9;
+  --text:#0F172A;--text-secondary:#475569;--text-muted:#94A3B8;
+  --accent:#2563EB;--accent-light:#DBEAFE;--accent-lighter:#EFF6FF;
+  --positive:#059669;--positive-light:#D1FAE5;--positive-bg:#ECFDF5;
+  --negative:#DC2626;--negative-light:#FEE2E2;--negative-bg:#FEF2F2;
+  --warning:#D97706;--warning-light:#FEF3C7;--warning-bg:#FFFBEB;
+  --orange:#EA580C;--orange-light:#FFEDD5;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,0.07);
+  --r:14px;
+}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .4s ease both}
+.report-header{background:linear-gradient(135deg,#1E293B,#334155);color:#fff;padding:40px 0;position:relative;overflow:hidden}
+.report-header::before{content:"";position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.03),transparent 70%);pointer-events:none}
+.header-inner{max-width:1100px;margin:0 auto;padding:0 24px;position:relative}
+.header-label{font-size:11px;font-weight:700;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+.header-title{font-size:2rem;font-weight:900;letter-spacing:-0.04em;line-height:1.2}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.5);margin-top:6px;font-weight:500}
+.header-meta{display:flex;gap:20px;margin-top:20px;flex-wrap:wrap}
+.meta-chip{background:rgba(255,255,255,0.08);padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:6px}
+.meta-chip svg{width:14px;height:14px;opacity:0.5}
+.header-logo{position:absolute;top:20px;right:24px}
+.logo-mark{display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:20px;height:20px}
+.logo-text{font-size:13px;font-weight:900;color:rgba(255,255,255,0.7);letter-spacing:-0.03em}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-32px;position:relative;z-index:1}
+.kpi-card{background:var(--surface);border-radius:var(--r);padding:20px;box-shadow:var(--shadow-md);border:1px solid var(--border-light);text-align:center}
+.kpi-value{font-size:2rem;font-weight:900;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums}
+.kpi-label{font-size:11px;font-weight:700;color:var(--text-muted);margin-top:6px;text-transform:uppercase;letter-spacing:0.04em}
+.kpi-sub{font-size:11px;font-weight:600;margin-top:4px}
+.kpi-card.schools .kpi-value{color:var(--accent)}.kpi-card.schools .kpi-sub{color:var(--accent)}
+.kpi-card.poster .kpi-value{color:#7C3AED}.kpi-card.poster .kpi-sub{color:#7C3AED}
+.kpi-card.banner .kpi-value{color:var(--orange)}.kpi-card.banner .kpi-sub{color:var(--orange)}
+.kpi-card.progress .kpi-value{color:var(--positive)}.kpi-card.progress .kpi-sub{color:var(--positive)}
+.progress-section{margin-top:24px}
+.progress-bar-wrap{background:var(--surface);border-radius:var(--r);padding:20px 24px;box-shadow:var(--shadow-sm);border:1px solid var(--border-light)}
+.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.progress-title{font-size:13px;font-weight:700;color:var(--text-secondary)}
+.progress-pct{font-size:22px;font-weight:900;color:var(--positive)}
+.progress-track{height:10px;background:var(--surface-alt);border-radius:5px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--positive));border-radius:5px}
+.progress-detail{display:flex;gap:24px;margin-top:12px;font-size:12px;color:var(--text-muted);font-weight:600}
+.progress-detail span{display:flex;align-items:center;gap:4px}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-done{background:var(--positive)}.dot-remain{background:var(--border)}
+.section{margin-top:32px}
+.section-title{font-size:13px;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.section-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.region-group{margin-bottom:24px}
+.region-label{font-size:12px;font-weight:800;color:var(--text-muted);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.region-count{font-size:10px;font-weight:700;color:var(--accent);background:var(--accent-lighter);padding:2px 8px;border-radius:10px}
+.summary-table-wrap{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow-sm);border:1px solid var(--border-light);overflow:hidden}
+.summary-table{width:100%;border-collapse:collapse}
+.summary-table thead th{font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em;padding:10px 14px;text-align:left;background:var(--surface-alt);border-bottom:1px solid var(--border);white-space:nowrap}
+.summary-table thead th:nth-child(n+4){text-align:center}
+.summary-table tbody td{font-size:12px;padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text-secondary);vertical-align:middle}
+.summary-table tbody td:first-child{font-weight:700;color:var(--text);text-align:center}
+.summary-table tbody td:nth-child(n+4){text-align:center}
+.summary-table tbody tr:last-child td{border-bottom:none}
+.summary-table tbody tr:hover td{background:var(--accent-lighter)}
+.summary-table tfoot td{font-size:12px;font-weight:800;padding:10px 14px;background:var(--surface-alt);color:var(--text);border-top:1px solid var(--border)}
+.summary-table tfoot td:nth-child(n+4){text-align:center}
+.region-tag{font-size:10px;font-weight:600;color:var(--text-muted)}
+.summary-note{font-size:11px;color:var(--text-muted);max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.date-text{font-variant-numeric:tabular-nums;font-weight:600;color:var(--text)}
+.school-card{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow-sm);border:1px solid var(--border-light);overflow:hidden;margin-bottom:16px}
+.school-card-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border-light)}
+.school-info{display:flex;align-items:center;gap:12px}
+.school-num{width:28px;height:28px;background:var(--accent);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+.school-name{font-size:15px;font-weight:800;letter-spacing:-0.02em}
+.school-addr{font-size:11px;color:var(--text-muted);margin-top:1px}
+.school-status{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px}
+.status-done{background:var(--positive-bg);color:var(--positive)}
+.status-pending{background:var(--surface-alt);color:var(--text-muted)}
+.qty-header{display:flex;gap:16px;padding:12px 20px;border-bottom:1px solid var(--border-light);background:var(--surface-alt)}
+.qty-item{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700}
+.qty-item .qty-label{font-size:11px;font-weight:600;color:var(--text-muted)}
+.qty-poster{color:#7C3AED}.qty-banner{color:var(--orange)}
+.attach-info{padding:12px 20px;display:flex;gap:24px;flex-wrap:wrap;font-size:13px;border-bottom:1px solid var(--border-light)}
+.attach-info-item{display:flex;align-items:center;gap:6px}
+.attach-info-label{font-size:11px;font-weight:600;color:var(--text-muted)}
+.attach-info-value{font-weight:700;color:var(--text)}
+.photo-section{padding:0 20px 16px}
+.photo-label{font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.photo-thumb{aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:var(--surface-alt);position:relative;cursor:pointer;border:1px solid var(--border-light)}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.2s}
+.photo-thumb:hover img{transform:scale(1.05)}
+.photo-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:11px;flex-direction:column;gap:4px}
+.photo-placeholder svg{width:24px;height:24px;opacity:0.3}
+.drive-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--accent);text-decoration:none;padding:4px 10px;border-radius:8px;transition:background 0.15s}
+.drive-link:hover{background:var(--accent-lighter)}
+.drive-link svg{width:14px;height:14px}
+.report-footer{margin-top:48px;padding:28px 0;border-top:1px solid var(--border);text-align:center}
+.footer-logo{font-size:13px;font-weight:800;color:var(--text-muted);letter-spacing:-0.01em}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;display:none;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.lightbox.show{display:flex}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.lightbox-close{position:fixed;top:20px;right:20px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+@media(max-width:768px){
+  .kpi-grid{grid-template-columns:repeat(2,1fr);gap:10px;margin-top:-24px}
+  .kpi-value{font-size:1.5rem}
+  .header-title{font-size:1.5rem}
+  .container{padding:0 16px}
+  .report-header{padding:28px 0}
+  .header-logo{position:static;margin-bottom:14px}
+  .school-card-header{flex-direction:column;align-items:flex-start;gap:10px}
+  .photo-grid{grid-template-columns:repeat(3,1fr);gap:6px}
+  .attach-info{flex-direction:column;gap:6px}
+}
+@media(max-width:480px){
+  .kpi-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .kpi-card{padding:14px 10px}
+  .kpi-value{font-size:1.3rem}
+  .header-title{font-size:1.3rem}
+  .progress-detail{flex-direction:column;gap:6px}
+}
+@media print{
+  .report-header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .school-card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+  .photo-thumb{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&#x2715;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+<div class="report-header">
+  <div class="header-inner">
+    <div class="header-logo"><div class="logo-mark">
+      <div class="logo-icon"><svg viewBox="0 0 40 40" fill="none"><polygon points="20,6 34,32 6,32" fill="url(#lg)"/><defs><linearGradient id="lg" x1="20" y1="6" x2="20" y2="32" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7EB5F0"/><stop offset="100%" stop-color="#3B6CB5"/></linearGradient></defs></svg></div>
+      <div class="logo-text">GOODADLAB</div>
+    </div></div>
+    <div class="header-label">Campaign Report</div>
+    <div class="header-title">웍스피어_Kirk 결과보고서</div>
+    <div class="header-sub">좋은광고연구소 광고 게첨 실시간 현황</div>
+    <div class="header-meta">
+      <div class="meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>마감 : 3월 23일 월요일</div>
+      <div class="meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>4개교 (서울 3 · 경기 1)</div>
+      <div class="meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>실시간 업데이트</div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="kpi-grid fade-in">
+  <div class="kpi-card schools"><div class="kpi-value">4</div><div class="kpi-label">대상 학교</div><div class="kpi-sub">서울 3 · 경기 1</div></div>
+  <div class="kpi-card poster"><div class="kpi-value">200</div><div class="kpi-label">포스터 (장)</div><div class="kpi-sub">완료 200 / 잔여 0</div></div>
+  <div class="kpi-card banner"><div class="kpi-value">0</div><div class="kpi-label">현수막 (장)</div><div class="kpi-sub">완료 0 / 잔여 0</div></div>
+  <div class="kpi-card progress"><div class="kpi-value">100%</div><div class="kpi-label">진행률</div><div class="kpi-sub">4/4개교 완료</div></div>
+</div>
+<div class="progress-section fade-in" style="animation-delay:0.1s">
+  <div class="progress-bar-wrap">
+    <div class="progress-header"><span class="progress-title">전체 진행 현황</span><span class="progress-pct">100%</span></div>
+    <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+    <div class="progress-detail">
+      <span><span class="dot dot-done"></span>완료 4개교</span>
+      <span><span class="dot dot-remain"></span>잔여 0개교</span>
+      <span style="margin-left:auto;color:var(--text-secondary)">최종 업데이트 : 3/24 17:49</span>
+    </div>
+  </div>
+</div>
+<div class="section fade-in" style="animation-delay:0.12s">
+  <div class="section-title">전체 학교 요약</div>
+  <div class="summary-table-wrap"><div style="overflow-x:auto">
+    <table class="summary-table">
+      <thead><tr><th>No.</th><th>학교명</th><th>주소</th><th>포스터</th><th>현수막</th><th>부착일시</th><th>상태</th><th>비고 (부착장소)</th></tr></thead>
+      <tbody><tr><td>1</td><td>중앙대학교 서울캠퍼스</td><td class="region-tag">서울 동작구</td><td class="qty-poster">50</td><td>-</td><td class="date-text">Wed Mar 25 2026 09:46:00 GMT+0900 (Korean Standard Time)</td><td><span class="school-status status-done" style="display:inline-flex;font-size:10px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</span></td><td class="summary-note">국제어학원, 학생회관</td></tr><tr><td>2</td><td>한양대학교 서울캠퍼스</td><td class="region-tag">서울 성동구</td><td class="qty-poster">50</td><td>-</td><td class="date-text">Wed Mar 25 2026 09:46:00 GMT+0900 (Korean Standard Time)</td><td><span class="school-status status-done" style="display:inline-flex;font-size:10px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</span></td><td class="summary-note">국제어학원</td></tr><tr><td>3</td><td>동국대학교 서울캠퍼스</td><td class="region-tag">서울 중구</td><td class="qty-poster">50</td><td>-</td><td class="date-text">Wed Mar 25 2026 09:47:00 GMT+0900 (Korean Standard Time)</td><td><span class="school-status status-done" style="display:inline-flex;font-size:10px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</span></td><td class="summary-note">혜화관, 구두승인</td></tr><tr><td>4</td><td>가천대학교 글로벌캠퍼스</td><td class="region-tag">경기 성남시</td><td class="qty-poster">50</td><td>-</td><td class="date-text">Wed Mar 25 2026 09:45:00 GMT+0900 (Korean Standard Time)</td><td><span class="school-status status-done" style="display:inline-flex;font-size:10px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</span></td><td class="summary-note">글로벌센터</td></tr></tbody>
+      <tfoot><tr><td></td><td>합계 4개교</td><td></td><td class="qty-poster">200장</td><td class="qty-banner">0장</td><td></td><td></td><td></td></tr></tfoot>
+    </table>
+  </div></div>
+</div>
+<div class="section fade-in" style="animation-delay:0.15s">
+  <div class="section-title">학교별 부착 결과</div>
+  <div class="region-group"><div class="region-label">서울 <span class="region-count">3개교</span></div><div class="school-card"><div class="school-card-header"><div class="school-info"><div class="school-num" style="background:var(--accent)">1</div><div><div class="school-name">중앙대학교 서울캠퍼스</div><div class="school-addr">서울특별시 동작구 흑석로 84</div></div></div><div class="school-status status-done"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</div></div><div class="qty-header"><div class="qty-item"><span class="qty-label">포스터</span><span class="qty-poster">50장</span></div></div><div class="attach-info"><div class="attach-info-item"><span class="attach-info-label">부착일시</span><span class="attach-info-value">Wed Mar 25 2026 09:46:00 GMT+0900 (Korean Standard Time)</span></div><div class="attach-info-item"><span class="attach-info-label">비고</span><span class="attach-info-value">국제어학원, 학생회관</span></div></div><div class="photo-section" style="padding-top:12px"><div class="photo-label"><span>부착 사진</span><a href="https://drive.google.com/drive/folders/1sKwoKK4X2NemMXSjYdGIFiVE0tUSGw5Q" class="drive-link" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>전체 사진 보기</a></div><div class="photo-grid"><div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>사진 없음</span></div></div><div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>사진 없음</span></div></div><div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>사진 없음</span></div></div></div></div></div><div class="school-card"><div class="school-card-header"><div class="school-info"><div class="school-num" style="background:var(--accent)">2</div><div><div class="school-name">한양대학교 서울캠퍼스</div><div class="school-addr">서울특별시 성동구 왕십리로 220</div></div></div><div class="school-status status-done"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</div></div><div class="qty-header"><div class="qty-item"><span class="qty-label">포스터</span><span class="qty-poster">50장</span></div></div><div class="attach-info"><div class="attach-info-item"><span class="attach-info-label">부착일시</span><span class="attach-info-value">Wed Mar 25 2026 09:46:00 GMT+0900 (Korean Standard Time)</span></div><div class="attach-info-item"><span class="attach-info-label">비고</span><span class="attach-info-value">국제어학원</span></div></div><div class="photo-section" style="padding-top:12px"><div class="photo-label"><span>부착 사진</span><a href="https://drive.google.com/drive/folders/1qzHoJrq65QmyFhqGexJonVhXPOsLIbar" class="drive-link" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>전체 사진 보기</a></div><div class="photo-grid"><div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>사진 없음</span></div></div><div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>사진 없음</span></div></div><div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>사진 없음</span></div></div></div></div></div><div class="school-card"><div class="school-card-header"><div class="school-info"><div class="school-num" style="background:var(--accent)">3</div><div><div class="school-name">동국대학교 서울캠퍼스</div><div class="school-addr">서울특별시 중구 필동로1길 30</div></div></div><div class="school-status status-done"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</div></div><div class="qty-header"><div class="qty-item"><span class="qty-label">포스터</span><span class="qty-poster">50장</span></div></div><div class="attach-info"><div class="attach-info-item"><span class="attach-info-label">부착일시</span><span class="attach-info-value">Wed Mar 25 2026 09:47:00 GMT+0900 (Korean Standard Time)</span></div><div class="attach-info-item"><span class="attach-info-label">비고</span><span class="attach-info-value">혜화관, 구두승인</span></div></div><div class="photo-section" style="padding-top:12px"><div class="photo-label"><span>부착 사진</span><a href="https://drive.google.com/drive/folders/1d8cdOWCLhs9JEVCWGWLyxSR9OKlYJPjC" class="drive-link" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>전체 사진 보기</a></div><div class="photo-grid"><div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>사진 없음</span></div></div><div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>사진 없음</span></div></div><div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>사진 없음</span></div></div></div></div></div></div><div class="region-group"><div class="region-label">경기 <span class="region-count">1개교</span></div><div class="school-card"><div class="school-card-header"><div class="school-info"><div class="school-num" style="background:var(--accent)">4</div><div><div class="school-name">가천대학교 글로벌캠퍼스</div><div class="school-addr">경기도 성남시 수정구 성남대로 1342</div></div></div><div class="school-status status-done"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</div></div><div class="qty-header"><div class="qty-item"><span class="qty-label">포스터</span><span class="qty-poster">50장</span></div></div><div class="attach-info"><div class="attach-info-item"><span class="attach-info-label">부착일시</span><span class="attach-info-value">Wed Mar 25 2026 09:45:00 GMT+0900 (Korean Standard Time)</span></div><div class="attach-info-item"><span class="attach-info-label">비고</span><span class="attach-info-value">글로벌센터</span></div></div><div class="photo-section" style="padding-top:12px"><div class="photo-label"><span>부착 사진</span><a href="https://drive.google.com/drive/folders/1syX9PA2BFI9OR9ftgNFsE6ng8fX3R4ch" class="drive-link" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>전체 사진 보기</a></div><div class="photo-grid"><div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>사진 없음</span></div></div><div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>사진 없음</span></div></div><div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>사진 없음</span></div></div></div></div></div></div>
+</div>
+<div class="report-footer"><div class="container"><div class="footer-logo">좋은광고연구소</div></div></div>
+</div>
+<script>
+function openLightbox(src){var lb=document.getElementById("lightbox");document.getElementById("lightbox-img").src=src;lb.classList.add("show");document.body.style.overflow="hidden"}
+function closeLightbox(){document.getElementById("lightbox").classList.remove("show");document.body.style.overflow=""}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox()});
+</script>
+</body></html>
