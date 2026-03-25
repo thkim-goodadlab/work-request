@@ -112,20 +112,13 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .drive-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--accent);text-decoration:none;padding:4px 10px;border-radius:8px;transition:background 0.15s}
 .drive-link:hover{background:var(--accent-lighter)}
 .drive-link svg{width:14px;height:14px}
-.gps-map-section{margin-top:24px}
-.gps-map-wrap{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow-sm);border:1px solid var(--border-light);overflow:hidden}
-.gps-map-header{padding:16px 20px 10px;display:flex;justify-content:space-between;align-items:center}
-.gps-map-title{font-size:13px;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em}
-.gps-map-count{font-size:11px;font-weight:700;color:var(--positive);background:var(--positive-bg);padding:3px 10px;border-radius:10px}
-#gpsMap{width:100%;height:400px}
-.gps-legend{padding:10px 20px;display:flex;gap:16px;border-top:1px solid var(--border-light);font-size:11px;color:var(--text-muted);font-weight:600}
-.gps-legend-item{display:flex;align-items:center;gap:5px}
-.gps-legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.gps-no-data{padding:40px 20px;text-align:center;color:var(--text-muted);font-size:13px}
-.school-gps-mini{width:100%;height:180px;border-radius:10px;margin-top:8px;border:1px solid var(--border-light)}
+.school-gps-mini{width:100%;height:200px;border-radius:12px;margin-top:8px;border:1px solid var(--border-light);overflow:hidden}
 .gps-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:8px}
 .gps-badge.has-gps{background:var(--positive-bg);color:var(--positive)}
 .gps-badge.no-gps{background:var(--surface-alt);color:var(--text-muted)}
+.gps-legend-mini{display:flex;gap:12px;margin-top:6px;font-size:10px;color:var(--text-muted);font-weight:600}
+.gps-legend-mini .gps-lg-item{display:flex;align-items:center;gap:4px}
+.gps-legend-mini .gps-lg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .loading-wrap{text-align:center;padding:80px 20px}
 .loading-spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -148,8 +141,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   .school-card-header{flex-direction:column;align-items:flex-start;gap:10px}
   .photo-grid{grid-template-columns:repeat(2,1fr);gap:6px}
   .attach-info{flex-direction:column;gap:6px}
-  #gpsMap{height:300px}
-  .school-gps-mini{height:150px}
+  .school-gps-mini{height:160px}
 }
 @media(max-width:480px){
   .kpi-grid{grid-template-columns:repeat(2,1fr);gap:8px}
@@ -237,13 +229,6 @@ function renderReport(data){
   h+='<span><span class="dot dot-remain"></span>잔여 '+s.remainSchools+'개교</span>';
   h+='<span style="margin-left:auto;color:var(--text-secondary)">최종 업데이트 : '+data.updatedAt+'</span></div></div></div>';
 
-  // GPS 전체 지도
-  h+='<div class="gps-map-section fade-in" style="animation-delay:0.11s"><div class="gps-map-wrap">';
-  h+='<div class="gps-map-header"><span class="gps-map-title">📍 부착 위치 (GPS)</span><span class="gps-map-count" id="gpsCount">로딩 중...</span></div>';
-  h+='<div id="gpsMap"></div>';
-  h+='<div class="gps-legend"><span class="gps-legend-item"><span class="gps-legend-dot" style="background:#059669"></span>완료</span><span class="gps-legend-item"><span class="gps-legend-dot" style="background:#94A3B8"></span>대기</span></div>';
-  h+='</div></div>';
-
   // 요약 테이블
   h+='<div class="section fade-in" style="animation-delay:0.12s"><div class="section-title">전체 학교 요약</div>';
   h+='<div class="summary-table-wrap"><div style="overflow-x:auto"><table class="summary-table">';
@@ -260,7 +245,9 @@ function renderReport(data){
     h+='<tr><td>'+(i+1)+'</td><td>'+escHtml(sc.name)+'</td><td class="region-tag">'+escHtml(sc.region+" "+sc.subAddr)+'</td>';
     h+='<td'+(pq!=="-"?' class="qty-poster"':'')+">"+ pq+'</td>';
     h+='<td'+(bq!=="-"?' class="qty-banner"':'')+">"+ bq+'</td>';
-    var gpsCell=(sc.gps&&sc.gps.length>0)?'<td><span class="gps-badge has-gps" style="font-size:9px">📍 확인</span></td>':'<td><span class="gps-badge no-gps" style="font-size:9px">-</span></td>';
+    var scGps=sc.gps||{poster:[],banner:[]};
+    var scHasGps=(scGps.poster&&scGps.poster.length>0)||(scGps.banner&&scGps.banner.length>0);
+    var gpsCell=scHasGps?'<td><span class="gps-badge has-gps" style="font-size:9px">📍 확인</span></td>':'<td><span class="gps-badge no-gps" style="font-size:9px">-</span></td>';
     h+=dateCell+'<td>'+(sc.isDone?SVG_DONE:SVG_PENDING)+'</td>'+gpsCell+noteCell+'</tr>';
   }
   h+='</tbody><tfoot><tr><td></td><td>합계 '+s.totalSchools+'개교</td><td></td><td class="qty-poster">'+s.totalPoster+'장</td><td class="qty-banner">'+s.totalBanner+'장</td><td></td><td></td><td></td><td></td></tr></tfoot></table></div></div></div>';
@@ -296,87 +283,77 @@ function renderReport(data){
     if(photos.length>0){for(var pi=0;pi<4;pi++){if(pi<photos.length){h+='<div class="photo-thumb" onclick="openLightbox(\''+photos[pi]+'\')"><img src="'+photos[pi]+'" alt="'+escHtml(sc2.name)+' 부착사진 '+(pi+1)+'" loading="lazy"></div>'}else if(pi<photos.length+1){h+=buildPlaceholder(sc2.isDone?"":"대기 중")}}}
     else{for(var pp=0;pp<4;pp++)h+=buildPlaceholder(sc2.isDone?"사진 없음":"대기 중")}
     h+='</div>';
-    // GPS 미니맵
-    var hasGps=sc2.gps&&sc2.gps.length>0;
+    // GPS 미니맵 (포스터=보라, 현수막=주황)
+    var gpsData=sc2.gps||{poster:[],banner:[]};
+    var hasGps=(gpsData.poster&&gpsData.poster.length>0)||(gpsData.banner&&gpsData.banner.length>0);
     if(hasGps){
-      h+='<div style="margin-top:10px;padding:0 0 4px"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="font-size:11px;font-weight:700;color:var(--text-muted)">촬영 위치</span><span class="gps-badge has-gps"><svg width="10" height="10" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>GPS 확인됨</span></div>';
-      h+='<div class="school-gps-mini" id="minimap-'+si+'"></div></div>';
+      h+='<div style="margin-top:12px;padding:0 0 4px"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="font-size:11px;font-weight:700;color:var(--text-muted)">부착 위치</span><span class="gps-badge has-gps"><svg width="10" height="10" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>GPS 확인됨</span></div>';
+      h+='<div class="school-gps-mini" id="minimap-'+si+'"></div>';
+      h+='<div class="gps-legend-mini">';
+      if(gpsData.poster&&gpsData.poster.length>0)h+='<span class="gps-lg-item"><span class="gps-lg-dot" style="background:#7C3AED"></span>포스터 '+gpsData.poster.length+'건</span>';
+      if(gpsData.banner&&gpsData.banner.length>0)h+='<span class="gps-lg-item"><span class="gps-lg-dot" style="background:#EA580C"></span>현수막 '+gpsData.banner.length+'건</span>';
+      h+='</div></div>';
     }else if(sc2.isDone){
-      h+='<div style="margin-top:8px;display:flex;align-items:center;gap:6px"><span style="font-size:11px;font-weight:700;color:var(--text-muted)">촬영 위치</span><span class="gps-badge no-gps">GPS 정보 없음</span></div>';
+      h+='<div style="margin-top:8px;display:flex;align-items:center;gap:6px"><span style="font-size:11px;font-weight:700;color:var(--text-muted)">부착 위치</span><span class="gps-badge no-gps">GPS 정보 없음</span></div>';
     }
     h+='</div></div>';
   }
   if(curRegion)h+='</div>';
   h+='</div>';
   document.getElementById("reportContent").innerHTML=h;
-  // GPS 맵 렌더링
-  setTimeout(function(){renderGpsMap(schools)},500);
+  // 학교별 GPS 미니맵 렌더링
+  setTimeout(function(){renderSchoolMiniMaps(schools)},800);
 }
 
-// ── GPS 전체 지도 렌더링 ──
-function renderGpsMap(schools){
-  if(typeof kakao==="undefined"||!kakao.maps)return;
-  var gpsSchools=[];
-  for(var i=0;i<schools.length;i++){
-    var sc=schools[i];
-    if(sc.gps&&sc.gps.length>0){
-      gpsSchools.push({name:sc.name,lat:sc.gps[0].lat,lng:sc.gps[0].lng,isDone:sc.isDone});
-    }
-  }
-  var mapEl=document.getElementById("gpsMap");
-  if(!mapEl)return;
-  var countEl=document.getElementById("gpsCount");
-  if(countEl)countEl.textContent="GPS "+gpsSchools.length+"/"+schools.length+"개교";
-  if(gpsSchools.length===0){
-    mapEl.innerHTML='<div class="gps-no-data"><div style="font-size:32px;margin-bottom:8px">📍</div>GPS 데이터가 있는 학교가 없습니다.<br>사진 촬영 시 위치 정보를 활성화해 주세요.</div>';
-    mapEl.style.height="auto";
-    return;
-  }
-  var map=new kakao.maps.Map(mapEl,{center:new kakao.maps.LatLng(gpsSchools[0].lat,gpsSchools[0].lng),level:10});
-  var bounds=new kakao.maps.LatLngBounds();
-  for(var gi=0;gi<gpsSchools.length;gi++){
-    var gs=gpsSchools[gi];
-    var pos=new kakao.maps.LatLng(gs.lat,gs.lng);
-    bounds.extend(pos);
-    var color=gs.isDone?"#059669":"#94A3B8";
-    var svg="data:image/svg+xml;charset=utf-8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="'+color+'" stroke="#fff" stroke-width="2"/></svg>');
-    var img=new kakao.maps.MarkerImage(svg,new kakao.maps.Size(24,24),{offset:new kakao.maps.Point(12,12)});
-    var marker=new kakao.maps.Marker({map:map,position:pos,title:gs.name,image:img});
-    var label=document.createElement("div");
-    label.style.cssText="background:#fff;border:1.5px solid "+color+";border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;color:#0F172A;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,0.1)";
-    label.textContent=gs.name;
-    new kakao.maps.CustomOverlay({map:map,position:pos,content:label,yAnchor:2.5});
-  }
-  if(gpsSchools.length>1)map.setBounds(bounds);
-  // 학교별 미니맵도 렌더링
-  setTimeout(function(){renderSchoolMiniMaps(schools)},1000);
+// ── 학교별 GPS 미니맵 렌더링 (포스터=보라, 현수막=주황) ──
+var GPS_COLOR_POSTER="#7C3AED";  // 보라
+var GPS_COLOR_BANNER="#EA580C";  // 주황
+
+function makeSvgMarkerUrl(color,size){
+  size=size||24;
+  return "data:image/svg+xml;charset=utf-8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'"><circle cx="'+size/2+'" cy="'+size/2+'" r="'+(size/2-2)+'" fill="'+color+'" stroke="#fff" stroke-width="2"/></svg>');
 }
 
-// ── 학교별 미니맵 렌더링 ──
 function renderSchoolMiniMaps(schools){
+  if(typeof kakao==="undefined"||!kakao.maps)return;
   for(var i=0;i<schools.length;i++){
     var sc=schools[i];
-    if(!sc.gps||sc.gps.length===0)continue;
+    var gps=sc.gps||{poster:[],banner:[]};
+    var hasPosterGps=gps.poster&&gps.poster.length>0;
+    var hasBannerGps=gps.banner&&gps.banner.length>0;
+    if(!hasPosterGps&&!hasBannerGps)continue;
     var miniEl=document.getElementById("minimap-"+i);
     if(!miniEl)continue;
-    var lat=sc.gps[0].lat,lng=sc.gps[0].lng;
-    var miniMap=new kakao.maps.Map(miniEl,{center:new kakao.maps.LatLng(lat,lng),level:3,draggable:false,scrollwheel:false});
-    var pos=new kakao.maps.LatLng(lat,lng);
-    var svg2="data:image/svg+xml;charset=utf-8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="12" fill="#DC2626" stroke="#fff" stroke-width="2.5"/><circle cx="14" cy="14" r="4" fill="#fff"/></svg>');
-    var img2=new kakao.maps.MarkerImage(svg2,new kakao.maps.Size(28,28),{offset:new kakao.maps.Point(14,14)});
-    new kakao.maps.Marker({map:miniMap,position:pos,image:img2});
-    // GPS 여러 포인트 있으면 모두 표시
-    if(sc.gps.length>1){
-      var miniBounds=new kakao.maps.LatLngBounds();
-      for(var gi2=0;gi2<sc.gps.length;gi2++){
-        var p2=new kakao.maps.LatLng(sc.gps[gi2].lat,sc.gps[gi2].lng);
-        miniBounds.extend(p2);
-        if(gi2>0){
-          new kakao.maps.Marker({map:miniMap,position:p2,image:new kakao.maps.MarkerImage(svg2,new kakao.maps.Size(20,20),{offset:new kakao.maps.Point(10,10)})});
-        }
+    
+    // 첫 좌표로 센터 설정
+    var firstPt=hasPosterGps?gps.poster[0]:(hasBannerGps?gps.banner[0]:null);
+    if(!firstPt)continue;
+    var miniMap=new kakao.maps.Map(miniEl,{center:new kakao.maps.LatLng(firstPt.lat,firstPt.lng),level:4});
+    var bounds=new kakao.maps.LatLngBounds();
+    var markerCount=0;
+    
+    // 포스터 마커 (보라)
+    if(hasPosterGps){
+      var posterImg=new kakao.maps.MarkerImage(makeSvgMarkerUrl(GPS_COLOR_POSTER,28),new kakao.maps.Size(28,28),{offset:new kakao.maps.Point(14,14)});
+      for(var pi2=0;pi2<gps.poster.length;pi2++){
+        var pp=new kakao.maps.LatLng(gps.poster[pi2].lat,gps.poster[pi2].lng);
+        bounds.extend(pp);
+        new kakao.maps.Marker({map:miniMap,position:pp,title:"포스터 "+(pi2+1),image:posterImg});
+        markerCount++;
       }
-      miniMap.setBounds(miniBounds);
     }
+    // 현수막 마커 (주황)
+    if(hasBannerGps){
+      var bannerImg=new kakao.maps.MarkerImage(makeSvgMarkerUrl(GPS_COLOR_BANNER,28),new kakao.maps.Size(28,28),{offset:new kakao.maps.Point(14,14)});
+      for(var bi2=0;bi2<gps.banner.length;bi2++){
+        var bp=new kakao.maps.LatLng(gps.banner[bi2].lat,gps.banner[bi2].lng);
+        bounds.extend(bp);
+        new kakao.maps.Marker({map:miniMap,position:bp,title:"현수막 "+(bi2+1),image:bannerImg});
+        markerCount++;
+      }
+    }
+    if(markerCount>1)miniMap.setBounds(bounds);
+    else miniMap.setLevel(3);
   }
 }
 
