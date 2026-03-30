@@ -215,6 +215,7 @@ function renderReport(data){
   h+='<div class="progress-detail"><span><span class="dot dot-done"></span>완료 '+s.doneSchools+'개교</span>';
   h+='<span><span class="dot dot-remain"></span>잔여 '+s.remainSchools+'개교</span>';
   h+='<span style="margin-left:auto;color:var(--text-secondary)">최종 업데이트 : '+data.updatedAt+'</span></div></div></div>';
+  h+='<div style="margin:12px 16px 0;padding:10px 14px;background:#FFF7ED;border:1px solid #FDBA74;border-radius:8px;font-size:12px;color:#9A3412;display:flex;align-items:center;gap:8px"><span style="font-size:16px">📷</span>부착 사진은 1시간 간격으로 자동 업데이트 됩니다.</div>';
   h+='<div class="section fade-in" style="animation-delay:0.12s"><div class="section-title">전체 학교 요약</div>';
   h+='<div class="summary-table-wrap"><div style="overflow-x:auto"><table class="summary-table">';
   h+='<thead><tr><th>No.</th><th>학교명</th><th>주소</th><th>포스터</th><th>현수막</th><th>부착일시</th><th>상태</th><th>부착장소 및 특이사항</th></tr></thead><tbody>';
@@ -253,13 +254,15 @@ function renderReport(data){
       if(noteText2)h+='<div class="attach-info-item"><span class="attach-info-label">부착장소 및 특이사항</span><span class="attach-info-value">'+escHtml(noteText2)+'</span></div>';
       h+='</div>';
     }
-    h+='<div class="photo-section" style="padding-top:12px"><div class="photo-label"><span>부착 사진</span>';
-    if(sc2.driveUrl)h+='<a href="'+sc2.driveUrl+'" class="drive-link" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>원본 파일 다운로드</a>';
-    h+='</div><div class="photo-grid">';
     var photos=sc2.photos||[];
-    if(photos.length>0){for(var pi=0;pi<photos.length;pi++){h+='<div class="photo-thumb" onclick="openLightbox(\''+photos[pi]+'\')"><img src="'+photos[pi]+'" alt="'+escHtml(sc2.name)+' 부착사진 '+(pi+1)+'" loading="lazy"></div>'}}
-    else{for(var pp=0;pp<4;pp++)h+=buildPlaceholder(sc2.isDone?"사진 없음":"대기 중")}
-    h+='</div></div></div>';
+    if(photos.length>0){
+      h+='<div class="photo-section" style="padding-top:12px"><div class="photo-label"><span>부착 사진</span>';
+      if(sc2.driveUrl)h+='<a href="'+sc2.driveUrl+'" class="drive-link" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>원본 파일 다운로드</a>';
+      h+='</div><div class="photo-grid">';
+      for(var pi=0;pi<photos.length;pi++){h+='<div class="photo-thumb" onclick="openLightbox(\''+photos[pi]+'\')"><img src="'+photos[pi]+'" alt="'+escHtml(sc2.name)+' 부착사진 '+(pi+1)+'" loading="lazy"></div>'}
+      h+='</div></div>';
+    }
+    h+='</div>';
   }
   if(curRegion)h+='</div>';
   h+='</div>';
