@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>메이캔_한경닷컴_QuantUX 결과보고서</title>
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d54c0f5967bec82cc041a0afef9e493b&libraries=services"></script>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <style>
@@ -112,13 +111,6 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .drive-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--accent);text-decoration:none;padding:4px 10px;border-radius:8px;transition:background 0.15s}
 .drive-link:hover{background:var(--accent-lighter)}
 .drive-link svg{width:14px;height:14px}
-.school-gps-mini{width:100%;height:200px;border-radius:12px;margin-top:8px;border:1px solid var(--border-light);overflow:hidden}
-.gps-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:8px}
-.gps-badge.has-gps{background:var(--positive-bg);color:var(--positive)}
-.gps-badge.no-gps{background:var(--surface-alt);color:var(--text-muted)}
-.gps-legend-mini{display:flex;gap:12px;margin-top:6px;font-size:10px;color:var(--text-muted);font-weight:600}
-.gps-legend-mini .gps-lg-item{display:flex;align-items:center;gap:4px}
-.gps-legend-mini .gps-lg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .loading-wrap{text-align:center;padding:80px 20px}
 .loading-spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -141,7 +133,6 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   .school-card-header{flex-direction:column;align-items:flex-start;gap:10px}
   .photo-grid{grid-template-columns:repeat(2,1fr);gap:6px}
   .attach-info{flex-direction:column;gap:6px}
-  .school-gps-mini{height:160px}
 }
 @media(max-width:480px){
   .kpi-grid{grid-template-columns:repeat(2,1fr);gap:8px}
@@ -187,7 +178,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 <script>
 var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzl7mY-tnpMFE_6R3kWCXQ2YAso9K9JasI7t2cRwBdbHh8kNXND-Xy4pdXWv-RghCVO/exec";
 var CAMP_KEY = "메이캔_한경닷컴_QuantUX";
-var AUTO_REFRESH_SEC = 300; // 5분마다 자동 새로고침
+var AUTO_REFRESH_SEC = 300;
 
 function escHtml(s){if(!s)return"";return s.toString().replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 
@@ -212,27 +203,21 @@ function renderReport(data){
   var s=data.stats, schools=data.schools;
   document.getElementById("metaSchools").innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>'+s.totalSchools+'개교 ('+s.regionText+')';
   var h="";
-
-  // KPI 카드
   h+='<div class="kpi-grid fade-in">';
   h+='<div class="kpi-card schools"><div class="kpi-value">'+s.totalSchools+'</div><div class="kpi-label">대상 학교</div><div class="kpi-sub">'+s.regionText+'</div></div>';
   h+='<div class="kpi-card poster"><div class="kpi-value">'+s.totalPoster+'</div><div class="kpi-label">포스터 (장)</div><div class="kpi-sub">완료 '+s.donePoster+' / 잔여 '+(s.totalPoster-s.donePoster)+'</div></div>';
   h+='<div class="kpi-card banner"><div class="kpi-value">'+s.totalBanner+'</div><div class="kpi-label">현수막 (장)</div><div class="kpi-sub">완료 '+s.doneBanner+' / 잔여 '+(s.totalBanner-s.doneBanner)+'</div></div>';
   h+='<div class="kpi-card progress"><div class="kpi-value">'+s.pct+'%</div><div class="kpi-label">진행률</div><div class="kpi-sub">'+s.doneSchools+'/'+s.totalSchools+'개교 완료</div></div>';
   h+='</div>';
-
-  // 프로그레스 바
   h+='<div class="progress-section fade-in" style="animation-delay:0.1s"><div class="progress-bar-wrap">';
   h+='<div class="progress-header"><span class="progress-title">전체 진행 현황</span><span class="progress-pct">'+s.pct+'%</span></div>';
   h+='<div class="progress-track"><div class="progress-fill" style="width:'+s.pct+'%"></div></div>';
   h+='<div class="progress-detail"><span><span class="dot dot-done"></span>완료 '+s.doneSchools+'개교</span>';
   h+='<span><span class="dot dot-remain"></span>잔여 '+s.remainSchools+'개교</span>';
   h+='<span style="margin-left:auto;color:var(--text-secondary)">최종 업데이트 : '+data.updatedAt+'</span></div></div></div>';
-
-  // 요약 테이블
   h+='<div class="section fade-in" style="animation-delay:0.12s"><div class="section-title">전체 학교 요약</div>';
   h+='<div class="summary-table-wrap"><div style="overflow-x:auto"><table class="summary-table">';
-  h+='<thead><tr><th>No.</th><th>학교명</th><th>주소</th><th>포스터</th><th>현수막</th><th>부착일시</th><th>상태</th><th>GPS</th><th>비고 (부착장소)</th></tr></thead><tbody>';
+  h+='<thead><tr><th>No.</th><th>학교명</th><th>주소</th><th>포스터</th><th>현수막</th><th>부착일시</th><th>상태</th><th>비고 (부착장소)</th></tr></thead><tbody>';
   var SVG_DONE='<span class="school-status status-done" style="display:inline-flex;font-size:10px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</span>';
   var SVG_PENDING='<span class="school-status status-pending" style="display:inline-flex;font-size:10px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="none" stroke="#CBD5E1" stroke-width="2"/></svg>대기</span>';
   for(var i=0;i<schools.length;i++){
@@ -240,19 +225,14 @@ function renderReport(data){
     var pq=typeof sc.pQty==="number"&&sc.pQty>0?sc.pQty:"-";
     var bq=typeof sc.bQty==="number"&&sc.bQty>0?sc.bQty:"-";
     var dateCell=sc.postDate?'<td class="date-text">'+escHtml(sc.postDate)+'</td>':'<td style="color:var(--text-muted)">-</td>';
-    var noteText=sc.note||"";
+    var noteText=sc.note||sc.posterAttach||sc.bannerAttach||"";
     var noteCell=noteText?'<td class="summary-note">'+escHtml(noteText)+'</td>':'<td class="summary-note" style="color:var(--text-muted)">-</td>';
     h+='<tr><td>'+(i+1)+'</td><td>'+escHtml(sc.name)+'</td><td class="region-tag">'+escHtml(sc.region+" "+sc.subAddr)+'</td>';
-    h+='<td'+(pq!=="-"?' class="qty-poster"':'')+">"+ pq+'</td>';
-    h+='<td'+(bq!=="-"?' class="qty-banner"':'')+">"+ bq+'</td>';
-    var scGps=sc.gps||{poster:[],banner:[]};
-    var scHasGps=(scGps.poster&&scGps.poster.length>0)||(scGps.banner&&scGps.banner.length>0);
-    var gpsCell=scHasGps?'<td><span class="gps-badge has-gps" style="font-size:9px">📍 확인</span></td>':'<td><span class="gps-badge no-gps" style="font-size:9px">-</span></td>';
-    h+=dateCell+'<td>'+(sc.isDone?SVG_DONE:SVG_PENDING)+'</td>'+gpsCell+noteCell+'</tr>';
+    h+='<td'+(pq!=="-"?' class="qty-poster"':"")+">"+pq+'</td>';
+    h+='<td'+(bq!=="-"?' class="qty-banner"':"")+">"+bq+'</td>';
+    h+=dateCell+'<td>'+(sc.isDone?SVG_DONE:SVG_PENDING)+'</td>'+noteCell+'</tr>';
   }
-  h+='</tbody><tfoot><tr><td></td><td>합계 '+s.totalSchools+'개교</td><td></td><td class="qty-poster">'+s.totalPoster+'장</td><td class="qty-banner">'+s.totalBanner+'장</td><td></td><td></td><td></td><td></td></tr></tfoot></table></div></div></div>';
-
-  // 학교별 카드
+  h+='</tbody><tfoot><tr><td></td><td>합계 '+s.totalSchools+'개교</td><td></td><td class="qty-poster">'+s.totalPoster+'장</td><td class="qty-banner">'+s.totalBanner+'장</td><td></td><td></td><td></td></tr></tfoot></table></div></div></div>';
   h+='<div class="section fade-in" style="animation-delay:0.15s"><div class="section-title">학교별 부착 결과</div>';
   var curRegion="", regionCounts={};
   for(var rc=0;rc<schools.length;rc++)regionCounts[schools[rc].region]=(regionCounts[schools[rc].region]||0)+1;
@@ -262,99 +242,28 @@ function renderReport(data){
     var numBg=sc2.isDone?"var(--accent)":"var(--text-muted)";
     var statusHtml2=sc2.isDone?'<div class="school-status status-done"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</div>':'<div class="school-status status-pending"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="none" stroke="#CBD5E1" stroke-width="2"/></svg>대기</div>';
     h+='<div class="school-card"><div class="school-card-header"><div class="school-info"><div class="school-num" style="background:'+numBg+'">' +(si+1)+'</div><div><div class="school-name">'+escHtml(sc2.name)+'</div><div class="school-addr">'+escHtml(sc2.addr)+'</div></div></div>'+statusHtml2+'</div>';
-    // 수량 헤더
     h+='<div class="qty-header">';
     if(sc2.pQty)h+='<div class="qty-item"><span class="qty-label">포스터</span><span class="qty-poster">'+sc2.pQty+'장</span></div>';
     if(sc2.bQty)h+='<div class="qty-item"><span class="qty-label">현수막</span><span class="qty-banner">'+sc2.bQty+'장</span></div>';
     h+='</div>';
-    // 부착정보
     if(sc2.isDone){
-      var noteText2=sc2.note||"";
+      var noteText2=sc2.note||sc2.posterAttach||sc2.bannerAttach||"";
       h+='<div class="attach-info">';
       if(sc2.postDate)h+='<div class="attach-info-item"><span class="attach-info-label">부착일시</span><span class="attach-info-value">'+escHtml(sc2.postDate)+'</span></div>';
       if(noteText2)h+='<div class="attach-info-item"><span class="attach-info-label">비고</span><span class="attach-info-value">'+escHtml(noteText2)+'</span></div>';
       h+='</div>';
     }
-    // 사진
     h+='<div class="photo-section" style="padding-top:12px"><div class="photo-label"><span>부착 사진</span>';
     if(sc2.driveUrl)h+='<a href="'+sc2.driveUrl+'" class="drive-link" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>전체 사진 보기</a>';
     h+='</div><div class="photo-grid">';
     var photos=sc2.photos||[];
     if(photos.length>0){for(var pi=0;pi<4;pi++){if(pi<photos.length){h+='<div class="photo-thumb" onclick="openLightbox(\''+photos[pi]+'\')"><img src="'+photos[pi]+'" alt="'+escHtml(sc2.name)+' 부착사진 '+(pi+1)+'" loading="lazy"></div>'}else if(pi<photos.length+1){h+=buildPlaceholder(sc2.isDone?"":"대기 중")}}}
     else{for(var pp=0;pp<4;pp++)h+=buildPlaceholder(sc2.isDone?"사진 없음":"대기 중")}
-    h+='</div>';
-    // GPS 미니맵 (포스터=보라, 현수막=주황)
-    var gpsData=sc2.gps||{poster:[],banner:[]};
-    var hasGps=(gpsData.poster&&gpsData.poster.length>0)||(gpsData.banner&&gpsData.banner.length>0);
-    if(hasGps){
-      h+='<div style="margin-top:12px;padding:0 0 4px"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="font-size:11px;font-weight:700;color:var(--text-muted)">부착 위치</span><span class="gps-badge has-gps"><svg width="10" height="10" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>GPS 확인됨</span></div>';
-      h+='<div class="school-gps-mini" id="minimap-'+si+'"></div>';
-      h+='<div class="gps-legend-mini">';
-      if(gpsData.poster&&gpsData.poster.length>0)h+='<span class="gps-lg-item"><span class="gps-lg-dot" style="background:#7C3AED"></span>포스터 '+gpsData.poster.length+'건</span>';
-      if(gpsData.banner&&gpsData.banner.length>0)h+='<span class="gps-lg-item"><span class="gps-lg-dot" style="background:#EA580C"></span>현수막 '+gpsData.banner.length+'건</span>';
-      h+='</div></div>';
-    }else if(sc2.isDone){
-      h+='<div style="margin-top:8px;display:flex;align-items:center;gap:6px"><span style="font-size:11px;font-weight:700;color:var(--text-muted)">부착 위치</span><span class="gps-badge no-gps">GPS 정보 없음</span></div>';
-    }
-    h+='</div></div>';
+    h+='</div></div></div>';
   }
   if(curRegion)h+='</div>';
   h+='</div>';
   document.getElementById("reportContent").innerHTML=h;
-  // 학교별 GPS 미니맵 렌더링
-  setTimeout(function(){renderSchoolMiniMaps(schools)},800);
-}
-
-// ── 학교별 GPS 미니맵 렌더링 (포스터=보라, 현수막=주황) ──
-var GPS_COLOR_POSTER="#7C3AED";  // 보라
-var GPS_COLOR_BANNER="#EA580C";  // 주황
-
-function makeSvgMarkerUrl(color,size){
-  size=size||24;
-  return "data:image/svg+xml;charset=utf-8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'"><circle cx="'+size/2+'" cy="'+size/2+'" r="'+(size/2-2)+'" fill="'+color+'" stroke="#fff" stroke-width="2"/></svg>');
-}
-
-function renderSchoolMiniMaps(schools){
-  if(typeof kakao==="undefined"||!kakao.maps)return;
-  for(var i=0;i<schools.length;i++){
-    var sc=schools[i];
-    var gps=sc.gps||{poster:[],banner:[]};
-    var hasPosterGps=gps.poster&&gps.poster.length>0;
-    var hasBannerGps=gps.banner&&gps.banner.length>0;
-    if(!hasPosterGps&&!hasBannerGps)continue;
-    var miniEl=document.getElementById("minimap-"+i);
-    if(!miniEl)continue;
-    
-    // 첫 좌표로 센터 설정
-    var firstPt=hasPosterGps?gps.poster[0]:(hasBannerGps?gps.banner[0]:null);
-    if(!firstPt)continue;
-    var miniMap=new kakao.maps.Map(miniEl,{center:new kakao.maps.LatLng(firstPt.lat,firstPt.lng),level:4});
-    var bounds=new kakao.maps.LatLngBounds();
-    var markerCount=0;
-    
-    // 포스터 마커 (보라)
-    if(hasPosterGps){
-      var posterImg=new kakao.maps.MarkerImage(makeSvgMarkerUrl(GPS_COLOR_POSTER,28),new kakao.maps.Size(28,28),{offset:new kakao.maps.Point(14,14)});
-      for(var pi2=0;pi2<gps.poster.length;pi2++){
-        var pp=new kakao.maps.LatLng(gps.poster[pi2].lat,gps.poster[pi2].lng);
-        bounds.extend(pp);
-        new kakao.maps.Marker({map:miniMap,position:pp,title:"포스터 "+(pi2+1),image:posterImg});
-        markerCount++;
-      }
-    }
-    // 현수막 마커 (주황)
-    if(hasBannerGps){
-      var bannerImg=new kakao.maps.MarkerImage(makeSvgMarkerUrl(GPS_COLOR_BANNER,28),new kakao.maps.Size(28,28),{offset:new kakao.maps.Point(14,14)});
-      for(var bi2=0;bi2<gps.banner.length;bi2++){
-        var bp=new kakao.maps.LatLng(gps.banner[bi2].lat,gps.banner[bi2].lng);
-        bounds.extend(bp);
-        new kakao.maps.Marker({map:miniMap,position:bp,title:"현수막 "+(bi2+1),image:bannerImg});
-        markerCount++;
-      }
-    }
-    if(markerCount>1)miniMap.setBounds(bounds);
-    else miniMap.setLevel(3);
-  }
 }
 
 function buildPlaceholder(text){
@@ -365,10 +274,7 @@ function openLightbox(src){var lb=document.getElementById("lightbox");document.g
 function closeLightbox(){document.getElementById("lightbox").classList.remove("show");document.body.style.overflow=""}
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox()});
 
-// 초기 로딩
 loadReportData();
-
-// 자동 새로고침
 setInterval(loadReportData, AUTO_REFRESH_SEC * 1000);
 
 </script>
