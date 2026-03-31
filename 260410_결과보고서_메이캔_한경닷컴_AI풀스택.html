@@ -338,7 +338,15 @@ function openSchoolMap(name,gpsArr){
   popup.style.cssText="background:#fff;border-radius:16px;width:90vw;max-width:700px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3)";
   var header=document.createElement("div");
   header.style.cssText="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #E2E8F0";
-  header.innerHTML='<div style="font-size:14px;font-weight:800">'+escHtml(name)+' <span style="color:#059669;font-size:12px">GPS '+gpsArr.length+'건</span></div><button onclick="document.getElementById(\\'schoolMapOverlay\\').remove()" style="background:none;border:none;font-size:20px;cursor:pointer;color:#94A3B8;padding:4px">✕</button>';
+  var titleDiv=document.createElement("div");
+  titleDiv.style.cssText="font-size:14px;font-weight:800";
+  titleDiv.innerHTML=escHtml(name)+" <span style=\"color:#059669;font-size:12px\">GPS "+gpsArr.length+"건</span>";
+  var closeBtn=document.createElement("button");
+  closeBtn.textContent="\u2715";
+  closeBtn.style.cssText="background:none;border:none;font-size:20px;cursor:pointer;color:#94A3B8;padding:4px";
+  closeBtn.addEventListener("click",function(){var el=document.getElementById("schoolMapOverlay");if(el)el.remove()});
+  header.appendChild(titleDiv);
+  header.appendChild(closeBtn);
   var mapDiv=document.createElement("div");
   mapDiv.style.cssText="width:100%;height:400px";
   popup.appendChild(header);
