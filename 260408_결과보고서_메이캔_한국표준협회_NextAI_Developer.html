@@ -231,7 +231,7 @@ function renderReport(data){
   }
   if(gpsPoints.length>0){
     h+='<div class="section fade-in" style="animation-delay:0.11s"><div class="section-title">부착 위치 현황</div>';
-    h+='<div style="padding:0 16px 16px"><div id="reportMap" style="width:100%;height:400px;border-radius:12px;border:1px solid var(--border);overflow:hidden"></div>';
+    h+='<div style="padding:0 16px 16px"><div id="reportMap" style="width:100%;height:520px;border-radius:12px;border:1px solid var(--border);overflow:hidden"></div>';
     h+='<div style="margin-top:10px;padding:10px 14px;background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;font-size:12px;color:#166534;display:flex;align-items:center;gap:8px">';
     h+='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>';
     h+='GPS 및 사진은 1시간 간격으로 자동 업데이트 됩니다. <span style="margin-left:auto;font-weight:700;color:#059669">GPS 확인 '+gpsPoints.length+'건</span>';
@@ -308,7 +308,7 @@ function renderReport(data){
         bounds.extend(pos);
         (function(pos2,name,map2){
           var el=document.createElement("div");
-          el.style.cssText="width:14px;height:14px;background:#059669;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,0.3);cursor:pointer";
+          el.style.cssText="width:10px;height:10px;background:#059669;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,0.3);cursor:pointer";
           var overlay=new kakao.maps.CustomOverlay({position:pos2,map:map2,content:el,yAnchor:0.5,xAnchor:0.5});
           var infoEl=document.createElement("div");
           infoEl.style.cssText="padding:4px 8px;font-size:11px;font-weight:700;white-space:nowrap;background:#fff;border:1px solid #ddd;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.15)";
@@ -348,7 +348,7 @@ function openSchoolMap(name,gpsArr){
   header.appendChild(titleDiv);
   header.appendChild(closeBtn);
   var mapDiv=document.createElement("div");
-  mapDiv.style.cssText="width:100%;height:400px";
+  mapDiv.style.cssText="width:100%;height:520px";
   popup.appendChild(header);
   popup.appendChild(mapDiv);
   overlay.appendChild(popup);
@@ -361,7 +361,7 @@ function openSchoolMap(name,gpsArr){
       var pos=new kakao.maps.LatLng(gpsArr[i].lat,gpsArr[i].lng);
       bounds.extend(pos);
       var el=document.createElement("div");
-      el.style.cssText="width:16px;height:16px;background:#059669;border:2px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)";
+      el.style.cssText="width:11px;height:11px;background:#059669;border:2px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)";
       new kakao.maps.CustomOverlay({position:pos,map:map,content:el,yAnchor:0.5,xAnchor:0.5});
     }
     if(gpsArr.length>1)map.setBounds(bounds);
