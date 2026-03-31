@@ -56,10 +56,10 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media print{body{background:#fff!important}.tab-nav,.bottom-bar,.search-bar{display:none!important}.page{display:block!important;padding-bottom:0!important}.card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}}
 .tab-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;border-top:1px solid var(--border);z-index:200;padding-bottom:env(safe-area-inset-bottom,0)}
-.tab-btn{flex:1;padding:8px 0 12px;text-align:center;font-size:11px;font-weight:700;letter-spacing:0.02em;color:var(--text-muted);border:none;background:none;cursor:pointer;position:relative;transition:color 0.2s;touch-action:manipulation;font-family:inherit}
+.tab-btn{flex:1;padding:9px 0 14px;text-align:center;font-size:13px;font-weight:700;letter-spacing:0.02em;color:var(--text-muted);border:none;background:none;cursor:pointer;position:relative;transition:color 0.2s;touch-action:manipulation;font-family:inherit}
 .tab-btn.active{color:var(--accent)}
-.tab-btn.active::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:20px;height:2px;background:var(--accent);border-radius:0 0 2px 2px}
-.tab-btn .tab-icon{display:block;font-size:18px;margin-bottom:1px;line-height:1}
+.tab-btn.active::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:2px;background:var(--accent);border-radius:0 0 2px 2px}
+.tab-btn .tab-icon{display:block;font-size:21px;margin-bottom:1px;line-height:1}
 .page{display:none;padding-bottom:150px;min-height:100vh}.page.active{display:block}
 .summary-header{background:var(--gradient-header);color:#fff;padding:28px 20px 22px;position:relative;overflow:hidden}
 .summary-header::before{content:"";position:absolute;top:-60%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 70%);pointer-events:none}
@@ -239,16 +239,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <h1>반장님</h1>
     <div class="sub">작업요청서 · 전체 요약</div>
-    <div class="updated-tag">3/31 15:04 업데이트</div>
-  </div>
-  <div class="totals-grid">
-    <div class="total-card schools"><div class="label">학교</div><div class="value">40<span class="unit">개교</span></div><div class="sub-val" id="sumSchoolDone">완료 7</div></div>
-    <div class="total-card poster"><div class="label">포스터</div><div class="value">1200<span class="unit">장</span></div><div class="sub-val" id="sumPosterDone">완료 210</div></div>
-    <div class="total-card banner"><div class="label">현수막</div><div class="value">0<span class="unit">장</span></div><div class="sub-val" id="sumBannerDone">완료 0</div></div>
-  </div>
-  <div class="progress-summary">
-    <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">7/40</span></div>
-    <div class="progress-track"><div class="progress-fill" id="summaryProgress" style="width:0%"></div></div>
+    <div class="updated-tag">3/31 15:14 업데이트</div>
   </div>
   <div class="map-section">
     <div class="section-title">학교 위치</div>
@@ -259,6 +250,15 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
       <span class="legend-item"><span class="legend-dot" style="background:var(--text-muted)"></span>여유</span>
       <span class="legend-item"><span class="legend-dot" style="background:var(--positive)"></span>완료</span>
     </div>
+  </div>
+  <div class="totals-grid">
+    <div class="total-card schools"><div class="label">학교</div><div class="value">40<span class="unit">개교</span></div><div class="sub-val" id="sumSchoolDone">완료 7</div></div>
+    <div class="total-card poster"><div class="label">포스터</div><div class="value">1200<span class="unit">장</span></div><div class="sub-val" id="sumPosterDone">완료 210</div></div>
+    <div class="total-card banner"><div class="label">현수막</div><div class="value">0<span class="unit">장</span></div><div class="sub-val" id="sumBannerDone">완료 0</div></div>
+  </div>
+  <div class="progress-summary">
+    <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">7/40</span></div>
+    <div class="progress-track"><div class="progress-fill" id="summaryProgress" style="width:0%"></div></div>
   </div>
   <div class="camp-summary">
     <div class="section-title">캠페인 현황</div>
