@@ -84,7 +84,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .summary-note{font-size:12px;color:var(--text-muted);max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .date-text{font-variant-numeric:tabular-nums;font-weight:600;color:var(--text)}
 .school-card{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow-sm);border:1px solid var(--border-light);overflow:hidden;margin-bottom:16px;transition:all 0.3s ease}
-.school-card.card-done{opacity:0.7}
+.school-card.card-done{opacity:1}
 .school-card.card-done .card-body{display:none}
 .school-card.card-done.card-expanded .card-body{display:block}
 .school-card-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border-light);cursor:pointer;transition:background 0.15s;gap:12px}
@@ -241,7 +241,7 @@ function renderReport(data){
     h+='<div style="padding:0 16px 16px"><div id="reportMap" style="width:100%;height:520px;border-radius:12px;border:1px solid var(--border);overflow:hidden"></div>';
     h+='<div style="margin-top:10px;padding:10px 14px;background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;font-size:12px;color:#166534;display:flex;align-items:center;gap:8px">';
     h+='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>';
-    h+='GPS 및 사진은 1시간 간격으로 자동 업데이트 됩니다. <span style="margin-left:auto;font-weight:700;color:#059669">GPS 확인 '+gpsPoints.length+'건</span>';
+    h+='GPS 및 사진은 1시간 간격으로 자동 업데이트 됩니다.<br><span style="color:#64748B;font-weight:500">실내 깊은곳에서는 GPS가 수집되지 않습니다.</span>';
     h+='</div></div></div>';
   }
   h+='<div class="section fade-in" style="animation-delay:0.12s"><div class="section-title">전체 학교 요약</div>';
@@ -281,19 +281,14 @@ function renderReport(data){
     h+='<div id="school-'+(si+1)+'" class="'+cardClass+'" onclick="if(this.classList.contains(\'card-done\')){this.classList.toggle(\'card-expanded\')}">'
     +'<div class="school-card-header"><div class="school-info"><div class="school-num" style="background:'+numBg+'">' +(si+1)+'</div><div><div class="school-name">'+escHtml(sc2.name)+toggleArrow+'</div><div class="school-addr">'+escHtml(sc2.addr)+'</div></div></div><div class="header-qty">'+qtyHtml2+'</div>'+statusHtml2+'</div>';
     h+='<div class="card-body">';
+    var sc2Gps=(sc2.gps&&sc2.gps.poster)||[];
     if(sc2.isDone){
       var noteText2=sc2.note||"";
       h+='<div class="attach-info">';
-      if(sc2.postDate)h+='<div class="attach-info-item"><span class="attach-info-label">부착일시</span><span class="attach-info-value">'+escHtml(sc2.postDate)+'</span></div>';
+      if(sc2.postDate){h+='<div class="attach-info-item"><span class="attach-info-label">부착일시</span><span class="attach-info-value">'+escHtml(sc2.postDate)+'</span>';
+        if(sc2Gps.length>0)h+='<a href="javascript:void(0)" onclick="event.stopPropagation();openSchoolMap(\''+escHtml(sc2.name)+'\','+JSON.stringify(sc2Gps).replace(/"/g,"&quot;")+')" style="margin-left:12px;color:#2563EB;font-size:12px;font-weight:700;text-decoration:none;cursor:pointer">지도 보기 →</a>';
+        h+='</div>';}
       if(noteText2)h+='<div class="attach-info-item"><span class="attach-info-label">부착장소 및 특이사항</span><span class="attach-info-value">'+escHtml(noteText2)+'</span></div>';
-      h+='</div>';
-    }
-    var sc2Gps=(sc2.gps&&sc2.gps.poster)||[];
-    if(sc2Gps.length>0){
-      h+='<div style="padding:8px 14px;display:flex;align-items:center;gap:6px;font-size:12px;color:#059669;font-weight:700;background:#ECFDF5;border-top:1px solid #D1FAE5">';
-      h+='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>';
-      h+='GPS 위치 확인됨 ('+sc2Gps.length+'건)';
-      h+='<a href="javascript:void(0)" onclick="openSchoolMap(\''+escHtml(sc2.name)+'\','+JSON.stringify(sc2Gps).replace(/"/g,"&quot;")+')" style="margin-left:auto;color:#2563EB;font-size:12px;text-decoration:none;cursor:pointer">지도 보기 →</a>';
       h+='</div>';
     }
     var photos=sc2.photos||[];
