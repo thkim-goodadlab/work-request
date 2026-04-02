@@ -145,10 +145,20 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   .header-title{font-size:1.3rem}
   .progress-detail{flex-direction:column;gap:6px}
 }
+.pdf-btn-wrap{text-align:center;margin-top:16px}
+.pdf-btn{display:inline-flex;align-items:center;gap:8px;background:#1E293B;color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:var(--shadow-sm);border:none;cursor:pointer;font-family:inherit;transition:background 0.15s}
+.pdf-btn:hover{background:#334155}
 @media print{
   .report-header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .school-card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
   .photo-thumb{break-inside:avoid}
+  .pdf-btn-wrap,.lightbox,.live-indicator{display:none!important}
+  body{background:#fff}
+  .kpi-card,.progress-bar-wrap,.summary-table-wrap,.school-card{box-shadow:none}
+  .kpi-card{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .progress-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .photo-grid{grid-template-columns:repeat(4,1fr)}
+  a[href]::after{content:none!important}
 }
 </style>
 </head>
@@ -256,9 +266,12 @@ function renderReport(data){
     h+=dateCell+'<td>'+(sc.isDone?SVG_DONE:SVG_PENDING)+'</td>'+noteCell+'</tr>';
   }
   h+='</tbody><tfoot><tr><td></td><td>합계 '+s.totalSchools+'개교</td><td></td><td class="qty-poster">'+s.totalPoster+'장</td><td class="qty-banner">'+s.totalBanner+'장</td><td></td><td></td><td></td></tr></tfoot></table></div></div>';
+  h+='<div style="margin-top:16px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding-bottom:4px">';
   if(campDriveUrlSaved){
-    h+='<div style="margin-top:16px;text-align:center;padding-bottom:4px"><a href="'+campDriveUrlSaved+'" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:var(--shadow-sm)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>전체 원본 사진 다운로드</a></div>';
+    h+='<a href="'+campDriveUrlSaved+'" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:var(--shadow-sm)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>전체 원본 사진 다운로드</a>';
   }
+  h+='<div class="pdf-btn-wrap"><button class="pdf-btn" onclick="window.print()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>PDF 다운로드</button></div>';
+  h+='</div>';
   h+='</div>';
   h+='<div class="section fade-in" style="animation-delay:0.15s"><div class="section-title">학교별 부착 결과</div>';
   var curRegion="", regionCounts={};
