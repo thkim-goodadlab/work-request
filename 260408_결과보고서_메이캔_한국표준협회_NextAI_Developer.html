@@ -44,15 +44,14 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .live-dot{width:6px;height:6px;background:#34D399;border-radius:50%;animation:pulse 2s ease-in-out infinite}
 .container{max-width:1100px;margin:0 auto;padding:0 24px}
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-32px;position:relative;z-index:1}
-.kpi-card{background:var(--surface);border-radius:var(--r);padding:20px;box-shadow:var(--shadow-md);border:1px solid var(--border-light);text-align:center;position:relative;overflow:hidden}
-.kpi-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+.kpi-card{background:var(--surface);border-radius:var(--r);padding:20px;box-shadow:var(--shadow-md);border:1px solid var(--border-light);text-align:center}
 .kpi-value{font-size:2rem;font-weight:900;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums}
 .kpi-label{font-size:12px;font-weight:700;color:var(--text-muted);margin-top:6px;text-transform:uppercase;letter-spacing:0.04em}
 .kpi-sub{font-size:12px;font-weight:600;margin-top:4px}
-.kpi-card.schools::before{background:var(--accent)}.kpi-card.schools .kpi-value{color:var(--accent)}.kpi-card.schools .kpi-sub{color:var(--accent)}
-.kpi-card.poster::before{background:#7C3AED}.kpi-card.poster .kpi-value{color:#7C3AED}.kpi-card.poster .kpi-sub{color:#7C3AED}
-.kpi-card.banner::before{background:var(--orange)}.kpi-card.banner .kpi-value{color:var(--orange)}.kpi-card.banner .kpi-sub{color:var(--orange)}
-.kpi-card.progress::before{background:linear-gradient(90deg,var(--accent),var(--positive))}.kpi-card.progress{background:linear-gradient(135deg,#ECFDF5,#F0FDF4);border-color:#BBF7D0}.kpi-card.progress .kpi-value{color:var(--positive);font-size:2.2rem}.kpi-card.progress .kpi-sub{color:var(--positive)}
+.kpi-card.schools .kpi-value{color:var(--accent)}.kpi-card.schools .kpi-sub{color:var(--accent)}
+.kpi-card.poster .kpi-value{color:#7C3AED}.kpi-card.poster .kpi-sub{color:#7C3AED}
+.kpi-card.banner .kpi-value{color:var(--orange)}.kpi-card.banner .kpi-sub{color:var(--orange)}
+.kpi-card.progress{background:linear-gradient(135deg,#ECFDF5,#F0FDF4);border-color:#BBF7D0}.kpi-card.progress .kpi-value{color:var(--positive);font-size:2.2rem}.kpi-card.progress .kpi-sub{color:var(--positive)}
 .progress-section{margin-top:24px}
 .progress-bar-wrap{background:var(--surface);border-radius:var(--r);padding:20px 24px;box-shadow:var(--shadow-sm);border:1px solid var(--border-light)}
 .progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
@@ -88,8 +87,9 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .school-card.card-done{opacity:0.7}
 .school-card.card-done .card-body{display:none}
 .school-card.card-done.card-expanded .card-body{display:block}
-.school-card-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border-light);cursor:pointer;transition:background 0.15s}
+.school-card-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border-light);cursor:pointer;transition:background 0.15s;gap:12px}
 .school-card-header:hover{background:var(--surface-alt)}
+.header-qty{display:flex;align-items:center;gap:12px;margin-left:auto;margin-right:12px;flex-shrink:0}
 .card-toggle{font-size:12px;color:var(--text-muted);font-weight:600;margin-left:8px;transition:transform 0.2s}
 .card-expanded .card-toggle{transform:rotate(180deg)}
 .school-info{display:flex;align-items:center;gap:12px}
@@ -178,8 +178,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="loading-wrap"><div class="loading-spinner"></div><div class="loading-text">데이터를 불러오는 중...</div></div>
 </div>
 <div class="report-footer" style="text-align:center;padding:32px 16px 40px">
-  <div style="margin-bottom:8px"><img src="https://lh3.googleusercontent.com/d/1GBm8WrDq7Qo4IfODOMeZEs4JrO2Y4Pq3" alt="좋은광고연구소" style="height:48px;object-fit:contain"></div>
-  <div style="font-size:11px;color:var(--text-muted)">좋은광고연구소</div>
+  <div><img src="https://lh3.googleusercontent.com/d/1GBm8WrDq7Qo4IfODOMeZEs4JrO2Y4Pq3" alt="좋은광고연구소" style="height:24px;object-fit:contain"></div>
 </div>
 </div>
 <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d54c0f5967bec82cc041a0afef9e493b&autoload=false"></script>
@@ -257,7 +256,7 @@ function renderReport(data){
     var dateCell=sc.postDate?'<td class="date-text">'+escHtml(sc.postDate)+'</td>':'<td style="color:var(--text-muted)">-</td>';
     var noteText=sc.note||"";
     var noteCell=noteText?'<td class="summary-note">'+escHtml(noteText)+'</td>':'<td class="summary-note" style="color:var(--text-muted)">-</td>';
-    h+='<tr><td>'+(i+1)+'</td><td>'+escHtml(sc.name)+'</td><td class="region-tag">'+escHtml(sc.region+" "+sc.subAddr)+'</td>';
+    h+='<tr><td>'+(i+1)+'</td><td><a href="#school-'+(i+1)+'" style="color:var(--accent);text-decoration:none;font-weight:700;cursor:pointer" onclick="event.preventDefault();var el=document.getElementById(\'school-'+(i+1)+'\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'center\'})">'+escHtml(sc.name)+'</a></td><td class="region-tag">'+escHtml(sc.region+" "+sc.subAddr)+'</td>';
     h+='<td'+(pq!=="-"?' class="qty-poster"':"")+">"+pq+'</td>';
     h+='<td'+(bq!=="-"?' class="qty-banner"':"")+">"+bq+'</td>';
     h+=dateCell+'<td>'+(sc.isDone?SVG_DONE:SVG_PENDING)+'</td>'+noteCell+'</tr>';
@@ -266,20 +265,22 @@ function renderReport(data){
   h+='<div class="section fade-in" style="animation-delay:0.15s"><div class="section-title">학교별 부착 결과</div>';
   var curRegion="", regionCounts={};
   for(var rc=0;rc<schools.length;rc++)regionCounts[schools[rc].region]=(regionCounts[schools[rc].region]||0)+1;
+  var doneRegionCounts={};
+  for(var drc=0;drc<schools.length;drc++){if(schools[drc].isDone)doneRegionCounts[schools[drc].region]=(doneRegionCounts[schools[drc].region]||0)+1;}
   for(var si=0;si<schools.length;si++){
     var sc2=schools[si];
-    if(sc2.region!==curRegion){if(curRegion)h+='</div>';curRegion=sc2.region;h+='<div class="region-group"><div class="region-label">'+curRegion+' <span class="region-count">'+regionCounts[curRegion]+'개교</span></div>'}
+    if(!sc2.isDone)continue;
+    if(sc2.region!==curRegion){if(curRegion)h+='</div>';curRegion=sc2.region;h+='<div class="region-group"><div class="region-label">'+curRegion+' <span class="region-count">'+(doneRegionCounts[curRegion]||0)+'개교</span></div>'}
     var numBg=sc2.isDone?"var(--accent)":"var(--text-muted)";
     var statusHtml2=sc2.isDone?'<div class="school-status status-done"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</div>':'<div class="school-status status-pending"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="none" stroke="#CBD5E1" stroke-width="2"/></svg>대기</div>';
     var cardClass=sc2.isDone?"school-card card-done":"school-card";
-    var toggleArrow=sc2.isDone?'<span class="card-toggle">▼</span>':"";
-    h+='<div class="'+cardClass+'" onclick="if(this.classList.contains(\'card-done\')){this.classList.toggle(\'card-expanded\')}">'
-    +'<div class="school-card-header"><div class="school-info"><div class="school-num" style="background:'+numBg+'">' +(si+1)+'</div><div><div class="school-name">'+escHtml(sc2.name)+toggleArrow+'</div><div class="school-addr">'+escHtml(sc2.addr)+'</div></div></div>'+statusHtml2+'</div>';
+    var toggleArrow=sc2.isDone?'<span class="card-toggle"><span style="font-size:12px;color:var(--accent);font-weight:600;margin-right:4px">사진 및 위치보기</span>▼</span>':"";
+    var qtyHtml2="";
+    if(sc2.pQty)qtyHtml2+='<div class="qty-item"><span class="qty-label">포스터</span><span class="qty-poster">'+sc2.pQty+'장</span></div>';
+    if(sc2.bQty)qtyHtml2+='<div class="qty-item"><span class="qty-label">현수막</span><span class="qty-banner">'+sc2.bQty+'장</span></div>';
+    h+='<div id="school-'+(si+1)+'" class="'+cardClass+'" onclick="if(this.classList.contains(\'card-done\')){this.classList.toggle(\'card-expanded\')}">'
+    +'<div class="school-card-header"><div class="school-info"><div class="school-num" style="background:'+numBg+'">' +(si+1)+'</div><div><div class="school-name">'+escHtml(sc2.name)+toggleArrow+'</div><div class="school-addr">'+escHtml(sc2.addr)+'</div></div></div><div class="header-qty">'+qtyHtml2+'</div>'+statusHtml2+'</div>';
     h+='<div class="card-body">';
-    h+='<div class="qty-header">';
-    if(sc2.pQty)h+='<div class="qty-item"><span class="qty-label">포스터</span><span class="qty-poster">'+sc2.pQty+'장</span></div>';
-    if(sc2.bQty)h+='<div class="qty-item"><span class="qty-label">현수막</span><span class="qty-banner">'+sc2.bQty+'장</span></div>';
-    h+='</div>';
     if(sc2.isDone){
       var noteText2=sc2.note||"";
       h+='<div class="attach-info">';
@@ -320,7 +321,7 @@ function renderReport(data){
         bounds.extend(pos);
         (function(pos2,name,map2){
           var el=document.createElement("div");
-          el.style.cssText="width:10px;height:10px;background:#059669;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,0.3);cursor:pointer";
+          el.style.cssText="width:16px;height:16px;background:#059669;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3);cursor:pointer";
           var overlay=new kakao.maps.CustomOverlay({position:pos2,map:map2,content:el,yAnchor:0.5,xAnchor:0.5});
           var infoEl=document.createElement("div");
           infoEl.style.cssText="padding:4px 8px;font-size:11px;font-weight:700;white-space:nowrap;background:#fff;border:1px solid #ddd;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.15)";
@@ -373,7 +374,7 @@ function openSchoolMap(name,gpsArr){
       var pos=new kakao.maps.LatLng(gpsArr[i].lat,gpsArr[i].lng);
       bounds.extend(pos);
       var el=document.createElement("div");
-      el.style.cssText="width:11px;height:11px;background:#059669;border:2px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)";
+      el.style.cssText="width:16px;height:16px;background:#059669;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)";
       new kakao.maps.CustomOverlay({position:pos,map:map,content:el,yAnchor:0.5,xAnchor:0.5});
     }
     if(gpsArr.length>1)map.setBounds(bounds);
