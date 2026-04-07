@@ -391,10 +391,10 @@ function openSchoolMap(name,gpsArr){
 
 function handleImgError(img){
   var src=img.src;
-  var idMatch=src.match(/\/d\/([^=\/]+)/);
+  var idMatch=src.match(/[?&]id=([^&]+)/) || src.match(/\/d\/([^=\/]+)/);
   if(idMatch&&!img.dataset.retried){
     img.dataset.retried="1";
-    img.src="https://drive.google.com/thumbnail?id="+idMatch[1]+"&sz=w1200";
+    img.src="https://lh3.googleusercontent.com/d/"+idMatch[1]+"=w1200";
     return;
   }
   img.style.display="none";
