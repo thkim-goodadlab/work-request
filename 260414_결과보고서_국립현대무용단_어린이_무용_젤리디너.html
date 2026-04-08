@@ -120,8 +120,9 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .loading-text{font-size:14px;color:var(--text-muted);font-weight:600}
 .error-wrap{text-align:center;padding:80px 20px;color:var(--negative)}
 .refresh-btn{background:var(--accent);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;margin-top:16px;font-family:inherit}
-.report-footer{margin-top:48px;padding:28px 0;border-top:1px solid var(--border);text-align:center}
+.report-footer{margin-top:48px;padding:28px 0;border-top:1px solid var(--border);text-align:left}
 .footer-logo{font-size:13px;font-weight:800;color:var(--text-muted);letter-spacing:-0.01em}
+.footer-info{font-size:12px;color:var(--text-muted);margin-top:8px}
 .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;display:none;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 .lightbox.show{display:flex}
 .lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
@@ -145,14 +146,11 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   .header-title{font-size:1.3rem}
   .progress-detail{flex-direction:column;gap:6px}
 }
-.pdf-btn-wrap{text-align:center;margin-top:16px}
-.pdf-btn{display:inline-flex;align-items:center;gap:8px;background:#1E293B;color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:var(--shadow-sm);border:none;cursor:pointer;font-family:inherit;transition:background 0.15s}
-.pdf-btn:hover{background:#334155}
 @media print{
   .report-header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .school-card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
   .photo-thumb{break-inside:avoid}
-  .pdf-btn-wrap,.lightbox,.live-indicator{display:none!important}
+  .lightbox,.live-indicator{display:none!important}
   body{background:#fff}
   .kpi-card,.progress-bar-wrap,.summary-table-wrap,.school-card{box-shadow:none}
   .kpi-card{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -183,8 +181,9 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 <div id="reportContent">
   <div class="loading-wrap"><div class="loading-spinner"></div><div class="loading-text">데이터를 불러오는 중...</div></div>
 </div>
-<div class="report-footer" style="text-align:center;padding:32px 16px 40px">
-  <div><img src="https://lh3.googleusercontent.com/d/1GBm8WrDq7Qo4IfODOMeZEs4JrO2Y4Pq3" alt="좋은광고연구소" style="height:24px;object-fit:contain"></div>
+<div class="report-footer" style="text-align:left;padding:32px 16px 40px">
+  <div><img src="https://lh3.googleusercontent.com/d/1GBm8WrDq7Qo4IfODOMeZEs4JrO2Y4Pq3" alt="좋은광고연구소" style="height:19px;object-fit:contain"></div>
+  <div class="footer-info">주식회사 좋은광고연구소 ㅣ goodadlab@goodadlab.co.kr l 1522-3235</div>
 </div>
 </div>
 <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d54c0f5967bec82cc041a0afef9e493b&autoload=false"></script>
@@ -266,12 +265,7 @@ function renderReport(data){
     h+=dateCell+'<td>'+(sc.isDone?SVG_DONE:SVG_PENDING)+'</td>'+noteCell+'</tr>';
   }
   h+='</tbody><tfoot><tr><td></td><td>합계 '+s.totalSchools+'개교</td><td></td><td class="qty-poster">'+s.totalPoster+'장</td><td class="qty-banner">'+s.totalBanner+'장</td><td></td><td></td><td></td></tr></tfoot></table></div></div>';
-  h+='<div style="margin-top:16px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding-bottom:4px">';
-  if(campDriveUrlSaved){
-    h+='<a href="'+campDriveUrlSaved+'" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:var(--shadow-sm)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>전체 원본 사진 다운로드</a>';
-  }
-  h+='<div class="pdf-btn-wrap"><button class="pdf-btn" onclick="window.print()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>PDF 다운로드</button></div>';
-  h+='</div>';
+
   h+='</div>';
   h+='<div class="section fade-in" style="animation-delay:0.15s"><div class="section-title">학교별 부착 결과</div>';
   var curRegion="", regionCounts={};
@@ -295,15 +289,15 @@ function renderReport(data){
       var noteText2=sc2.note||"";
       h+='<div class="attach-info">';
       if(sc2.postDate){h+='<div class="attach-info-item"><span class="attach-info-label">부착일시</span><span class="attach-info-value">'+escHtml(sc2.postDate)+'</span>';
-        if(sc2Gps.length>0)h+='<a href="javascript:void(0)" onclick="event.stopPropagation();openSchoolMap(\''+escHtml(sc2.name)+'\','+JSON.stringify(sc2Gps).replace(/"/g,"&quot;")+')" style="margin-left:12px;color:#2563EB;font-size:12px;font-weight:700;text-decoration:none;cursor:pointer">지도 보기 →</a>';
         h+='</div>';}
       if(noteText2)h+='<div class="attach-info-item"><span class="attach-info-label">부착장소 및 특이사항</span><span class="attach-info-value">'+escHtml(noteText2)+'</span></div>';
       h+='</div>';
     }
     var photos=sc2.photos||[];
     if(photos.length>0){
-      h+='<div class="photo-section" style="padding-top:12px"><div class="photo-label"><span>부착 사진</span>';
-      if(sc2.driveUrl)h+='<a href="'+sc2.driveUrl+'" class="drive-link" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>원본 파일 다운로드</a>';
+      var sc2GpsForLink=(sc2.gps&&sc2.gps.poster)||[];
+      h+='<div class="photo-section" style="padding-top:12px"><div class="photo-label" style="display:flex;align-items:center;gap:12px"><span>부착 사진</span>';
+      if(sc2GpsForLink.length>0)h+='<a href="javascript:void(0)" class="drive-link" onclick="event.stopPropagation();openSchoolMap(\''+escHtml(sc2.name)+'\','+JSON.stringify(sc2GpsForLink).replace(/"/g,"&quot;")+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>지도보기</a>';
       h+='</div><div class="photo-grid">';
       for(var pi=0;pi<photos.length;pi++){h+='<div class="photo-thumb" onclick="openLightbox(\''+photos[pi]+'\')"><img src="'+photos[pi]+'" alt="'+escHtml(sc2.name)+' 부착사진 '+(pi+1)+'" loading="lazy" onerror="handleImgError(this)"></div>'}
       h+='</div></div>';
@@ -391,10 +385,10 @@ function openSchoolMap(name,gpsArr){
 
 function handleImgError(img){
   var src=img.src;
-  var idMatch=src.match(/[?&]id=([^&]+)/) || src.match(/\/d\/([^=\/]+)/);
+  var idMatch=src.match(/\/d\/([^=\/]+)/) || src.match(/[?&]id=([^&]+)/);
   if(idMatch&&!img.dataset.retried){
     img.dataset.retried="1";
-    img.src="https://lh3.googleusercontent.com/d/"+idMatch[1]+"=w1200";
+    img.src="https://drive.google.com/thumbnail?id="+idMatch[1]+"&sz=w1200";
     return;
   }
   img.style.display="none";
