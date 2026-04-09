@@ -174,6 +174,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
       <div class="meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>마감 : 4월 17일 금요일</div>
       <div class="meta-chip" id="metaSchools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>로딩 중...</div>
       <div class="live-indicator"><span class="live-dot"></span>실시간</div>
+      <div class="meta-chip" id="metaManager" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span id="managerName"></span></div>
     </div>
   </div>
 </div>
@@ -186,7 +187,6 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="footer-info">주식회사 좋은광고연구소 ㅣ goodadlab@goodadlab.co.kr l 1522-3235</div>
 </div>
 </div>
-<script src="https://cdn.jsdelivr.net/gh/gitbrent/PptxGenJS@3.12.0/dist/pptxgen.bundle.js"></script>
 <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d54c0f5967bec82cc041a0afef9e493b&autoload=false"></script>
 <script>
 var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzl7mY-tnpMFE_6R3kWCXQ2YAso9K9JasI7t2cRwBdbHh8kNXND-Xy4pdXWv-RghCVO/exec";
@@ -217,6 +217,7 @@ function renderReport(data){
   window._reportData=data;
   var s=data.stats, schools=data.schools;
   document.getElementById("metaSchools").innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>'+s.totalSchools+'개교 ('+s.regionText+')';
+  if(data.manager){var mgrEl=document.getElementById("metaManager");mgrEl.style.display="";document.getElementById("managerName").textContent="담당: "+data.manager;}
   var h="";
   h+='<div class="kpi-grid fade-in">';
   h+='<div class="kpi-card schools"><div class="kpi-value">'+s.totalSchools+'</div><div class="kpi-label">대상 학교</div><div class="kpi-sub">'+s.regionText+'</div></div>';
@@ -408,141 +409,26 @@ function openLightbox(src){var lb=document.getElementById("lightbox");document.g
 function closeLightbox(){document.getElementById("lightbox").classList.remove("show");document.body.style.overflow=""}
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox()});
 
-function fetchImageAsBase64(url){
-  return fetch(url,{mode:"cors"}).then(function(r){return r.blob()}).then(function(blob){
-    return new Promise(function(resolve){
-      var reader=new FileReader();
-      reader.onloadend=function(){resolve(reader.result)};
-      reader.readAsDataURL(blob);
-    });
-  }).catch(function(){return null});
-}
-
 function generatePPT(){
-  if(!window._reportData){alert("데이터가 아직 로딩되지 않았습니다.");return;}
-  var data=window._reportData;
-  var s=data.stats, schools=data.schools;
-  var campName=CAMP_KEY;
-  var today=new Date();
-  var dateStr=today.getFullYear()+"."+(today.getMonth()+1<10?"0":"")+(today.getMonth()+1)+"."+(today.getDate()<10?"0":"")+today.getDate();
-
   var progressEl=document.createElement("div");
   progressEl.id="pptProgress";
   progressEl.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:3000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)";
-  progressEl.innerHTML='<div style="background:#fff;border-radius:16px;padding:40px 48px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)"><div style="font-size:16px;font-weight:700;margin-bottom:12px">결과보고서 PPT 생성 중...</div><div id="pptProgressText" style="font-size:13px;color:#64748B">사진을 다운로드하고 있습니다</div><div style="margin-top:16px;height:6px;background:#E2E8F0;border-radius:100px;overflow:hidden;width:280px"><div id="pptProgressBar" style="height:100%;background:linear-gradient(90deg,#2563EB,#3B82F6);border-radius:100px;width:0%;transition:width 0.3s"></div></div></div>';
+  progressEl.innerHTML='<div style="background:#fff;border-radius:16px;padding:40px 48px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)"><div style="font-size:16px;font-weight:700;margin-bottom:12px">결과보고서 PPT 생성 중...</div><div id="pptProgressText" style="font-size:13px;color:#64748B">서버에서 템플릿 기반 PPT를 생성하고 있습니다</div><div style="margin-top:16px"><div class="loading-spinner" style="width:32px;height:32px;border:3px solid #E2E8F0;border-top-color:#2563EB;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto"></div></div></div>';
   document.body.appendChild(progressEl);
 
-  var doneSchools=[];
-  for(var i=0;i<schools.length;i++){if(schools[i].isDone)doneSchools.push({idx:i,school:schools[i]})}
-
-  var totalPhotos=0;
-  for(var j=0;j<doneSchools.length;j++){var ph=doneSchools[j].school.photos||[];totalPhotos+=Math.min(ph.length,6)}
-  var loadedPhotos=0;
-
-  function updateProgress(text){
-    var pct=totalPhotos>0?Math.round(loadedPhotos/totalPhotos*100):0;
-    var bar=document.getElementById("pptProgressBar");
-    var txt=document.getElementById("pptProgressText");
-    if(bar)bar.style.width=pct+"%";
-    if(txt)txt.textContent=text||("사진 다운로드 중... "+loadedPhotos+"/"+totalPhotos);
-  }
-
-  var photoPromises=[];
-  for(var k=0;k<doneSchools.length;k++){
-    var photos=doneSchools[k].school.photos||[];
-    var schoolPhotos=[];
-    for(var p=0;p<Math.min(photos.length,6);p++){
-      (function(url,arr){
-        var pr=fetchImageAsBase64(url).then(function(b64){
-          arr.push(b64);
-          loadedPhotos++;
-          updateProgress();
-          return b64;
-        });
-        photoPromises.push(pr);
-      })(photos[p],schoolPhotos);
-    }
-    doneSchools[k].photoData=schoolPhotos;
-  }
-
-  Promise.all(photoPromises).then(function(){
-    updateProgress("PPT 파일을 생성하고 있습니다...");
-    var pptx=new PptxGenJS();
-    pptx.layout="LAYOUT_WIDE";
-    var BG="#0D1B3E";
-    var WHITE="#FFFFFF";
-    var GRAY="#94A3B8";
-    var ACCENT="#2563EB";
-
-    /* === 슬라이드 1: 표지 === */
-    var s1=pptx.addSlide();
-    s1.background={fill:BG};
-    s1.addImage({path:"https://lh3.googleusercontent.com/d/1GBm8WrDq7Qo4IfODOMeZEs4JrO2Y4Pq3",x:0.5,y:0.35,h:0.3,w:1.2,sizing:{type:"contain",w:1.2,h:0.3}});
-    s1.addText("대학교 광고 결과보고서",{x:0.5,y:1.8,w:8,h:0.8,fontSize:32,fontFace:"맑은 고딕",color:WHITE,bold:true});
-    s1.addText(campName,{x:0.5,y:2.5,w:8,h:0.6,fontSize:24,fontFace:"맑은 고딕",color:WHITE,bold:true});
-    s1.addText(dateStr,{x:0.5,y:3.2,w:4,h:0.4,fontSize:14,fontFace:"맑은 고딕",color:GRAY});
-    s1.addText("주식회사 좋은광고연구소 ㅣ goodadlab@goodadlab.co.kr ㅣ 1522-3235",{x:0.5,y:4.7,w:8,h:0.3,fontSize:10,fontFace:"맑은 고딕",color:GRAY});
-    s1.addImage({path:"https://lh3.googleusercontent.com/d/1GBm8WrDq7Qo4IfODOMeZEs4JrO2Y4Pq3",x:0.5,y:5.05,h:0.25,w:1.0,sizing:{type:"contain",w:1.0,h:0.25}});
-
-    /* === 슬라이드 2~N: 게첨 현황 테이블 === */
-    var ROWS_PER_SLIDE=20;
-    var totalPages=Math.ceil(schools.length/ROWS_PER_SLIDE);
-    for(var pg=0;pg<totalPages;pg++){
-      var ts=pptx.addSlide();
-      ts.background={fill:WHITE};
-      ts.addImage({path:"https://lh3.googleusercontent.com/d/1GBm8WrDq7Qo4IfODOMeZEs4JrO2Y4Pq3",x:0.3,y:0.15,h:0.2,w:0.8,sizing:{type:"contain",w:0.8,h:0.2}});
-      ts.addText("게첨 현황",{x:0.3,y:0.5,w:4,h:0.5,fontSize:20,fontFace:"맑은 고딕",color:BG,bold:true});
-      var headerRow=[{text:"No",options:{bold:true,color:WHITE,fill:BG,fontSize:8,fontFace:"맑은 고딕",align:"center",border:{type:"solid",color:"CCCCCC",pt:0.5}}},{text:"학교명",options:{bold:true,color:WHITE,fill:BG,fontSize:8,fontFace:"맑은 고딕",align:"center",border:{type:"solid",color:"CCCCCC",pt:0.5}}},{text:"주소",options:{bold:true,color:WHITE,fill:BG,fontSize:8,fontFace:"맑은 고딕",align:"center",border:{type:"solid",color:"CCCCCC",pt:0.5}}},{text:"재학생(학부)",options:{bold:true,color:WHITE,fill:BG,fontSize:8,fontFace:"맑은 고딕",align:"center",border:{type:"solid",color:"CCCCCC",pt:0.5}}},{text:"포스터",options:{bold:true,color:WHITE,fill:BG,fontSize:8,fontFace:"맑은 고딕",align:"center",border:{type:"solid",color:"CCCCCC",pt:0.5}}}];
-      var rows=[headerRow];
-      var startIdx=pg*ROWS_PER_SLIDE;
-      var endIdx=Math.min(startIdx+ROWS_PER_SLIDE,schools.length);
-      for(var ri=startIdx;ri<endIdx;ri++){
-        var sc=schools[ri];
-        var pqText=sc.pQty?sc.pQty+"장":"-";
-        var bqText=sc.bQty?sc.bQty+"장":"";
-        var qtyText=pqText;
-        var bgFill=(ri%2===0)?"F8FAFC":"FFFFFF";
-        var cellOpt={fontSize:7,fontFace:"맑은 고딕",color:"334155",border:{type:"solid",color:"E2E8F0",pt:0.5},fill:bgFill};
-        rows.push([{text:String(ri+1),options:Object.assign({},cellOpt,{align:"center"})},{text:sc.name||"",options:Object.assign({},cellOpt,{bold:true})},{text:(sc.addr||""),options:Object.assign({},cellOpt,{fontSize:6})},{text:"",options:Object.assign({},cellOpt,{align:"center"})},{text:qtyText,options:Object.assign({},cellOpt,{align:"center",color:sc.pQty?"2563EB":"94A3B8"})}]);
-      }
-      ts.addTable(rows,{x:0.3,y:1.05,w:12.7,colW:[0.5,2.5,5.5,1.5,1.2],rowH:0.22,border:{type:"solid",color:"E2E8F0",pt:0.5},autoPage:false});
-    }
-
-    /* === 학교별 사진 슬라이드 === */
-    for(var si=0;si<doneSchools.length;si++){
-      var item=doneSchools[si];
-      var sc3=item.school;
-      var ps=pptx.addSlide();
-      ps.background={fill:WHITE};
-      ps.addImage({path:"https://lh3.googleusercontent.com/d/1GBm8WrDq7Qo4IfODOMeZEs4JrO2Y4Pq3",x:0.3,y:0.15,h:0.2,w:0.8,sizing:{type:"contain",w:0.8,h:0.2}});
-      ps.addText((item.idx+1)+". "+sc3.name,{x:0.3,y:0.45,w:10,h:0.55,fontSize:20,fontFace:"맑은 고딕",color:BG,bold:true});
-
-      var pData=item.photoData||[];
-      var cols=3,gapX=0.15,gapY=0.15;
-      var startX=0.3,startY=1.15;
-      var imgW=(12.7-gapX*(cols-1))/cols;
-      var imgH=imgW*0.65;
-      for(var pi2=0;pi2<Math.min(pData.length,6);pi2++){
-        var col=pi2%cols, row=Math.floor(pi2/cols);
-        var px=startX+col*(imgW+gapX);
-        var py=startY+row*(imgH+gapY);
-        if(pData[pi2]){
-          try{ps.addImage({data:pData[pi2],x:px,y:py,w:imgW,h:imgH,rounding:true})}catch(e){}
-        }
-      }
-    }
-
-    var fileName=campName+"_결과보고서_"+dateStr.replace(/\./g,"");
-    pptx.writeFile({fileName:fileName}).then(function(){
-      var el=document.getElementById("pptProgress");
+  fetch(WEB_APP_URL+"?action=generate_ppt&camp="+encodeURIComponent(CAMP_KEY))
+  .then(function(r){return r.json()})
+  .then(function(json){
+    var el=document.getElementById("pptProgress");
+    if(json.status==="ok"){
+      if(el)el.innerHTML='<div style="background:#fff;border-radius:16px;padding:40px 48px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)"><div style="font-size:40px;margin-bottom:12px">\u2705</div><div style="font-size:16px;font-weight:700;margin-bottom:8px">PPT 생성 완료</div><div style="display:flex;gap:10px;justify-content:center;margin-top:16px"><a href="'+json.url+'" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#1E293B;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none">다운로드 (PPTX)</a><a href="'+json.viewUrl+'" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#2563EB;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none">Google Slides에서 열기</a><button onclick="document.getElementById(\'pptProgress\').remove()" style="padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:1px solid #E2E8F0;background:#fff;color:#64748B;cursor:pointer">닫기</button></div></div>';
+    } else {
+      alert("PPT 생성 오류: "+(json.message||"알 수 없는 오류"));
       if(el)el.remove();
-    }).catch(function(err){
-      alert("PPT 생성 오류: "+err.message);
-      var el=document.getElementById("pptProgress");
-      if(el)el.remove();
-    });
-  }).catch(function(err){
-    alert("사진 다운로드 오류: "+err.message);
+    }
+  })
+  .catch(function(err){
+    alert("네트워크 오류: "+err.message);
     var el=document.getElementById("pptProgress");
     if(el)el.remove();
   });
