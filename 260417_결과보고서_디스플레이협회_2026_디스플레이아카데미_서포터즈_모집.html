@@ -198,11 +198,11 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   </div>
 </div>
 </div>
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d54c0f5967bec82cc041a0afef9e493b&autoload=false"></script>
+<script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=0x9f3qn5c8"></script>
 <script>
 var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzl7mY-tnpMFE_6R3kWCXQ2YAso9K9JasI7t2cRwBdbHh8kNXND-Xy4pdXWv-RghCVO/exec";
 var CAMP_KEY = "디스플레이협회_2026 디스플레이아카데미 서포터즈 모집";
-var KAKAO_KEY = "d54c0f5967bec82cc041a0afef9e493b";
+var NAVER_CLIENT_ID = "0x9f3qn5c8";
 var AUTO_REFRESH_SEC = 300;
 
 function escHtml(s){if(!s)return"";return s.toString().replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
@@ -331,31 +331,29 @@ function renderReport(data){
   if(curRegion)h+='</div>';
   h+='</div>';
   document.getElementById("reportContent").innerHTML=h;
-  if(gpsPoints.length>0&&typeof kakao!=="undefined"){
-    kakao.maps.load(function(){
-      var mapEl=document.getElementById("reportMap");
-      if(!mapEl)return;
-      var bounds=new kakao.maps.LatLngBounds();
-      var map=new kakao.maps.Map(mapEl,{center:new kakao.maps.LatLng(36.5,127.5),level:12});
+  if(gpsPoints.length>0&&typeof naver!=="undefined"&&naver.maps){
+    var mapEl=document.getElementById("reportMap");
+    if(mapEl){
+      var bounds=new naver.maps.LatLngBounds();
+      var map=new naver.maps.Map(mapEl,{center:new naver.maps.LatLng(36.5,127.5),zoom:7});
       var activeInfoOverlay=null;
       for(var mi=0;mi<gpsPoints.length;mi++){
-        var pos=new kakao.maps.LatLng(gpsPoints[mi].lat,gpsPoints[mi].lng);
+        var pos=new naver.maps.LatLng(gpsPoints[mi].lat,gpsPoints[mi].lng);
         bounds.extend(pos);
         (function(pos2,name,map2){
           var el=document.createElement("div");
           el.style.cssText="width:16px;height:16px;background:#059669;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3);cursor:pointer";
-          var overlay=new kakao.maps.CustomOverlay({position:pos2,map:map2,content:el,yAnchor:0.5,xAnchor:0.5});
+          var marker=new naver.maps.Marker({position:pos2,map:map2,icon:{content:el,anchor:new naver.maps.Point(8,8)}});
           var infoEl=document.createElement("div");
           infoEl.style.cssText="padding:4px 8px;font-size:11px;font-weight:700;white-space:nowrap;background:#fff;border:1px solid #ddd;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.15)";
           infoEl.textContent=name;
-          var infoOverlay=new kakao.maps.CustomOverlay({position:pos2,map:map2,content:infoEl,yAnchor:2.2,xAnchor:0.5});
-          infoOverlay.setMap(null);
-          el.addEventListener("click",function(e){e.stopPropagation();if(activeInfoOverlay)activeInfoOverlay.setMap(null);if(activeInfoOverlay===infoOverlay){activeInfoOverlay=null}else{infoOverlay.setMap(map2);activeInfoOverlay=infoOverlay}});
+          var infoOverlay=new naver.maps.Marker({position:pos2,map:map2,icon:{content:infoEl,anchor:new naver.maps.Point(0,30)},visible:false});
+          naver.maps.Event.addListener(marker,"click",function(e){if(activeInfoOverlay)activeInfoOverlay.setVisible(false);if(activeInfoOverlay===infoOverlay){activeInfoOverlay=null}else{infoOverlay.setVisible(true);activeInfoOverlay=infoOverlay}});
         })(pos,gpsPoints[mi].name,map);
       }
-      kakao.maps.event.addListener(map,"click",function(){if(activeInfoOverlay){activeInfoOverlay.setMap(null);activeInfoOverlay=null}});
-      map.setBounds(bounds);
-    });
+      naver.maps.Event.addListener(map,"click",function(){if(activeInfoOverlay){activeInfoOverlay.setVisible(false);activeInfoOverlay=null}});
+      map.fitBounds(bounds);
+    }
   }
 }
 
@@ -389,22 +387,20 @@ function openSchoolMap(name,gpsArr){
   overlay.appendChild(popup);
   overlay.addEventListener("click",function(e){if(e.target===overlay)overlay.remove()});
   document.body.appendChild(overlay);
-  kakao.maps.load(function(){
-    var map=new kakao.maps.Map(mapDiv,{center:new kakao.maps.LatLng(gpsArr[0].lat,gpsArr[0].lng),level:4});
-    var bounds=new kakao.maps.LatLngBounds();
-    for(var i=0;i<gpsArr.length;i++){
-      var pos=new kakao.maps.LatLng(gpsArr[i].lat,gpsArr[i].lng);
-      bounds.extend(pos);
-      var el=document.createElement("div");
-      el.style.cssText="width:16px;height:16px;background:#059669;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)";
-      new kakao.maps.CustomOverlay({position:pos,map:map,content:el,yAnchor:0.5,xAnchor:0.5});
-    }
-    if(gpsArr.length>1)map.setBounds(bounds);
-    var labelEl=document.createElement("div");
-    labelEl.style.cssText="padding:4px 10px;font-size:11px;font-weight:700;background:#fff;border:1px solid #ddd;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,0.1)";
-    labelEl.textContent=name+" ("+gpsArr.length+"건)";
-    new kakao.maps.CustomOverlay({position:new kakao.maps.LatLng(gpsArr[0].lat,gpsArr[0].lng),map:map,content:labelEl,yAnchor:2.5,xAnchor:0.5});
-  });
+  var map=new naver.maps.Map(mapDiv,{center:new naver.maps.LatLng(gpsArr[0].lat,gpsArr[0].lng),zoom:15});
+  var bounds=new naver.maps.LatLngBounds();
+  for(var i=0;i<gpsArr.length;i++){
+    var pos=new naver.maps.LatLng(gpsArr[i].lat,gpsArr[i].lng);
+    bounds.extend(pos);
+    var el=document.createElement("div");
+    el.style.cssText="width:16px;height:16px;background:#059669;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)";
+    new naver.maps.Marker({position:pos,map:map,icon:{content:el,anchor:new naver.maps.Point(8,8)}});
+  }
+  if(gpsArr.length>1)map.fitBounds(bounds);
+  var labelEl=document.createElement("div");
+  labelEl.style.cssText="padding:4px 10px;font-size:11px;font-weight:700;background:#fff;border:1px solid #ddd;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,0.1)";
+  labelEl.textContent=name+" ("+gpsArr.length+"건)";
+  new naver.maps.Marker({position:new naver.maps.LatLng(gpsArr[0].lat,gpsArr[0].lng),map:map,icon:{content:labelEl,anchor:new naver.maps.Point(0,30)}});
 }
 
 function handleImgError(img){
