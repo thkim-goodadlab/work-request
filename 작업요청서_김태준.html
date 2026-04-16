@@ -185,6 +185,14 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .complete-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px;font-size:13px;font-weight:700;background:var(--surface);color:var(--text-secondary);cursor:pointer;touch-action:manipulation;font-family:inherit;transition:all 0.2s}
 .complete-btn:active{transform:scale(0.97)}
 .complete-btn.checked{background:var(--positive-bg);color:var(--positive);border-color:var(--positive-light)}
+.camp-action-upload{flex-wrap:wrap}
+.photo-btn-upload{background:var(--accent-lighter)!important;color:var(--accent)!important;border-color:var(--accent-light)!important;flex:2!important}
+.photo-btn-upload:active{background:var(--accent-light)!important}
+.photo-btn-drive{flex:0 0 auto!important;padding:10px 14px!important;font-size:12px!important;background:var(--surface-alt)!important;color:var(--text-muted)!important;border-color:var(--border)!important}
+.upload-progress{width:100%;margin-top:6px}
+.upload-progress-bar{height:5px;background:var(--surface-alt);border-radius:3px;overflow:hidden}
+.upload-progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.3s ease}
+.upload-progress-text{font-size:11px;color:var(--text-muted);font-weight:600;margin-top:3px;text-align:center}
 .camp-block.done{opacity:0.35}
 .draft-section{margin-top:8px;padding-top:8px;border-top:1px dashed var(--border)}
 .draft-label{font-size:11px;font-weight:800;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em}
@@ -278,7 +286,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <h1>김태준</h1>
     <div class="sub">작업요청서 · 전체 요약</div>
-    <div class="updated-tag">4/16 10:05 업데이트</div>
+    <div class="updated-tag">4/16 11:21 업데이트</div>
   </div>
   <div class="map-section">
     <div class="section-title">학교 위치</div>
@@ -329,7 +337,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
       <span class="search-clear" id="searchClear" onclick="clearSearch()">&#x2715;</span>
     </div>
   </div>
-  <div id="cardsContainer"><div class="region-divider"><span class="label">제주</span><span class="line"></span></div><div class="card all-done" id="school-1" data-school-name="제주대학교"><div class="card-header"><div class="card-num">1</div><div class="card-school">제주대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%A0%9C%EC%A3%BC%EC%8B%9C%20%EB%8C%80%ED%95%99%EB%A1%9C%20102&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주특별자치도 제주시 대학로 102'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 대학로 102</div><div class="approval-places"><span class="ap-item">📌 포스터 승인장소: 각 단과대 구두승인</span><span class="ap-item">📌 현수막 승인장소: 각 단과대 구두승인</span></div><div class="camp-block done" data-school="제주대학교" data-camp="에이콘아카데미_KT 클라우드 지원생 모집" data-poster="10" data-banner="3"><div class="camp-block-header"><span class="camp-name">에이콘아카데미_KT 클라우드 지원생 모집</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday done" data-deadline="260417">✓ 완료</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">10장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">3장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">각 개교 당 도서관앞에 현수막 1장 게첨 포스터는 도서관인근위주 게첨 컴공 및 공대 위주 부착</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1Scom2YkUjJKXRwRV4MRxvsrV6FkaUktj" class="photo-btn photo-btn-poster" onclick="return handleDriveClick(event,'1Scom2YkUjJKXRwRV4MRxvsrV6FkaUktj')">📁 Drive 앱으로 사진 업로드</a><button class="complete-btn checked" onclick="toggleCampDone(this)"><svg class="svg-check" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> 완료됨</button></div></div></div></div></div>
+  <div id="cardsContainer"><div class="region-divider"><span class="label">제주</span><span class="line"></span></div><div class="card all-done" id="school-1" data-school-name="제주대학교"><div class="card-header"><div class="card-num">1</div><div class="card-school">제주대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%A0%9C%EC%A3%BC%EC%8B%9C%20%EB%8C%80%ED%95%99%EB%A1%9C%20102&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주특별자치도 제주시 대학로 102'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 대학로 102</div><div class="approval-places"><span class="ap-item">📌 포스터 승인장소: 각 단과대 구두승인</span><span class="ap-item">📌 현수막 승인장소: 각 단과대 구두승인</span></div><div class="camp-block done" data-school="제주대학교" data-camp="에이콘아카데미_KT 클라우드 지원생 모집" data-poster="10" data-banner="3"><div class="camp-block-header"><span class="camp-name">에이콘아카데미_KT 클라우드 지원생 모집</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday done" data-deadline="260417">✓ 완료</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">10장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">3장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">각 개교 당 도서관앞에 현수막 1장 게첨 포스터는 도서관인근위주 게첨 컴공 및 공대 위주 부착</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="triggerPhotoUpload(this)" data-folder-id="1Scom2YkUjJKXRwRV4MRxvsrV6FkaUktj">📷 사진 업로드</button><a href="https://drive.google.com/drive/folders/1Scom2YkUjJKXRwRV4MRxvsrV6FkaUktj" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'1Scom2YkUjJKXRwRV4MRxvsrV6FkaUktj')">📁 Drive</a><button class="complete-btn checked" onclick="toggleCampDone(this)"><svg class="svg-check" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> 완료됨</button></div></div></div></div></div>
 </div>
 <div class="bottom-bar" id="bottomBar">
   <div class="bottom-progress">
@@ -456,6 +464,112 @@ function handleDriveClick(e,folderId){
     return false;
   }
   return true;
+}
+function triggerPhotoUpload(btn){
+  var block=btn.closest(".camp-block");
+  var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");
+  var inp=document.createElement("input");inp.type="file";inp.accept="image/*";inp.multiple=true;inp.capture="environment";
+  inp.onchange=function(){if(inp.files.length>0)processAndUploadFiles(inp.files,school,camp,btn)};
+  inp.click();
+}
+function extractGpsFromArrayBuffer(buf){
+  var dv=new DataView(buf);
+  if(dv.getUint16(0)!==0xFFD8)return null;
+  var off=2,len=dv.byteLength;
+  while(off<len){
+    if(dv.getUint8(off)!==0xFF)break;
+    var marker=dv.getUint8(off+1);
+    if(marker===0xE1){
+      var segLen=dv.getUint16(off+2);
+      var exifStart=off+4;
+      if(getString(dv,exifStart,4)==="Exif")return parseExifGps(dv,exifStart+6);
+      off+=2+segLen;continue;
+    }
+    if(marker===0xDA)break;
+    off+=2+dv.getUint16(off+2);
+  }
+  return null;
+}
+function getString(dv,s,n){var r="";for(var i=0;i<n;i++)r+=String.fromCharCode(dv.getUint8(s+i));return r}
+function parseExifGps(dv,tiffOff){
+  var le=dv.getUint16(tiffOff)===0x4949;
+  var g16=function(o){return le?dv.getUint16(tiffOff+o,true):dv.getUint16(tiffOff+o,false)};
+  var g32=function(o){return le?dv.getUint32(tiffOff+o,true):dv.getUint32(tiffOff+o,false)};
+  var ifdOff=g32(4);
+  var cnt=g16(ifdOff),gpsOff=0;
+  for(var i=0;i<cnt;i++){
+    var tag=g16(ifdOff+2+i*12);
+    if(tag===0x8825){gpsOff=g32(ifdOff+2+i*12+8);break}
+  }
+  if(!gpsOff)return null;
+  var gcnt=g16(gpsOff),tags={};
+  for(var j=0;j<gcnt;j++){
+    var to=gpsOff+2+j*12;
+    var gt=g16(to),gtype=g16(to+2);
+    if(gtype===2){var so=g32(to+8);tags[gt]=getString(dv,tiffOff+so,1)}
+    else if(gtype===5){
+      var vo=g32(to+8),gc=g16(to+4),arr=[];
+      for(var k=0;k<gc;k++){arr.push(g32(vo+k*8)/g32(vo+k*8+4))}
+      tags[gt]=arr;
+    }
+  }
+  if(!tags[2]||!tags[4])return null;
+  var lat=tags[2][0]+tags[2][1]/60+tags[2][2]/3600;
+  var lng=tags[4][0]+tags[4][1]/60+tags[4][2]/3600;
+  if(tags[1]==="S")lat=-lat;
+  if(tags[3]==="W")lng=-lng;
+  return{lat:lat,lng:lng};
+}
+function resizeAndEncode(file,maxDim,quality){
+  return new Promise(function(resolve){
+    var reader=new FileReader();reader.onload=function(){
+      var img=new Image();img.onload=function(){
+        var w=img.width,h=img.height;
+        if(w>maxDim||h>maxDim){if(w>h){h=Math.round(h*maxDim/w);w=maxDim}else{w=Math.round(w*maxDim/h);h=maxDim}}
+        var c=document.createElement("canvas");c.width=w;c.height=h;
+        c.getContext("2d").drawImage(img,0,0,w,h);
+        var dataUrl=c.toDataURL("image/jpeg",quality);
+        resolve(dataUrl.split(",")[1]);
+      };img.src=reader.result;
+    };reader.readAsDataURL(file);
+  });
+}
+function processAndUploadFiles(files,school,camp,btn){
+  var row=btn.closest(".camp-action-row");
+  var prog=document.createElement("div");prog.className="upload-progress";
+  prog.innerHTML='<div class="upload-progress-bar"><div class="upload-progress-fill" style="width:0%"></div></div><div class="upload-progress-text">준비 중...</div>';
+  row.appendChild(prog);
+  btn.disabled=true;btn.style.opacity="0.5";
+  var fill=prog.querySelector(".upload-progress-fill"),txt=prog.querySelector(".upload-progress-text");
+  var total=files.length,done=0,failCnt=0;
+  var chain=Promise.resolve();
+  for(var i=0;i<total;i++){(function(idx){
+    chain=chain.then(function(){
+      txt.textContent="처리 중 "+(idx+1)+"/"+total+"...";
+      var f=files[idx];
+      return new Promise(function(resolve){
+        var gpsReader=new FileReader();
+        gpsReader.onload=function(){
+          var gps=extractGpsFromArrayBuffer(gpsReader.result);
+          resizeAndEncode(f,1600,0.85).then(function(b64){
+            var payload={action:"upload_photo",school:school,camp:camp,fileName:f.name,fileData:b64};
+            if(gps){payload.lat=gps.lat.toString();payload.lng=gps.lng.toString()}
+            return fetch(WEB_APP_URL,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify(payload)});
+          }).then(function(r){return r.json()}).then(function(json){
+            if(json.status!=="ok")failCnt++;
+            done++;fill.style.width=Math.round(done/total*100)+"%";
+            txt.textContent="업로드 "+done+"/"+total+(failCnt?" (실패 "+failCnt+")":"");
+            resolve();
+          }).catch(function(){failCnt++;done++;fill.style.width=Math.round(done/total*100)+"%";txt.textContent="업로드 "+done+"/"+total+" (실패 "+failCnt+")";resolve()});
+        };gpsReader.readAsArrayBuffer(f);
+      });
+    });
+  })(i)}
+  chain.then(function(){
+    btn.disabled=false;btn.style.opacity="1";
+    if(failCnt===0){showToast("✓ "+total+"장 업로드 완료");setTimeout(function(){prog.remove()},2000)}
+    else{showToast("⚠ "+total+"장 중 "+failCnt+"장 실패");txt.textContent=total+"장 중 "+(total-failCnt)+"장 성공, "+failCnt+"장 실패"}
+  });
 }
 function filterCards(){var q=document.getElementById("searchInput").value.trim().toLowerCase();document.getElementById("searchClear").style.display=q?"block":"none";document.querySelectorAll(".region-divider").forEach(function(d){d.style.display=q?"none":""});document.querySelectorAll(".card").forEach(function(c){c.classList.toggle("hidden",q&&(c.getAttribute("data-school-name")||"").toLowerCase().indexOf(q)===-1)})}
 function searchAndScroll(){var q=document.getElementById("searchInput").value.trim().toLowerCase();if(!q)return;var cards=document.querySelectorAll(".card");for(var i=0;i<cards.length;i++){var nm=(cards[i].getAttribute("data-school-name")||"").toLowerCase();if(nm.indexOf(q)!==-1){var hdr=document.querySelector(".detail-header");var off=hdr?hdr.offsetHeight+10:80;window.scrollTo({top:cards[i].getBoundingClientRect().top+window.pageYOffset-off,behavior:"smooth"});document.getElementById("searchInput").blur();break}}}
