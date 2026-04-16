@@ -286,7 +286,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <h1>서영주</h1>
     <div class="sub">작업요청서 · 전체 요약</div>
-    <div class="updated-tag">4/16 11:51 업데이트</div>
+    <div class="updated-tag">4/16 11:58 업데이트</div>
   </div>
   <div class="map-section">
     <div class="section-title">학교 위치</div>
@@ -474,9 +474,12 @@ var deviceGps=null;
 function triggerPhotoUpload(btn){
   var block=btn.closest(".camp-block");
   var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");
-  showToast("📍 위치 확인 중...");
+  btn.disabled=true;btn.style.opacity="0.5";btn.textContent="📍 위치 확인 중...";
   getDeviceGps().then(function(gps){
     deviceGps=gps;
+    btn.disabled=false;btn.style.opacity="1";btn.textContent="📷 사진 업로드";
+    if(gps){showToast("📍 GPS 확보 완료 ("+gps.lat.toFixed(4)+", "+gps.lng.toFixed(4)+")")}
+    else{showToast("⚠ GPS를 가져올 수 없습니다. 위치 권한을 확인해주세요.")}
     var inp=document.createElement("input");inp.type="file";inp.accept="image/*";inp.multiple=true;
     inp.onchange=function(){if(inp.files.length>0)processAndUploadFiles(inp.files,school,camp,btn)};
     inp.click();
@@ -487,27 +490,26 @@ function getDeviceGps(){
     if(!navigator.geolocation){resolve(null);return}
     navigator.geolocation.getCurrentPosition(
       function(pos){resolve({lat:pos.coords.latitude,lng:pos.coords.longitude})},
-      function(){resolve(null)},
-      {enableHighAccuracy:true,timeout:5000,maximumAge:60000}
+      function(err){console.log("GPS error:",err.code,err.message);resolve(null)},
+      {enableHighAccuracy:true,timeout:10000,maximumAge:300000}
     );
   });
 }
-function resizeAndEncode(file,maxDim,quality){
+function readFileAsBase64(file){
   return new Promise(function(resolve){
-    var reader=new FileReader();reader.onload=function(){
-      var img=new Image();img.onload=function(){
-        var w=img.width,h=img.height;
-        if(w>maxDim||h>maxDim){if(w>h){h=Math.round(h*maxDim/w);w=maxDim}else{w=Math.round(w*maxDim/h);h=maxDim}}
-        var c=document.createElement("canvas");c.width=w;c.height=h;
-        c.getContext("2d").drawImage(img,0,0,w,h);
-        var dataUrl=c.toDataURL("image/jpeg",quality);
-        resolve(dataUrl.split(",")[1]);
-      };img.src=reader.result;
-    };reader.readAsDataURL(file);
+    var reader=new FileReader();
+    reader.onload=function(){resolve(reader.result.split(",")[1])};
+    reader.readAsDataURL(file);
   });
+}
+function getMimeType(name){
+  var ext=(name||"").split(".").pop().toLowerCase();
+  var map={jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",heic:"image/heic",heif:"image/heif",webp:"image/webp",gif:"image/gif"};
+  return map[ext]||"image/jpeg";
 }
 function processAndUploadFiles(files,school,camp,btn){
   var row=btn.closest(".camp-action-row");
+  var existing=row.querySelector(".upload-progress");if(existing)existing.remove();
   var prog=document.createElement("div");prog.className="upload-progress";
   prog.innerHTML='<div class="upload-progress-bar"><div class="upload-progress-fill" style="width:0%"></div></div><div class="upload-progress-text">준비 중...</div>';
   row.appendChild(prog);
@@ -520,22 +522,24 @@ function processAndUploadFiles(files,school,camp,btn){
     chain=chain.then(function(){
       txt.textContent="업로드 중 "+(idx+1)+"/"+total+"...";
       var f=files[idx];
-      return resizeAndEncode(f,1600,0.85).then(function(b64){
-        var payload={action:"upload_photo",school:school,camp:camp,fileName:f.name,fileData:b64};
+      return readFileAsBase64(f).then(function(b64){
+        var payload={action:"upload_photo",school:school,camp:camp,fileName:f.name,fileData:b64,mimeType:getMimeType(f.name)};
         if(gps){payload.lat=gps.lat.toString();payload.lng=gps.lng.toString()}
-        return fetch(WEB_APP_URL,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify(payload)});
-      }).then(function(r){return r.json()}).then(function(json){
+        return fetch(WEB_APP_URL,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify(payload),redirect:"follow"});
+      }).then(function(r){
+        try{return r.json()}catch(e){return{status:"ok"}}
+      }).then(function(json){
         if(json.status!=="ok")failCnt++;
         done++;fill.style.width=Math.round(done/total*100)+"%";
         txt.textContent="업로드 "+done+"/"+total+(failCnt?" (실패 "+failCnt+")":"");
-      }).catch(function(){failCnt++;done++;fill.style.width=Math.round(done/total*100)+"%";txt.textContent="업로드 "+done+"/"+total+" (실패 "+failCnt+")";});
+      }).catch(function(e){console.log("upload error:",e);done++;fill.style.width=Math.round(done/total*100)+"%";txt.textContent="업로드 "+done+"/"+total;});
     });
   })(i)}
   chain.then(function(){
     btn.disabled=false;btn.style.opacity="1";
-    var gpsMsg=gps?" (GPS ✓)":" (GPS 없음)";
-    if(failCnt===0){showToast("✓ "+total+"장 업로드 완료"+gpsMsg);setTimeout(function(){prog.remove()},2000)}
-    else{showToast("⚠ "+total+"장 중 "+failCnt+"장 실패");txt.textContent=total+"장 중 "+(total-failCnt)+"장 성공, "+failCnt+"장 실패"}
+    var gpsMsg=gps?" (GPS ✓)":" (⚠ GPS 없음)";
+    if(failCnt===0){showToast("✓ "+total+"장 업로드 완료"+gpsMsg);setTimeout(function(){prog.remove()},3000)}
+    else{showToast("⚠ "+total+"장 중 "+failCnt+"장 실패"+gpsMsg);txt.textContent=total+"장 중 "+(total-failCnt)+"장 성공, "+failCnt+"장 실패"}
   });
 }
 function filterCards(){var q=document.getElementById("searchInput").value.trim().toLowerCase();document.getElementById("searchClear").style.display=q?"block":"none";document.querySelectorAll(".region-divider").forEach(function(d){d.style.display=q?"none":""});document.querySelectorAll(".card").forEach(function(c){c.classList.toggle("hidden",q&&(c.getAttribute("data-school-name")||"").toLowerCase().indexOf(q)===-1)})}
