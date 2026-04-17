@@ -56,7 +56,8 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media print{body{background:#fff!important}.tab-nav,.bottom-bar,.search-bar{display:none!important}.page{display:block!important;padding-bottom:0!important}.card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}}
-.tab-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;border-top:1px solid var(--border);z-index:200;padding-bottom:env(safe-area-inset-bottom,0)}
+.tab-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;border-top:1px solid var(--border);z-index:200;padding-bottom:env(safe-area-inset-bottom,0);transition:transform 0.25s ease}
+.tab-nav.hidden-by-scroll{transform:translateY(100%)}
 .tab-btn{flex:1;padding:9px 0 14px;text-align:center;font-size:13px;font-weight:700;letter-spacing:0.02em;color:var(--text-muted);border:none;background:none;cursor:pointer;position:relative;transition:color 0.2s;touch-action:manipulation;font-family:inherit}
 .tab-btn.active{color:var(--accent)}
 .tab-btn.active::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:2px;background:var(--accent);border-radius:0 0 2px 2px}
@@ -183,7 +184,8 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .complete-btn:active{transform:scale(0.97)}
 .complete-btn.checked{background:var(--positive-bg);color:var(--positive);border-color:var(--positive-light)}
 .camp-block.done{opacity:0.35}
-.bottom-bar{position:fixed;bottom:76px;left:12px;right:12px;display:none;align-items:center;gap:10px;z-index:150}
+.bottom-bar{position:fixed;bottom:76px;left:12px;right:12px;display:none;align-items:center;gap:10px;z-index:150;transition:transform 0.25s ease}
+.bottom-bar.hidden-by-scroll{transform:translateY(140%)}
 .bottom-bar.show{display:flex}
 .bottom-progress{flex:1;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:10px 16px;border-radius:var(--r-md);box-shadow:var(--shadow-float);border:1px solid var(--border);display:flex;align-items:center;gap:12px}
 .bottom-progress .bp-label{font-size:12px;font-weight:700;color:var(--text-secondary);white-space:nowrap}
@@ -264,13 +266,6 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .camp-card.all-done{opacity:0.45}
 .ap-item{color:var(--brand-success)!important}
 .card.camp-filter-hidden{display:none!important}
-.map-fs-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:11px;font-weight:700;color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:all 0.15s;text-transform:none;letter-spacing:0}
-.map-fs-btn:active{background:var(--surface-alt);transform:scale(0.97)}
-.map-section.fullscreen{position:fixed!important;inset:0;z-index:9998;margin:0!important;border-radius:0!important;display:flex;flex-direction:column;background:var(--surface)}
-.map-section.fullscreen .section-title{padding:14px 18px 10px;flex-shrink:0}
-.map-section.fullscreen .camp-filter-row{flex-shrink:0}
-.map-section.fullscreen #naverMap{flex:1;height:auto!important;min-height:0}
-.map-section.fullscreen .map-fs-btn{background:var(--accent);color:#fff;border-color:var(--accent)}
 .map-school-dot-row{display:flex;gap:4px;margin-top:4px;flex-wrap:wrap}
 .camp-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
 .camp-chip .chip-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
@@ -315,7 +310,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <div class="header-top">
       <h1>김태준 작업요청서</h1>
-      <div class="updated-tag">4/17 20:40 업데이트</div>
+      <div class="updated-tag">4/17 20:54 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/3</span></div>
@@ -323,14 +318,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
     </div>
   </div>
   <div class="map-section" id="mapSection">
-    <div class="section-title" style="display:flex;justify-content:space-between;align-items:center">
-      <span>학교 위치</span>
-      <button class="map-fs-btn" onclick="toggleMapFullscreen()" type="button" aria-label="지도 전체화면">
-        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fs-icon-open"><path d="M3 8V3h5M17 8V3h-5M3 12v5h5M17 12v5h-5"/></svg>
-        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fs-icon-close" style="display:none"><path d="M8 3v5H3M12 3v5h5M8 17v-5H3M12 17v-5h5"/></svg>
-        <span class="fs-label">전체화면</span>
-      </button>
-    </div>
+    <div class="section-title"><span>학교 위치</span></div>
     <div class="camp-filter-row"><button class="camp-filter-btn active" data-camp="" style="border-color:var(--border);color:var(--text-secondary)" onclick="filterMapByCamp(this,'')"><span class="cf-dday">ALL</span><span class="cf-name">전체</span></button><button class="camp-filter-btn" data-camp="육군3사관학교_생도모집 (포스터)" data-color="#57bb8a" style="border-color:#57bb8a;color:#0F172A;background:#ebf7f1" onclick="filterMapByCamp(this,'육군3사관학교_생도모집 (포스터)')"><span class="cf-dday">D-13</span><span class="cf-name">육군3사관학교</span></button><button class="camp-filter-btn" data-camp="육군3사관학교_생도모집 (현수막)" data-color="#34a853" style="border-color:#34a853;color:#0F172A;background:#e7f5ea" onclick="filterMapByCamp(this,'육군3사관학교_생도모집 (현수막)')"><span class="cf-dday">D-13</span><span class="cf-name">육군3사관학교</span></button></div>
     <div id="naverMap"></div>
   </div>
@@ -383,8 +371,6 @@ var SVG_CHECKED='<svg class="svg-check" viewBox="0 0 22 22" width="22" height="2
 var SVG_UNCHECKED='<svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg>';
 var SVG_CHECK_SM='<svg class="svg-check" viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="9" fill="#059669"/><path d="M6 10l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 function switchPage(id,btn){
-  var mapSec=document.getElementById("mapSection");
-  if(mapSec&&mapSec.classList.contains("fullscreen")){mapSec.classList.remove("fullscreen");var fsBtn=mapSec.querySelector(".map-fs-btn");if(fsBtn){var io=fsBtn.querySelector(".fs-icon-open"),ic=fsBtn.querySelector(".fs-icon-close"),lb=fsBtn.querySelector(".fs-label");if(io)io.style.display="";if(ic)ic.style.display="none";if(lb)lb.textContent="전체화면";}}
   document.body.style.overflow="";
   document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active")});
   document.getElementById(id).classList.add("active");
@@ -461,6 +447,16 @@ function getCampOffsetPx(idx,total,size){
   var ang=(startDeg+idx*(360/total))*Math.PI/180;
   return{x:Math.cos(ang)*r,y:Math.sin(ang)*r};
 }
+function cmpDeadlineAsc(a,b){
+  var da=(a&&a.deadline)?String(a.deadline):"999999";
+  var db=(b&&b.deadline)?String(b.deadline):"999999";
+  if(!da||da.length<6)da="999999";
+  if(!db||db.length<6)db="999999";
+  if(da!==db)return da<db?-1:1;
+  var ca=(a&&a.camp)||"";var cb=(b&&b.camp)||"";
+  if(ca!==cb)return ca<cb?-1:1;
+  return 0;
+}
 function makeSvgIcon(color,size,offX,offY){
   size=size||24;offX=offX||0;offY=offY||0;
   var r=size/2-1.5;var cx=size/2,cy=size/2;
@@ -469,7 +465,7 @@ function makeSvgIcon(color,size,offX,offY){
 }
 function syncMapFromCards(){document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});var sn=card.getAttribute("data-school-name");if(sn)updateMapMarker(sn,allDone)})}
 function goToSchoolCard(schoolName){singleSchoolOrigin="pageSummary";var detailBtn=document.querySelectorAll(".tab-btn")[1];if(detailBtn)switchPage("pageDetail",detailBtn);requestAnimationFrame(function(){showSingleSchool(schoolName)})}
-(function(){try{if(typeof naver==="undefined"||!naver.maps){document.getElementById("naverMap").innerHTML="<p style=\"padding:20px;text-align:center;color:var(--text-muted)\">지도 로딩 실패</p>";return}var mc=document.getElementById("naverMap");naverMapObj=new naver.maps.Map(mc,{center:new naver.maps.LatLng(36.5,127.5),zoom:7,zoomControl:false});var bounds=new naver.maps.LatLngBounds();var cnt=0;var schools=MAP_DATA.filter(function(s){return s.addr});if(!schools.length){document.getElementById("naverMap").innerHTML="<p style=\"padding:40px 20px;text-align:center;color:var(--positive);font-weight:700\">모든 학교 작업 완료!</p>";mapInitDone=true;return}var geoRemain=schools.length;var usedCoords={};schools.forEach(function(s,i){setTimeout(function(){naver.maps.Service.geocode({query:s.addr},function(status,response){if(status===naver.maps.Service.Status.OK&&response.v2.addresses.length>0){var addr=response.v2.addresses[0];var lat=parseFloat(addr.y),lng=parseFloat(addr.x);var coordKey=lat.toFixed(4)+","+lng.toFixed(4);if(usedCoords[coordKey]){var oc=usedCoords[coordKey];lat+=0.0004*oc;lng+=0.0003*oc;usedCoords[coordKey]=oc+1}else{usedCoords[coordKey]=1}var coords=new naver.maps.LatLng(lat,lng);var campsForSchool=(SCHOOL_CAMPAIGNS[s.school]||[]).slice();if(!campsForSchool.length)campsForSchool=[{camp:"",deadline:""}];campsForSchool.sort(function(a,b){return(a.deadline||"").localeCompare(b.deadline||"")});var curSize=getMarkerSizeForZoom(naverMapObj.getZoom());var markerList=campsForSchool.map(function(c,idx){
+(function(){try{if(typeof naver==="undefined"||!naver.maps){document.getElementById("naverMap").innerHTML="<p style=\"padding:20px;text-align:center;color:var(--text-muted)\">지도 로딩 실패</p>";return}var mc=document.getElementById("naverMap");naverMapObj=new naver.maps.Map(mc,{center:new naver.maps.LatLng(36.5,127.5),zoom:7,zoomControl:false});var bounds=new naver.maps.LatLngBounds();var cnt=0;var schools=MAP_DATA.filter(function(s){return s.addr});if(!schools.length){document.getElementById("naverMap").innerHTML="<p style=\"padding:40px 20px;text-align:center;color:var(--positive);font-weight:700\">모든 학교 작업 완료!</p>";mapInitDone=true;return}var geoRemain=schools.length;var usedCoords={};schools.forEach(function(s,i){setTimeout(function(){naver.maps.Service.geocode({query:s.addr},function(status,response){if(status===naver.maps.Service.Status.OK&&response.v2.addresses.length>0){var addr=response.v2.addresses[0];var lat=parseFloat(addr.y),lng=parseFloat(addr.x);var coordKey=lat.toFixed(4)+","+lng.toFixed(4);if(usedCoords[coordKey]){var oc=usedCoords[coordKey];lat+=0.0004*oc;lng+=0.0003*oc;usedCoords[coordKey]=oc+1}else{usedCoords[coordKey]=1}var coords=new naver.maps.LatLng(lat,lng);var campsForSchool=(SCHOOL_CAMPAIGNS[s.school]||[]).slice();if(!campsForSchool.length)campsForSchool=[{camp:"",deadline:""}];campsForSchool.sort(cmpDeadlineAsc);var curSize=getMarkerSizeForZoom(naverMapObj.getZoom());var markerList=campsForSchool.map(function(c,idx){
   var col=(CAMP_COLORS&&CAMP_COLORS[c.camp])||"#94A3B8";
   var off=getCampOffsetPx(idx,campsForSchool.length,curSize);
   var mk=new naver.maps.Marker({map:naverMapObj,position:coords,title:s.school,icon:makeSvgIcon(col,curSize,off.x,off.y),zIndex:100});
@@ -492,7 +488,34 @@ function applyZoomToAllMarkers(){
   });
 }
 function updateMapMarker(schoolName,done){if(mapMarkers[schoolName]){mapMarkers[schoolName].done=done;}updateMapMarkerByCamp(schoolName);}
-window.addEventListener("scroll",function(){var bar=document.getElementById("bottomBar");var isDetail=document.getElementById("pageDetail").classList.contains("active");if(isDetail&&window.pageYOffset>200)bar.classList.add("show");else if(isDetail&&window.pageYOffset<=200)bar.classList.remove("show")});
+var __lastScrollY=0,__scrollTicking=false;
+window.addEventListener("scroll",function(){
+  if(__scrollTicking)return;
+  __scrollTicking=true;
+  requestAnimationFrame(function(){
+    var curY=window.pageYOffset||0;
+    var bar=document.getElementById("bottomBar");
+    var nav=document.querySelector(".tab-nav");
+    var isDetail=document.getElementById("pageDetail").classList.contains("active");
+    if(bar){if(isDetail&&curY>200)bar.classList.add("show");else if(curY<=200)bar.classList.remove("show");}
+    var delta=curY-__lastScrollY;
+    var atTop=curY<80;
+    var atBottom=(window.innerHeight+curY)>=(document.body.offsetHeight-10);
+    if(atTop||atBottom){
+      if(nav)nav.classList.remove("hidden-by-scroll");
+      if(bar)bar.classList.remove("hidden-by-scroll");
+    } else if(delta>6){
+      if(nav)nav.classList.add("hidden-by-scroll");
+      if(bar)bar.classList.add("hidden-by-scroll");
+    } else if(delta<-6){
+      if(nav)nav.classList.remove("hidden-by-scroll");
+      if(bar)bar.classList.remove("hidden-by-scroll");
+    }
+    __lastScrollY=curY;
+    __scrollTicking=false;
+  });
+},{passive:true});
+document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".tab-btn").forEach(function(b){b.addEventListener("click",function(){var n=document.querySelector(".tab-nav");if(n)n.classList.remove("hidden-by-scroll");var bb=document.getElementById("bottomBar");if(bb)bb.classList.remove("hidden-by-scroll");});});});
 (function syncOnLoad(){var ss=document.getElementById("syncStatus");ss.classList.add("show");fetch(WEB_APP_URL+"?action=sync&worker="+encodeURIComponent(WORKER_NAME)).then(function(r){return r.json()}).then(function(json){if(json.status==="ok"&&json.data){var data=json.data;document.querySelectorAll(".camp-block").forEach(function(block){var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");var key=school+"|||"+camp;if(!data[key])return;var info=data[key];var btn=block.querySelector(".complete-btn");if(info.postDate&&!btn.classList.contains("checked")){btn.classList.add("checked");btn.innerHTML=SVG_CHECKED+" 완료됨";block.classList.add("done");doneCount++}else if(!info.postDate&&btn.classList.contains("checked")){btn.classList.remove("checked");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";block.classList.remove("done");doneCount--}var noteInput=block.querySelector(".note-input");if(noteInput&&info.note)noteInput.value=info.note});document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});if(allDone)card.classList.add("all-done");else card.classList.remove("all-done");var sn2=card.getAttribute("data-school-name");if(sn2)updateMapMarker(sn2,allDone)});updateProgress();syncSchoolTable();refreshCampSummaryStats();refreshCampDoneStatus();refreshTotalsGrid();if(mapInitDone)syncMapFromCards();else setTimeout(syncMapFromCards,MAP_DATA.length*160+1000)}ss.classList.remove("show")}).catch(function(){ss.classList.remove("show")})})();
 function refreshDday(){
   var today=new Date();today.setHours(0,0,0,0);
@@ -623,7 +646,7 @@ function getSelectedCamps(){var r=[];for(var k in currentCampFilters)if(currentC
 function getSchoolActiveCamp(schoolName){
   var camps=SCHOOL_CAMPAIGNS[schoolName];
   if(!camps||!camps.length)return null;
-  var sorted=camps.slice().sort(function(a,b){return a.deadline.localeCompare(b.deadline)});
+  var sorted=camps.slice().sort(cmpDeadlineAsc);
   for(var i=0;i<sorted.length;i++){
     var c=sorted[i];
     var blocks=document.querySelectorAll('.camp-block[data-school="'+(window.CSS&&CSS.escape?CSS.escape(schoolName):schoolName)+'"][data-camp="'+(window.CSS&&CSS.escape?CSS.escape(c.camp):c.camp)+'"]');
@@ -647,7 +670,7 @@ function computeSchoolZIndex(schoolName){
   var dl="";
   if(hasCampFilter()){
     var camps=SCHOOL_CAMPAIGNS[schoolName]||[];
-    var matched=camps.filter(function(c){return currentCampFilters[c.camp]}).sort(function(a,b){return a.deadline.localeCompare(b.deadline)});
+    var matched=camps.filter(function(c){return currentCampFilters[c.camp]}).sort(cmpDeadlineAsc);
     if(matched.length)dl=matched[0].deadline;
   } else {
     var active=getSchoolActiveCamp(schoolName);
@@ -734,29 +757,6 @@ syncMapFromCards=function(){Object.keys(mapMarkers).forEach(function(sn){updateM
 var __origToggle=toggleCampDone;
 toggleCampDone=function(btn){__origToggle(btn);refreshCampCards();var card=btn.closest(".card");if(card){var sn=card.getAttribute("data-school-name");if(sn)updateMapMarkerByCamp(sn);}};
 refreshCampCards();
-function toggleMapFullscreen(){
-  var sec=document.getElementById("mapSection");
-  if(!sec)return;
-  var btn=sec.querySelector(".map-fs-btn");
-  var iconOpen=btn.querySelector(".fs-icon-open");
-  var iconClose=btn.querySelector(".fs-icon-close");
-  var lbl=btn.querySelector(".fs-label");
-  var isFs=sec.classList.toggle("fullscreen");
-  if(isFs){
-    iconOpen.style.display="none";iconClose.style.display="";lbl.textContent="닫기";
-    document.body.style.overflow="hidden";
-  } else {
-    iconOpen.style.display="";iconClose.style.display="none";lbl.textContent="전체화면";
-    document.body.style.overflow="";
-  }
-  setTimeout(function(){
-    if(naverMapObj&&naver&&naver.maps){
-      try{naver.maps.Event.trigger(naverMapObj,"resize");}catch(e){}
-      if(typeof applyZoomToAllMarkers==="function")applyZoomToAllMarkers();
-    }
-  },320);
-}
-document.addEventListener("keydown",function(e){if(e.key==="Escape"){var sec=document.getElementById("mapSection");if(sec&&sec.classList.contains("fullscreen"))toggleMapFullscreen();}});
 function injectSchoolCampChips(){
   document.querySelectorAll(".school-row").forEach(function(row){
     var sn=row.getAttribute("data-school");
@@ -765,7 +765,7 @@ function injectSchoolCampChips(){
     if(!camps.length)return;
     var cell=row.querySelector("td:first-child");
     if(!cell||cell.querySelector(".school-camps-inline"))return;
-    var sorted=camps.slice().sort(function(a,b){return a.deadline.localeCompare(b.deadline)});
+    var sorted=camps.slice().sort(cmpDeadlineAsc);
     var wrap=document.createElement("div");
     wrap.className="school-camps-inline";
     sorted.forEach(function(c){
