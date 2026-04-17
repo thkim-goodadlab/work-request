@@ -317,7 +317,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <div class="header-top">
       <h1>변재호 v2 작업요청서</h1>
-      <div class="updated-tag">4/17 18:55 업데이트</div>
+      <div class="updated-tag">4/17 19:29 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/80</span></div>
@@ -391,6 +391,9 @@ var SVG_CHECKED='<svg class="svg-check" viewBox="0 0 22 22" width="22" height="2
 var SVG_UNCHECKED='<svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg>';
 var SVG_CHECK_SM='<svg class="svg-check" viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="9" fill="#059669"/><path d="M6 10l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 function switchPage(id,btn){
+  var mapSec=document.getElementById("mapSection");
+  if(mapSec&&mapSec.classList.contains("fullscreen")){mapSec.classList.remove("fullscreen");var fsBtn=mapSec.querySelector(".map-fs-btn");if(fsBtn){var io=fsBtn.querySelector(".fs-icon-open"),ic=fsBtn.querySelector(".fs-icon-close"),lb=fsBtn.querySelector(".fs-label");if(io)io.style.display="";if(ic)ic.style.display="none";if(lb)lb.textContent="전체화면";}}
+  document.body.style.overflow="";
   document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active")});
   document.getElementById(id).classList.add("active");
   document.querySelectorAll(".tab-btn").forEach(function(b){b.classList.remove("active")});
