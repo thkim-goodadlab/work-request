@@ -192,9 +192,9 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .bottom-progress .bp-count{font-size:13px;font-weight:800;color:var(--positive);font-variant-numeric:tabular-nums;white-space:nowrap}
 .scroll-top-btn{width:44px;height:44px;border-radius:50%;background:var(--surface);color:var(--text-secondary);border:1px solid var(--border);font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-float);cursor:pointer;touch-action:manipulation;flex-shrink:0;transition:all 0.15s;font-family:inherit}
 .scroll-top-btn:active{transform:scale(0.92);background:var(--surface-alt)}
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:10px 20px;border-radius:var(--r-md);font-size:14px;font-weight:700;z-index:999;opacity:0;transition:opacity 0.3s;pointer-events:none;box-shadow:var(--shadow-lg)}
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--text);color:#fff;padding:14px 26px;border-radius:var(--r-md);font-size:16px;font-weight:700;z-index:999;opacity:0;transition:opacity 0.3s;pointer-events:none;box-shadow:var(--shadow-lg);max-width:85vw;text-align:center}
 .toast.show{opacity:1}
-.sync-status{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--accent-lighter);color:var(--accent);padding:8px 16px;border-radius:var(--r-sm);font-size:13px;font-weight:700;z-index:999;opacity:0;transition:opacity 0.3s;pointer-events:none;border:1px solid var(--accent-light)}
+.sync-status{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--accent-lighter);color:var(--accent);padding:12px 22px;border-radius:var(--r-sm);font-size:15px;font-weight:700;z-index:999;opacity:0;transition:opacity 0.3s;pointer-events:none;border:1px solid var(--accent-light);text-align:center}
 .sync-status.show{opacity:1}
 @media(max-width:480px){
   body{-webkit-text-size-adjust:100%}
@@ -302,9 +302,9 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .capture-upload-btn:active{background:var(--positive-light)}
 .gps-guide-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px}
 .gps-guide-box{background:#fff;border-radius:14px;padding:20px;max-width:340px;width:100%}
-.gps-guide-box h3{font-size:16px;font-weight:800;margin-bottom:10px;color:var(--text)}
-.gps-guide-box p{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;white-space:pre-line}
-.gps-guide-box button{width:100%;padding:11px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;margin-top:6px}
+.gps-guide-box h3{font-size:18px;font-weight:800;margin-bottom:10px;color:var(--text)}
+.gps-guide-box p{font-size:15px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;white-space:pre-line}
+.gps-guide-box button{width:100%;padding:11px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;font-size:16px;cursor:pointer;font-family:inherit;margin-top:6px}
 .gps-guide-box button.secondary{background:var(--surface-alt);color:var(--text-secondary)}
 </style>
 </head>
@@ -315,7 +315,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <div class="header-top">
       <h1>김태준 작업요청서</h1>
-      <div class="updated-tag">4/17 20:20 업데이트</div>
+      <div class="updated-tag">4/17 20:40 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/3</span></div>
@@ -361,7 +361,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
       <span class="search-clear" id="searchClear" onclick="clearSearch()">&#x2715;</span>
     </div>
   </div>
-  <div id="cardsContainer"><div class="region-divider"><span class="label">제주</span><span class="line"></span></div><div class="card" id="school-1" data-school-name="제주대학교"><div class="card-header"><div class="card-num">1</div><div class="card-school">제주대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%EB%8C%80%ED%95%99%EA%B5%90%20%EA%B0%81%20%EB%8B%A8%EA%B3%BC%EB%8C%80%20%EA%B5%AC%EB%91%90%EC%8A%B9%EC%9D%B8&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주대학교 각 단과대 구두승인'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 대학로 102</div><div class="approval-places"><span class="ap-item">포스터 승인: 각 단과대 구두승인</span><span class="ap-item">현수막 승인: 각 단과대 구두승인</span></div><div class="camp-block" data-school="제주대학교" data-camp="육군3사관학교_생도모집 (포스터)" data-poster="20" data-banner="0"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (포스터)</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday normal" data-deadline="260430">D-13</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">20장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">시안A+B 교차 부착<br>유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/1VPjvMnrToJGRys-e0nezihIFPEp-yuMQ" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'1VPjvMnrToJGRys-e0nezihIFPEp-yuMQ')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-2" data-school-name="제주관광대학교"><div class="card-header"><div class="card-num">2</div><div class="card-school">제주관광대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%EA%B4%80%EA%B4%91%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주관광대학교'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 애월읍 평화로 2715</div><div class="camp-block" data-school="제주관광대학교" data-camp="육군3사관학교_생도모집 (현수막)" data-poster="0" data-banner="2"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (현수막)</span><span class="approval-badge approval-no">비승인</span><span class="camp-dday normal" data-deadline="260430">D-13</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">2장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">시안 2종<br>유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/1D6QJn8t5CS5jmHGAIcbDp8y8sA3QP-SK" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'1D6QJn8t5CS5jmHGAIcbDp8y8sA3QP-SK')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-3" data-school-name="제주한라대학교"><div class="card-header"><div class="card-num">3</div><div class="card-school">제주한라대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%ED%95%9C%EB%9D%BC%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주한라대학교'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 한라대학로 38</div><div class="camp-block" data-school="제주한라대학교" data-camp="육군3사관학교_생도모집 (현수막)" data-poster="0" data-banner="2"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (현수막)</span><span class="approval-badge approval-no">비승인</span><span class="camp-dday normal" data-deadline="260430">D-13</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">2장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">시안 2종<br>유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/1GABo6oNg2pC7JgKMVNwybH_3q_DOmIYv" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'1GABo6oNg2pC7JgKMVNwybH_3q_DOmIYv')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div></div>
+  <div id="cardsContainer"><div class="region-divider"><span class="label">제주</span><span class="line"></span></div><div class="card" id="school-1" data-school-name="제주대학교"><div class="card-header"><div class="card-num">1</div><div class="card-school">제주대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주대학교'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 대학로 102</div><div class="camp-block" data-school="제주대학교" data-camp="육군3사관학교_생도모집 (포스터)" data-poster="20" data-banner="0"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (포스터)</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday normal" data-deadline="260430">D-13</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">20장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">시안A+B 교차 부착<br>유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/1VPjvMnrToJGRys-e0nezihIFPEp-yuMQ" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'1VPjvMnrToJGRys-e0nezihIFPEp-yuMQ')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-2" data-school-name="제주관광대학교"><div class="card-header"><div class="card-num">2</div><div class="card-school">제주관광대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%EA%B4%80%EA%B4%91%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주관광대학교'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 애월읍 평화로 2715</div><div class="camp-block" data-school="제주관광대학교" data-camp="육군3사관학교_생도모집 (현수막)" data-poster="0" data-banner="2"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (현수막)</span><span class="approval-badge approval-no">비승인</span><span class="camp-dday normal" data-deadline="260430">D-13</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">2장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">시안 2종<br>유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/1D6QJn8t5CS5jmHGAIcbDp8y8sA3QP-SK" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'1D6QJn8t5CS5jmHGAIcbDp8y8sA3QP-SK')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-3" data-school-name="제주한라대학교"><div class="card-header"><div class="card-num">3</div><div class="card-school">제주한라대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%ED%95%9C%EB%9D%BC%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주한라대학교'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 한라대학로 38</div><div class="camp-block" data-school="제주한라대학교" data-camp="육군3사관학교_생도모집 (현수막)" data-poster="0" data-banner="2"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (현수막)</span><span class="approval-badge approval-no">비승인</span><span class="camp-dday normal" data-deadline="260430">D-13</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">2장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">시안 2종<br>유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/1GABo6oNg2pC7JgKMVNwybH_3q_DOmIYv" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'1GABo6oNg2pC7JgKMVNwybH_3q_DOmIYv')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div></div>
 </div>
 <div class="bottom-bar" id="bottomBar">
   <div class="bottom-progress">
@@ -453,11 +453,45 @@ function goBackFromSingleSchool(){var origin=singleSchoolOrigin;showAllSchools()
 function goToSchoolDetail(schoolName){singleSchoolOrigin="pageSummary";var detailBtn=document.querySelectorAll(".tab-btn")[1];if(detailBtn)switchPage("pageDetail",detailBtn);requestAnimationFrame(function(){showSingleSchool(schoolName)})}
 function syncSchoolTable(){document.querySelectorAll(".school-row").forEach(function(row){var sn=row.getAttribute("data-school");var cards=document.querySelectorAll(".card[data-school-name]");var card=null;for(var i=0;i<cards.length;i++){if(cards[i].getAttribute("data-school-name")===sn){card=cards[i];break}}if(!card)return;var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});var cell=row.querySelector(".school-check-cell");if(allDone){cell.innerHTML=SVG_CHECK_SM;row.style.opacity="0.4"}else{cell.innerHTML="";row.style.opacity="1"}})}
 var mapMarkers={},mapLabels={},naverMapObj=null,mapInitDone=false;
+function getMarkerSizeForZoom(z){var s=12+(z-7)*2;if(s<12)s=12;if(s>30)s=30;return Math.round(s);}
+function getCampOffsetPx(idx,total,size){
+  if(total<=1)return{x:0,y:0};
+  var r=size*0.35;
+  var startDeg=total===2?0:-90;
+  var ang=(startDeg+idx*(360/total))*Math.PI/180;
+  return{x:Math.cos(ang)*r,y:Math.sin(ang)*r};
+}
+function makeSvgIcon(color,size,offX,offY){
+  size=size||24;offX=offX||0;offY=offY||0;
+  var r=size/2-1.5;var cx=size/2,cy=size/2;
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'"><circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="'+color+'" stroke="#fff" stroke-width="1.5"/></svg>';
+  return{content:'<div style="width:'+size+'px;height:'+size+'px">'+svg+'</div>',size:new naver.maps.Size(size,size),anchor:new naver.maps.Point(size/2-offX,size/2-offY)};
+}
 function syncMapFromCards(){document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});var sn=card.getAttribute("data-school-name");if(sn)updateMapMarker(sn,allDone)})}
-function makeSvgIcon(color){return{content:'<div style="width:24px;height:24px"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="'+color+'" stroke="#fff" stroke-width="1.5"/></svg></div>',size:new naver.maps.Size(24,24),anchor:new naver.maps.Point(12,12)}}
 function goToSchoolCard(schoolName){singleSchoolOrigin="pageSummary";var detailBtn=document.querySelectorAll(".tab-btn")[1];if(detailBtn)switchPage("pageDetail",detailBtn);requestAnimationFrame(function(){showSingleSchool(schoolName)})}
-(function(){try{if(typeof naver==="undefined"||!naver.maps){document.getElementById("naverMap").innerHTML="<p style=\"padding:20px;text-align:center;color:var(--text-muted)\">지도 로딩 실패</p>";return}var mc=document.getElementById("naverMap");naverMapObj=new naver.maps.Map(mc,{center:new naver.maps.LatLng(36.5,127.5),zoom:7,zoomControl:false});var bounds=new naver.maps.LatLngBounds();var cnt=0;var ddayColors={urgent:"#DC2626",soon:"#D97706",normal:"#94A3B8"};var doneColor="#059669";var schools=MAP_DATA.filter(function(s){return s.addr});if(!schools.length){document.getElementById("naverMap").innerHTML="<p style=\"padding:40px 20px;text-align:center;color:var(--positive);font-weight:700\">모든 학교 작업 완료!</p>";mapInitDone=true;return}var geoRemain=schools.length;var usedCoords={};schools.forEach(function(s,i){setTimeout(function(){naver.maps.Service.geocode({query:s.addr},function(status,response){if(status===naver.maps.Service.Status.OK&&response.v2.addresses.length>0){var addr=response.v2.addresses[0];var lat=parseFloat(addr.y),lng=parseFloat(addr.x);var coordKey=lat.toFixed(4)+","+lng.toFixed(4);if(usedCoords[coordKey]){var oc=usedCoords[coordKey];lat+=0.0004*oc;lng+=0.0003*oc;usedCoords[coordKey]=oc+1}else{usedCoords[coordKey]=1}var coords=new naver.maps.LatLng(lat,lng);var mColor=s.done?doneColor:(ddayColors[s.dday]||ddayColors.normal);var marker=new naver.maps.Marker({map:naverMapObj,position:coords,title:s.school,icon:makeSvgIcon(mColor)});if(s.done){marker.setVisible(false)}mapMarkers[s.school]={marker:marker,coords:coords,done:s.done,dday:s.dday};naver.maps.Event.addListener(marker,"click",function(){goToSchoolCard(s.school)});if(!s.done){bounds.extend(coords);cnt++}if(cnt>=Math.min(schools.filter(function(x){return!x.done}).length,5)&&cnt>0)naverMapObj.fitBounds(bounds)}geoRemain--;if(geoRemain<=0){mapInitDone=true;syncMapFromCards()}})},i*150)});}catch(e){document.getElementById("naverMap").innerHTML="<p style=\"padding:20px;text-align:center;color:var(--text-muted)\">지도 로딩 실패</p>"}})();
-function updateMapMarker(schoolName,done){if(mapMarkers[schoolName]){var m=mapMarkers[schoolName];m.done=done;if(done){m.marker.setVisible(false);if(mapLabels[schoolName])mapLabels[schoolName].setVisible(false)}else{m.marker.setVisible(true);m.marker.setIcon(makeSvgIcon(({urgent:"#DC2626",soon:"#D97706",normal:"#94A3B8"})[m.dday]||"#94A3B8"));if(mapLabels[schoolName]){mapLabels[schoolName].setVisible(true);var el=mapLabels[schoolName].getElement();if(el){var lbl=el.querySelector(".map-label");if(lbl)lbl.classList.remove("done")}}}}}
+(function(){try{if(typeof naver==="undefined"||!naver.maps){document.getElementById("naverMap").innerHTML="<p style=\"padding:20px;text-align:center;color:var(--text-muted)\">지도 로딩 실패</p>";return}var mc=document.getElementById("naverMap");naverMapObj=new naver.maps.Map(mc,{center:new naver.maps.LatLng(36.5,127.5),zoom:7,zoomControl:false});var bounds=new naver.maps.LatLngBounds();var cnt=0;var schools=MAP_DATA.filter(function(s){return s.addr});if(!schools.length){document.getElementById("naverMap").innerHTML="<p style=\"padding:40px 20px;text-align:center;color:var(--positive);font-weight:700\">모든 학교 작업 완료!</p>";mapInitDone=true;return}var geoRemain=schools.length;var usedCoords={};schools.forEach(function(s,i){setTimeout(function(){naver.maps.Service.geocode({query:s.addr},function(status,response){if(status===naver.maps.Service.Status.OK&&response.v2.addresses.length>0){var addr=response.v2.addresses[0];var lat=parseFloat(addr.y),lng=parseFloat(addr.x);var coordKey=lat.toFixed(4)+","+lng.toFixed(4);if(usedCoords[coordKey]){var oc=usedCoords[coordKey];lat+=0.0004*oc;lng+=0.0003*oc;usedCoords[coordKey]=oc+1}else{usedCoords[coordKey]=1}var coords=new naver.maps.LatLng(lat,lng);var campsForSchool=(SCHOOL_CAMPAIGNS[s.school]||[]).slice();if(!campsForSchool.length)campsForSchool=[{camp:"",deadline:""}];campsForSchool.sort(function(a,b){return(a.deadline||"").localeCompare(b.deadline||"")});var curSize=getMarkerSizeForZoom(naverMapObj.getZoom());var markerList=campsForSchool.map(function(c,idx){
+  var col=(CAMP_COLORS&&CAMP_COLORS[c.camp])||"#94A3B8";
+  var off=getCampOffsetPx(idx,campsForSchool.length,curSize);
+  var mk=new naver.maps.Marker({map:naverMapObj,position:coords,title:s.school,icon:makeSvgIcon(col,curSize,off.x,off.y),zIndex:100});
+  naver.maps.Event.addListener(mk,"click",function(){goToSchoolCard(s.school);});
+  return{marker:mk,camp:c.camp,deadline:c.deadline};
+});mapMarkers[s.school]={markers:markerList,coords:coords,done:s.done,dday:s.dday};if(!s.done){bounds.extend(coords);cnt++}if(cnt>=Math.min(schools.filter(function(x){return!x.done}).length,5)&&cnt>0)naverMapObj.fitBounds(bounds)}geoRemain--;if(geoRemain<=0){mapInitDone=true;syncMapFromCards();applyZoomToAllMarkers();}})},i*150)});var __zoomTimer=null;
+naver.maps.Event.addListener(naverMapObj,"zoom_changed",function(){if(__zoomTimer)clearTimeout(__zoomTimer);__zoomTimer=setTimeout(applyZoomToAllMarkers,150);});}catch(e){document.getElementById("naverMap").innerHTML="<p style=\"padding:20px;text-align:center;color:var(--text-muted)\">지도 로딩 실패</p>"}})();
+function applyZoomToAllMarkers(){
+  if(!naverMapObj)return;
+  var size=getMarkerSizeForZoom(naverMapObj.getZoom());
+  Object.keys(mapMarkers).forEach(function(sn){
+    var entry=mapMarkers[sn];if(!entry||!entry.markers)return;
+    var total=entry.markers.length;
+    entry.markers.forEach(function(mk,idx){
+      if(!mk.marker.getVisible())return;
+      var col=(CAMP_COLORS&&CAMP_COLORS[mk.camp])||"#94A3B8";
+      var off=getCampOffsetPx(idx,total,size);
+      mk.marker.setIcon(makeSvgIcon(col,size,off.x,off.y));
+    });
+  });
+}
+function updateMapMarker(schoolName,done){if(mapMarkers[schoolName]){mapMarkers[schoolName].done=done;}updateMapMarkerByCamp(schoolName);}
 window.addEventListener("scroll",function(){var bar=document.getElementById("bottomBar");var isDetail=document.getElementById("pageDetail").classList.contains("active");if(isDetail&&window.pageYOffset>200)bar.classList.add("show");else if(isDetail&&window.pageYOffset<=200)bar.classList.remove("show")});
 (function syncOnLoad(){var ss=document.getElementById("syncStatus");ss.classList.add("show");fetch(WEB_APP_URL+"?action=sync&worker="+encodeURIComponent(WORKER_NAME)).then(function(r){return r.json()}).then(function(json){if(json.status==="ok"&&json.data){var data=json.data;document.querySelectorAll(".camp-block").forEach(function(block){var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");var key=school+"|||"+camp;if(!data[key])return;var info=data[key];var btn=block.querySelector(".complete-btn");if(info.postDate&&!btn.classList.contains("checked")){btn.classList.add("checked");btn.innerHTML=SVG_CHECKED+" 완료됨";block.classList.add("done");doneCount++}else if(!info.postDate&&btn.classList.contains("checked")){btn.classList.remove("checked");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";block.classList.remove("done");doneCount--}var noteInput=block.querySelector(".note-input");if(noteInput&&info.note)noteInput.value=info.note});document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});if(allDone)card.classList.add("all-done");else card.classList.remove("all-done");var sn2=card.getAttribute("data-school-name");if(sn2)updateMapMarker(sn2,allDone)});updateProgress();syncSchoolTable();refreshCampSummaryStats();refreshCampDoneStatus();refreshTotalsGrid();if(mapInitDone)syncMapFromCards();else setTimeout(syncMapFromCards,MAP_DATA.length*160+1000)}ss.classList.remove("show")}).catch(function(){ss.classList.remove("show")})})();
 function refreshDday(){
@@ -583,7 +617,9 @@ function refreshTotalsGrid(){
 var CAMP_COLORS={"육군3사관학교_생도모집 (포스터)":"#57bb8a","육군3사관학교_생도모집 (현수막)":"#34a853"};
 var SCHOOL_CAMPAIGNS={"제주대학교":[{"camp":"육군3사관학교_생도모집 (포스터)","deadline":"260430","poster":20,"banner":0,"pay":20000}],"제주관광대학교":[{"camp":"육군3사관학교_생도모집 (현수막)","deadline":"260430","poster":0,"banner":2,"pay":20000}],"제주한라대학교":[{"camp":"육군3사관학교_생도모집 (현수막)","deadline":"260430","poster":0,"banner":2,"pay":20000}]};
 var CAMP_ORDER=["육군3사관학교_생도모집 (포스터)","육군3사관학교_생도모집 (현수막)"];
-var currentCampFilter="";
+var currentCampFilters={};
+function hasCampFilter(){for(var k in currentCampFilters)if(currentCampFilters.hasOwnProperty(k))return true;return false;}
+function getSelectedCamps(){var r=[];for(var k in currentCampFilters)if(currentCampFilters.hasOwnProperty(k))r.push(k);return r;}
 function getSchoolActiveCamp(schoolName){
   var camps=SCHOOL_CAMPAIGNS[schoolName];
   if(!camps||!camps.length)return null;
@@ -609,9 +645,10 @@ function isCampDoneAtSchool(schoolName,campName){
 }
 function computeSchoolZIndex(schoolName){
   var dl="";
-  if(currentCampFilter){
+  if(hasCampFilter()){
     var camps=SCHOOL_CAMPAIGNS[schoolName]||[];
-    for(var i=0;i<camps.length;i++){if(camps[i].camp===currentCampFilter){dl=camps[i].deadline;break;}}
+    var matched=camps.filter(function(c){return currentCampFilters[c.camp]}).sort(function(a,b){return a.deadline.localeCompare(b.deadline)});
+    if(matched.length)dl=matched[0].deadline;
   } else {
     var active=getSchoolActiveCamp(schoolName);
     if(active)dl=active.deadline;
@@ -624,33 +661,48 @@ function computeSchoolZIndex(schoolName){
   return 100000-diff*100;
 }
 function updateMapMarkerByCamp(schoolName){
-  var m=mapMarkers[schoolName];if(!m)return;
-  if(currentCampFilter){
-    var camps=SCHOOL_CAMPAIGNS[schoolName]||[];
-    var has=camps.some(function(c){return c.camp===currentCampFilter});
-    if(!has){m.marker.setVisible(false);return;}
-    if(isCampDoneAtSchool(schoolName,currentCampFilter)){m.marker.setVisible(false);return;}
-    m.marker.setVisible(true);
-    m.marker.setIcon(makeSvgIcon(CAMP_COLORS[currentCampFilter]||"#94A3B8"));
-    m.marker.setZIndex(computeSchoolZIndex(schoolName));
-    return;
-  }
-  var active=getSchoolActiveCamp(schoolName);
-  if(!active){m.marker.setVisible(false);return;}
-  m.marker.setVisible(true);
-  m.marker.setIcon(makeSvgIcon(CAMP_COLORS[active.camp]||"#94A3B8"));
-  m.marker.setZIndex(computeSchoolZIndex(schoolName));
+  var entry=mapMarkers[schoolName];if(!entry||!entry.markers)return;
+  var size=getMarkerSizeForZoom(naverMapObj?naverMapObj.getZoom():7);
+  var z=computeSchoolZIndex(schoolName);
+  var filtered=hasCampFilter();
+  var visibleIdx=[];
+  entry.markers.forEach(function(mk,idx){
+    var show=false;
+    if(!mk.camp){show=false;}
+    else if(filtered){
+      show=!!currentCampFilters[mk.camp]&&!isCampDoneAtSchool(schoolName,mk.camp);
+    } else {
+      show=!isCampDoneAtSchool(schoolName,mk.camp);
+    }
+    if(show)visibleIdx.push(idx);
+  });
+  entry.markers.forEach(function(mk,idx){
+    var pos=visibleIdx.indexOf(idx);
+    if(pos<0){mk.marker.setVisible(false);return;}
+    var col=(CAMP_COLORS&&CAMP_COLORS[mk.camp])||"#94A3B8";
+    var off=getCampOffsetPx(pos,visibleIdx.length,size);
+    mk.marker.setIcon(makeSvgIcon(col,size,off.x,off.y));
+    mk.marker.setZIndex(z+pos);
+    mk.marker.setVisible(true);
+  });
 }
 function filterMapByCamp(btn,campName){
-  currentCampFilter=campName;
+  if(!campName){
+    currentCampFilters={};
+  } else {
+    if(currentCampFilters[campName])delete currentCampFilters[campName];
+    else currentCampFilters[campName]=true;
+  }
   document.querySelectorAll(".camp-filter-btn").forEach(function(b){
-    b.classList.remove("active");
+    var c=b.getAttribute("data-camp")||"";
     var col=b.getAttribute("data-color");
-    if(col&&b!==btn){b.style.background="";b.style.color="#0F172A";}
+    var isActive=c?!!currentCampFilters[c]:!hasCampFilter();
+    b.classList.toggle("active",isActive);
+    if(col){
+      if(isActive){b.style.background=col;b.style.color="#fff";}
+      else{b.style.background="";b.style.color="#0F172A";}
+    }
   });
-  btn.classList.add("active");
-  var col=btn.getAttribute("data-color");
-  if(col){btn.style.background=col;btn.style.color="#fff";}
   Object.keys(mapMarkers).forEach(function(sn){updateMapMarkerByCamp(sn)});
 }
 function refreshCampCards(){
@@ -700,6 +752,7 @@ function toggleMapFullscreen(){
   setTimeout(function(){
     if(naverMapObj&&naver&&naver.maps){
       try{naver.maps.Event.trigger(naverMapObj,"resize");}catch(e){}
+      if(typeof applyZoomToAllMarkers==="function")applyZoomToAllMarkers();
     }
   },320);
 }
