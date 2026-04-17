@@ -185,23 +185,6 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .complete-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px;font-size:13px;font-weight:700;background:var(--surface);color:var(--text-secondary);cursor:pointer;touch-action:manipulation;font-family:inherit;transition:all 0.2s}
 .complete-btn:active{transform:scale(0.97)}
 .complete-btn.checked{background:var(--positive-bg);color:var(--positive);border-color:var(--positive-light)}
-.camp-action-upload{flex-wrap:wrap}
-.photo-btn-upload{background:var(--accent-lighter)!important;color:var(--accent)!important;border-color:var(--accent-light)!important;flex:2!important}
-.photo-btn-upload:active{background:var(--accent-light)!important}
-.photo-btn-drive{flex:0 0 auto!important;padding:10px 14px!important;font-size:12px!important;background:var(--surface-alt)!important;color:var(--text-muted)!important;border-color:var(--border)!important}
-.upload-progress{width:100%;margin-top:6px}
-.upload-progress-bar{height:5px;background:var(--surface-alt);border-radius:3px;overflow:hidden}
-.upload-progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.3s ease}
-.upload-progress-text{font-size:11px;color:var(--text-muted);font-weight:600;margin-top:3px;text-align:center}
-.capture-queue{width:100%;margin-top:8px;padding:10px 12px;background:var(--surface);border:1.5px solid var(--accent-light);border-radius:var(--r-sm)}
-.capture-queue-count{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px}
-.capture-queue-count .gps-ok{color:var(--positive)}
-.capture-queue-count .gps-fail{color:var(--negative)}
-.capture-queue-btns{display:flex;gap:8px}
-.capture-more-btn{flex:1;padding:10px;border-radius:var(--r-sm);font-size:13px;font-weight:700;border:1.5px solid var(--accent-light);background:var(--accent-lighter);color:var(--accent);cursor:pointer;font-family:inherit;touch-action:manipulation}
-.capture-more-btn:active{background:var(--accent-light)}
-.capture-upload-btn{flex:1;padding:10px;border-radius:var(--r-sm);font-size:13px;font-weight:700;border:1.5px solid var(--positive-light);background:var(--positive-bg);color:var(--positive);cursor:pointer;font-family:inherit;touch-action:manipulation}
-.capture-upload-btn:active{background:var(--positive-light)}
 .camp-block.done{opacity:0.35}
 .draft-section{margin-top:8px;padding-top:8px;border-top:1px dashed var(--border)}
 .draft-label{font-size:11px;font-weight:800;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em}
@@ -295,7 +278,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <h1>김태준</h1>
     <div class="sub">작업요청서 · 전체 요약</div>
-    <div class="updated-tag">4/16 17:45 업데이트</div>
+    <div class="updated-tag">4/17 14:28 업데이트</div>
   </div>
   <div class="map-section">
     <div class="section-title">학교 위치</div>
@@ -308,25 +291,25 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
     </div>
   </div>
   <div class="totals-grid">
-    <div class="total-card schools"><div class="label">학교</div><div class="value">1<span class="unit">개교</span></div><div class="sub-val" id="sumSchoolDone">완료 1</div></div>
-    <div class="total-card poster"><div class="label">포스터</div><div class="value">10<span class="unit">장</span></div><div class="sub-val" id="sumPosterDone">완료 10</div></div>
-    <div class="total-card banner"><div class="label">현수막</div><div class="value">3<span class="unit">장</span></div><div class="sub-val" id="sumBannerDone">완료 3</div></div>
+    <div class="total-card schools"><div class="label">학교</div><div class="value">3<span class="unit">개교</span></div><div class="sub-val" id="sumSchoolDone">완료 0</div></div>
+    <div class="total-card poster"><div class="label">포스터</div><div class="value">20<span class="unit">장</span></div><div class="sub-val" id="sumPosterDone">완료 0</div></div>
+    <div class="total-card banner"><div class="label">현수막</div><div class="value">4<span class="unit">장</span></div><div class="sub-val" id="sumBannerDone">완료 0</div></div>
   </div>
   <div class="progress-summary">
-    <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">1/1</span></div>
+    <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/3</span></div>
     <div class="progress-track"><div class="progress-fill" id="summaryProgress" style="width:0%"></div></div>
   </div>
   <div class="camp-summary">
     <div class="section-title">캠페인 현황</div>
-    <div class="camp-sum-row"><div class="camp-sum-dday done" data-deadline="260417">✓ 완료</div><div class="camp-sum-body"><div class="camp-sum-header"><div class="camp-sum-name">에이콘아카데미_KT 클라우드 지원생 모집</div><span class="camp-sum-approval approval-yes">승인</span></div><div class="camp-sum-date">4월 17일 금요일</div><div class="camp-sum-progress-bar"><div class="camp-sum-progress-fill" style="width:100%"></div></div><div class="camp-sum-progress">1개교 중 <b>✓ 완료</b></div><div class="camp-sum-request">각 개교 당 도서관앞에 현수막 1장 게첨 포스터는 도서관인근위주 게첨 컴공 및 공대 위주 부착</div><div class="camp-sum-qty"><span class="q-poster">포스터 10장 중 <b class="q-remain">0장 남음</b></span><span class="q-banner">현수막 3장 중 <b class="q-remain">0장 남음</b></span></div></div></div>
+    <div class="camp-sum-row"><div class="camp-sum-dday normal" data-deadline="260430">D-13</div><div class="camp-sum-body"><div class="camp-sum-header"><div class="camp-sum-name">육군3사관학교_생도모집 (포스터)</div><span class="camp-sum-approval approval-yes">승인</span></div><div class="camp-sum-date">4월 30일 목요일</div><div class="camp-sum-progress-bar"><div class="camp-sum-progress-fill" style="width:0%"></div></div><div class="camp-sum-progress">3개교 중 <b>3개교 남음</b></div><div class="camp-sum-request">포스터 : AB시안 교차 게첨 / 현수막 : 유동인구 많은 곳</div><div class="camp-sum-qty"><span class="q-poster">포스터 20장 중 <b class="q-remain">20장 남음</b></span><span class="q-banner">현수막 4장 중 <b class="q-remain">4장 남음</b></span></div></div></div>
   </div>
   <div class="school-list-section">
     <div class="section-title">전체 학교 <span style="font-size:11px;color:var(--accent);font-weight:600;margin-left:4px">(클릭 시 상세 이동)</span></div>
     <div style="overflow-x:auto">
       <table class="school-table">
         <thead><tr><th>학교명</th><th>지역</th><th>포스터</th><th>현수막</th><th>급여</th><th>완료</th></tr></thead>
-        <tbody><tr class="region-row"><td colspan="6">제주 (1개교 · 완료 1)</td></tr><tr class="school-row" data-school="제주대학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td>제주대학교</td><td>제주시</td><td>10</td><td>3</td><td>40,000</td><td class="school-check-cell"><svg class="svg-check" viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="9" fill="#059669"/><path d="M6 10l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></td></tr></tbody>
-        <tfoot><tr><td>합계</td><td>1개교</td><td>10</td><td>3</td><td>40,000</td><td id="sumFootDone">1</td></tr></tfoot>
+        <tbody><tr class="region-row"><td colspan="6">제주 (3개교 · 완료 0)</td></tr><tr class="school-row" data-school="제주대학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td>제주대학교</td><td>제주시</td><td>20</td><td></td><td>25,000</td><td class="school-check-cell"></td></tr><tr class="school-row" data-school="제주관광대학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td>제주관광대학교</td><td>제주시</td><td></td><td>2</td><td>20,000</td><td class="school-check-cell"></td></tr><tr class="school-row" data-school="제주한라대학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td>제주한라대학교</td><td>제주시</td><td></td><td>2</td><td>20,000</td><td class="school-check-cell"></td></tr></tbody>
+        <tfoot><tr><td>합계</td><td>3개교</td><td>20</td><td>4</td><td>65,000</td><td id="sumFootDone">0</td></tr></tfoot>
       </table>
     </div>
   </div>
@@ -335,7 +318,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="detail-header">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <h1>작업 상세</h1>
-      <span class="school-count-badge">1곳 · 1건</span>
+      <span class="school-count-badge">3곳 · 3건</span>
     </div>
   </div>
   <div class="search-bar">
@@ -346,13 +329,13 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
       <span class="search-clear" id="searchClear" onclick="clearSearch()">&#x2715;</span>
     </div>
   </div>
-  <div id="cardsContainer"><div class="region-divider"><span class="label">제주</span><span class="line"></span></div><div class="card all-done" id="school-1" data-school-name="제주대학교"><div class="card-header"><div class="card-num">1</div><div class="card-school">제주대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%A0%9C%EC%A3%BC%EC%8B%9C%20%EB%8C%80%ED%95%99%EB%A1%9C%20102&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주특별자치도 제주시 대학로 102'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 대학로 102</div><div class="approval-places"><span class="ap-item">📌 포스터 승인장소: 각 단과대 구두승인</span><span class="ap-item">📌 현수막 승인장소: 각 단과대 구두승인</span></div><div class="camp-block done" data-school="제주대학교" data-camp="에이콘아카데미_KT 클라우드 지원생 모집" data-poster="10" data-banner="3"><div class="camp-block-header"><span class="camp-name">에이콘아카데미_KT 클라우드 지원생 모집</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday done" data-deadline="260417">✓ 완료</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">10장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">3장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">각 개교 당 도서관앞에 현수막 1장 게첨 포스터는 도서관인근위주 게첨 컴공 및 공대 위주 부착</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload os-android" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/1Scom2YkUjJKXRwRV4MRxvsrV6FkaUktj" class="photo-btn photo-btn-poster os-ios" onclick="return handleDriveClick(event,'1Scom2YkUjJKXRwRV4MRxvsrV6FkaUktj')">📁 Drive 앱으로 사진 업로드</a><a href="https://drive.google.com/drive/folders/1Scom2YkUjJKXRwRV4MRxvsrV6FkaUktj" class="photo-btn photo-btn-drive os-android" onclick="return handleDriveClick(event,'1Scom2YkUjJKXRwRV4MRxvsrV6FkaUktj')">📁 Drive</a><button class="complete-btn checked" onclick="toggleCampDone(this)"><svg class="svg-check" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> 완료됨</button></div></div></div></div></div>
+  <div id="cardsContainer"><div class="region-divider"><span class="label">제주</span><span class="line"></span></div><div class="card" id="school-1" data-school-name="제주대학교"><div class="card-header"><div class="card-num">1</div><div class="card-school">제주대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%A0%9C%EC%A3%BC%EC%8B%9C%20%EB%8C%80%ED%95%99%EB%A1%9C%20102&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주특별자치도 제주시 대학로 102'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 대학로 102</div><div class="approval-places"><span class="ap-item">📌 포스터 승인: 각 단과대 구두승인</span><span class="ap-item">📌 현수막 승인: 각 단과대 구두승인</span></div><div class="camp-block" data-school="제주대학교" data-camp="육군3사관학교_생도모집 (포스터)" data-poster="20" data-banner="0"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (포스터)</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday normal" data-deadline="260430">D-13</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">20장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">포스터 : AB시안 교차 게첨 / 현수막 : 유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1D5xnbLOu5ljDVTo6L_tpl3zMjG1MWbye" class="photo-btn photo-btn-poster" onclick="return handleDriveClick(event,'1D5xnbLOu5ljDVTo6L_tpl3zMjG1MWbye')">📁 Drive 앱으로 사진 업로드</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-2" data-school-name="제주관광대학교"><div class="card-header"><div class="card-num">2</div><div class="card-school">제주관광대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%A0%9C%EC%A3%BC%EC%8B%9C%20%EC%95%A0%EC%9B%94%EC%9D%8D%20%ED%8F%89%ED%99%94%EB%A1%9C%202715&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주특별자치도 제주시 애월읍 평화로 2715'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 애월읍 평화로 2715</div><div class="camp-block" data-school="제주관광대학교" data-camp="육군3사관학교_생도모집 (포스터)" data-poster="0" data-banner="2"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (포스터)</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday normal" data-deadline="260430">D-13</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">2장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">포스터 : AB시안 교차 게첨 / 현수막 : 유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1TSZ3Rdk9icWt75ro39_i7IuqaGxyCn2_" class="photo-btn photo-btn-poster" onclick="return handleDriveClick(event,'1TSZ3Rdk9icWt75ro39_i7IuqaGxyCn2_')">📁 Drive 앱으로 사진 업로드</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-3" data-school-name="제주한라대학교"><div class="card-header"><div class="card-num">3</div><div class="card-school">제주한라대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%A0%9C%EC%A3%BC%EC%8B%9C%20%ED%95%9C%EB%9D%BC%EB%8C%80%ED%95%99%EB%A1%9C%2038&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주특별자치도 제주시 한라대학로 38'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 한라대학로 38</div><div class="camp-block" data-school="제주한라대학교" data-camp="육군3사관학교_생도모집 (포스터)" data-poster="0" data-banner="2"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (포스터)</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday normal" data-deadline="260430">D-13</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">2장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">포스터 : AB시안 교차 게첨 / 현수막 : 유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1kaq87ln-CK8s6LRwutG--IIfS8TXMZ_V" class="photo-btn photo-btn-poster" onclick="return handleDriveClick(event,'1kaq87ln-CK8s6LRwutG--IIfS8TXMZ_V')">📁 Drive 앱으로 사진 업로드</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div></div>
 </div>
 <div class="bottom-bar" id="bottomBar">
   <div class="bottom-progress">
     <span class="bp-label">작업 완료</span>
     <div class="bp-track"><div class="bp-fill" id="progressFill" style="width:0%"></div></div>
-    <span class="bp-count" id="progressCount">0/1</span>
+    <span class="bp-count" id="progressCount">0/3</span>
   </div>
   <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#x2191;</button>
 </div>
@@ -373,37 +356,9 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <button class="tab-btn" ontouchend="event.preventDefault();switchPage('pageDetail',this)" onclick="switchPage('pageDetail',this)"><span class="tab-icon">&#x2261;</span>상세</button>
 </div>
 <script>
-(function(){
-  var ua=navigator.userAgent||"";
-  var url=location.href;
-  if(/KAKAOTALK/i.test(ua)){
-    if(/Android/i.test(ua)){
-      location.href="intent://"+url.replace(/https?:\/\//i,"")+"#Intent;scheme=https;package=com.android.chrome;end";
-      return;
-    }
-    if(/iPhone|iPad|iPod/i.test(ua)){
-      location.href="kakaotalk://web/openExternal?url="+encodeURIComponent(url);
-      return;
-    }
-  }
-  if(/NAVER|Line\//i.test(ua)&&/Android/i.test(ua)){
-    location.href="intent://"+url.replace(/https?:\/\//i,"")+"#Intent;scheme=https;package=com.android.chrome;end";
-    return;
-  }
-  if(/FB_IAB|FBAN|FBAV|Instagram/i.test(ua)&&/Android/i.test(ua)){
-    location.href="intent://"+url.replace(/https?:\/\//i,"")+"#Intent;scheme=https;package=com.android.chrome;end";
-    return;
-  }
-})();
-var WEB_APP_URL="https://script.google.com/macros/s/AKfycbzl7mY-tnpMFE_6R3kWCXQ2YAso9K9JasI7t2cRwBdbHh8kNXND-Xy4pdXWv-RghCVO/exec",WORKER_NAME="김태준";
-var MAP_DATA=[{"school":"제주대학교","region":"제주","addr":"제주특별자치도 제주시 대학로 102","done":true,"dday":"urgent"}];
-var DRAFT_IMAGES={"에이콘아카데미_KT 클라우드 지원생 모집":{"poster":[],"banner":[]}};
-var isIOS=/iPhone|iPad|iPod/i.test(navigator.userAgent);
-var isAndroid=/Android/i.test(navigator.userAgent);
-(function(){
-  var hide=isIOS?"os-android":"os-ios";
-  document.querySelectorAll("."+hide).forEach(function(el){el.style.display="none"});
-})();
+var WEB_APP_URL="https://script.google.com/macros/s/AKfycbz2LO4HaJiABrdqSy1XI7x4CoOdTyF_fwYToVYoRssVXiYvHCjeiP2nNytMMpgKqhGhAA/exec",WORKER_NAME="김태준";
+var MAP_DATA=[{"school":"제주대학교","region":"제주","addr":"제주특별자치도 제주시 대학로 102","done":false,"dday":"normal"},{"school":"제주관광대학교","region":"제주","addr":"제주특별자치도 제주시 애월읍 평화로 2715","done":false,"dday":"normal"},{"school":"제주한라대학교","region":"제주","addr":"제주특별자치도 제주시 한라대학로 38","done":false,"dday":"normal"}];
+var DRAFT_IMAGES={"육군3사관학교_생도모집 (포스터)":{"poster":[],"banner":[]}};
 var draftViewerState={campName:"",type:"",index:0,images:[]};
 function openDraftViewer(campName,type,idx){
   var data=DRAFT_IMAGES[campName];
@@ -501,172 +456,6 @@ function handleDriveClick(e,folderId){
     return false;
   }
   return true;
-}
-var captureQueues={};
-function queueKey(block){return block.getAttribute("data-school")+"|||"+block.getAttribute("data-camp")}
-function detectInAppBrowser(){
-  var ua=navigator.userAgent||"";
-  if(/KAKAOTALK/i.test(ua))return"kakaotalk";
-  if(/NAVER/i.test(ua)||/WHALE/i.test(ua))return"naver";
-  if(/FB_IAB|FBAN|FBAV|Instagram|Line|Twitter|Snapchat/i.test(ua))return"other";
-  return null;
-}
-function openInExternalBrowser(){
-  var url=window.location.href;
-  var ua=navigator.userAgent||"";
-  if(/KAKAOTALK/i.test(ua)&&/iPhone|iPad|iPod/i.test(ua)){
-    window.location="kakaotalk://web/openExternal?url="+encodeURIComponent(url);return;
-  }
-  if(/KAKAOTALK/i.test(ua)&&/Android/i.test(ua)){
-    window.location="intent://"+url.replace(/https?:\/\//,"")+"#Intent;scheme=https;package=com.android.chrome;end";return;
-  }
-  window.open(url,"_system")||window.open(url,"_blank");
-}
-function closeGpsGuide(){var el=document.getElementById("gpsGuideOverlay");if(el)el.remove()}
-function closeGpsGuideNoGps(){closeGpsGuide();forceCaptureNoGps=true}
-var gpsGuideShown=false;
-function showGpsGuide(reason){
-  if(document.getElementById("gpsGuideOverlay"))return;
-  var isInApp=detectInAppBrowser();
-  var title=isInApp?"외부 브라우저에서 열어주세요":"위치 권한을 허용해주세요";
-  var msg=isInApp?"카카오톡/네이버 등 앱 내 브라우저에서는<br>GPS가 작동하지 않습니다.<br><br><b>Chrome 또는 Safari</b>에서 열어야<br>사진에 위치 정보가 기록됩니다."
-    :"사진 촬영 위치를 기록하려면<br>위치 권한이 필요합니다.<br><br>브라우저 설정에서 이 사이트의<br><b>위치 접근을 허용</b>해주세요.";
-  var mainBtn=isInApp?"<button onclick=\"openInExternalBrowser()\" style=\"width:100%;padding:14px;border-radius:12px;border:none;background:#2563EB;color:#fff;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;margin-bottom:8px\">Chrome/Safari에서 열기</button>"
-    :"<button onclick=\"closeGpsGuide()\" style=\"width:100%;padding:14px;border-radius:12px;border:none;background:#2563EB;color:#fff;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;margin-bottom:8px\">확인</button>";
-  var skipBtn="<button onclick=\"closeGpsGuideNoGps()\" style=\"width:100%;padding:12px;border-radius:12px;border:1px solid #E2E8F0;background:#fff;color:#64748B;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit\">GPS 없이 촬영하기</button>";
-  var icon=isInApp?"🌐":"📍";
-  var overlay=document.createElement("div");overlay.id="gpsGuideOverlay";
-  overlay.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px";
-  overlay.innerHTML="<div style=\"background:#fff;border-radius:18px;padding:28px 24px;max-width:320px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)\">"    +"<div style=\"font-size:40px;margin-bottom:12px\">"+icon+"</div>"    +"<div style=\"font-size:17px;font-weight:800;margin-bottom:12px\">"+title+"</div>"    +"<div style=\"font-size:14px;color:#475569;line-height:1.7;margin-bottom:20px\">"+msg+"</div>"    +mainBtn+skipBtn+"</div>";
-  document.body.appendChild(overlay);
-}
-var forceCaptureNoGps=false;
-var gpsPermissionGranted=false;
-function startCameraCapture(btn){
-  var block=btn.closest(".camp-block");
-  var key=queueKey(block);
-  if(!captureQueues[key])captureQueues[key]=[];
-  if(!forceCaptureNoGps&&!gpsGuideShown&&detectInAppBrowser()){
-    showGpsGuide("inapp");gpsGuideShown=true;return;
-  }
-  if(!forceCaptureNoGps&&!gpsPermissionGranted){
-    btn.textContent="📍 위치 권한 확인 중...";btn.disabled=true;
-    navigator.geolocation.getCurrentPosition(
-      function(pos){
-        gpsPermissionGranted=true;gpsGuideShown=true;
-        btn.textContent="📷 사진 촬영";btn.disabled=false;
-        showToast("📍 GPS 권한 허용됨! 이제 촬영해주세요.");
-      },
-      function(err){
-        btn.textContent="📷 사진 촬영";btn.disabled=false;
-        gpsGuideShown=true;
-        if(err.code===1){showGpsGuide("denied")}
-        else{showToast("⚠ GPS 연결 실패. 다시 시도해주세요.")}
-      },
-      {enableHighAccuracy:true,timeout:15000,maximumAge:0}
-    );return;
-  }
-  doCapture(btn,block,key);
-}
-function doCapture(btn,block,key){
-  var inp=document.createElement("input");inp.type="file";inp.accept="image/*";inp.capture="environment";
-  inp.onchange=function(){
-    if(!inp.files.length)return;
-    var file=inp.files[0];
-    btn.textContent="📍 GPS 기록 중...";btn.disabled=true;
-    getDeviceGps().then(function(gps){
-      captureQueues[key].push({file:file,gps:gps});
-      var cnt=captureQueues[key].length;
-      var gpsOk=gps?true:false;
-      showToast("✓ "+cnt+"장 촬영"+(gpsOk?" (GPS ✓)":" (⚠ GPS 없음)"));
-      btn.textContent="📷 사진 촬영";btn.disabled=false;
-      renderCaptureQueue(block,key);
-    });
-  };
-  inp.click();
-}
-function getDeviceGps(){
-  return new Promise(function(resolve){
-    if(!navigator.geolocation){resolve(null);return}
-    navigator.geolocation.getCurrentPosition(
-      function(pos){resolve({lat:pos.coords.latitude,lng:pos.coords.longitude})},
-      function(err){console.log("GPS error:",err.code,err.message);resolve(null)},
-      {enableHighAccuracy:true,timeout:10000,maximumAge:60000}
-    );
-  });
-}
-function renderCaptureQueue(block,key){
-  var row=block.querySelector(".camp-action-upload");
-  var existing=row.querySelector(".capture-queue");if(existing)existing.remove();
-  var queue=captureQueues[key];
-  if(!queue||!queue.length)return;
-  var gpsOkCnt=0;for(var i=0;i<queue.length;i++){if(queue[i].gps)gpsOkCnt++}
-  var div=document.createElement("div");div.className="capture-queue";
-  div.innerHTML='<div class="capture-queue-count">'+queue.length+'장 촬영됨 '
-    +(gpsOkCnt>0?'<span class="gps-ok">GPS '+gpsOkCnt+'장 ✓</span> ':"")
-    +(gpsOkCnt<queue.length?'<span class="gps-fail">GPS 없음 '+(queue.length-gpsOkCnt)+'장</span>':"")
-    +'</div>'
-    +'<div class="capture-queue-btns">'
-    +'<button class="capture-upload-btn" onclick="uploadCaptureQueue(this)">⬆ '+queue.length+'장 업로드</button>'
-    +'</div>';
-  row.appendChild(div);
-}
-function readFileAsBase64(file){
-  return new Promise(function(resolve){
-    var reader=new FileReader();
-    reader.onload=function(){resolve(reader.result.split(",")[1])};
-    reader.readAsDataURL(file);
-  });
-}
-function getMimeType(name){
-  var ext=(name||"").split(".").pop().toLowerCase();
-  var map={jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",heic:"image/heic",heif:"image/heif",webp:"image/webp",gif:"image/gif"};
-  return map[ext]||"image/jpeg";
-}
-function uploadCaptureQueue(uploadBtn){
-  var block=uploadBtn.closest(".camp-block");
-  var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");
-  var key=queueKey(block);
-  var queue=captureQueues[key];
-  if(!queue||!queue.length){showToast("촬영된 사진이 없습니다");return}
-  var row=block.querySelector(".camp-action-upload");
-  var queueDiv=row.querySelector(".capture-queue");
-  var existingProg=row.querySelector(".upload-progress");if(existingProg)existingProg.remove();
-  var prog=document.createElement("div");prog.className="upload-progress";
-  prog.innerHTML='<div class="upload-progress-bar"><div class="upload-progress-fill" style="width:0%"></div></div><div class="upload-progress-text">업로드 준비 중...</div>';
-  row.appendChild(prog);
-  uploadBtn.disabled=true;uploadBtn.style.opacity="0.5";
-  var fill=prog.querySelector(".upload-progress-fill"),txt=prog.querySelector(".upload-progress-text");
-  var total=queue.length,done=0,failCnt=0;
-  var chain=Promise.resolve();
-  for(var i=0;i<total;i++){(function(idx){
-    chain=chain.then(function(){
-      txt.textContent="업로드 중 "+(idx+1)+"/"+total+"...";
-      var item=queue[idx];
-      return readFileAsBase64(item.file).then(function(b64){
-        var payload={action:"upload_photo",school:school,camp:camp,fileName:item.file.name,fileData:b64,mimeType:getMimeType(item.file.name)};
-        if(item.gps){payload.lat=item.gps.lat.toString();payload.lng=item.gps.lng.toString()}
-        return fetch(WEB_APP_URL,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify(payload),redirect:"follow"});
-      }).then(function(r){
-        return r.json().catch(function(){return{status:"ok"}})
-      }).then(function(json){
-        if(json.status!=="ok")failCnt++;
-        done++;fill.style.width=Math.round(done/total*100)+"%";
-        txt.textContent="업로드 "+done+"/"+total+(failCnt?" (실패 "+failCnt+")":"");
-      }).catch(function(e){console.log("upload error:",e);done++;fill.style.width=Math.round(done/total*100)+"%";txt.textContent="업로드 "+done+"/"+total;});
-    });
-  })(i)}
-  chain.then(function(){
-    if(failCnt===0){
-      captureQueues[key]=[];
-      if(queueDiv)queueDiv.remove();
-      showToast("✓ "+total+"장 업로드 완료");setTimeout(function(){prog.remove()},3000);
-    }else{
-      showToast("⚠ "+total+"장 중 "+failCnt+"장 실패");
-      txt.textContent=total+"장 중 "+(total-failCnt)+"장 성공, "+failCnt+"장 실패";
-      uploadBtn.disabled=false;uploadBtn.style.opacity="1";
-    }
-  });
 }
 function filterCards(){var q=document.getElementById("searchInput").value.trim().toLowerCase();document.getElementById("searchClear").style.display=q?"block":"none";document.querySelectorAll(".region-divider").forEach(function(d){d.style.display=q?"none":""});document.querySelectorAll(".card").forEach(function(c){c.classList.toggle("hidden",q&&(c.getAttribute("data-school-name")||"").toLowerCase().indexOf(q)===-1)})}
 function searchAndScroll(){var q=document.getElementById("searchInput").value.trim().toLowerCase();if(!q)return;var cards=document.querySelectorAll(".card");for(var i=0;i<cards.length;i++){var nm=(cards[i].getAttribute("data-school-name")||"").toLowerCase();if(nm.indexOf(q)!==-1){var hdr=document.querySelector(".detail-header");var off=hdr?hdr.offsetHeight+10:80;window.scrollTo({top:cards[i].getBoundingClientRect().top+window.pageYOffset-off,behavior:"smooth"});document.getElementById("searchInput").blur();break}}}
