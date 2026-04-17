@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=gcvbnnigi1&submodules=geocoder"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/piexifjs/1.0.6/piexif.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -314,7 +315,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <div class="header-top">
       <h1>김태준 작업요청서</h1>
-      <div class="updated-tag">4/17 20:09 업데이트</div>
+      <div class="updated-tag">4/17 20:20 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/3</span></div>
@@ -826,6 +827,36 @@ function readFileAsBase64(file){
     reader.readAsDataURL(file);
   });
 }
+function readFileAsDataUrl(file){
+  return new Promise(function(resolve,reject){
+    var reader=new FileReader();
+    reader.onload=function(){resolve(reader.result||"");};
+    reader.onerror=function(){reject(reader.error);};
+    reader.readAsDataURL(file);
+  });
+}
+function injectGpsToJpegDataUrl(dataUrl, lat, lng){
+  try{
+    if(typeof piexif==="undefined")return dataUrl;
+    if(lat==null||lng==null)return dataUrl;
+    if(!/^data:image\/jpe?g/i.test(dataUrl))return dataUrl;
+    var exifObj;
+    try{exifObj=piexif.load(dataUrl);}
+    catch(e){exifObj={"0th":{},"Exif":{},"GPS":{},"Interop":{},"1st":{},"thumbnail":null};}
+    if(!exifObj.GPS)exifObj.GPS={};
+    var absLat=Math.abs(Number(lat)),absLng=Math.abs(Number(lng));
+    exifObj.GPS[piexif.GPSIFD.GPSLatitudeRef]=Number(lat)>=0?"N":"S";
+    exifObj.GPS[piexif.GPSIFD.GPSLatitude]=piexif.GPSHelper.degToDmsRational(absLat);
+    exifObj.GPS[piexif.GPSIFD.GPSLongitudeRef]=Number(lng)>=0?"E":"W";
+    exifObj.GPS[piexif.GPSIFD.GPSLongitude]=piexif.GPSHelper.degToDmsRational(absLng);
+    var ts=new Date();
+    exifObj.GPS[piexif.GPSIFD.GPSDateStamp]=ts.getUTCFullYear()+":"+String(ts.getUTCMonth()+1).padStart(2,"0")+":"+String(ts.getUTCDate()).padStart(2,"0");
+    exifObj.GPS[piexif.GPSIFD.GPSTimeStamp]=[[ts.getUTCHours(),1],[ts.getUTCMinutes(),1],[ts.getUTCSeconds(),1]];
+    var exifBytes=piexif.dump(exifObj);
+    return piexif.insert(exifBytes, dataUrl);
+  }catch(e){return dataUrl;}
+}
+function extractBase64(dataUrl){var idx=(dataUrl||"").indexOf(",");return idx>=0?dataUrl.substring(idx+1):(dataUrl||"");}
 function getMimeType(name){var e=(name||"").toLowerCase().split(".").pop();var m={jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",heic:"image/heic",heif:"image/heif",webp:"image/webp"};return m[e]||"image/jpeg";}
 var __wakeLock=null;
 function acquireWakeLock(){try{if("wakeLock" in navigator){navigator.wakeLock.request("screen").then(function(wl){__wakeLock=wl;if(wl&&wl.addEventListener)wl.addEventListener("release",function(){});}).catch(function(){});}}catch(e){}}
@@ -869,8 +900,12 @@ function uploadCaptureQueue(uploadBtn){
   function next(){
     if(i>=queue.length){finish();return;}
     var item=queue[i];var rawFile=item.file;var gps=item.gps||{};
-    readFileAsBase64(rawFile).then(function(b64){
-      var payload={action:"upload_photo",school:school,camp:camp,fileName:rawFile.name||("photo_"+Date.now()+".jpg"),fileData:b64,mimeType:rawFile.type||getMimeType(rawFile.name)};
+    readFileAsDataUrl(rawFile).then(function(dataUrl){
+      var finalDataUrl=dataUrl;
+      if(gps.lat!=null&&gps.lng!=null){finalDataUrl=injectGpsToJpegDataUrl(dataUrl, gps.lat, gps.lng);}
+      var b64=extractBase64(finalDataUrl);
+      var mime=(finalDataUrl.match(/^data:([^;,]+)/)||[,rawFile.type||getMimeType(rawFile.name)])[1];
+      var payload={action:"upload_photo",school:school,camp:camp,fileName:rawFile.name||("photo_"+Date.now()+".jpg"),fileData:b64,mimeType:mime};
       if(gps.lat!=null&&gps.lng!=null){payload.lat=gps.lat;payload.lng=gps.lng;}
       return uploadSingle(payload);
     }).then(function(res){
