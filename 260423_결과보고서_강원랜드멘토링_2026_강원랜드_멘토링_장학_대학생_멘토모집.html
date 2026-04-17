@@ -198,11 +198,11 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   </div>
 </div>
 </div>
-<script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=0x9f3qn5c8"></script>
+<script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=gcvbnnigi1"></script>
 <script>
-var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzl7mY-tnpMFE_6R3kWCXQ2YAso9K9JasI7t2cRwBdbHh8kNXND-Xy4pdXWv-RghCVO/exec";
+var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz2LO4HaJiABrdqSy1XI7x4CoOdTyF_fwYToVYoRssVXiYvHCjeiP2nNytMMpgKqhGhAA/exec";
 var CAMP_KEY = "강원랜드멘토링_2026 강원랜드 멘토링 장학 대학생 멘토모집";
-var NAVER_CLIENT_ID = "0x9f3qn5c8";
+var NAVER_CLIENT_ID = "gcvbnnigi1";
 var AUTO_REFRESH_SEC = 300;
 
 function escHtml(s){if(!s)return"";return s.toString().replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
@@ -270,7 +270,7 @@ function renderReport(data){
   }
   h+='<div class="section fade-in" style="animation-delay:0.12s"><div class="section-title">전체 학교 요약</div>';
   h+='<div class="summary-table-wrap"><div style="overflow-x:auto"><table class="summary-table">';
-  h+='<thead><tr><th>No.</th><th>학교명</th><th>주소</th><th>포스터</th><th>현수막</th><th>부착일시</th><th>상태</th><th>부착장소 및 특이사항</th></tr></thead><tbody>';
+  h+='<thead><tr><th>No.</th><th>학교이름</th><th>주소</th><th>포스터</th><th>현수막</th><th>부착일시</th><th>상태</th><th>부착장소 및 특이사항</th></tr></thead><tbody>';
   var SVG_DONE='<span class="school-status status-done" style="display:inline-flex;font-size:12px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</span>';
   var SVG_PENDING='<span class="school-status status-pending" style="display:inline-flex;font-size:12px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="none" stroke="#CBD5E1" stroke-width="2"/></svg>대기</span>';
   for(var i=0;i<schools.length;i++){
