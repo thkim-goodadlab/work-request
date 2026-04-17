@@ -310,7 +310,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <div class="header-top">
       <h1>김태준 작업요청서</h1>
-      <div class="updated-tag">4/17 21:10 업데이트</div>
+      <div class="updated-tag">4/17 21:20 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/3</span></div>
@@ -845,16 +845,36 @@ function startCameraCapture(btn){
   if(!gpsPermissionGranted)gpsPermissionGranted=true;
   doCapture(btn,block,queueKey(block));
 }
+function pickPhotoExt(file){
+  var t=((file&&file.type)||"").toLowerCase();
+  if(t.indexOf("heic")!==-1)return"heic";
+  if(t.indexOf("heif")!==-1)return"heif";
+  if(t.indexOf("png")!==-1)return"png";
+  if(t.indexOf("webp")!==-1)return"webp";
+  if(t.indexOf("jpeg")!==-1||t.indexOf("jpg")!==-1)return"jpg";
+  var nm=(file&&file.name)||"";
+  var m=nm.match(/\.(heic|heif|png|webp|jpe?g)$/i);
+  return m?m[1].toLowerCase().replace("jpeg","jpg"):"jpg";
+}
 function saveFileToDevice(file){
   try{
+    if(!file)return false;
     var ts=new Date();
-    var stamp=ts.getFullYear()+('0'+(ts.getMonth()+1)).slice(-2)+('0'+ts.getDate()).slice(-2)+'_'+('0'+ts.getHours()).slice(-2)+('0'+ts.getMinutes()).slice(-2)+('0'+ts.getSeconds()).slice(-2);
-    var ext=(file.name||"").split(".").pop()||"jpg";
-    var dlName="photo_"+stamp+"."+ext;
-    var url=URL.createObjectURL(file);
-    var a=document.createElement("a");a.href=url;a.download=dlName;a.rel="noopener";a.style.display="none";
-    document.body.appendChild(a);a.click();
-    setTimeout(function(){try{document.body.removeChild(a);}catch(e){}URL.revokeObjectURL(url);},2000);
+    var stamp=ts.getFullYear()+("0"+(ts.getMonth()+1)).slice(-2)+("0"+ts.getDate()).slice(-2)+"_"+("0"+ts.getHours()).slice(-2)+("0"+ts.getMinutes()).slice(-2)+("0"+ts.getSeconds()).slice(-2);
+    var dlName="photo_"+stamp+"."+pickPhotoExt(file);
+    var reader=new FileReader();
+    reader.onload=function(){
+      try{
+        var dataUrl=reader.result;
+        if(!dataUrl)return;
+        var a=document.createElement("a");
+        a.href=dataUrl;a.download=dlName;a.rel="noopener";a.style.display="none";
+        document.body.appendChild(a);a.click();
+        setTimeout(function(){try{document.body.removeChild(a);}catch(e){}},3000);
+      }catch(e){}
+    };
+    reader.onerror=function(){};
+    reader.readAsDataURL(file);
     return true;
   }catch(e){return false;}
 }
