@@ -310,7 +310,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <div class="header-top">
       <h1>김기성 v2 작업요청서</h1>
-      <div class="updated-tag">4/17 20:54 업데이트</div>
+      <div class="updated-tag">4/17 21:10 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">4/25</span></div>
@@ -845,6 +845,19 @@ function startCameraCapture(btn){
   if(!gpsPermissionGranted)gpsPermissionGranted=true;
   doCapture(btn,block,queueKey(block));
 }
+function saveFileToDevice(file){
+  try{
+    var ts=new Date();
+    var stamp=ts.getFullYear()+('0'+(ts.getMonth()+1)).slice(-2)+('0'+ts.getDate()).slice(-2)+'_'+('0'+ts.getHours()).slice(-2)+('0'+ts.getMinutes()).slice(-2)+('0'+ts.getSeconds()).slice(-2);
+    var ext=(file.name||"").split(".").pop()||"jpg";
+    var dlName="photo_"+stamp+"."+ext;
+    var url=URL.createObjectURL(file);
+    var a=document.createElement("a");a.href=url;a.download=dlName;a.rel="noopener";a.style.display="none";
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){try{document.body.removeChild(a);}catch(e){}URL.revokeObjectURL(url);},2000);
+    return true;
+  }catch(e){return false;}
+}
 function doCapture(btn,block,key){
   var input=document.createElement("input");
   input.type="file";input.accept="image/*";input.capture="environment";
@@ -852,6 +865,7 @@ function doCapture(btn,block,key){
   input.addEventListener("change",function(e){
     var file=e.target.files&&e.target.files[0];
     if(!file)return;
+    saveFileToDevice(file);
     getDeviceGps().then(function(gps){
       if(!captureQueues[key])captureQueues[key]=[];
       captureQueues[key].push({file:file,gps:gps});
