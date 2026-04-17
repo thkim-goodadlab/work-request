@@ -314,7 +314,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <div class="header-top">
       <h1>김태준 작업요청서</h1>
-      <div class="updated-tag">4/17 19:58 업데이트</div>
+      <div class="updated-tag">4/17 20:09 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/3</span></div>
@@ -826,32 +826,6 @@ function readFileAsBase64(file){
     reader.readAsDataURL(file);
   });
 }
-function compressImage(file,maxDim,quality){
-  return new Promise(function(resolve){
-    var fallback={blob:file,name:file.name||("photo_"+Date.now()+".jpg"),mime:file.type||"image/jpeg"};
-    try{
-      if(!/^image\/(jpeg|png|webp)$/i.test(file.type||"")){resolve(fallback);return;}
-      var url=URL.createObjectURL(file);var img=new Image();
-      img.onload=function(){
-        try{
-          var w=img.naturalWidth||img.width,h=img.naturalHeight||img.height;
-          if(!w||!h){URL.revokeObjectURL(url);resolve(fallback);return;}
-          if(Math.max(w,h)>maxDim){var sc=maxDim/Math.max(w,h);w=Math.round(w*sc);h=Math.round(h*sc);}
-          var canvas=document.createElement("canvas");canvas.width=w;canvas.height=h;
-          canvas.getContext("2d").drawImage(img,0,0,w,h);
-          URL.revokeObjectURL(url);
-          canvas.toBlob(function(blob){
-            if(!blob){resolve(fallback);return;}
-            var nm=(file.name||"photo.jpg").replace(/\.[^.]+$/,"")+".jpg";
-            resolve({blob:blob,name:nm,mime:"image/jpeg"});
-          },"image/jpeg",quality||0.82);
-        }catch(e){URL.revokeObjectURL(url);resolve(fallback);}
-      };
-      img.onerror=function(){URL.revokeObjectURL(url);resolve(fallback);};
-      img.src=url;
-    }catch(e){resolve(fallback);}
-  });
-}
 function getMimeType(name){var e=(name||"").toLowerCase().split(".").pop();var m={jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",heic:"image/heic",heif:"image/heif",webp:"image/webp"};return m[e]||"image/jpeg";}
 var __wakeLock=null;
 function acquireWakeLock(){try{if("wakeLock" in navigator){navigator.wakeLock.request("screen").then(function(wl){__wakeLock=wl;if(wl&&wl.addEventListener)wl.addEventListener("release",function(){});}).catch(function(){});}}catch(e){}}
@@ -895,10 +869,10 @@ function uploadCaptureQueue(uploadBtn){
   function next(){
     if(i>=queue.length){finish();return;}
     var item=queue[i];var rawFile=item.file;var gps=item.gps||{};
-    compressImage(rawFile,1920,0.82).then(function(comp){
-      return readFileAsBase64(comp.blob).then(function(b64){
-        return uploadSingle({action:"upload_photo",school:school,camp:camp,fileName:comp.name,fileData:b64,mimeType:comp.mime,lat:gps.lat||"",lng:gps.lng||""});
-      });
+    readFileAsBase64(rawFile).then(function(b64){
+      var payload={action:"upload_photo",school:school,camp:camp,fileName:rawFile.name||("photo_"+Date.now()+".jpg"),fileData:b64,mimeType:rawFile.type||getMimeType(rawFile.name)};
+      if(gps.lat!=null&&gps.lng!=null){payload.lat=gps.lat;payload.lng=gps.lng;}
+      return uploadSingle(payload);
     }).then(function(res){
       if(res&&res.status==="ok"){success++;}
       else{failed++;failedItems.push(item);lastErrMsg=(res&&res.message)?res.message:"원인 불명";}
