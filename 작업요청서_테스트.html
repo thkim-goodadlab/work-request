@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>테스트 작업요청서</title>
+<!-- PWA: 홈 화면 추가 시 앱처럼 실행 -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="테스트 작업요청서">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1E293B">
+<link rel="apple-touch-icon" href="https://thkim-goodadlab.github.io/work-request/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://thkim-goodadlab.github.io/work-request/icon-192.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=gcvbnnigi1&submodules=geocoder"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/piexifjs/1.0.6/piexif.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F8FAFB;
+  --surface:#FFFFFF;
+  --surface-alt:#F1F5F9;
+  --border:#E2E8F0;
+  --border-light:#F1F5F9;
+  --text:#0F172A;
+  --text-secondary:#475569;
+  --text-muted:#64748B;
+  --accent:#2563EB;
+  --accent-light:#DBEAFE;
+  --accent-lighter:#EFF6FF;
+  --accent-secondary:#7C3AED;
+  --gradient-accent:linear-gradient(135deg,#2563EB,#7C3AED);
+  --gradient-header:linear-gradient(135deg,#1E293B 0%,#334155 100%);
+  --positive:#059669;
+  --positive-light:#D1FAE5;
+  --positive-bg:#ECFDF5;
+  --negative:#DC2626;
+  --negative-light:#FEE2E2;
+  --negative-bg:#FEF2F2;
+  --warning:#D97706;
+  --warning-light:#FEF3C7;
+  --warning-bg:#FFFBEB;
+  --orange:#EA580C;
+  --orange-light:#FFEDD5;
+  --shadow-xs:0 1px 2px rgba(0,0,0,0.04);
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,0.07);
+  --shadow-lg:0 10px 30px rgba(0,0,0,0.1);
+  --shadow-float:0 8px 32px rgba(0,0,0,0.12);
+  --r-sm:10px;--r-md:14px;--r-lg:18px;
+}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{body{background:#fff!important}.tab-nav,.bottom-bar,.search-bar{display:none!important}.page{display:block!important;padding-bottom:0!important}.card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}}
+.tab-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;border-top:1px solid var(--border);z-index:200;padding-bottom:env(safe-area-inset-bottom,0);transition:transform 0.25s ease}
+.tab-nav.hidden-by-scroll{transform:translateY(100%)}
+.tab-btn{flex:1;padding:9px 0 14px;text-align:center;font-size:13px;font-weight:700;letter-spacing:0.02em;color:var(--text-muted);border:none;background:none;cursor:pointer;position:relative;transition:color 0.2s;touch-action:manipulation;font-family:inherit}
+.tab-btn.active{color:var(--accent)}
+.tab-btn.active::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:2px;background:var(--accent);border-radius:0 0 2px 2px}
+.tab-btn .tab-icon{display:block;font-size:21px;margin-bottom:1px;line-height:1}
+.page{display:none;padding-bottom:150px;min-height:100vh}.page.active{display:block}
+.summary-header{background:var(--gradient-header);color:#fff;padding:28px 20px 22px;position:relative;overflow:hidden}
+.summary-header::before{content:"";position:absolute;top:-60%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 70%);pointer-events:none}
+.summary-header h1{font-size:1.565rem;font-weight:900;letter-spacing:-0.04em}
+.summary-header .sub{font-size:13px;color:rgba(255,255,255,0.55);margin-top:3px;font-weight:500}
+.updated-tag{margin-top:8px;background:rgba(255,255,255,0.1);display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.08)}
+.totals-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 16px 0}
+.total-card{background:var(--surface);border-radius:var(--r-md);padding:16px 14px;box-shadow:var(--shadow-sm);border:1px solid var(--border-light);position:relative;overflow:hidden}
+.total-card .label{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em}
+.total-card .value{font-size:1.716rem;font-weight:900;margin-top:5px;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums}
+.total-card .unit{font-size:12px;color:var(--text-muted);font-weight:500;margin-left:1px}
+.total-card .sub-val{font-size:11px;font-weight:700;margin-top:5px}
+.total-card.schools .value{color:var(--accent)}.total-card.schools .sub-val{color:var(--accent)}
+.total-card.poster .value{color:var(--accent-secondary)}.total-card.poster .sub-val{color:var(--accent-secondary)}
+.total-card.banner .value{color:var(--orange)}.total-card.banner .sub-val{color:var(--orange)}
+.total-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2.5px}
+.total-card.schools::after{background:var(--accent)}
+.total-card.poster::after{background:var(--accent-secondary)}
+.total-card.banner::after{background:var(--orange)}
+.progress-summary{margin:12px 16px 0;background:var(--surface);border-radius:var(--r-md);padding:14px 18px;box-shadow:var(--shadow-sm);border:1px solid var(--border-light)}
+.progress-summary .progress-label{display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:8px}
+.progress-summary .progress-label span:last-child{color:var(--positive);font-variant-numeric:tabular-nums}
+.progress-track{height:7px;background:var(--surface-alt);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--positive));border-radius:4px;transition:width 0.7s cubic-bezier(0.34,1.56,0.64,1);position:relative}
+.progress-fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.35),transparent);background-size:200% 100%;animation:shimmer 2.5s infinite}
+.map-section{margin:16px 16px 0;background:var(--surface);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--border-light)}
+.section-title{padding:14px 18px 8px;font-size:12px;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em}
+.map-label{background:var(--surface);border:1.5px solid var(--accent);border-radius:6px;padding:2px 7px;font-size:10px;font-weight:800;color:var(--accent);white-space:nowrap;pointer-events:none;transform:translateY(-8px);box-shadow:var(--shadow-sm)}
+.map-label.done{background:var(--positive-bg);border-color:var(--positive);color:var(--positive);opacity:.35}
+#naverMap{width:100%;height:680px}
+.map-legend{padding:10px 18px;display:flex;gap:16px;border-top:1px solid var(--border-light)}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary);font-weight:600}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.camp-summary{margin:16px 16px 0;background:var(--surface);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--border-light)}
+.camp-sum-row{display:flex;align-items:flex-start;padding:14px 18px;gap:12px;border-top:1px solid var(--border-light);transition:background 0.15s}
+.camp-sum-row:first-child{border-top:none}
+.camp-sum-dday{font-size:11px;font-weight:800;padding:5px 8px;border-radius:8px;min-width:48px;text-align:center;flex-shrink:0;margin-top:2px}
+.camp-sum-dday.urgent{background:var(--negative-bg);color:var(--negative);border:1px solid var(--negative-light)}
+.camp-sum-dday.soon{background:var(--warning-bg);color:var(--warning);border:1px solid var(--warning-light)}
+.camp-sum-dday.normal{background:var(--surface-alt);color:var(--text-secondary);border:1px solid var(--border)}
+.camp-sum-dday.done{background:var(--positive-bg);color:var(--positive);border:1px solid var(--positive-light)}
+.camp-sum-body{flex:1;min-width:0}
+.camp-sum-header{display:flex;align-items:center;gap:8px}
+.camp-sum-name{font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-0.02em}
+.camp-sum-approval{font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;flex-shrink:0}
+.camp-sum-date{font-size:12px;color:var(--text-secondary);font-weight:600;margin-top:3px}
+.camp-sum-progress-bar{height:4px;background:var(--surface-alt);border-radius:2px;overflow:hidden;margin-top:6px}
+.camp-sum-progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 0.5s ease}
+.camp-sum-progress{font-size:11px;color:var(--positive);font-weight:700;margin-top:3px}
+.camp-sum-request{font-size:12px;color:var(--accent);font-weight:600;margin-top:4px;line-height:1.5}
+.camp-sum-qty{margin-top:4px;font-size:12px;line-height:1.7;display:flex;gap:12px;flex-wrap:wrap}
+.q-poster{color:var(--accent-secondary);font-weight:600}
+.q-banner{color:var(--orange);font-weight:600}
+.q-remain{color:var(--negative);font-weight:800}
+.approval-yes{background:var(--positive-bg);color:var(--positive)}
+.approval-no{background:var(--negative-bg);color:var(--negative)}
+.approval-partial{background:var(--warning-bg);color:var(--warning)}
+.school-list-section{margin:16px 16px 0;background:var(--surface);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--border-light)}
+.school-table{width:100%;border-collapse:collapse}
+.school-table thead th{background:var(--surface-alt);color:var(--text-secondary);font-size:11px;font-weight:700;padding:10px 8px;text-align:center;border-bottom:1px solid var(--border);letter-spacing:0.04em}
+.school-table thead th:first-child{text-align:left;padding-left:18px}
+.school-table tbody td{font-size:13px;padding:11px 8px;text-align:center;border-bottom:1px solid var(--border-light);color:var(--text-secondary);transition:background 0.15s}
+.school-table tbody td:first-child{text-align:left;padding-left:18px;font-weight:700;color:var(--accent)}
+.school-table tfoot td{background:var(--surface-alt);color:var(--text);font-size:13px;font-weight:800;padding:11px 8px;text-align:center;border-top:1px solid var(--border)}
+.school-table tfoot td:first-child{text-align:left;padding-left:18px}
+.region-row td{background:var(--bg)!important;font-size:12px!important;font-weight:800!important;color:var(--text-muted)!important;padding:8px 18px!important;text-align:left!important}
+.school-row:active td{background:var(--accent-lighter)!important}
+.school-row td:first-child{text-decoration:none}
+.svg-check{vertical-align:middle}
+.detail-header{background:var(--gradient-header);color:#fff;padding:22px 20px 18px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
+.detail-header h1{font-size:1.315rem;font-weight:900;letter-spacing:-0.03em}
+.school-count-badge{background:rgba(255,255,255,0.12);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;color:rgba(255,255,255,0.65)}
+.search-bar{padding:12px 16px;position:sticky;top:0;z-index:99;background:rgba(248,250,251,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.back-to-list{display:flex;align-items:center;gap:6px;width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:16px;font-weight:600;font-family:inherit;background:var(--surface);color:var(--accent);cursor:pointer;box-shadow:var(--shadow-xs);-webkit-appearance:none}
+.back-to-list:active{background:var(--accent-light)}
+.search-wrap{position:relative}
+.search-input{width:100%;padding:12px 14px 12px 40px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:17px;font-family:inherit;background:var(--surface);color:var(--text);outline:none;transition:all 0.2s;box-shadow:var(--shadow-xs);-webkit-appearance:none}
+.search-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)}
+.search-input::placeholder{color:var(--text-muted)}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:16px}
+.search-clear{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:19px;color:var(--text-muted);cursor:pointer;display:none;padding:4px;line-height:1}
+.region-divider{display:flex;align-items:center;gap:10px;margin:20px 20px 10px}
+.region-divider .label{font-size:13px;font-weight:800;color:var(--text-muted);white-space:nowrap}
+.region-divider .line{flex:1;height:1px;background:var(--border)}
+.card{background:var(--surface);margin:0 16px 12px;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--border-light);position:relative;transition:all 0.2s}
+.card.all-done{opacity:0.35}
+.card.hidden{display:none}
+.card-header{display:flex;align-items:center;padding:16px 18px 8px;gap:12px;flex-wrap:nowrap}
+.btn-navi{display:flex;align-items:center;gap:4px;padding:7px 14px;border-radius:var(--r-sm);font-size:12px;font-weight:700;text-decoration:none;border:1px solid var(--border);background:var(--bg);color:var(--text-secondary);flex-shrink:0;transition:all 0.15s;font-family:inherit;white-space:nowrap;cursor:pointer}
+.btn-navi:active{transform:scale(0.96);background:var(--surface-alt)}
+.card-num{width:32px;height:32px;background:var(--gradient-accent);color:#fff;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;box-shadow:0 2px 8px rgba(37,99,235,0.2)}
+.card-school{font-size:16px;font-weight:800;flex:1;letter-spacing:-0.02em}
+.card-addr{padding:2px 18px 8px 62px;font-size:12px;color:var(--text-muted)}
+.approval-places{padding:2px 18px 8px 62px;display:flex;flex-direction:column;gap:3px}
+.ap-item{font-size:12px;color:var(--positive);font-weight:600}
+.camp-block{margin:6px 18px 8px;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border-light);transition:all 0.2s}
+.camp-block-header{display:flex;align-items:center;padding:10px 14px;font-size:13px;font-weight:700;gap:8px;flex-wrap:wrap;background:var(--surface)}
+.camp-block-header .camp-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.camp-dday{font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px;flex-shrink:0}
+.camp-dday.urgent{background:var(--negative-bg);color:var(--negative)}
+.camp-dday.soon{background:var(--warning-bg);color:var(--warning)}
+.camp-dday.normal{background:var(--surface-alt);color:var(--text-muted)}
+.camp-dday.done{background:var(--positive-bg);color:var(--positive)}
+.approval-badge{font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;flex-shrink:0}
+.camp-block-body{padding:10px 14px 12px;background:var(--bg);font-size:13px;line-height:1.8}
+.camp-detail-row{display:flex;gap:8px;align-items:baseline}
+.cdl{color:var(--text-muted);min-width:48px;flex-shrink:0;font-weight:600;font-size:12px}
+.cdv{color:var(--text-secondary);font-weight:500}
+.req-row .cdl{color:var(--accent)}
+.req-text{color:var(--accent);font-weight:700}
+.note-row{margin-top:6px;padding-top:6px;border-top:1px dashed var(--border)}
+.note-input{flex:1;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:9px 12px;font-size:13px;font-family:inherit;background:var(--surface);color:var(--text);outline:none;min-width:0;transition:all 0.2s}
+.note-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)}
+.note-input::placeholder{color:var(--text-muted)}
+.camp-action-row{display:flex;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border-light)}
+.photo-btn{display:flex;align-items:center;justify-content:center;gap:5px;flex:1;background:var(--accent-lighter);color:var(--accent);border:1.5px solid var(--accent-light);border-radius:var(--r-sm);padding:10px;font-size:13px;font-weight:700;text-decoration:none;touch-action:manipulation;font-family:inherit;cursor:pointer;transition:all 0.15s}
+.photo-btn:active{transform:scale(0.97);background:var(--accent-light)}
+.photo-btn-disabled{display:flex;align-items:center;justify-content:center;flex:1;background:var(--surface-alt);color:var(--text-muted);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px;font-size:13px}
+.complete-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px;font-size:13px;font-weight:700;background:var(--surface);color:var(--text-secondary);cursor:pointer;touch-action:manipulation;font-family:inherit;transition:all 0.2s}
+.complete-btn:active{transform:scale(0.97)}
+.complete-btn.checked{background:var(--positive-bg);color:var(--positive);border-color:var(--positive-light)}
+.camp-block.done{opacity:0.35}
+.bottom-bar{position:fixed;bottom:76px;left:12px;right:12px;display:none;align-items:center;gap:10px;z-index:150;transition:transform 0.25s ease}
+.bottom-bar.hidden-by-scroll{transform:translateY(140%)}
+.bottom-bar.show{display:flex}
+.bottom-progress{flex:1;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:10px 16px;border-radius:var(--r-md);box-shadow:var(--shadow-float);border:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.bottom-progress .bp-label{font-size:12px;font-weight:700;color:var(--text-secondary);white-space:nowrap}
+.bottom-progress .bp-track{flex:1;height:6px;background:var(--surface-alt);border-radius:3px;overflow:hidden;min-width:60px}
+.bottom-progress .bp-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--positive));border-radius:3px;transition:width 0.6s ease}
+.bottom-progress .bp-count{font-size:13px;font-weight:800;color:var(--positive);font-variant-numeric:tabular-nums;white-space:nowrap}
+.scroll-top-btn{width:44px;height:44px;border-radius:50%;background:var(--surface);color:var(--text-secondary);border:1px solid var(--border);font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-float);cursor:pointer;touch-action:manipulation;flex-shrink:0;transition:all 0.15s;font-family:inherit}
+.scroll-top-btn:active{transform:scale(0.92);background:var(--surface-alt)}
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--text);color:#fff;padding:14px 26px;border-radius:var(--r-md);font-size:16px;font-weight:700;z-index:999;opacity:0;transition:opacity 0.3s;pointer-events:none;box-shadow:var(--shadow-lg);max-width:85vw;text-align:center}
+.toast.show{opacity:1}
+.sync-status{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--accent-lighter);color:var(--accent);padding:12px 22px;border-radius:var(--r-sm);font-size:15px;font-weight:700;z-index:999;opacity:0;transition:opacity 0.3s;pointer-events:none;border:1px solid var(--accent-light);text-align:center}
+.sync-status.show{opacity:1}
+@media(max-width:480px){
+  body{-webkit-text-size-adjust:100%}
+  .summary-header{padding:22px 16px 18px}
+  .summary-header h1{font-size:1.365rem}
+  .totals-grid{gap:6px;margin:12px 12px 0}
+  .total-card{padding:12px 10px}
+  .total-card .value{font-size:1.365rem}
+  .card{margin:0 10px 10px}
+  .card-header{padding:12px 14px 6px;gap:8px}
+  .card-school{font-size:15px}
+  .btn-navi{padding:5px 10px;font-size:11px}
+  .card-addr{padding:2px 14px 6px 50px;font-size:12px}
+  .camp-block{margin:4px 14px 6px}
+  .camp-summary,.school-list-section,.map-section{margin:12px 10px 0}
+  .search-bar{padding:10px 12px}
+  .search-input{padding:10px 12px 10px 36px;font-size:17px}
+  .detail-header{padding:16px 16px 12px}
+  .detail-header h1{font-size:1.216rem}
+  .camp-sum-row{padding:10px 14px;gap:8px}
+  .camp-sum-name{font-size:13px}
+  .region-divider{margin:14px 12px 6px}
+  .progress-summary{margin:10px 10px 0}
+  #naverMap{height:260px}
+  .bottom-bar{bottom:72px;left:8px;right:8px;gap:8px}
+  .bottom-progress{padding:8px 12px;gap:8px}
+  .camp-action-row{gap:6px}
+  .photo-btn,.complete-btn{padding:9px 6px;font-size:12px}
+}
+@media(max-width:340px){
+  .total-card .value{font-size:1.166rem}
+  .card-school{font-size:14px}
+  .summary-header h1{font-size:1.265rem}
+}
+:root{--brand-navy:#0D1B3E;--brand-navy-800:#152952;--brand-navy-700:#1E3F75;--brand-blue-600:#2D5DA1;--brand-blue-500:#4A8ED6;--brand-sky-400:#7EC8E3;--brand-warning:#E6940A;--brand-success:#0EA47A}
+.summary-header .header-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.summary-header .updated-tag{margin-top:0}
+.progress-in-header{margin-top:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:11px 14px}
+.progress-in-header .progress-label{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:rgba(255,255,255,0.92);margin-bottom:7px}
+.progress-in-header .progress-label span:last-child{color:var(--brand-sky-400);font-variant-numeric:tabular-nums}
+.progress-in-header .progress-track{height:6px;background:rgba(255,255,255,0.12);border-radius:4px;overflow:hidden}
+.progress-in-header .progress-fill{height:100%;background:linear-gradient(90deg,var(--brand-sky-400),#fff);border-radius:4px;transition:width 0.7s cubic-bezier(0.34,1.56,0.64,1)}
+.camp-filter-row{display:flex;gap:7px;padding:10px 14px 6px;flex-wrap:wrap}
+.camp-filter-btn{flex:1;min-width:0;padding:6px 6px;border-radius:10px;font-size:11px;font-weight:800;border:1.5px solid transparent;background:#fff;cursor:pointer;font-family:inherit;transition:all 0.15s;letter-spacing:-0.02em;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.15}
+.camp-filter-btn.active{color:#fff}
+.camp-filter-btn .cf-dday{font-weight:900;font-size:11px;display:block}
+.camp-filter-btn .cf-name{font-size:11px;display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.camp-card{margin:10px 14px;background:#fff;border-radius:14px;border:1px solid var(--border-light);box-shadow:var(--shadow-sm);overflow:hidden}
+.camp-card .cc-head{padding:11px 14px 8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.camp-card .cc-dday{font-size:10px;font-weight:900;padding:3px 8px;border-radius:8px;color:#fff}
+.camp-card .cc-advertiser{font-size:12px;font-weight:800;color:var(--text)}
+.camp-card .cc-approval{font-size:9px;font-weight:800;padding:2px 7px;border-radius:16px}
+.camp-card .cc-deadline{font-size:11px;color:var(--text-secondary);font-weight:600;margin-left:auto}
+.camp-card .cc-title{padding:0 14px 8px;font-size:13px;font-weight:700;color:var(--text);line-height:1.4;letter-spacing:-0.02em}
+.camp-card .cc-progress-wrap{padding:0 14px 9px}
+.camp-card .cc-progress-bar{height:5px;background:var(--surface-alt);border-radius:3px;overflow:hidden}
+.camp-card .cc-progress-fill{height:100%;border-radius:3px;transition:width 0.5s ease}
+.camp-card .cc-progress-text{display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:var(--text-muted);margin-top:5px}
+.camp-card .cc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 14px 10px}
+.camp-card .cc-stat{background:var(--surface-alt);border-radius:8px;padding:8px 10px}
+.camp-card .cc-stat .lbl{font-size:9px;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
+.camp-card .cc-stat .val{font-size:13px;font-weight:900;margin-top:2px;letter-spacing:-0.02em}
+.camp-card .cc-stat .sub{font-size:9px;color:var(--negative);font-weight:700;margin-top:1px}
+.camp-card .cc-request{margin:0 14px 10px;padding:9px 12px;background:var(--accent-lighter);border-radius:9px}
+.camp-card .cc-request .req-lbl{font-size:9px;font-weight:800;color:var(--accent);letter-spacing:0.05em;margin-bottom:3px;display:block}
+.camp-card .cc-request .req-txt{font-size:11px;font-weight:600;color:var(--text);line-height:1.5}
+.camp-card.all-done{opacity:0.45}
+.ap-item{color:var(--brand-success)!important}
+.card.camp-filter-hidden{display:none!important}
+.map-school-dot-row{display:flex;gap:4px;margin-top:4px;flex-wrap:wrap}
+.camp-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
+.camp-chip .chip-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.school-camps-inline{margin-top:4px;display:flex;gap:4px;flex-wrap:wrap}
+.school-camps-inline .camp-chip{font-size:11px;padding:2px 7px}
+.school-table tbody td:first-child{padding-top:10px;padding-bottom:10px}
+.camp-block-header .camp-name-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle;flex-shrink:0}
+.camp-block{position:relative;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.06);border:1px solid var(--border-light);border-left-width:5px;margin:10px 18px 12px;border-radius:12px;overflow:hidden}
+.camp-block .camp-block-header{background:var(--surface-alt)}
+.camp-block .camp-block-body{background:#fff}
+.camp-block.done{opacity:0.4}
+.camp-action-upload{flex-wrap:wrap}
+.camp-action-upload>.photo-btn,.camp-action-upload>.complete-btn{flex:1 1 0!important;min-width:0;padding:10px 6px!important;font-size:13px!important;height:42px;box-sizing:border-box}
+.photo-btn-upload{background:var(--accent-lighter)!important;color:var(--accent)!important;border-color:var(--accent-light)!important}
+.photo-btn-upload:active{background:var(--accent-light)!important}
+.photo-btn-drive{background:var(--surface-alt)!important;color:var(--text-muted)!important;border-color:var(--border)!important}
+.upload-progress{width:100%;margin-top:6px}
+.upload-progress-bar{height:5px;background:var(--surface-alt);border-radius:3px;overflow:hidden}
+.upload-progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.3s ease}
+.upload-progress-text{font-size:12px;color:var(--text-muted);font-weight:600;margin-top:3px;text-align:center}
+.capture-queue{width:100%;margin-top:8px;padding:10px 12px;background:var(--surface);border:1.5px solid var(--accent-light);border-radius:var(--r-sm)}
+.capture-queue-count{font-size:14px;font-weight:700;color:var(--accent);margin-bottom:8px}
+.capture-queue-count .gps-ok{color:var(--positive)}
+.capture-queue-count .gps-fail{color:var(--negative)}
+.capture-queue-btns{display:flex;gap:8px}
+.capture-more-btn{flex:1;padding:10px;border-radius:var(--r-sm);font-size:14px;font-weight:700;border:1.5px solid var(--accent-light);background:var(--accent-lighter);color:var(--accent);cursor:pointer;font-family:inherit;touch-action:manipulation}
+.capture-more-btn:active{background:var(--accent-light)}
+.capture-upload-btn{flex:1;padding:10px;border-radius:var(--r-sm);font-size:14px;font-weight:700;border:1.5px solid var(--positive-light);background:var(--positive-bg);color:var(--positive);cursor:pointer;font-family:inherit;touch-action:manipulation}
+.capture-upload-btn:active{background:var(--positive-light)}
+.uploaded-gallery-wrap{margin-top:10px;padding:10px 12px;background:var(--positive-bg);border:1.5px solid var(--positive-light);border-radius:var(--r-sm)}
+.uploaded-gallery-label{font-size:13px;font-weight:800;color:var(--positive);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.uploaded-gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.uploaded-gallery .u-item{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;background:#f0f0f0;border:1px solid var(--positive-light);cursor:pointer;touch-action:manipulation}
+.uploaded-gallery .u-item img{width:100%;height:100%;object-fit:cover;display:block}
+.uploaded-gallery .u-item .u-num{position:absolute;top:3px;left:4px;background:rgba(0,0,0,0.65);color:#fff;font-size:10px;font-weight:800;padding:1px 5px;border-radius:4px;line-height:1.4}
+.uploaded-gallery .u-item .u-check{position:absolute;bottom:3px;right:4px;background:var(--positive);color:#fff;font-size:10px;font-weight:800;padding:1px 5px;border-radius:4px;line-height:1.4}
+.uploaded-viewer{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:10001;display:flex;align-items:center;justify-content:center;padding:20px}
+.uploaded-viewer img{max-width:100%;max-height:100%;object-fit:contain}
+.gps-guide-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px}
+.gps-guide-box{background:#fff;border-radius:14px;padding:20px;max-width:340px;width:100%}
+.gps-guide-box h3{font-size:18px;font-weight:800;margin-bottom:10px;color:var(--text)}
+.gps-guide-box p{font-size:15px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;white-space:pre-line}
+.gps-guide-box button{width:100%;padding:11px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;font-size:16px;cursor:pointer;font-family:inherit;margin-top:6px}
+.gps-guide-box button.secondary{background:var(--surface-alt);color:var(--text-secondary)}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="sync-status" id="syncStatus">동기화 중...</div>
+<div class="page active" id="pageSummary">
+  <div class="summary-header">
+    <div class="header-top">
+      <h1>테스트 작업요청서</h1>
+      <div class="updated-tag">4/20 15:13 업데이트</div>
+    </div>
+    <div class="progress-in-header">
+      <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/5</span></div>
+      <div class="progress-track"><div class="progress-fill" id="summaryProgress" style="width:0%"></div></div>
+    </div>
+  </div>
+  <div class="map-section" id="mapSection">
+    <div class="section-title"><span>학교 위치</span></div>
+    <div class="camp-filter-row"><button class="camp-filter-btn active" data-camp="" style="border-color:var(--border);color:var(--text-secondary)" onclick="filterMapByCamp(this,'')"><span class="cf-dday">ALL</span><span class="cf-name">전체</span></button><button class="camp-filter-btn" data-camp="테스트_테스트" data-color="#c00000" style="border-color:#c00000;color:#0F172A;background:#f7e0e0" onclick="filterMapByCamp(this,'테스트_테스트')"><span class="cf-dday">D-day</span><span class="cf-name">테스트</span></button></div>
+    <div id="naverMap"></div>
+  </div>
+  <div class="camp-card" data-camp="테스트_테스트"><div class="cc-head"><span class="cc-dday urgent" data-deadline="260420" style="background:#c00000">D-day</span><span class="cc-advertiser">테스트</span><span class="cc-approval approval-yes">승인</span><span class="cc-deadline">4월 20일 월요일</span></div><div class="cc-title">테스트</div><div class="cc-progress-wrap"><div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%;background:#c00000"></div></div><div class="cc-progress-text"><span class="cc-progress-done">0개교 완료 (0%)</span><span class="cc-progress-remain">5개교 남음</span></div></div><div class="cc-stats"><div class="cc-stat"><div class="lbl">학교</div><div class="val">5<span style="font-size:10px;font-weight:600;color:var(--text-muted)">개교</span></div><div class="sub cc-school-remain">남음 5</div></div><div class="cc-stat"><div class="lbl">포스터</div><div class="val">50<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-poster-remain">남음 50</div></div><div class="cc-stat"><div class="lbl">현수막</div><div class="val">5<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-banner-remain">남음 5</div></div></div><div class="cc-request"><span class="req-lbl">📋 요청사항</span><span class="req-txt">테스트</span></div></div>
+  <div class="school-list-section">
+    <div class="section-title">전체 학교 <span style="font-size:11px;color:var(--accent);font-weight:600;margin-left:4px">(클릭 시 상세 이동)</span></div>
+    <div style="overflow-x:auto">
+      <table class="school-table">
+        <thead><tr><th>학교이름</th><th>포스터</th><th>현수막</th><th>급여</th><th>완료</th></tr></thead>
+        <tbody><tr class="region-row"><td colspan="5">서울 (5개교 · 완료 0)</td></tr><tr class="school-row" data-school="서울대학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td>서울대학교</td><td>10</td><td>1</td><td>20,000</td><td class="school-check-cell"></td></tr><tr class="school-row" data-school="건국대학교 서울캠퍼스" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td>건국대학교 서울캠퍼스</td><td>10</td><td>1</td><td>20,000</td><td class="school-check-cell"></td></tr><tr class="school-row" data-school="동양미래대학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td>동양미래대학교</td><td>10</td><td>1</td><td>20,000</td><td class="school-check-cell"></td></tr><tr class="school-row" data-school="성공회대학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td>성공회대학교</td><td>10</td><td>1</td><td>20,000</td><td class="school-check-cell"></td></tr><tr class="school-row" data-school="서울과학기술대학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td>서울과학기술대학교</td><td>10</td><td>1</td><td>20,000</td><td class="school-check-cell"></td></tr></tbody>
+        <tfoot><tr><td>합계 (5개교)</td><td>50</td><td>5</td><td>100,000</td><td id="sumFootDone">0</td></tr></tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="page" id="pageDetail">
+  <div class="detail-header">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h1>작업 상세</h1>
+      <span class="school-count-badge">5곳 · 5건</span>
+    </div>
+  </div>
+  <div class="search-bar">
+    <button id="backToList" class="back-to-list" style="display:none" onclick="goBackFromSingleSchool()">&#x2190; 뒤로 가기</button>
+    <div class="search-wrap">
+      <span class="search-icon">&#x1F50D;</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="학교이름 검색..." oninput="filterCards()" onkeydown="if(event.key==='Enter')searchAndScroll()" />
+      <span class="search-clear" id="searchClear" onclick="clearSearch()">&#x2715;</span>
+    </div>
+  </div>
+  <div id="cardsContainer"><div class="region-divider"><span class="label">서울</span><span class="line"></span></div><div class="card" id="school-1" data-school-name="서울대학교"><div class="card-header"><div class="card-num">1</div><div class="card-school">서울대학교</div><a href="nmap://search?query=%EC%84%9C%EC%9A%B8%EB%8C%80%ED%95%99%EA%B5%90%20NH%EB%86%8D%ED%98%91%EB%91%90%EB%A0%88%EB%AC%B8%EC%98%88%EA%B4%80&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('서울대학교 NH농협두레문예관'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">서울특별시 관악구 관악로 1</div><div class="approval-places"><span class="ap-item">포스터 승인: NH농협두레문예관 · 201호 · 3장 · 7일</span><span class="ap-item">현수막 승인: 구두승인</span></div><div class="camp-block" data-school="서울대학교" data-camp="테스트_테스트" data-poster="10" data-banner="1"><div class="camp-block-header"><span class="camp-name">테스트_테스트</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday urgent" data-deadline="260420">D-day</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">10장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">테스트</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/1H5hC81TWKhmnvyz96ak_dxLJEQzv2XbM" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'1H5hC81TWKhmnvyz96ak_dxLJEQzv2XbM')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-2" data-school-name="건국대학교 서울캠퍼스"><div class="card-header"><div class="card-num">2</div><div class="card-school">건국대학교 서울캠퍼스</div><a href="nmap://search?query=%EA%B1%B4%EA%B5%AD%EB%8C%80%ED%95%99%EA%B5%90%20%EC%84%9C%EC%9A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4%20%ED%95%99%EC%83%9D%ED%9A%8C%EA%B4%80&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('건국대학교 서울캠퍼스 학생회관'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">서울특별시 광진구 능동로 120</div><div class="approval-places"><span class="ap-item">포스터 승인: 학생회관 · 2층 학생지원팀 · 5장 · 7일</span><span class="ap-item">현수막 승인: 본관 · 1층 102호 시설관리팀 사전공문 필요</span></div><div class="camp-block" data-school="건국대학교 서울캠퍼스" data-camp="테스트_테스트" data-poster="10" data-banner="1"><div class="camp-block-header"><span class="camp-name">테스트_테스트</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday urgent" data-deadline="260420">D-day</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">10장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">테스트</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/136L9vH5Fk53ncXm70BueHvWR0yOEeB7y" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'136L9vH5Fk53ncXm70BueHvWR0yOEeB7y')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-3" data-school-name="동양미래대학교"><div class="card-header"><div class="card-num">3</div><div class="card-school">동양미래대학교</div><a href="nmap://search?query=%EB%8F%99%EC%96%91%EB%AF%B8%EB%9E%98%EB%8C%80%ED%95%99%EA%B5%90%20%ED%95%99%EC%83%9D%ED%9A%8C%EA%B4%80&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('동양미래대학교 학생회관'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">서울특별시 구로구 경인로 445</div><div class="approval-places"><span class="ap-item">포스터 승인: 학생회관 · 학생서비스센터</span></div><div class="camp-block" data-school="동양미래대학교" data-camp="테스트_테스트" data-poster="10" data-banner="1"><div class="camp-block-header"><span class="camp-name">테스트_테스트</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday urgent" data-deadline="260420">D-day</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">10장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">테스트</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/11pLT_Y_by_uLceQpyBeqLLKPPkGIY92m" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'11pLT_Y_by_uLceQpyBeqLLKPPkGIY92m')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-4" data-school-name="성공회대학교"><div class="card-header"><div class="card-num">4</div><div class="card-school">성공회대학교</div><a href="nmap://search?query=%EC%84%B1%EA%B3%B5%ED%9A%8C%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('성공회대학교'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">서울특별시 구로구 연동로 320</div><div class="camp-block" data-school="성공회대학교" data-camp="테스트_테스트" data-poster="10" data-banner="1"><div class="camp-block-header"><span class="camp-name">테스트_테스트</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday urgent" data-deadline="260420">D-day</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">10장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">테스트</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/167tigXuwjnbNifdkZHgqHXlAWjxaZ3q6" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'167tigXuwjnbNifdkZHgqHXlAWjxaZ3q6')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-5" data-school-name="서울과학기술대학교"><div class="card-header"><div class="card-num">5</div><div class="card-school">서울과학기술대학교</div><a href="nmap://search?query=%EC%84%9C%EC%9A%B8%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EB%8C%80%ED%95%99%EA%B5%90%20%ED%95%99%EC%83%9D%ED%9A%8C%EA%B4%80&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('서울과학기술대학교 학생회관'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">서울특별시 노원구 공릉로 232</div><div class="approval-places"><span class="ap-item">포스터 승인: 학생회관 · 2층 학생지원처 · 2장 · 7일</span></div><div class="camp-block" data-school="서울과학기술대학교" data-camp="테스트_테스트" data-poster="10" data-banner="1"><div class="camp-block-header"><span class="camp-name">테스트_테스트</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday urgent" data-deadline="260420">D-day</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">10장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">테스트</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/1enWsAn1McLaZFXi3ttth5HFUcrvDloU-" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'1enWsAn1McLaZFXi3ttth5HFUcrvDloU-')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div></div>
+</div>
+<div class="bottom-bar" id="bottomBar">
+  <div class="bottom-progress">
+    <span class="bp-label">작업 완료</span>
+    <div class="bp-track"><div class="bp-fill" id="progressFill" style="width:0%"></div></div>
+    <span class="bp-count" id="progressCount">0/5</span>
+  </div>
+  <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#x2191;</button>
+</div>
+<div class="tab-nav">
+  <button class="tab-btn active" ontouchend="event.preventDefault();switchPage('pageSummary',this)" onclick="switchPage('pageSummary',this)"><span class="tab-icon">&#x25C9;</span>요약</button>
+  <button class="tab-btn" ontouchend="event.preventDefault();switchPage('pageDetail',this)" onclick="switchPage('pageDetail',this)"><span class="tab-icon">&#x2261;</span>상세</button>
+</div>
+<script>
+(function(){var ua=navigator.userAgent||"";var isInApp=/KAKAOTALK|NAVER|Line|FBAN|FBAV|Instagram|Whale/i.test(ua);if(!isInApp)return;var isAndroid=/Android/i.test(ua);var isIOS=/iPhone|iPad|iPod/i.test(ua);var url=location.href;if(isAndroid){location.href="intent://"+url.replace(/^https?:\/\//,"")+"#Intent;scheme=https;package=com.android.chrome;end";}else if(isIOS&&/KAKAOTALK/i.test(ua)){location.href="kakaotalk://web/openExternal?url="+encodeURIComponent(url);}})();
+var WEB_APP_URL="https://script.google.com/macros/s/AKfycbz2LO4HaJiABrdqSy1XI7x4CoOdTyF_fwYToVYoRssVXiYvHCjeiP2nNytMMpgKqhGhAA/exec",WORKER_NAME="테스트";
+var MAP_DATA=[{"school":"서울대학교","region":"서울","addr":"서울특별시 관악구 관악로 1","done":false,"dday":"urgent"},{"school":"건국대학교 서울캠퍼스","region":"서울","addr":"서울특별시 광진구 능동로 120","done":false,"dday":"urgent"},{"school":"동양미래대학교","region":"서울","addr":"서울특별시 구로구 경인로 445","done":false,"dday":"urgent"},{"school":"성공회대학교","region":"서울","addr":"서울특별시 구로구 연동로 320","done":false,"dday":"urgent"},{"school":"서울과학기술대학교","region":"서울","addr":"서울특별시 노원구 공릉로 232","done":false,"dday":"urgent"}];
+var SVG_CHECKED='<svg class="svg-check" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var SVG_UNCHECKED='<svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg>';
+var SVG_CHECK_SM='<svg class="svg-check" viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="9" fill="#059669"/><path d="M6 10l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+function switchPage(id,btn){
+  document.body.style.overflow="";
+  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active")});
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".tab-btn").forEach(function(b){b.classList.remove("active")});
+  btn.classList.add("active");
+  document.getElementById("bottomBar").classList.toggle("show",id==="pageDetail");
+  window.scrollTo(0,0);
+  if(id==="pageSummary"){if(singleSchoolMode)showAllSchools();syncMapFromCards();syncSchoolTable();refreshTotalsGrid()}
+  if(id==="pageDetail"&&singleSchoolMode)showAllSchools();
+}
+function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},2200)}
+function callWebApp(params,retry){retry=retry||0;fetch(WEB_APP_URL+"?"+new URLSearchParams(params).toString(),{mode:"no-cors"}).then(function(){if(retry===0&&(params.action==="complete"||params.action==="note")){setTimeout(function(){verifyWebAppAction(params)},2000)}}).catch(function(){if(retry<2)setTimeout(function(){callWebApp(params,retry+1)},1000*(retry+1));else showToast("⚠ 서버 연결 실패")})}
+function verifyWebAppAction(params){fetch(WEB_APP_URL+"?action=sync&worker="+encodeURIComponent(WORKER_NAME)).then(function(r){return r.json()}).then(function(json){if(json.status==="ok"&&json.data){var key=params.school+"|||"+params.camp;var info=json.data[key];if(params.action==="complete"){var expected=params.time||"";var actual=info?info.postDate:"";if((!expected&&actual)||(expected&&!actual)){showToast("⚠ 저장 확인 실패 - 재시도");callWebApp(params,1)}}}}).catch(function(){})}
+var totalTasks=document.querySelectorAll(".complete-btn").length;
+var doneCount=document.querySelectorAll(".complete-btn.checked").length;
+function updateProgress(){
+  var pct=totalTasks?Math.round(doneCount/totalTasks*100):0;
+  document.getElementById("progressCount").textContent=doneCount+"/"+totalTasks+" ("+pct+"%)";
+  document.getElementById("progressFill").style.width=pct+"%";
+  document.getElementById("summaryProgress").style.width=pct+"%";
+  document.getElementById("sumProgressText").textContent=doneCount+"/"+totalTasks+" ("+pct+"%)";
+}
+updateProgress();
+function toggleCampDone(btn){
+  btn.classList.toggle("checked");
+  var block=btn.closest(".camp-block"),card=btn.closest(".card");
+  var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");
+  if(btn.classList.contains("checked")){
+    block.classList.add("done");btn.innerHTML=SVG_CHECKED+" 완료됨";doneCount++;
+    var now=new Date();var ts=(now.getMonth()+1)+"/"+now.getDate()+" "+now.getHours().toString().padStart(2,"0")+":"+now.getMinutes().toString().padStart(2,"0");
+    callWebApp({action:"complete",school:school,camp:camp,time:ts});showToast("\u2713 "+school+" 완료");
+  } else {
+    block.classList.remove("done");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";doneCount--;
+    callWebApp({action:"complete",school:school,camp:camp,time:""});showToast("\u21A9 "+school+" 취소");
+  }
+  var allBtns=card.querySelectorAll(".complete-btn"),allDone=true;
+  allBtns.forEach(function(b){if(!b.classList.contains("checked"))allDone=false});
+  if(allDone)card.classList.add("all-done");else card.classList.remove("all-done");
+  var sn=card.getAttribute("data-school-name");if(sn)updateMapMarker(sn,allDone);
+  updateProgress();refreshCampSummaryStats();refreshCampDoneStatus();refreshTotalsGrid();syncSchoolTable();
+}
+function saveNote(el){var block=el.closest(".camp-block");callWebApp({action:"note",school:block.getAttribute("data-school"),camp:block.getAttribute("data-camp"),text:el.value.trim()});showToast("\u2713 비고 저장")}
+function handleDriveClick(e,folderId){
+  var ua=navigator.userAgent||"";
+  var webUrl="https://drive.google.com/drive/folders/"+folderId;
+  if(/Android/i.test(ua)){
+    e.preventDefault();
+    window.location="intent://drive.google.com/drive/folders/"+folderId+"#Intent;scheme=https;package=com.google.android.apps.docs;S.browser_fallback_url="+encodeURIComponent(webUrl)+";end";
+    return false;
+  }
+  if(/KAKAOTALK/i.test(ua)&&/iPhone|iPad|iPod/i.test(ua)){
+    e.preventDefault();
+    window.location="kakaotalk://web/openExternal?url="+encodeURIComponent(webUrl);
+    return false;
+  }
+  return true;
+}
+function filterCards(){var q=document.getElementById("searchInput").value.trim().toLowerCase();document.getElementById("searchClear").style.display=q?"block":"none";document.querySelectorAll(".region-divider").forEach(function(d){d.style.display=q?"none":""});document.querySelectorAll(".card").forEach(function(c){c.classList.toggle("hidden",q&&(c.getAttribute("data-school-name")||"").toLowerCase().indexOf(q)===-1)})}
+function searchAndScroll(){var q=document.getElementById("searchInput").value.trim().toLowerCase();if(!q)return;var cards=document.querySelectorAll(".card");for(var i=0;i<cards.length;i++){var nm=(cards[i].getAttribute("data-school-name")||"").toLowerCase();if(nm.indexOf(q)!==-1){var hdr=document.querySelector(".detail-header");var off=hdr?hdr.offsetHeight+10:80;window.scrollTo({top:cards[i].getBoundingClientRect().top+window.pageYOffset-off,behavior:"smooth"});document.getElementById("searchInput").blur();break}}}
+function clearSearch(){document.getElementById("searchInput").value="";filterCards()}
+var singleSchoolMode=false;var singleSchoolOrigin=null;
+function scrollToSingleCard(schoolName){requestAnimationFrame(function(){requestAnimationFrame(function(){var card=null;var cards=document.querySelectorAll(".card");for(var i=0;i<cards.length;i++){if(cards[i].getAttribute("data-school-name")===schoolName&&!cards[i].classList.contains("hidden")){card=cards[i];break}}if(card){var hdr=document.querySelector("#pageDetail .detail-header");var off=hdr?hdr.offsetHeight+10:80;var y=card.getBoundingClientRect().top+window.pageYOffset-off;window.scrollTo({top:Math.max(0,y),behavior:"auto"})}else{window.scrollTo(0,0)}})})}
+function showSingleSchool(schoolName){singleSchoolMode=true;document.querySelectorAll(".region-divider").forEach(function(d){d.style.display="none"});document.querySelectorAll(".card").forEach(function(c){c.classList.toggle("hidden",c.getAttribute("data-school-name")!==schoolName)});document.getElementById("searchInput").value="";document.getElementById("searchClear").style.display="none";document.getElementById("backToList").style.display="flex";document.querySelector(".search-wrap").style.display="none";scrollToSingleCard(schoolName)}
+function showAllSchools(){singleSchoolMode=false;singleSchoolOrigin=null;document.querySelectorAll(".region-divider").forEach(function(d){d.style.display=""});document.querySelectorAll(".card").forEach(function(c){c.classList.remove("hidden")});document.getElementById("backToList").style.display="none";document.querySelector(".search-wrap").style.display="";window.scrollTo(0,0)}
+function goBackFromSingleSchool(){var origin=singleSchoolOrigin;showAllSchools();if(origin==="pageSummary"){var sumBtn=document.querySelectorAll(".tab-btn")[0];if(sumBtn)switchPage("pageSummary",sumBtn)}}
+function goToSchoolDetail(schoolName){singleSchoolOrigin="pageSummary";var detailBtn=document.querySelectorAll(".tab-btn")[1];if(detailBtn)switchPage("pageDetail",detailBtn);requestAnimationFrame(function(){showSingleSchool(schoolName)})}
+function syncSchoolTable(){document.querySelectorAll(".school-row").forEach(function(row){var sn=row.getAttribute("data-school");var cards=document.querySelectorAll(".card[data-school-name]");var card=null;for(var i=0;i<cards.length;i++){if(cards[i].getAttribute("data-school-name")===sn){card=cards[i];break}}if(!card)return;var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});var cell=row.querySelector(".school-check-cell");if(allDone){cell.innerHTML=SVG_CHECK_SM;row.style.opacity="0.4"}else{cell.innerHTML="";row.style.opacity="1"}})}
+var mapMarkers={},mapLabels={},naverMapObj=null,mapInitDone=false;
+function getMarkerSizeForZoom(z){var s=12+(z-7)*2;if(s<12)s=12;if(s>30)s=30;return Math.round(s);}
+function getCampOffsetPx(idx,total,size){
+  if(total<=1)return{x:0,y:0};
+  var r=size*0.35;
+  var startDeg=total===2?0:-90;
+  var ang=(startDeg+idx*(360/total))*Math.PI/180;
+  return{x:Math.cos(ang)*r,y:Math.sin(ang)*r};
+}
+function cmpDeadlineAsc(a,b){
+  var da=(a&&a.deadline)?String(a.deadline):"999999";
+  var db=(b&&b.deadline)?String(b.deadline):"999999";
+  if(!da||da.length<6)da="999999";
+  if(!db||db.length<6)db="999999";
+  if(da!==db)return da<db?-1:1;
+  var ca=(a&&a.camp)||"";var cb=(b&&b.camp)||"";
+  if(ca!==cb)return ca<cb?-1:1;
+  return 0;
+}
+function makeSvgIcon(color,size,offX,offY){
+  size=size||24;offX=offX||0;offY=offY||0;
+  var r=size/2-1.5;var cx=size/2,cy=size/2;
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'"><circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="'+color+'" stroke="#fff" stroke-width="1.5"/></svg>';
+  return{content:'<div style="width:'+size+'px;height:'+size+'px">'+svg+'</div>',size:new naver.maps.Size(size,size),anchor:new naver.maps.Point(size/2-offX,size/2-offY)};
+}
+function syncMapFromCards(){document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});var sn=card.getAttribute("data-school-name");if(sn)updateMapMarker(sn,allDone)})}
+function goToSchoolCard(schoolName){singleSchoolOrigin="pageSummary";var detailBtn=document.querySelectorAll(".tab-btn")[1];if(detailBtn)switchPage("pageDetail",detailBtn);requestAnimationFrame(function(){showSingleSchool(schoolName)})}
+(function(){try{if(typeof naver==="undefined"||!naver.maps){document.getElementById("naverMap").innerHTML="<p style=\"padding:20px;text-align:center;color:var(--text-muted)\">지도 로딩 실패</p>";return}var mc=document.getElementById("naverMap");naverMapObj=new naver.maps.Map(mc,{center:new naver.maps.LatLng(36.5,127.5),zoom:7,zoomControl:false});var bounds=new naver.maps.LatLngBounds();var cnt=0;var schools=MAP_DATA.filter(function(s){return s.addr});if(!schools.length){document.getElementById("naverMap").innerHTML="<p style=\"padding:40px 20px;text-align:center;color:var(--positive);font-weight:700\">모든 학교 작업 완료!</p>";mapInitDone=true;return}var geoRemain=schools.length;var usedCoords={};schools.forEach(function(s,i){setTimeout(function(){naver.maps.Service.geocode({query:s.addr},function(status,response){if(status===naver.maps.Service.Status.OK&&response.v2.addresses.length>0){var addr=response.v2.addresses[0];var lat=parseFloat(addr.y),lng=parseFloat(addr.x);var coordKey=lat.toFixed(4)+","+lng.toFixed(4);if(usedCoords[coordKey]){var oc=usedCoords[coordKey];lat+=0.0004*oc;lng+=0.0003*oc;usedCoords[coordKey]=oc+1}else{usedCoords[coordKey]=1}var coords=new naver.maps.LatLng(lat,lng);var campsForSchool=(SCHOOL_CAMPAIGNS[s.school]||[]).slice();if(!campsForSchool.length)campsForSchool=[{camp:"",deadline:""}];campsForSchool.sort(cmpDeadlineAsc);var curSize=getMarkerSizeForZoom(naverMapObj.getZoom());var markerList=campsForSchool.map(function(c,idx){
+  var col=(CAMP_COLORS&&CAMP_COLORS[c.camp])||"#94A3B8";
+  var off=getCampOffsetPx(idx,campsForSchool.length,curSize);
+  var mk=new naver.maps.Marker({map:naverMapObj,position:coords,title:s.school,icon:makeSvgIcon(col,curSize,off.x,off.y),zIndex:100});
+  naver.maps.Event.addListener(mk,"click",function(){goToSchoolCard(s.school);});
+  return{marker:mk,camp:c.camp,deadline:c.deadline};
+});mapMarkers[s.school]={markers:markerList,coords:coords,done:s.done,dday:s.dday};if(!s.done){bounds.extend(coords);cnt++}if(cnt>=Math.min(schools.filter(function(x){return!x.done}).length,5)&&cnt>0)naverMapObj.fitBounds(bounds)}geoRemain--;if(geoRemain<=0){mapInitDone=true;syncMapFromCards();applyZoomToAllMarkers();}})},i*150)});var __zoomTimer=null;
+naver.maps.Event.addListener(naverMapObj,"zoom_changed",function(){if(__zoomTimer)clearTimeout(__zoomTimer);__zoomTimer=setTimeout(applyZoomToAllMarkers,150);});}catch(e){document.getElementById("naverMap").innerHTML="<p style=\"padding:20px;text-align:center;color:var(--text-muted)\">지도 로딩 실패</p>"}})();
+function applyZoomToAllMarkers(){
+  if(!naverMapObj)return;
+  var size=getMarkerSizeForZoom(naverMapObj.getZoom());
+  Object.keys(mapMarkers).forEach(function(sn){
+    var entry=mapMarkers[sn];if(!entry||!entry.markers)return;
+    var total=entry.markers.length;
+    entry.markers.forEach(function(mk,idx){
+      if(!mk.marker.getVisible())return;
+      var col=(CAMP_COLORS&&CAMP_COLORS[mk.camp])||"#94A3B8";
+      var off=getCampOffsetPx(idx,total,size);
+      mk.marker.setIcon(makeSvgIcon(col,size,off.x,off.y));
+    });
+  });
+}
+function updateMapMarker(schoolName,done){if(mapMarkers[schoolName]){mapMarkers[schoolName].done=done;}updateMapMarkerByCamp(schoolName);}
+var __lastScrollY=0,__scrollTicking=false;
+window.addEventListener("scroll",function(){
+  if(__scrollTicking)return;
+  __scrollTicking=true;
+  requestAnimationFrame(function(){
+    var curY=window.pageYOffset||0;
+    var bar=document.getElementById("bottomBar");
+    var nav=document.querySelector(".tab-nav");
+    var isDetail=document.getElementById("pageDetail").classList.contains("active");
+    if(bar){if(isDetail&&curY>200)bar.classList.add("show");else if(curY<=200)bar.classList.remove("show");}
+    var delta=curY-__lastScrollY;
+    var atTop=curY<80;
+    var atBottom=(window.innerHeight+curY)>=(document.body.offsetHeight-10);
+    if(atTop||atBottom){
+      if(nav)nav.classList.remove("hidden-by-scroll");
+      if(bar)bar.classList.remove("hidden-by-scroll");
+    } else if(delta>6){
+      if(nav)nav.classList.add("hidden-by-scroll");
+      if(bar)bar.classList.add("hidden-by-scroll");
+    } else if(delta<-6){
+      if(nav)nav.classList.remove("hidden-by-scroll");
+      if(bar)bar.classList.remove("hidden-by-scroll");
+    }
+    __lastScrollY=curY;
+    __scrollTicking=false;
+  });
+},{passive:true});
+document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".tab-btn").forEach(function(b){b.addEventListener("click",function(){var n=document.querySelector(".tab-nav");if(n)n.classList.remove("hidden-by-scroll");var bb=document.getElementById("bottomBar");if(bb)bb.classList.remove("hidden-by-scroll");});});});
+(function syncOnLoad(){var ss=document.getElementById("syncStatus");ss.classList.add("show");fetch(WEB_APP_URL+"?action=sync&worker="+encodeURIComponent(WORKER_NAME)).then(function(r){return r.json()}).then(function(json){if(json.status==="ok"&&json.data){var data=json.data;document.querySelectorAll(".camp-block").forEach(function(block){var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");var key=school+"|||"+camp;if(!data[key])return;var info=data[key];var btn=block.querySelector(".complete-btn");if(info.postDate&&!btn.classList.contains("checked")){btn.classList.add("checked");btn.innerHTML=SVG_CHECKED+" 완료됨";block.classList.add("done");doneCount++}else if(!info.postDate&&btn.classList.contains("checked")){btn.classList.remove("checked");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";block.classList.remove("done");doneCount--}var noteInput=block.querySelector(".note-input");if(noteInput&&info.note)noteInput.value=info.note});document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});if(allDone)card.classList.add("all-done");else card.classList.remove("all-done");var sn2=card.getAttribute("data-school-name");if(sn2)updateMapMarker(sn2,allDone)});updateProgress();syncSchoolTable();refreshCampSummaryStats();refreshCampDoneStatus();refreshTotalsGrid();if(mapInitDone)syncMapFromCards();else setTimeout(syncMapFromCards,MAP_DATA.length*160+1000)}ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400)}).catch(function(){ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400)})})();
+function refreshDday(){
+  var today=new Date();today.setHours(0,0,0,0);
+  document.querySelectorAll("[data-deadline]").forEach(function(el){
+    var dl=el.getAttribute("data-deadline");
+    if(!dl||dl.length!==6)return;
+    var y=2000+parseInt(dl.substring(0,2)),m=parseInt(dl.substring(2,4))-1,d=parseInt(dl.substring(4,6));
+    var deadline=new Date(y,m,d);deadline.setHours(0,0,0,0);
+    var diff=Math.ceil((deadline-today)/864e5);
+    var label,cls;
+    if(diff>0)label="D-"+diff;
+    else if(diff===0)label="D-day";
+    else label=Math.abs(diff)+"일초과";
+    cls=diff<=3?"urgent":(diff<=7?"soon":"normal");
+    el.textContent=label;
+    el.className=el.className.replace(/urgent|soon|normal|done/g,"").trim()+" "+cls;
+  });
+}
+refreshCampDoneStatus();
+function calcDdayLabel(dl){
+  if(!dl||dl.length!==6)return{label:"D-?",cls:"normal"};
+  var today=new Date();today.setHours(0,0,0,0);
+  var y=2000+parseInt(dl.substring(0,2)),m=parseInt(dl.substring(2,4))-1,d=parseInt(dl.substring(4,6));
+  var deadline=new Date(y,m,d);deadline.setHours(0,0,0,0);
+  var diff=Math.ceil((deadline-today)/864e5);
+  var label,cls;
+  if(diff>0)label="D-"+diff;
+  else if(diff===0)label="D-day";
+  else label=Math.abs(diff)+"일초과";
+  cls=diff<=3?"urgent":(diff<=7?"soon":"normal");
+  return{label:label,cls:cls};
+}
+function refreshCampDoneStatus(){
+  document.querySelectorAll(".camp-block").forEach(function(block){
+    var ddayEl=block.querySelector(".camp-dday");
+    if(!ddayEl)return;
+    var btn=block.querySelector(".complete-btn");
+    var isDone=btn&&btn.classList.contains("checked");
+    if(isDone){
+      ddayEl.textContent="✓ 완료";
+      ddayEl.className=ddayEl.className.replace(/urgent|soon|normal|done/g,"").trim()+" done";
+    } else {
+      var dl=ddayEl.getAttribute("data-deadline");
+      var info=calcDdayLabel(dl);
+      ddayEl.textContent=info.label;
+      ddayEl.className=ddayEl.className.replace(/urgent|soon|normal|done/g,"").trim()+" "+info.cls;
+    }
+  });
+  document.querySelectorAll(".camp-sum-dday").forEach(function(sumEl){
+    var row=sumEl.closest(".camp-sum-row");
+    if(!row)return;
+    var nameEl=row.querySelector(".camp-sum-name");
+    if(!nameEl)return;
+    var campName=nameEl.textContent.trim();
+    var blocks=document.querySelectorAll(".camp-block[data-camp=\""+CSS.escape(campName)+"\"]");
+    if(!blocks.length)return;
+    var allDone=true;
+    blocks.forEach(function(b){
+      var btn=b.querySelector(".complete-btn");
+      if(!btn||!btn.classList.contains("checked"))allDone=false;
+    });
+    if(allDone){
+      sumEl.textContent="✓ 완료";
+      sumEl.className=sumEl.className.replace(/urgent|soon|normal|done/g,"").trim()+" done";
+    } else {
+      var dl=sumEl.getAttribute("data-deadline");
+      var info=calcDdayLabel(dl);
+      sumEl.textContent=info.label;
+      sumEl.className=sumEl.className.replace(/urgent|soon|normal|done/g,"").trim()+" "+info.cls;
+    }
+  });
+}
+function refreshCampSummaryStats(){
+  document.querySelectorAll(".camp-sum-row").forEach(function(row){
+    var nameEl=row.querySelector(".camp-sum-name");
+    if(!nameEl)return;
+    var campName=nameEl.textContent.trim();
+    var blocks=document.querySelectorAll(".camp-block[data-camp=\""+CSS.escape(campName)+"\"]");
+    if(!blocks.length)return;
+    var totalSchools=blocks.length,doneSchools=0;
+    var totalPoster=0,totalBanner=0,donePoster=0,doneBanner=0;
+    blocks.forEach(function(b){
+      var p=parseInt(b.getAttribute("data-poster"))||0;
+      var bn=parseInt(b.getAttribute("data-banner"))||0;
+      totalPoster+=p;totalBanner+=bn;
+      var btn=b.querySelector(".complete-btn");
+      if(btn&&btn.classList.contains("checked")){doneSchools++;donePoster+=p;doneBanner+=bn}
+    });
+    var remainSchools=totalSchools-doneSchools;
+    var pct=totalSchools>0?Math.round(doneSchools/totalSchools*100):0;
+    var fill=row.querySelector(".camp-sum-progress-fill");
+    if(fill)fill.style.width=pct+"%";
+    var progEl=row.querySelector(".camp-sum-progress");
+    if(progEl)progEl.innerHTML=totalSchools+"개교 중 <b>"+(remainSchools>0?remainSchools+"개교 남음":"✓ 완료")+"</b>";
+    var qtyEl=row.querySelector(".camp-sum-qty");
+    if(qtyEl){
+      var qh="";
+      if(totalPoster>0)qh+='<span class="q-poster">포스터 '+totalPoster+'장 중 <b class="q-remain">'+(totalPoster-donePoster)+'장 남음</b></span>';
+      if(totalBanner>0)qh+='<span class="q-banner">현수막 '+totalBanner+'장 중 <b class="q-remain">'+(totalBanner-doneBanner)+'장 남음</b></span>';
+      qtyEl.innerHTML=qh;
+    }
+  });
+}
+function refreshTotalsGrid(){
+  var doneSchools=0,donePoster=0,doneBanner=0;
+  document.querySelectorAll(".card").forEach(function(card){
+    var allDone=true;
+    card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});
+    if(allDone){
+      doneSchools++;
+      card.querySelectorAll(".camp-block").forEach(function(block){
+        donePoster+=parseInt(block.getAttribute("data-poster"))||0;
+        doneBanner+=parseInt(block.getAttribute("data-banner"))||0;
+      });
+    }
+  });
+  var es=document.getElementById("sumSchoolDone");if(es)es.textContent="완료 "+doneSchools;
+  var ep=document.getElementById("sumPosterDone");if(ep)ep.textContent="완료 "+donePoster;
+  var eb=document.getElementById("sumBannerDone");if(eb)eb.textContent="완료 "+doneBanner;
+  var ef=document.getElementById("sumFootDone");if(ef)ef.textContent=doneSchools;
+}
+var CAMP_COLORS={"테스트_테스트":"#c00000"};
+var SCHOOL_CAMPAIGNS={"서울대학교":[{"camp":"테스트_테스트","deadline":"260420","poster":10,"banner":1,"pay":20000}],"건국대학교 서울캠퍼스":[{"camp":"테스트_테스트","deadline":"260420","poster":10,"banner":1,"pay":20000}],"동양미래대학교":[{"camp":"테스트_테스트","deadline":"260420","poster":10,"banner":1,"pay":20000}],"성공회대학교":[{"camp":"테스트_테스트","deadline":"260420","poster":10,"banner":1,"pay":20000}],"서울과학기술대학교":[{"camp":"테스트_테스트","deadline":"260420","poster":10,"banner":1,"pay":20000}]};
+var CAMP_ORDER=["테스트_테스트"];
+var currentCampFilters={};
+function hasCampFilter(){for(var k in currentCampFilters)if(currentCampFilters.hasOwnProperty(k))return true;return false;}
+function getSelectedCamps(){var r=[];for(var k in currentCampFilters)if(currentCampFilters.hasOwnProperty(k))r.push(k);return r;}
+function getSchoolActiveCamp(schoolName){
+  var camps=SCHOOL_CAMPAIGNS[schoolName];
+  if(!camps||!camps.length)return null;
+  var sorted=camps.slice().sort(cmpDeadlineAsc);
+  for(var i=0;i<sorted.length;i++){
+    var c=sorted[i];
+    var blocks=document.querySelectorAll('.camp-block[data-school="'+(window.CSS&&CSS.escape?CSS.escape(schoolName):schoolName)+'"][data-camp="'+(window.CSS&&CSS.escape?CSS.escape(c.camp):c.camp)+'"]');
+    if(!blocks.length)return c;
+    var btn=blocks[0].querySelector(".complete-btn");
+    if(!btn||!btn.classList.contains("checked"))return c;
+  }
+  return null;
+}
+function isCampDoneAtSchool(schoolName,campName){
+  var esc=function(s){return window.CSS&&CSS.escape?CSS.escape(s):s};
+  var blocks=document.querySelectorAll('.camp-block[data-school="'+esc(schoolName)+'"][data-camp="'+esc(campName)+'"]');
+  if(!blocks.length)return false;
+  for(var i=0;i<blocks.length;i++){
+    var btn=blocks[i].querySelector(".complete-btn");
+    if(!btn||!btn.classList.contains("checked"))return false;
+  }
+  return true;
+}
+function computeSchoolZIndex(schoolName){
+  var dl="";
+  if(hasCampFilter()){
+    var camps=SCHOOL_CAMPAIGNS[schoolName]||[];
+    var matched=camps.filter(function(c){return currentCampFilters[c.camp]}).sort(cmpDeadlineAsc);
+    if(matched.length)dl=matched[0].deadline;
+  } else {
+    var active=getSchoolActiveCamp(schoolName);
+    if(active)dl=active.deadline;
+  }
+  if(!dl||dl.length!==6)return 100;
+  var today=new Date();today.setHours(0,0,0,0);
+  var y=2000+parseInt(dl.substring(0,2)),mo=parseInt(dl.substring(2,4))-1,d=parseInt(dl.substring(4,6));
+  var deadline=new Date(y,mo,d);deadline.setHours(0,0,0,0);
+  var diff=Math.ceil((deadline-today)/864e5);
+  return 100000-diff*100;
+}
+function updateMapMarkerByCamp(schoolName){
+  var entry=mapMarkers[schoolName];if(!entry||!entry.markers)return;
+  var size=getMarkerSizeForZoom(naverMapObj?naverMapObj.getZoom():7);
+  var z=computeSchoolZIndex(schoolName);
+  var filtered=hasCampFilter();
+  var visibleIdx=[];
+  entry.markers.forEach(function(mk,idx){
+    var show=false;
+    if(!mk.camp){show=false;}
+    else if(filtered){
+      show=!!currentCampFilters[mk.camp]&&!isCampDoneAtSchool(schoolName,mk.camp);
+    } else {
+      show=!isCampDoneAtSchool(schoolName,mk.camp);
+    }
+    if(show)visibleIdx.push(idx);
+  });
+  entry.markers.forEach(function(mk,idx){
+    var pos=visibleIdx.indexOf(idx);
+    if(pos<0){mk.marker.setVisible(false);return;}
+    var col=(CAMP_COLORS&&CAMP_COLORS[mk.camp])||"#94A3B8";
+    var off=getCampOffsetPx(pos,visibleIdx.length,size);
+    mk.marker.setIcon(makeSvgIcon(col,size,off.x,off.y));
+    mk.marker.setZIndex(z+pos);
+    mk.marker.setVisible(true);
+  });
+}
+function filterMapByCamp(btn,campName){
+  if(!campName){
+    currentCampFilters={};
+  } else {
+    if(currentCampFilters[campName])delete currentCampFilters[campName];
+    else currentCampFilters[campName]=true;
+  }
+  document.querySelectorAll(".camp-filter-btn").forEach(function(b){
+    var c=b.getAttribute("data-camp")||"";
+    var col=b.getAttribute("data-color");
+    var isActive=c?!!currentCampFilters[c]:!hasCampFilter();
+    b.classList.toggle("active",isActive);
+    if(col){
+      if(isActive){b.style.background=col;b.style.color="#fff";}
+      else{b.style.background="";b.style.color="#0F172A";}
+    }
+  });
+  Object.keys(mapMarkers).forEach(function(sn){updateMapMarkerByCamp(sn)});
+}
+function refreshCampCards(){
+  document.querySelectorAll(".camp-card").forEach(function(cc){
+    var cname=cc.getAttribute("data-camp");
+    var blocks=document.querySelectorAll('.camp-block[data-camp="'+(window.CSS&&CSS.escape?CSS.escape(cname):cname)+'"]');
+    var tSch=blocks.length,dSch=0,tP=0,tB=0,dP=0,dB=0;
+    blocks.forEach(function(b){
+      var p=parseInt(b.getAttribute("data-poster"))||0;
+      var bn=parseInt(b.getAttribute("data-banner"))||0;
+      tP+=p;tB+=bn;
+      var btn=b.querySelector(".complete-btn");
+      if(btn&&btn.classList.contains("checked")){dSch++;dP+=p;dB+=bn}
+    });
+    var pct=tSch>0?Math.round(dSch/tSch*100):0;
+    var fill=cc.querySelector(".cc-progress-fill");if(fill)fill.style.width=pct+"%";
+    var pd=cc.querySelector(".cc-progress-done");if(pd)pd.textContent=dSch+"개교 완료 ("+pct+"%)";
+    var pr=cc.querySelector(".cc-progress-remain");if(pr)pr.textContent=(tSch-dSch)+"개교 남음";
+    var sr=cc.querySelector(".cc-school-remain");if(sr)sr.textContent="남음 "+(tSch-dSch);
+    var pr2=cc.querySelector(".cc-poster-remain");if(pr2)pr2.textContent="남음 "+(tP-dP);
+    var br=cc.querySelector(".cc-banner-remain");if(br)br.textContent="남음 "+(tB-dB);
+    if(dSch===tSch&&tSch>0)cc.classList.add("all-done");else cc.classList.remove("all-done");
+  });
+}
+var __origUpdateMapMarker=updateMapMarker;
+updateMapMarker=function(schoolName,done){updateMapMarkerByCamp(schoolName);};
+var __origSyncMapFromCards=syncMapFromCards;
+syncMapFromCards=function(){Object.keys(mapMarkers).forEach(function(sn){updateMapMarkerByCamp(sn)});};
+var __origToggle=toggleCampDone;
+toggleCampDone=function(btn){__origToggle(btn);refreshCampCards();var card=btn.closest(".card");if(card){var sn=card.getAttribute("data-school-name");if(sn)updateMapMarkerByCamp(sn);}};
+refreshCampCards();
+function injectSchoolCampChips(){
+  document.querySelectorAll(".school-row").forEach(function(row){
+    var sn=row.getAttribute("data-school");
+    if(!sn)return;
+    var camps=SCHOOL_CAMPAIGNS[sn]||[];
+    if(!camps.length)return;
+    var cell=row.querySelector("td:first-child");
+    if(!cell||cell.querySelector(".school-camps-inline"))return;
+    var sorted=camps.slice().sort(cmpDeadlineAsc);
+    var wrap=document.createElement("div");
+    wrap.className="school-camps-inline";
+    sorted.forEach(function(c){
+      var col=CAMP_COLORS[c.camp]||"#94A3B8";
+      var parts=c.camp.split("_");
+      var advert=parts[0];
+      var qtyParts=[];
+      if(c.poster>0)qtyParts.push("포"+c.poster);
+      if(c.banner>0)qtyParts.push("현"+c.banner);
+      var qtyStr=qtyParts.length?" "+qtyParts.join("·"):"";
+      var payStr=c.pay>0?" ₩"+c.pay.toLocaleString():"";
+      var chip=document.createElement("span");
+      chip.className="camp-chip";
+      chip.style.background=col+"1A";
+      chip.style.color="#0F172A";
+      chip.innerHTML='<span class="chip-dot" style="background:'+col+'"></span>'+advert+qtyStr+payStr;
+      wrap.appendChild(chip);
+    });
+    cell.appendChild(wrap);
+  });
+}
+injectSchoolCampChips();
+function injectCampNameDots(){
+  document.querySelectorAll(".camp-block").forEach(function(block){
+    var cn=block.getAttribute("data-camp");
+    if(!cn)return;
+    var col=CAMP_COLORS[cn]||"#94A3B8";
+    block.style.borderLeftColor=col;
+    var hdr=block.querySelector(".camp-block-header");
+    if(hdr)hdr.style.background=col+"1F";
+    var nameEl=block.querySelector(".camp-name");
+    if(nameEl&&!nameEl.querySelector(".camp-name-dot")){
+      var dot=document.createElement("span");
+      dot.className="camp-name-dot";
+      dot.style.background=col;
+      nameEl.insertBefore(dot,nameEl.firstChild);
+    }
+  });
+}
+injectCampNameDots();
+var captureQueues={};
+var gpsPermissionGranted=false;
+function queueKey(block){return block.getAttribute("data-school")+"|||"+block.getAttribute("data-camp");}
+var IDB_NAME="uploadQueueDB",IDB_STORE="photos",IDB_VERSION=1,IDB_MAX_AGE_MS=48*60*60*1000;
+var __idbDb=null;
+function idbOpen(){
+  return new Promise(function(resolve,reject){
+    if(__idbDb){resolve(__idbDb);return;}
+    if(!window.indexedDB){reject(new Error("IDB unavailable"));return;}
+    var req=indexedDB.open(IDB_NAME,IDB_VERSION);
+    req.onerror=function(){reject(req.error);};
+    req.onupgradeneeded=function(){
+      var db=req.result;
+      if(!db.objectStoreNames.contains(IDB_STORE)){
+        var st=db.createObjectStore(IDB_STORE,{keyPath:"id",autoIncrement:true});
+        st.createIndex("queueKey","queueKey",{unique:false});
+        st.createIndex("ts","ts",{unique:false});
+      }
+    };
+    req.onsuccess=function(){__idbDb=req.result;resolve(__idbDb);};
+  });
+}
+function idbAddPhoto(qKey,file,gps){
+  return idbOpen().then(function(db){return new Promise(function(resolve,reject){
+    var tx=db.transaction(IDB_STORE,"readwrite");
+    var req=tx.objectStore(IDB_STORE).add({
+      queueKey:qKey,ts:Date.now(),blob:file,
+      name:(file&&file.name)||("photo_"+Date.now()+".jpg"),
+      type:(file&&file.type)||"image/jpeg",
+      gpsLat:gps?gps.lat:null, gpsLng:gps?gps.lng:null
+    });
+    req.onsuccess=function(){resolve(req.result);};
+    req.onerror=function(){reject(req.error);};
+  });});
+}
+function idbDeletePhoto(id){
+  if(id==null)return Promise.resolve();
+  return idbOpen().then(function(db){return new Promise(function(resolve){
+    var tx=db.transaction(IDB_STORE,"readwrite");
+    tx.objectStore(IDB_STORE).delete(id);
+    tx.oncomplete=function(){resolve();};
+    tx.onerror=function(){resolve();};
+  });}).catch(function(){});
+}
+function idbCleanupExpired(){
+  return idbOpen().then(function(db){return new Promise(function(resolve){
+    var cutoff=Date.now()-IDB_MAX_AGE_MS;
+    var tx=db.transaction(IDB_STORE,"readwrite");
+    var idx=tx.objectStore(IDB_STORE).index("ts");
+    var req=idx.openCursor(IDBKeyRange.upperBound(cutoff));
+    var n=0;
+    req.onsuccess=function(e){var c=e.target.result;if(c){c.delete();n++;c.continue();}else resolve(n);};
+    req.onerror=function(){resolve(0);};
+  });}).catch(function(){return 0;});
+}
+function idbGetAllPhotos(){
+  return idbOpen().then(function(db){return new Promise(function(resolve){
+    var tx=db.transaction(IDB_STORE,"readonly");
+    var req=tx.objectStore(IDB_STORE).getAll();
+    req.onsuccess=function(){resolve(req.result||[]);};
+    req.onerror=function(){resolve([]);};
+  });}).catch(function(){return [];});
+}
+function restoreQueuesFromIdb(){
+  idbCleanupExpired().then(function(){return idbGetAllPhotos();}).then(function(items){
+    if(!items||!items.length)return;
+    var count=0;var touchedKeys={};
+    items.forEach(function(it){
+      if(!captureQueues[it.queueKey])captureQueues[it.queueKey]=[];
+      var f=it.blob;
+      try{if(it.name&&!f.name){f=new File([it.blob],it.name,{type:it.type||"image/jpeg"});}}catch(e){}
+      captureQueues[it.queueKey].push({
+        file:f, gps:(it.gpsLat!=null&&it.gpsLng!=null)?{lat:it.gpsLat,lng:it.gpsLng}:null,
+        idbId:it.id
+      });
+      touchedKeys[it.queueKey]=true;count++;
+    });
+    var esc=function(s){return (window.CSS&&CSS.escape)?CSS.escape(s):s;};
+    Object.keys(touchedKeys).forEach(function(k){
+      var parts=k.split("|||");
+      var block=document.querySelector('.camp-block[data-school="'+esc(parts[0])+'"][data-camp="'+esc(parts[1])+'"]');
+      if(block)renderCaptureQueue(block,k);
+    });
+    if(count>0)showToast("\uD83D\uDCE6 이전 세션 사진 "+count+"장 복구됨");
+  }).catch(function(){});
+}
+window.addEventListener("pageshow",function(e){if(e.persisted)setTimeout(restoreQueuesFromIdb,300);});
+function getDeviceGps(){
+  return new Promise(function(resolve){
+    if(!navigator.geolocation){resolve(null);return;}
+    navigator.geolocation.getCurrentPosition(
+      function(pos){resolve({lat:pos.coords.latitude,lng:pos.coords.longitude});},
+      function(){resolve(null);},
+      {enableHighAccuracy:true,timeout:10000,maximumAge:60000}
+    );
+  });
+}
+function closeGpsGuide(){var el=document.getElementById("gpsGuideOverlay");if(el)el.parentNode.removeChild(el);}
+function showGpsGuide(reason){
+  closeGpsGuide();
+  var msg="",title="",btn="확인";
+  if(reason==="inapp"){title="외부 브라우저에서 열어주세요";msg="카카오톡/네이버 등 인앱 브라우저에서는\nGPS 위치 권한 요청이 차단됩니다.\n\n우측 상단 ⋮ 버튼 → \"Chrome\"(안드로이드) 또는\n\"Safari\"(아이폰)로 열어주세요.";}
+  else if(reason==="denied"){title="GPS 권한이 필요합니다";msg="사진 업로드 시 GPS 좌표를 함께 기록하려면\n위치 권한을 허용해주세요.\n\n브라우저 주소창 왼쪽 자물쇠 아이콘 →\n위치 → 허용으로 변경 후 재시도.";}
+  var ov=document.createElement("div");ov.id="gpsGuideOverlay";ov.className="gps-guide-overlay";
+  ov.innerHTML='<div class="gps-guide-box"><h3>'+title+'</h3><p>'+msg+'</p><button onclick="closeGpsGuide()">'+btn+'</button></div>';
+  document.body.appendChild(ov);
+}
+function detectInAppBrowser(){return /KAKAOTALK|NAVER|Line|FBAN|FBAV|Instagram|Whale/i.test(navigator.userAgent||"");}
+function startCameraCapture(btn){
+  if(detectInAppBrowser()){showGpsGuide("inapp");return;}
+  var block=btn.closest(".camp-block");
+  if(!gpsPermissionGranted&&navigator.geolocation){
+    showToast("\uD83D\uDCCD GPS 권한 요청 중...");
+    navigator.geolocation.getCurrentPosition(
+      function(){gpsPermissionGranted=true;showToast("\u2713 GPS 허용됨. 이제 촬영해주세요.");},
+      function(){gpsPermissionGranted=true;showToast("\u26A0 GPS 없이 업로드됩니다 (데스크톱/권한없음).");},
+      {enableHighAccuracy:true,timeout:8000,maximumAge:0}
+    );
+    return;
+  }
+  if(!gpsPermissionGranted)gpsPermissionGranted=true;
+  doCapture(btn,block,queueKey(block));
+}
+function pickPhotoExt(file){
+  var t=((file&&file.type)||"").toLowerCase();
+  if(t.indexOf("heic")!==-1)return"heic";
+  if(t.indexOf("heif")!==-1)return"heif";
+  if(t.indexOf("png")!==-1)return"png";
+  if(t.indexOf("webp")!==-1)return"webp";
+  if(t.indexOf("jpeg")!==-1||t.indexOf("jpg")!==-1)return"jpg";
+  var nm=(file&&file.name)||"";
+  var m=nm.match(/\.(heic|heif|png|webp|jpe?g)$/i);
+  return m?m[1].toLowerCase().replace("jpeg","jpg"):"jpg";
+}
+function saveFileToDevice(file){
+  try{
+    if(!file)return false;
+    var ts=new Date();
+    var stamp=ts.getFullYear()+("0"+(ts.getMonth()+1)).slice(-2)+("0"+ts.getDate()).slice(-2)+"_"+("0"+ts.getHours()).slice(-2)+("0"+ts.getMinutes()).slice(-2)+("0"+ts.getSeconds()).slice(-2);
+    var dlName="photo_"+stamp+"."+pickPhotoExt(file);
+    var reader=new FileReader();
+    reader.onload=function(){
+      try{
+        var dataUrl=reader.result;
+        if(!dataUrl)return;
+        var a=document.createElement("a");
+        a.href=dataUrl;a.download=dlName;a.rel="noopener";a.style.display="none";
+        document.body.appendChild(a);a.click();
+        setTimeout(function(){try{document.body.removeChild(a);}catch(e){}},3000);
+      }catch(e){}
+    };
+    reader.onerror=function(){};
+    reader.readAsDataURL(file);
+    return true;
+  }catch(e){return false;}
+}
+function doCapture(btn,block,key){
+  var input=document.createElement("input");
+  input.type="file";input.accept="image/*";input.capture="environment";
+  input.style.display="none";
+  input.addEventListener("change",function(e){
+    var file=e.target.files&&e.target.files[0];
+    if(!file)return;
+    saveFileToDevice(file);
+    getDeviceGps().then(function(gps){
+      if(!captureQueues[key])captureQueues[key]=[];
+      var item={file:file,gps:gps};
+      captureQueues[key].push(item);
+      renderCaptureQueue(block,key);
+      idbAddPhoto(key,file,gps).then(function(id){item.idbId=id;}).catch(function(){});
+    });
+  });
+  document.body.appendChild(input);input.click();
+  setTimeout(function(){try{document.body.removeChild(input);}catch(e){}},60000);
+}
+function renderCaptureQueue(block,key){
+  var queue=captureQueues[key]||[];
+  var existing=block.querySelector(".capture-queue");
+  if(!queue.length){if(existing)existing.remove();return;}
+  var gpsOk=queue.filter(function(q){return q.gps;}).length;
+  var gpsFail=queue.length-gpsOk;
+  var html='<div class="capture-queue-count">'+queue.length+'장 촬영됨 · <span class="gps-ok">GPS '+gpsOk+'장 \u2713</span>'+(gpsFail?' · <span class="gps-fail">GPS 실패 '+gpsFail+'장</span>':'')+'</div>'+
+    '<div class="capture-queue-btns"><button class="capture-more-btn" onclick="startCameraCapture(this)">\uD83D\uDCF7 추가 촬영</button><button class="capture-upload-btn" onclick="uploadCaptureQueue(this)">\u2B06 '+queue.length+'장 업로드</button></div>';
+  if(existing){existing.innerHTML=html;}
+  else {var wrap=document.createElement("div");wrap.className="capture-queue";wrap.innerHTML=html;block.querySelector(".camp-action-row").insertAdjacentElement("afterend",wrap);}
+}
+function readFileAsBase64(file){
+  return new Promise(function(resolve,reject){
+    var reader=new FileReader();
+    reader.onload=function(){var s=reader.result||"";var idx=s.indexOf(",");resolve(idx>=0?s.substring(idx+1):s);};
+    reader.onerror=function(){reject(reader.error);};
+    reader.readAsDataURL(file);
+  });
+}
+function readFileAsDataUrl(file){
+  return new Promise(function(resolve,reject){
+    var reader=new FileReader();
+    reader.onload=function(){resolve(reader.result||"");};
+    reader.onerror=function(){reject(reader.error);};
+    reader.readAsDataURL(file);
+  });
+}
+function injectGpsToJpegDataUrl(dataUrl, lat, lng){
+  try{
+    if(typeof piexif==="undefined")return dataUrl;
+    if(lat==null||lng==null)return dataUrl;
+    if(!/^data:image\/jpe?g/i.test(dataUrl))return dataUrl;
+    var exifObj;
+    try{exifObj=piexif.load(dataUrl);}
+    catch(e){exifObj={"0th":{},"Exif":{},"GPS":{},"Interop":{},"1st":{},"thumbnail":null};}
+    if(!exifObj.GPS)exifObj.GPS={};
+    var absLat=Math.abs(Number(lat)),absLng=Math.abs(Number(lng));
+    exifObj.GPS[piexif.GPSIFD.GPSLatitudeRef]=Number(lat)>=0?"N":"S";
+    exifObj.GPS[piexif.GPSIFD.GPSLatitude]=piexif.GPSHelper.degToDmsRational(absLat);
+    exifObj.GPS[piexif.GPSIFD.GPSLongitudeRef]=Number(lng)>=0?"E":"W";
+    exifObj.GPS[piexif.GPSIFD.GPSLongitude]=piexif.GPSHelper.degToDmsRational(absLng);
+    var ts=new Date();
+    exifObj.GPS[piexif.GPSIFD.GPSDateStamp]=ts.getUTCFullYear()+":"+String(ts.getUTCMonth()+1).padStart(2,"0")+":"+String(ts.getUTCDate()).padStart(2,"0");
+    exifObj.GPS[piexif.GPSIFD.GPSTimeStamp]=[[ts.getUTCHours(),1],[ts.getUTCMinutes(),1],[ts.getUTCSeconds(),1]];
+    var exifBytes=piexif.dump(exifObj);
+    return piexif.insert(exifBytes, dataUrl);
+  }catch(e){return dataUrl;}
+}
+function extractBase64(dataUrl){var idx=(dataUrl||"").indexOf(",");return idx>=0?dataUrl.substring(idx+1):(dataUrl||"");}
+function getMimeType(name){var e=(name||"").toLowerCase().split(".").pop();var m={jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",heic:"image/heic",heif:"image/heif",webp:"image/webp"};return m[e]||"image/jpeg";}
+var __wakeLock=null;
+function acquireWakeLock(){try{if("wakeLock" in navigator){navigator.wakeLock.request("screen").then(function(wl){__wakeLock=wl;if(wl&&wl.addEventListener)wl.addEventListener("release",function(){});}).catch(function(){});}}catch(e){}}
+function releaseWakeLock(){try{if(__wakeLock){__wakeLock.release().catch(function(){});__wakeLock=null;}}catch(e){}}
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible"&&window.__uploadInProgress)acquireWakeLock();});
+function uploadSingle(payload,tries){
+  tries=tries||0;
+  var action=payload.action||"upload_photo";
+  var url=WEB_APP_URL+(WEB_APP_URL.indexOf("?")<0?"?":"&")+"action="+encodeURIComponent(action);
+  return fetch(url,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)})
+    .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
+    .then(function(t){
+      try{return JSON.parse(t);}
+      catch(e){return{status:"error",message:"응답파싱실패: "+(t||"").substring(0,80)};}
+    })
+    .catch(function(err){
+      if(tries<2){return new Promise(function(res){setTimeout(function(){res(uploadSingle(payload,tries+1));},1500*(tries+1));});}
+      return{status:"error",message:String(err&&err.message||err)};
+    });
+}
+function addToUploadedGallery(block,rawFile){
+  try{
+    var wrap=block.querySelector(".uploaded-gallery-wrap");
+    var gal;
+    if(!wrap){
+      wrap=document.createElement("div");wrap.className="uploaded-gallery-wrap";
+      var lbl=document.createElement("div");lbl.className="uploaded-gallery-label";
+      lbl.innerHTML='\u2713 '+'<span class="ug-count">0</span>장 업로드 완료';
+      gal=document.createElement("div");gal.className="uploaded-gallery";
+      wrap.appendChild(lbl);wrap.appendChild(gal);
+      var anchor=block.querySelector(".capture-queue")||block.querySelector(".camp-action-row");
+      if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(wrap,anchor.nextSibling);}
+      else{block.appendChild(wrap);}
+    }else{gal=wrap.querySelector(".uploaded-gallery");}
+    var url=URL.createObjectURL(rawFile);
+    var item=document.createElement("div");item.className="u-item";
+    var n=gal.children.length+1;
+    item.innerHTML='<img loading="lazy" src="'+url+'" alt="업로드 '+n+'"><div class="u-num">'+n+'</div><div class="u-check">\u2713</div>';
+    item.onclick=function(){openUploadedViewer(url);};
+    gal.appendChild(item);
+    var cnt=wrap.querySelector(".ug-count");if(cnt)cnt.textContent=gal.children.length;
+  }catch(e){}
+}
+function openUploadedViewer(url){
+  var ov=document.createElement("div");ov.className="uploaded-viewer";
+  ov.innerHTML='<img src="'+url+'">';
+  ov.onclick=function(){document.body.removeChild(ov);};
+  document.body.appendChild(ov);
+}
+function uploadCaptureQueue(uploadBtn){
+  var block=uploadBtn.closest(".camp-block");
+  var key=queueKey(block);
+  var queue=captureQueues[key]||[];
+  if(!queue.length){showToast("촬영된 사진 없음");return;}
+  uploadBtn.disabled=true;uploadBtn.textContent="업로드 중...";
+  window.__uploadInProgress=true;acquireWakeLock();
+  var qEl=block.querySelector(".capture-queue");
+  var prog=document.createElement("div");prog.className="upload-progress";
+  prog.innerHTML='<div class="upload-progress-bar"><div class="upload-progress-fill" style="width:0%"></div></div><div class="upload-progress-text">0 / '+queue.length+' · 화면을 끄지 마세요</div>';
+  qEl.appendChild(prog);
+  var fill=prog.querySelector(".upload-progress-fill");var txt=prog.querySelector(".upload-progress-text");
+  var school=block.getAttribute("data-school");var camp=block.getAttribute("data-camp");
+  var i=0,success=0,failed=0;var failedItems=[];var lastErrMsg="";
+  function finish(){
+    window.__uploadInProgress=false;releaseWakeLock();
+    if(failed && lastErrMsg){showToast("\u2717 업로드 실패 "+failed+"건: "+lastErrMsg);}
+    else{showToast("\u2713 업로드 완료 "+success+"/"+queue.length+(failed?" (실패 "+failed+")":""));}
+    captureQueues[key]=failedItems;renderCaptureQueue(block,key);
+  }
+  function next(){
+    if(i>=queue.length){finish();return;}
+    var item=queue[i];var rawFile=item.file;var gps=item.gps||{};
+    readFileAsDataUrl(rawFile).then(function(dataUrl){
+      var finalDataUrl=dataUrl;
+      if(gps.lat!=null&&gps.lng!=null){finalDataUrl=injectGpsToJpegDataUrl(dataUrl, gps.lat, gps.lng);}
+      var b64=extractBase64(finalDataUrl);
+      var mime=(finalDataUrl.match(/^data:([^;,]+)/)||[,rawFile.type||getMimeType(rawFile.name)])[1];
+      var payload={action:"upload_photo",school:school,camp:camp,fileName:rawFile.name||("photo_"+Date.now()+".jpg"),fileData:b64,mimeType:mime};
+      if(gps.lat!=null&&gps.lng!=null){payload.lat=gps.lat;payload.lng=gps.lng;}
+      return uploadSingle(payload);
+    }).then(function(res){
+      if(res&&res.status==="ok"){success++;addToUploadedGallery(block,rawFile);if(item.idbId!=null)idbDeletePhoto(item.idbId);}
+      else{failed++;failedItems.push(item);lastErrMsg=(res&&res.message)?res.message:"원인 불명";}
+    }).catch(function(e){failed++;failedItems.push(item);lastErrMsg=String(e&&e.message||e);}).then(function(){
+      i++;var pct=Math.round(i/queue.length*100);
+      fill.style.width=pct+"%";txt.textContent=i+" / "+queue.length+(failed?" (실패 "+failed+")":" · 화면을 끄지 마세요");
+      next();
+    });
+  }
+  next();
+}
+</script>
+</body></html>
