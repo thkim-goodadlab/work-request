@@ -297,11 +297,10 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .capture-upload-btn:active{background:var(--positive-light)}
 .uploaded-gallery-wrap{margin-top:10px;padding:10px 12px;background:var(--positive-bg);border:1.5px solid var(--positive-light);border-radius:var(--r-sm)}
 .uploaded-gallery-label{font-size:13px;font-weight:800;color:var(--positive);margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.uploaded-gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.uploaded-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
 .uploaded-gallery .u-item{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;background:#f0f0f0;border:1px solid var(--positive-light);cursor:pointer;touch-action:manipulation}
 .uploaded-gallery .u-item img{width:100%;height:100%;object-fit:cover;display:block}
-.uploaded-gallery .u-item .u-num{position:absolute;top:3px;left:4px;background:rgba(0,0,0,0.65);color:#fff;font-size:10px;font-weight:800;padding:1px 5px;border-radius:4px;line-height:1.4}
-.uploaded-gallery .u-item .u-check{position:absolute;bottom:3px;right:4px;background:var(--positive);color:#fff;font-size:10px;font-weight:800;padding:1px 5px;border-radius:4px;line-height:1.4}
+.uploaded-gallery .u-item .u-num{position:absolute;top:4px;left:5px;background:rgba(0,0,0,0.65);color:#fff;font-size:11px;font-weight:800;padding:1px 6px;border-radius:4px;line-height:1.4}
 .uploaded-viewer{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:10001;display:flex;align-items:center;justify-content:center;padding:20px}
 .uploaded-viewer img{max-width:100%;max-height:100%;object-fit:contain}
 .gps-guide-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px}
@@ -319,7 +318,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <div class="header-top">
       <h1>김태준 작업요청서</h1>
-      <div class="updated-tag">4/21 15:22 업데이트</div>
+      <div class="updated-tag">4/21 15:57 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/3</span></div>
@@ -525,7 +524,9 @@ window.addEventListener("scroll",function(){
   });
 },{passive:true});
 document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".tab-btn").forEach(function(b){b.addEventListener("click",function(){var n=document.querySelector(".tab-nav");if(n)n.classList.remove("hidden-by-scroll");var bb=document.getElementById("bottomBar");if(bb)bb.classList.remove("hidden-by-scroll");});});});
-(function syncOnLoad(){var ss=document.getElementById("syncStatus");ss.classList.add("show");fetch(WEB_APP_URL+"?action=sync&worker="+encodeURIComponent(WORKER_NAME)).then(function(r){return r.json()}).then(function(json){if(json.status==="ok"&&json.data){var data=json.data;document.querySelectorAll(".camp-block").forEach(function(block){var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");var key=school+"|||"+camp;if(!data[key])return;var info=data[key];var btn=block.querySelector(".complete-btn");if(info.postDate&&!btn.classList.contains("checked")){btn.classList.add("checked");btn.innerHTML=SVG_CHECKED+" 완료됨";block.classList.add("done");doneCount++}else if(!info.postDate&&btn.classList.contains("checked")){btn.classList.remove("checked");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";block.classList.remove("done");doneCount--}var noteInput=block.querySelector(".note-input");if(noteInput&&info.note)noteInput.value=info.note});document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});if(allDone)card.classList.add("all-done");else card.classList.remove("all-done");var sn2=card.getAttribute("data-school-name");if(sn2)updateMapMarker(sn2,allDone)});updateProgress();syncSchoolTable();refreshCampSummaryStats();refreshCampDoneStatus();refreshTotalsGrid();if(mapInitDone)syncMapFromCards();else setTimeout(syncMapFromCards,MAP_DATA.length*160+1000)}ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400)}).catch(function(){ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400)})})();
+(function syncOnLoad(){var ss=document.getElementById("syncStatus");ss.classList.add("show");fetch(WEB_APP_URL+"?action=sync&worker="+encodeURIComponent(WORKER_NAME)).then(function(r){return r.json()}).then(function(json){if(json.status==="ok"&&json.data){var data=json.data;document.querySelectorAll(".camp-block").forEach(function(block){var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");var key=school+"|||"+camp;if(!data[key])return;var info=data[key];var btn=block.querySelector(".complete-btn");if(info.postDate&&!btn.classList.contains("checked")){btn.classList.add("checked");btn.innerHTML=SVG_CHECKED+" 완료됨";block.classList.add("done");doneCount++}else if(!info.postDate&&btn.classList.contains("checked")){btn.classList.remove("checked");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";block.classList.remove("done");doneCount--}var noteInput=block.querySelector(".note-input");if(noteInput&&info.note)noteInput.value=info.note;
+if(info.photos&&info.photos.length){info.photos.forEach(function(p){if(!p||!p.fileId)return;var thumb=p.thumb||("https://drive.google.com/thumbnail?id="+encodeURIComponent(p.fileId)+"&sz=w400");addUploadedItemFromUrl(block,thumb);});}
+});document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});if(allDone)card.classList.add("all-done");else card.classList.remove("all-done");var sn2=card.getAttribute("data-school-name");if(sn2)updateMapMarker(sn2,allDone)});updateProgress();syncSchoolTable();refreshCampSummaryStats();refreshCampDoneStatus();refreshTotalsGrid();if(mapInitDone)syncMapFromCards();else setTimeout(syncMapFromCards,MAP_DATA.length*160+1000)}ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400)}).catch(function(){ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400)})})();
 function refreshDday(){
   var today=new Date();today.setHours(0,0,0,0);
   document.querySelectorAll("[data-deadline]").forEach(function(el){
@@ -1002,8 +1003,7 @@ function renderCaptureQueue(block,key){
   if(uploading)parts.push('<span class="gps-ok">\u2191 업로드 중 '+uploading+'</span>');
   if(retrying)parts.push('<span class="gps-fail">\u21BB 재시도 '+retrying+'</span>');
   if(gpsOk<queue.length)parts.push('<span class="gps-fail">GPS 실패 '+(queue.length-gpsOk)+'</span>');
-  var html='<div class="capture-queue-count">'+parts.join(" · ")+'</div>'+
-    '<div class="capture-queue-btns"><button class="capture-more-btn" onclick="startCameraCapture(this)">\uD83D\uDCF7 추가 촬영</button></div>';
+  var html='<div class="capture-queue-count">'+parts.join(" · ")+'</div>';
   if(existing){existing.innerHTML=html;}
   else {var wrap=document.createElement("div");wrap.className="capture-queue";wrap.innerHTML=html;block.querySelector(".camp-action-row").insertAdjacentElement("afterend",wrap);}
 }
@@ -1065,28 +1065,30 @@ function uploadSingle(payload,tries){
       return{status:"error",message:String(err&&err.message||err)};
     });
 }
-function addToUploadedGallery(block,rawFile){
+function addUploadedItemFromUrl(block,imgUrl){
   try{
     var wrap=block.querySelector(".uploaded-gallery-wrap");
     var gal;
     if(!wrap){
       wrap=document.createElement("div");wrap.className="uploaded-gallery-wrap";
       var lbl=document.createElement("div");lbl.className="uploaded-gallery-label";
-      lbl.innerHTML='\u2713 '+'<span class="ug-count">0</span>장 업로드 완료';
+      lbl.innerHTML='\u2713 업로드 완료 '+'<span class="ug-count">0</span>장';
       gal=document.createElement("div");gal.className="uploaded-gallery";
       wrap.appendChild(lbl);wrap.appendChild(gal);
       var anchor=block.querySelector(".capture-queue")||block.querySelector(".camp-action-row");
       if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(wrap,anchor.nextSibling);}
       else{block.appendChild(wrap);}
     }else{gal=wrap.querySelector(".uploaded-gallery");}
-    var url=URL.createObjectURL(rawFile);
     var item=document.createElement("div");item.className="u-item";
     var n=gal.children.length+1;
-    item.innerHTML='<img loading="lazy" src="'+url+'" alt="업로드 '+n+'"><div class="u-num">'+n+'</div><div class="u-check">\u2713</div>';
-    item.onclick=function(){openUploadedViewer(url);};
+    item.innerHTML='<img loading="lazy" src="'+imgUrl+'" alt="업로드 '+n+'"><div class="u-num">'+n+'</div>';
+    item.onclick=function(){openUploadedViewer(imgUrl);};
     gal.appendChild(item);
     var cnt=wrap.querySelector(".ug-count");if(cnt)cnt.textContent=gal.children.length;
   }catch(e){}
+}
+function addToUploadedGallery(block,rawFile){
+  try{addUploadedItemFromUrl(block,URL.createObjectURL(rawFile));}catch(e){}
 }
 function openUploadedViewer(url){
   var ov=document.createElement("div");ov.className="uploaded-viewer";
