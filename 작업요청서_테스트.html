@@ -92,7 +92,9 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .section-title{padding:14px 18px 8px;font-size:12px;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em}
 .map-label{background:var(--surface);border:1.5px solid var(--accent);border-radius:6px;padding:2px 7px;font-size:10px;font-weight:800;color:var(--accent);white-space:nowrap;pointer-events:none;transform:translateY(-8px);box-shadow:var(--shadow-sm)}
 .map-label.done{background:var(--positive-bg);border-color:var(--positive);color:var(--positive);opacity:.35}
-#naverMap{width:100%;height:680px}
+#naverMap{width:100%;height:680px;transition:none}
+#naverMap.map-large{position:fixed!important;top:8px;left:8px;right:8px;bottom:8px;width:auto!important;height:auto!important;z-index:10000;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.35)}
+body.has-large-map{overflow:hidden}
 .map-legend{padding:10px 18px;display:flex;gap:16px;border-top:1px solid var(--border-light)}
 .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary);font-weight:600}
 .legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
@@ -335,7 +337,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1776840585431;
+  var BUILD_TS=1776841605692;
   // v3.9.10: 무한 새로고침 방지 — 세션당 1회만 체크, 플래그를 "체크 시작 시점"에 바로 세팅.
   // (이전 v3.9.9는 location.replace 분기에서 플래그를 안 찍어서 루프 발생)
   if(sessionStorage.getItem("__verChecked"))return;
@@ -356,7 +358,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <div class="header-top">
       <h1>테스트 작업요청서</h1>
-      <div class="updated-tag">4/22 15:49 업데이트</div>
+      <div class="updated-tag">4/22 16:06 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/2</span></div>
@@ -516,14 +518,12 @@ function addMapControlButtons(){
     var mapEl=document.getElementById("naverMap");if(!mapEl)return;
     if(getComputedStyle(mapEl).position==="static")mapEl.style.position="relative";
     var btnCss="position:absolute;z-index:100;cursor:pointer;background:#fff;border:1px solid rgba(0,0,0,0.18);border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.18);user-select:none;-webkit-user-select:none;touch-action:manipulation;";
-    var fsBtn=document.createElement("button");fsBtn.type="button";fsBtn.title="전체화면";fsBtn.setAttribute("aria-label","전체화면");
+    var fsBtn=document.createElement("button");fsBtn.type="button";fsBtn.title="크게보기";fsBtn.setAttribute("aria-label","크게보기");
     fsBtn.style.cssText=btnCss+"top:10px;right:10px;padding:0;";
     var fsEnterSvg='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>';
     var fsExitSvg='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>';
     fsBtn.innerHTML=fsEnterSvg;
-    fsBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();var doc=document;var isFs=doc.fullscreenElement||doc.webkitFullscreenElement;if(isFs){var ex=doc.exitFullscreen||doc.webkitExitFullscreen;if(ex)ex.call(doc);}else{var req=mapEl.requestFullscreen||mapEl.webkitRequestFullscreen;if(req){try{req.call(mapEl);}catch(e){alert("전체화면 전환 실패: "+e.message);}}else{alert("이 브라우저는 전체화면을 지원하지 않습니다");}}};
-    function onFsChange(){var isFs=document.fullscreenElement||document.webkitFullscreenElement;fsBtn.innerHTML=isFs?fsExitSvg:fsEnterSvg;setTimeout(function(){try{if(naverMapObj)naver.maps.Event.trigger(naverMapObj,"resize");}catch(e){}},200);}
-    document.addEventListener("fullscreenchange",onFsChange);document.addEventListener("webkitfullscreenchange",onFsChange);
+    fsBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();var isLarge=mapEl.classList.toggle("map-large");document.body.classList.toggle("has-large-map",isLarge);fsBtn.innerHTML=isLarge?fsExitSvg:fsEnterSvg;fsBtn.title=isLarge?"원래 크기":"크게보기";setTimeout(function(){try{if(naverMapObj)naver.maps.Event.trigger(naverMapObj,"resize");}catch(e){}},220);};
     mapEl.appendChild(fsBtn);
     var locBtn=document.createElement("button");locBtn.type="button";locBtn.title="내 위치";locBtn.setAttribute("aria-label","내 위치");
     locBtn.style.cssText=btnCss+"top:50%;right:10px;transform:translateY(-50%);padding:0;";
