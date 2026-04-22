@@ -334,7 +334,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <div class="header-top">
       <h1>김태준 작업요청서</h1>
-      <div class="updated-tag">4/22 12:40 업데이트</div>
+      <div class="updated-tag">4/22 14:51 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/3</span></div>
@@ -540,9 +540,25 @@ window.addEventListener("scroll",function(){
   });
 },{passive:true});
 document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".tab-btn").forEach(function(b){b.addEventListener("click",function(){var n=document.querySelector(".tab-nav");if(n)n.classList.remove("hidden-by-scroll");var bb=document.getElementById("bottomBar");if(bb)bb.classList.remove("hidden-by-scroll");});});});
-(function syncOnLoad(){var ss=document.getElementById("syncStatus");ss.classList.add("show");fetch(WEB_APP_URL+"?action=sync&worker="+encodeURIComponent(WORKER_NAME)).then(function(r){return r.json()}).then(function(json){if(json.status==="ok"&&json.data){var data=json.data;document.querySelectorAll(".camp-block").forEach(function(block){var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");var key=school+"|||"+camp;if(!data[key])return;var info=data[key];var btn=block.querySelector(".complete-btn");if(info.postDate&&!btn.classList.contains("checked")){btn.classList.add("checked");btn.innerHTML=SVG_CHECKED+" 완료됨";block.classList.add("done");doneCount++}else if(!info.postDate&&btn.classList.contains("checked")){btn.classList.remove("checked");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";block.classList.remove("done");doneCount--}var noteInput=block.querySelector(".note-input");if(noteInput&&info.note)noteInput.value=info.note;
-if(info.photos&&info.photos.length){info.photos.forEach(function(p){if(!p||!p.fileId)return;if(p.clientId)window._serverClientIds[p.clientId]=1;var thumb=p.thumb||("https://drive.google.com/thumbnail?id="+encodeURIComponent(p.fileId)+"&sz=w400");addUploadedItemFromUrl(block,thumb);});}
-});document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});if(allDone)card.classList.add("all-done");else card.classList.remove("all-done");var sn2=card.getAttribute("data-school-name");if(sn2)updateMapMarker(sn2,allDone)});updateProgress();syncSchoolTable();refreshCampSummaryStats();refreshCampDoneStatus();refreshTotalsGrid();if(mapInitDone)syncMapFromCards();else setTimeout(syncMapFromCards,MAP_DATA.length*160+1000)}ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400)}).catch(function(){ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400)})})();
+var SYNC_CACHE_KEY="sync_cache_v1_"+WORKER_NAME;
+function applySyncData(data,reset){
+  if(reset){document.querySelectorAll(".uploaded-gallery-wrap").forEach(function(w){if(w&&w.parentNode)w.parentNode.removeChild(w);});}
+  document.querySelectorAll(".camp-block").forEach(function(block){var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");var key=school+"|||"+camp;if(!data[key])return;var info=data[key];var btn=block.querySelector(".complete-btn");if(info.postDate&&!btn.classList.contains("checked")){btn.classList.add("checked");btn.innerHTML=SVG_CHECKED+" 완료됨";block.classList.add("done");doneCount++}else if(!info.postDate&&btn.classList.contains("checked")){btn.classList.remove("checked");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";block.classList.remove("done");doneCount--}var noteInput=block.querySelector(".note-input");if(noteInput&&info.note)noteInput.value=info.note;
+    if(info.photos&&info.photos.length){info.photos.forEach(function(p){if(!p||!p.fileId)return;if(p.clientId)window._serverClientIds[p.clientId]=1;var thumb=p.thumb||("https://drive.google.com/thumbnail?id="+encodeURIComponent(p.fileId)+"&sz=w400");addUploadedItemFromUrl(block,thumb);});}
+  });
+  document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});if(allDone)card.classList.add("all-done");else card.classList.remove("all-done");var sn2=card.getAttribute("data-school-name");if(sn2)updateMapMarker(sn2,allDone)});
+  updateProgress();syncSchoolTable();refreshCampSummaryStats();refreshCampDoneStatus();refreshTotalsGrid();if(mapInitDone)syncMapFromCards();else setTimeout(syncMapFromCards,MAP_DATA.length*160+1000);
+}
+(function syncOnLoad(){
+  var ss=document.getElementById("syncStatus");
+  var hadCache=false;
+  try{var cached=sessionStorage.getItem(SYNC_CACHE_KEY);if(cached){applySyncData(JSON.parse(cached),false);hadCache=true;}}catch(e){}
+  if(!hadCache)ss.classList.add("show");
+  fetch(WEB_APP_URL+"?action=sync&worker="+encodeURIComponent(WORKER_NAME)).then(function(r){return r.json()}).then(function(json){
+    if(json.status==="ok"&&json.data){applySyncData(json.data,hadCache);try{sessionStorage.setItem(SYNC_CACHE_KEY,JSON.stringify(json.data));}catch(e){}}
+    ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400);
+  }).catch(function(){ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400);});
+})();
 function refreshDday(){
   var today=new Date();today.setHours(0,0,0,0);
   document.querySelectorAll("[data-deadline]").forEach(function(el){
@@ -912,7 +928,10 @@ function restoreQueuesFromIdb(){
     if(!items||!items.length)return;
     var count=0;var touchedKeys={};var skipped=0;
     items.forEach(function(it){
-      if(it.clientId&&window._serverClientIds[it.clientId]){
+      if(!it.clientId){
+        idbDeletePhoto(it.id);skipped++;return;
+      }
+      if(window._serverClientIds[it.clientId]){
         idbDeletePhoto(it.id);skipped++;return;
       }
       if(!captureQueues[it.queueKey])captureQueues[it.queueKey]=[];
@@ -956,6 +975,7 @@ function showGpsGuide(reason){
 }
 function detectInAppBrowser(){return /KAKAOTALK|NAVER|Line|FBAN|FBAV|Instagram|Whale/i.test(navigator.userAgent||"");}
 function startCameraCapture(btn){
+  if(btn.__cool)return;btn.__cool=true;setTimeout(function(){btn.__cool=false;},1000);
   if(detectInAppBrowser()){showGpsGuide("inapp");return;}
   var block=btn.closest(".camp-block");
   if(!gpsPermissionGranted&&navigator.geolocation){
@@ -1007,7 +1027,10 @@ function doCapture(btn,block,key){
   var input=document.createElement("input");
   input.type="file";input.accept="image/*";input.capture="environment";
   input.style.display="none";
+  var __handled=false;
   input.addEventListener("change",function(e){
+    if(__handled)return;
+    __handled=true;
     var file=e.target.files&&e.target.files[0];
     if(!file)return;
     saveFileToDevice(file);
