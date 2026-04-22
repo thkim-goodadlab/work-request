@@ -329,17 +329,18 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1776838805051;
-  if(sessionStorage.getItem("__ver_"+BUILD_TS))return;
+  var BUILD_TS=1776839181220;
+  // v3.9.10: 무한 새로고침 방지 — 세션당 1회만 체크, 플래그를 "체크 시작 시점"에 바로 세팅.
+  // (이전 v3.9.9는 location.replace 분기에서 플래그를 안 찍어서 루프 발생)
+  if(sessionStorage.getItem("__verChecked"))return;
+  sessionStorage.setItem("__verChecked","1");
   fetch(location.pathname+"?_="+Date.now(),{method:"HEAD",cache:"no-store"}).then(function(r){
     var lm=r.headers.get("last-modified");
-    if(!lm){sessionStorage.setItem("__ver_"+BUILD_TS,"1");return;}
+    if(!lm)return;
     var srvTs=new Date(lm).getTime();
     if(srvTs>BUILD_TS+30000){
-      try{if(window.__uploadInProgress){sessionStorage.setItem("__ver_"+BUILD_TS,"1");return;}}catch(e){}
+      try{if(window.__uploadInProgress)return;}catch(e){}
       location.replace(location.pathname+"?v="+srvTs);
-    } else {
-      sessionStorage.setItem("__ver_"+BUILD_TS,"1");
     }
   }).catch(function(){});
 }catch(e){}})();</script>
@@ -349,7 +350,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <div class="header-top">
       <h1>변재호 v2 작업요청서</h1>
-      <div class="updated-tag">4/22 15:20 업데이트</div>
+      <div class="updated-tag">4/22 15:26 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">21/80</span></div>
