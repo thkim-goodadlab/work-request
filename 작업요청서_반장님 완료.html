@@ -317,6 +317,12 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .uploaded-gallery .u-item img{width:100%;height:100%;object-fit:cover;display:block}
 .uploaded-gallery .u-item.is-arriving{opacity:0;transform:scale(0.7)}
 .uploaded-gallery .u-item .u-num{position:absolute;top:4px;left:4px;min-width:20px;height:20px;padding:0 6px;background:linear-gradient(135deg,#10B981,#059669);color:#fff;font-size:11px;font-weight:900;border-radius:10px;display:flex;align-items:center;justify-content:center;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,0.22);letter-spacing:-0.02em}
+.uploaded-collapsed{margin-top:10px;padding:11px 14px;background:linear-gradient(180deg,#ECFDF5 0%,#FFF 100%);border:1.5px solid #A7F3D0;border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;touch-action:manipulation;transition:background 0.15s}
+.uploaded-collapsed:active{background:#D1FAE5}
+.uploaded-collapsed .uc-label{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#047857;letter-spacing:-0.02em}
+.uploaded-collapsed .uc-label .ug-check{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#10B981,#059669);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;box-shadow:0 1px 3px rgba(5,150,105,0.3)}
+.uploaded-collapsed .uc-label b{color:#065F46;font-size:15px;margin:0 1px}
+.uploaded-collapsed .uc-action{font-size:12.5px;font-weight:800;color:#059669;display:flex;align-items:center;gap:4px}
 .uploaded-viewer{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:10001;display:flex;align-items:center;justify-content:center;padding:20px}
 .uploaded-viewer img{max-width:100%;max-height:100%;object-fit:contain}
 .gps-guide-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px}
@@ -329,7 +335,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1776839179783;
+  var BUILD_TS=1776840579285;
   // v3.9.10: 무한 새로고침 방지 — 세션당 1회만 체크, 플래그를 "체크 시작 시점"에 바로 세팅.
   // (이전 v3.9.9는 location.replace 분기에서 플래그를 안 찍어서 루프 발생)
   if(sessionStorage.getItem("__verChecked"))return;
@@ -350,7 +356,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <div class="header-top">
       <h1>반장님 완료 작업요청서</h1>
-      <div class="updated-tag">4/22 15:26 업데이트</div>
+      <div class="updated-tag">4/22 15:49 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">21/21</span></div>
@@ -505,7 +511,28 @@ function makeSvgIcon(color,size,offX,offY){
 }
 function syncMapFromCards(){document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});var sn=card.getAttribute("data-school-name");if(sn)updateMapMarker(sn,allDone)})}
 function goToSchoolCard(schoolName){singleSchoolOrigin="pageSummary";var detailBtn=document.querySelectorAll(".tab-btn")[1];if(detailBtn)switchPage("pageDetail",detailBtn);requestAnimationFrame(function(){showSingleSchool(schoolName)})}
-(function(){try{if(typeof naver==="undefined"||!naver.maps){document.getElementById("naverMap").innerHTML="<p style=\"padding:20px;text-align:center;color:var(--text-muted)\">지도 로딩 실패</p>";return}var mc=document.getElementById("naverMap");naverMapObj=new naver.maps.Map(mc,{center:new naver.maps.LatLng(36.5,127.5),zoom:7,zoomControl:false,mapDataControl:false,scaleControl:false});(function addFullscreenBtn(){try{var fsBtn=document.createElement("div");fsBtn.style.cssText="margin:10px;cursor:pointer;background:#fff;border:1px solid rgba(0,0,0,0.15);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.15);user-select:none;-webkit-user-select:none;touch-action:manipulation";fsBtn.title="전체화면";var fsEnterSvg='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>';var fsExitSvg='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>';fsBtn.innerHTML=fsEnterSvg;fsBtn.onclick=function(){var doc=document;var mapEl=document.getElementById("naverMap");var isFs=doc.fullscreenElement||doc.webkitFullscreenElement;if(isFs){var ex=doc.exitFullscreen||doc.webkitExitFullscreen;if(ex)ex.call(doc);}else{var req=mapEl.requestFullscreen||mapEl.webkitRequestFullscreen;if(req)req.call(mapEl);else alert("전체화면 지원 안됨");}};function onFsChange(){var isFs=document.fullscreenElement||document.webkitFullscreenElement;fsBtn.innerHTML=isFs?fsExitSvg:fsEnterSvg;setTimeout(function(){try{naver.maps.Event.trigger(naverMapObj,"resize");}catch(e){}},200);}document.addEventListener("fullscreenchange",onFsChange);document.addEventListener("webkitfullscreenchange",onFsChange);naverMapObj.controls[naver.maps.Position.TOP_RIGHT].push(fsBtn);}catch(e){}})();(function addMyLocationBtn(){try{var btnDiv=document.createElement("div");btnDiv.style.cssText="margin:10px;cursor:pointer;background:#fff;border:1px solid rgba(0,0,0,0.15);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.15);font-size:18px;user-select:none;-webkit-user-select:none;touch-action:manipulation";btnDiv.title="내 위치";btnDiv.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>';btnDiv.onclick=function(){if(!navigator.geolocation){alert("위치 정보를 지원하지 않는 브라우저입니다");return}btnDiv.style.opacity="0.5";navigator.geolocation.getCurrentPosition(function(pos){btnDiv.style.opacity="1";var lat=pos.coords.latitude,lng=pos.coords.longitude;var ll=new naver.maps.LatLng(lat,lng);naverMapObj.setCenter(ll);naverMapObj.setZoom(14);if(window.__myLocMarker)window.__myLocMarker.setMap(null);window.__myLocMarker=new naver.maps.Marker({map:naverMapObj,position:ll,icon:{content:'<div style="width:16px;height:16px;background:#4F46E5;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 2px rgba(79,70,229,0.3),0 2px 6px rgba(0,0,0,0.3)"></div>',size:new naver.maps.Size(16,16),anchor:new naver.maps.Point(8,8)},zIndex:1000})},function(err){btnDiv.style.opacity="1";alert("위치를 가져올 수 없습니다: "+(err.message||"권한 확인"))},{enableHighAccuracy:true,timeout:10000,maximumAge:0})};naverMapObj.controls[naver.maps.Position.RIGHT_CENTER].push(btnDiv);}catch(e){}})();var bounds=new naver.maps.LatLngBounds();var cnt=0;var schools=MAP_DATA.filter(function(s){return s.addr});if(!schools.length){document.getElementById("naverMap").innerHTML="<p style=\"padding:40px 20px;text-align:center;color:var(--positive);font-weight:700\">모든 학교 작업 완료!</p>";mapInitDone=true;return}var geoRemain=schools.length;var usedCoords={};schools.forEach(function(s,i){setTimeout(function(){naver.maps.Service.geocode({query:s.addr},function(status,response){if(status===naver.maps.Service.Status.OK&&response.v2.addresses.length>0){var addr=response.v2.addresses[0];var lat=parseFloat(addr.y),lng=parseFloat(addr.x);var coordKey=lat.toFixed(4)+","+lng.toFixed(4);if(usedCoords[coordKey]){var oc=usedCoords[coordKey];lat+=0.0004*oc;lng+=0.0003*oc;usedCoords[coordKey]=oc+1}else{usedCoords[coordKey]=1}var coords=new naver.maps.LatLng(lat,lng);var campsForSchool=(SCHOOL_CAMPAIGNS[s.school]||[]).slice();if(!campsForSchool.length)campsForSchool=[{camp:"",deadline:""}];campsForSchool.sort(cmpDeadlineAsc);var curSize=getMarkerSizeForZoom(naverMapObj.getZoom());var markerList=campsForSchool.map(function(c,idx){
+function addMapControlButtons(){
+  try{
+    var mapEl=document.getElementById("naverMap");if(!mapEl)return;
+    if(getComputedStyle(mapEl).position==="static")mapEl.style.position="relative";
+    var btnCss="position:absolute;z-index:100;cursor:pointer;background:#fff;border:1px solid rgba(0,0,0,0.18);border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.18);user-select:none;-webkit-user-select:none;touch-action:manipulation;";
+    var fsBtn=document.createElement("button");fsBtn.type="button";fsBtn.title="전체화면";fsBtn.setAttribute("aria-label","전체화면");
+    fsBtn.style.cssText=btnCss+"top:10px;right:10px;padding:0;";
+    var fsEnterSvg='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>';
+    var fsExitSvg='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>';
+    fsBtn.innerHTML=fsEnterSvg;
+    fsBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();var doc=document;var isFs=doc.fullscreenElement||doc.webkitFullscreenElement;if(isFs){var ex=doc.exitFullscreen||doc.webkitExitFullscreen;if(ex)ex.call(doc);}else{var req=mapEl.requestFullscreen||mapEl.webkitRequestFullscreen;if(req){try{req.call(mapEl);}catch(e){alert("전체화면 전환 실패: "+e.message);}}else{alert("이 브라우저는 전체화면을 지원하지 않습니다");}}};
+    function onFsChange(){var isFs=document.fullscreenElement||document.webkitFullscreenElement;fsBtn.innerHTML=isFs?fsExitSvg:fsEnterSvg;setTimeout(function(){try{if(naverMapObj)naver.maps.Event.trigger(naverMapObj,"resize");}catch(e){}},200);}
+    document.addEventListener("fullscreenchange",onFsChange);document.addEventListener("webkitfullscreenchange",onFsChange);
+    mapEl.appendChild(fsBtn);
+    var locBtn=document.createElement("button");locBtn.type="button";locBtn.title="내 위치";locBtn.setAttribute("aria-label","내 위치");
+    locBtn.style.cssText=btnCss+"top:50%;right:10px;transform:translateY(-50%);padding:0;";
+    locBtn.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>';
+    locBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();if(!navigator.geolocation){alert("이 브라우저는 위치 정보를 지원하지 않습니다");return;}locBtn.style.opacity="0.5";navigator.geolocation.getCurrentPosition(function(pos){locBtn.style.opacity="1";if(!naverMapObj)return;var lat=pos.coords.latitude,lng=pos.coords.longitude;var ll=new naver.maps.LatLng(lat,lng);naverMapObj.setCenter(ll);naverMapObj.setZoom(14);if(window.__myLocMarker)window.__myLocMarker.setMap(null);window.__myLocMarker=new naver.maps.Marker({map:naverMapObj,position:ll,icon:{content:'<div style="width:16px;height:16px;background:#4F46E5;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 2px rgba(79,70,229,0.3),0 2px 6px rgba(0,0,0,0.3)"></div>',size:new naver.maps.Size(16,16),anchor:new naver.maps.Point(8,8)},zIndex:1000});},function(err){locBtn.style.opacity="1";var msg=(err&&err.code===1)?"위치 권한이 거부되었습니다. 브라우저 설정에서 위치 권한을 허용해 주세요":(err&&err.message)||"위치를 가져올 수 없습니다";alert(msg);},{enableHighAccuracy:true,timeout:10000,maximumAge:0});};
+    mapEl.appendChild(locBtn);
+  }catch(e){if(window.console&&console.warn)console.warn("addMapControlButtons error",e);}
+}
+(function(){try{if(typeof naver==="undefined"||!naver.maps){document.getElementById("naverMap").innerHTML="<p style=\"padding:20px;text-align:center;color:var(--text-muted)\">지도 로딩 실패</p>";return}var mc=document.getElementById("naverMap");naverMapObj=new naver.maps.Map(mc,{center:new naver.maps.LatLng(36.5,127.5),zoom:7,zoomControl:false,mapDataControl:false,scaleControl:false});addMapControlButtons();var bounds=new naver.maps.LatLngBounds();var cnt=0;var schools=MAP_DATA.filter(function(s){return s.addr});if(!schools.length){document.getElementById("naverMap").innerHTML="<p style=\"padding:40px 20px;text-align:center;color:var(--positive);font-weight:700\">모든 학교 작업 완료!</p>";mapInitDone=true;return}var geoRemain=schools.length;var usedCoords={};schools.forEach(function(s,i){setTimeout(function(){naver.maps.Service.geocode({query:s.addr},function(status,response){if(status===naver.maps.Service.Status.OK&&response.v2.addresses.length>0){var addr=response.v2.addresses[0];var lat=parseFloat(addr.y),lng=parseFloat(addr.x);var coordKey=lat.toFixed(4)+","+lng.toFixed(4);if(usedCoords[coordKey]){var oc=usedCoords[coordKey];lat+=0.0004*oc;lng+=0.0003*oc;usedCoords[coordKey]=oc+1}else{usedCoords[coordKey]=1}var coords=new naver.maps.LatLng(lat,lng);var campsForSchool=(SCHOOL_CAMPAIGNS[s.school]||[]).slice();if(!campsForSchool.length)campsForSchool=[{camp:"",deadline:""}];campsForSchool.sort(cmpDeadlineAsc);var curSize=getMarkerSizeForZoom(naverMapObj.getZoom());var markerList=campsForSchool.map(function(c,idx){
   var col=(CAMP_COLORS&&CAMP_COLORS[c.camp])||"#94A3B8";
   var off=getCampOffsetPx(idx,campsForSchool.length,curSize);
   var mk=new naver.maps.Marker({map:naverMapObj,position:coords,title:s.school,icon:makeSvgIcon(col,curSize,off.x,off.y),zIndex:100});
@@ -558,19 +585,29 @@ window.addEventListener("scroll",function(){
 document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".tab-btn").forEach(function(b){b.addEventListener("click",function(){var n=document.querySelector(".tab-nav");if(n)n.classList.remove("hidden-by-scroll");var bb=document.getElementById("bottomBar");if(bb)bb.classList.remove("hidden-by-scroll");});});});
 var SYNC_CACHE_KEY="sync_cache_v1_"+WORKER_NAME;
 function applySyncData(data,reset){
-  if(reset){document.querySelectorAll(".uploaded-gallery-wrap").forEach(function(w){if(w&&w.parentNode)w.parentNode.removeChild(w);});}
+  if(reset){document.querySelectorAll(".uploaded-gallery-wrap,.uploaded-collapsed").forEach(function(w){if(w&&w.parentNode)w.parentNode.removeChild(w);});}
   document.querySelectorAll(".camp-block").forEach(function(block){var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");var key=school+"|||"+camp;if(!data[key])return;var info=data[key];var btn=block.querySelector(".complete-btn");if(info.postDate&&!btn.classList.contains("checked")){btn.classList.add("checked");btn.innerHTML=SVG_CHECKED+" 완료됨";block.classList.add("done");doneCount++}else if(!info.postDate&&btn.classList.contains("checked")){btn.classList.remove("checked");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";block.classList.remove("done");doneCount--}var noteInput=block.querySelector(".note-input");if(noteInput&&info.note)noteInput.value=info.note;
-    if(info.photos&&info.photos.length){info.photos.forEach(function(p){if(!p||!p.fileId)return;if(p.clientId)window._serverClientIds[p.clientId]=1;var thumb=p.thumb||("https://drive.google.com/thumbnail?id="+encodeURIComponent(p.fileId)+"&sz=w400");addUploadedItemFromUrl(block,thumb);});}
+    if(info.photos&&info.photos.length){
+      info.photos.forEach(function(p){if(p&&p.clientId)window._serverClientIds[p.clientId]=1;});
+      var photoUrls=info.photos.filter(function(p){return p&&p.fileId;}).map(function(p){return p.thumb||("https://drive.google.com/thumbnail?id="+encodeURIComponent(p.fileId)+"&sz=w400");});
+      block.__pendingPhotos=photoUrls;
+      if(block.__expandedPhotos){renderExpandedGallery(block);}else{renderCollapsedSummary(block,photoUrls.length);}
+    }
   });
   document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});if(allDone)card.classList.add("all-done");else card.classList.remove("all-done");var sn2=card.getAttribute("data-school-name");if(sn2)updateMapMarker(sn2,allDone)});
   updateProgress();syncSchoolTable();refreshCampSummaryStats();refreshCampDoneStatus();refreshTotalsGrid();if(mapInitDone)syncMapFromCards();else setTimeout(syncMapFromCards,MAP_DATA.length*160+1000);
+}
+function fetchSync(fresh){
+  var url=WEB_APP_URL+"?action=sync&worker="+encodeURIComponent(WORKER_NAME);
+  if(fresh)url+="&fresh=1&_="+Date.now();
+  return fetch(url).then(function(r){return r.json()});
 }
 (function syncOnLoad(){
   var ss=document.getElementById("syncStatus");
   var hadCache=false;
   try{var cached=sessionStorage.getItem(SYNC_CACHE_KEY);if(cached){applySyncData(JSON.parse(cached),false);hadCache=true;}}catch(e){}
   if(!hadCache)ss.classList.add("show");
-  fetch(WEB_APP_URL+"?action=sync&worker="+encodeURIComponent(WORKER_NAME)).then(function(r){return r.json()}).then(function(json){
+  fetchSync(true).then(function(json){
     if(json.status==="ok"&&json.data){applySyncData(json.data,hadCache);try{sessionStorage.setItem(SYNC_CACHE_KEY,JSON.stringify(json.data));}catch(e){}}
     ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400);
   }).catch(function(){ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400);});
@@ -1195,7 +1232,31 @@ function handleUploadedImgError(img){
   }catch(e){}
 }
 function addToUploadedGallery(block,rawFile){
-  try{addUploadedItemFromUrl(block,URL.createObjectURL(rawFile));}catch(e){}
+  try{
+    block.__expandedPhotos=true;
+    var collapsed=block.querySelector(".uploaded-collapsed");if(collapsed&&collapsed.parentNode)collapsed.parentNode.removeChild(collapsed);
+    addUploadedItemFromUrl(block,URL.createObjectURL(rawFile));
+  }catch(e){}
+}
+function renderCollapsedSummary(block,count){
+  try{
+    var oldGal=block.querySelector(".uploaded-gallery-wrap");if(oldGal&&oldGal.parentNode)oldGal.parentNode.removeChild(oldGal);
+    var oldSum=block.querySelector(".uploaded-collapsed");if(oldSum&&oldSum.parentNode)oldSum.parentNode.removeChild(oldSum);
+    if(!count)return;
+    var sum=document.createElement("div");sum.className="uploaded-collapsed";
+    sum.innerHTML='<span class="uc-label"><span class="ug-check">\u2713</span>업로드 완료 <b>'+count+'</b>장</span><span class="uc-action">\uD83D\uDCF7 펼쳐보기 \u25B6</span>';
+    sum.onclick=function(){block.__expandedPhotos=true;renderExpandedGallery(block);};
+    var anchor=block.querySelector(".capture-queue")||block.querySelector(".camp-action-row");
+    if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(sum,anchor.nextSibling);else block.appendChild(sum);
+  }catch(e){}
+}
+function renderExpandedGallery(block){
+  try{
+    var collapsed=block.querySelector(".uploaded-collapsed");if(collapsed&&collapsed.parentNode)collapsed.parentNode.removeChild(collapsed);
+    var existing=block.querySelector(".uploaded-gallery-wrap");if(existing&&existing.parentNode)existing.parentNode.removeChild(existing);
+    var urls=block.__pendingPhotos||[];
+    urls.forEach(function(u){addUploadedItemFromUrl(block,u);});
+  }catch(e){}
 }
 function openUploadedViewer(url){
   var ov=document.createElement("div");ov.className="uploaded-viewer";
