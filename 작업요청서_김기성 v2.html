@@ -328,13 +328,28 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 </style>
 </head>
 <body>
+<script>(function(){try{
+  var BUILD_TS=1776838801879;
+  if(sessionStorage.getItem("__ver_"+BUILD_TS))return;
+  fetch(location.pathname+"?_="+Date.now(),{method:"HEAD",cache:"no-store"}).then(function(r){
+    var lm=r.headers.get("last-modified");
+    if(!lm){sessionStorage.setItem("__ver_"+BUILD_TS,"1");return;}
+    var srvTs=new Date(lm).getTime();
+    if(srvTs>BUILD_TS+30000){
+      try{if(window.__uploadInProgress){sessionStorage.setItem("__ver_"+BUILD_TS,"1");return;}}catch(e){}
+      location.replace(location.pathname+"?v="+srvTs);
+    } else {
+      sessionStorage.setItem("__ver_"+BUILD_TS,"1");
+    }
+  }).catch(function(){});
+}catch(e){}})();</script>
 <div class="toast" id="toast"></div>
 <div class="sync-status" id="syncStatus">동기화 중...</div>
 <div class="page active" id="pageSummary">
   <div class="summary-header">
     <div class="header-top">
       <h1>김기성 v2 작업요청서</h1>
-      <div class="updated-tag">4/22 14:58 업데이트</div>
+      <div class="updated-tag">4/22 15:20 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">4/9</span></div>
