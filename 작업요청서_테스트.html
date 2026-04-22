@@ -334,7 +334,7 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   <div class="summary-header">
     <div class="header-top">
       <h1>테스트 작업요청서</h1>
-      <div class="updated-tag">4/22 12:34 업데이트</div>
+      <div class="updated-tag">4/22 12:40 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/3</span></div>
@@ -1136,11 +1136,23 @@ function addUploadedItemFromUrl(block,imgUrl,opts){
     }else{gal=wrap.querySelector(".uploaded-gallery");}
     var item=document.createElement("div");item.className="u-item"+(opts.animate?" is-arriving":"");
     var n=gal.children.length+1;
-    item.innerHTML='<img loading="lazy" src="'+imgUrl+'" alt="업로드 '+n+'"><div class="u-num">'+n+'</div>';
+    item.innerHTML='<img loading="lazy" src="'+imgUrl+'" alt="업로드 '+n+'" onerror="handleUploadedImgError(this)"><div class="u-num">'+n+'</div>';
     item.onclick=function(){openUploadedViewer(imgUrl);};
     gal.appendChild(item);
     if(opts.animate){setTimeout(function(){item.classList.remove("is-arriving");},20);}
     var cnt=wrap.querySelector(".ug-count");if(cnt)cnt.textContent=gal.children.length;
+  }catch(e){}
+}
+function handleUploadedImgError(img){
+  try{
+    var item=img.closest(".u-item");if(!item)return;
+    var gal=item.parentNode;if(!gal)return;
+    var wrap=gal.closest(".uploaded-gallery-wrap");
+    item.remove();
+    var nums=gal.querySelectorAll(".u-num");
+    for(var i=0;i<nums.length;i++){nums[i].textContent=i+1;}
+    if(wrap){var cnt=wrap.querySelector(".ug-count");if(cnt)cnt.textContent=gal.children.length;}
+    if(gal.children.length===0&&wrap){wrap.style.display="none";}
   }catch(e){}
 }
 function addToUploadedGallery(block,rawFile){
