@@ -411,11 +411,20 @@ function handleImgError(img){
     img.src="https://drive.google.com/thumbnail?id="+idMatch[1]+"&sz=w1200";
     return;
   }
-  img.style.display="none";
-  var ph=document.createElement("div");
-  ph.className="photo-placeholder";
-  ph.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>사진 로딩 실패</span>';
-  img.parentNode.appendChild(ph);
+  // v3.9.7: 재시도도 실패 → Drive에서 삭제된 사진이므로 썸네일 자체를 제거 + 번호 재카운트
+  try{
+    var thumb=img.closest(".photo-thumb");
+    var grid=thumb&&thumb.parentNode;
+    if(thumb)thumb.remove();
+    if(grid){
+      var remaining=grid.querySelectorAll(".photo-thumb img");
+      for(var i=0;i<remaining.length;i++){
+        var alt=remaining[i].alt||"";
+        remaining[i].alt=alt.replace(/\s\d+$/," "+(i+1));
+      }
+      if(remaining.length===0){var sec=grid.closest(".photo-section");if(sec)sec.style.display="none";}
+    }
+  }catch(e){}
 }
 function toggleCard(headerEl){
   var card=headerEl.parentElement;
