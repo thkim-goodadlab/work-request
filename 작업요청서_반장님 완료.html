@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>반장님 완료 작업요청서</title>
 <!-- PWA: 홈 화면 추가 시 앱처럼 실행 -->
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -120,7 +120,7 @@ body.has-large-map{overflow:hidden}
 .q-banner{color:var(--orange);font-weight:600}
 .q-remain{color:var(--negative);font-weight:800}
 .approval-yes{background:var(--positive-bg);color:var(--positive)}
-.approval-no{background:var(--negative-bg);color:var(--negative)}
+.approval-no{background:#F3F4F6;color:#6B7280}
 .approval-partial{background:var(--warning-bg);color:var(--warning)}
 .school-list-section{margin:16px 16px 0;background:var(--surface);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--border-light)}
 .school-table{width:100%;border-collapse:collapse}
@@ -333,11 +333,14 @@ body.has-large-map{overflow:hidden}
 .gps-guide-box p{font-size:15px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;white-space:pre-line}
 .gps-guide-box button{width:100%;padding:11px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;font-size:16px;cursor:pointer;font-family:inherit;margin-top:6px}
 .gps-guide-box button.secondary{background:var(--surface-alt);color:var(--text-secondary)}
+.is-zero,.is-zero *{color:#9CA3AF !important;background:transparent !important;border-color:#E5E7EB !important}
+.tab-btn,.bottom-tab,.filter-chip,.photo-btn,.drive-btn,.complete-btn,.directions-btn,.approval-badge,.search-input,button,input[type="text"],input[type="search"],textarea{min-height:44px;box-sizing:border-box}
+.approval-badge{min-width:44px;display:inline-flex;align-items:center;justify-content:center}
 </style>
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1776841599367;
+  var BUILD_TS=1776905407840;
   // v3.9.10: 무한 새로고침 방지 — 세션당 1회만 체크, 플래그를 "체크 시작 시점"에 바로 세팅.
   // (이전 v3.9.9는 location.replace 분기에서 플래그를 안 찍어서 루프 발생)
   if(sessionStorage.getItem("__verChecked"))return;
@@ -358,7 +361,7 @@ body.has-large-map{overflow:hidden}
   <div class="summary-header">
     <div class="header-top">
       <h1>반장님 완료 작업요청서</h1>
-      <div class="updated-tag">4/22 16:06 업데이트</div>
+      <div class="updated-tag">4/23 09:49 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">21/21</span></div>
@@ -367,7 +370,7 @@ body.has-large-map{overflow:hidden}
   </div>
   <div class="map-section" id="mapSection">
     <div class="section-title"><span>학교 위치</span></div>
-    <div class="camp-filter-row"><button class="camp-filter-btn active" data-camp="" style="border-color:var(--border);color:var(--text-secondary)" onclick="filterMapByCamp(this,'')"><span class="cf-dday">ALL</span><span class="cf-name">전체</span></button><button class="camp-filter-btn" data-camp="강원랜드멘토링_2026 강원랜드 멘토링 장학 대학생 멘토모집" data-color="#c00000" style="border-color:#c00000;color:#0F172A;background:#f7e0e0" onclick="filterMapByCamp(this,'강원랜드멘토링_2026 강원랜드 멘토링 장학 대학생 멘토모집')"><span class="cf-dday">D-1</span><span class="cf-name">강원랜드멘토링</span></button></div>
+    <div class="camp-filter-row"><button class="camp-filter-btn active" data-camp="" style="border-color:var(--border);color:var(--text-secondary)" onclick="filterMapByCamp(this,'')"><span class="cf-dday">ALL</span><span class="cf-name">전체</span></button><button class="camp-filter-btn" data-camp="강원랜드멘토링_2026 강원랜드 멘토링 장학 대학생 멘토모집" data-color="#c00000" style="border-color:#c00000;color:#0F172A;background:#f7e0e0" onclick="filterMapByCamp(this,'강원랜드멘토링_2026 강원랜드 멘토링 장학 대학생 멘토모집')"><span class="cf-dday">D-day</span><span class="cf-name">강원랜드멘토링</span></button></div>
     <div id="naverMap"></div>
   </div>
   <div class="camp-card all-done" data-camp="강원랜드멘토링_2026 강원랜드 멘토링 장학 대학생 멘토모집"><div class="cc-head"><span class="cc-dday done" data-deadline="260423" style="background:#c00000">✓ 완료</span><span class="cc-advertiser">강원랜드멘토링</span><span class="cc-approval approval-yes">승인</span><span class="cc-deadline">4월 23일 목요일</span></div><div class="cc-title">2026 강원랜드 멘토링 장학 대학생 멘토모집</div><div class="cc-progress-wrap"><div class="cc-progress-bar"><div class="cc-progress-fill" style="width:100%;background:#c00000"></div></div><div class="cc-progress-text"><span class="cc-progress-done">21개교 완료 (100%)</span><span class="cc-progress-remain">0개교 남음</span></div></div><div class="cc-stats"><div class="cc-stat"><div class="lbl">학교</div><div class="val">21<span style="font-size:10px;font-weight:600;color:var(--text-muted)">개교</span></div><div class="sub cc-school-remain">남음 0</div></div><div class="cc-stat"><div class="lbl">포스터</div><div class="val">420<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-poster-remain">남음 0</div></div><div class="cc-stat"><div class="lbl">현수막</div><div class="val">42<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-banner-remain">남음 0</div></div></div><div class="cc-request"><span class="req-lbl">📋 요청사항</span><span class="req-txt">유동인구 많은 곳에 부착</span></div></div>
@@ -839,9 +842,9 @@ function refreshCampCards(){
     var fill=cc.querySelector(".cc-progress-fill");if(fill)fill.style.width=pct+"%";
     var pd=cc.querySelector(".cc-progress-done");if(pd)pd.textContent=dSch+"개교 완료 ("+pct+"%)";
     var pr=cc.querySelector(".cc-progress-remain");if(pr)pr.textContent=(tSch-dSch)+"개교 남음";
-    var sr=cc.querySelector(".cc-school-remain");if(sr)sr.textContent="남음 "+(tSch-dSch);
-    var pr2=cc.querySelector(".cc-poster-remain");if(pr2)pr2.textContent="남음 "+(tP-dP);
-    var br=cc.querySelector(".cc-banner-remain");if(br)br.textContent="남음 "+(tB-dB);
+    var sr=cc.querySelector(".cc-school-remain");if(sr){sr.textContent="남음 "+(tSch-dSch);sr.classList.toggle("is-zero",(tSch-dSch)===0)}
+    var pr2=cc.querySelector(".cc-poster-remain");if(pr2){pr2.textContent="남음 "+(tP-dP);pr2.classList.toggle("is-zero",(tP-dP)===0)}
+    var br=cc.querySelector(".cc-banner-remain");if(br){br.textContent="남음 "+(tB-dB);br.classList.toggle("is-zero",(tB-dB)===0)}
     if(dSch===tSch&&tSch>0)cc.classList.add("all-done");else cc.classList.remove("all-done");
   });
 }
