@@ -360,7 +360,7 @@ body.has-large-map{overflow:hidden}
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1776928731675;
+  var BUILD_TS=1776931946998;
   var urlV=0;try{var m=location.search.match(/[?&]v=(\d+)/);if(m)urlV=parseInt(m[1]);}catch(e){}
   var lastSeen=0;try{lastSeen=parseInt(localStorage.getItem("lastSeenVer")||"0");}catch(e){}
   fetch(location.pathname+"?_="+Date.now(),{method:"HEAD",cache:"no-store"}).then(function(r){
@@ -382,7 +382,7 @@ body.has-large-map{overflow:hidden}
   <div class="summary-header">
     <div class="header-top">
       <h1>변재호 v4 작업요청서</h1>
-      <div class="updated-tag">4/23 16:18 업데이트</div>
+      <div class="updated-tag">4/23 17:12 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/1</span></div>
@@ -648,9 +648,16 @@ var SYNC_CACHE_KEY="sync_cache_v1_"+WORKER_NAME;
 function applySyncData(data,reset){
   if(reset){document.querySelectorAll(".uploaded-gallery-wrap,.uploaded-collapsed").forEach(function(w){if(w&&w.parentNode)w.parentNode.removeChild(w);});}
   document.querySelectorAll(".camp-block").forEach(function(block){var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");var key=school+"|||"+camp;if(!data[key])return;var info=data[key];var btn=block.querySelector(".complete-btn");if(info.postDate&&!btn.classList.contains("checked")){btn.classList.add("checked");btn.innerHTML=SVG_CHECKED+" 완료됨";block.classList.add("done");doneCount++}else if(!info.postDate&&btn.classList.contains("checked")){btn.classList.remove("checked");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";block.classList.remove("done");doneCount--}var bldInput=block.querySelector(".building-input");if(bldInput&&document.activeElement!==bldInput)bldInput.value=info.note||"";
-    if(info.photos&&info.photos.length){
-      info.photos.forEach(function(p){if(p&&p.clientId)window._serverClientIds[p.clientId]=1;});
-      var photoUrls=info.photos.filter(function(p){return p&&p.fileId;}).map(function(p){return p.thumb||("https://drive.google.com/thumbnail?id="+encodeURIComponent(p.fileId)+"&sz=w400");});
+    var serverPhotos=(info.photos||[]).slice();
+    var remain=pruneRecentUploadsBySync(school,camp,serverPhotos);
+    if(remain&&remain.length){
+      remain.forEach(function(ru){
+        serverPhotos.push({fileId:ru.fileId,clientId:ru.cid||null,thumb:"https://drive.google.com/thumbnail?id="+encodeURIComponent(ru.fileId)+"&sz=w400"});
+      });
+    }
+    if(serverPhotos.length){
+      serverPhotos.forEach(function(p){if(p&&p.clientId)window._serverClientIds[p.clientId]=1;});
+      var photoUrls=serverPhotos.filter(function(p){return p&&p.fileId;}).map(function(p){return p.thumb||("https://drive.google.com/thumbnail?id="+encodeURIComponent(p.fileId)+"&sz=w400");});
       block.__pendingPhotos=photoUrls;
       if(block.__expandedPhotos){renderExpandedGallery(block);}else{renderCollapsedSummary(block,photoUrls.length);}
     }
@@ -1045,6 +1052,37 @@ function idbGetAllPhotos(){
   });}).catch(function(){return [];});
 }
 window._serverClientIds=window._serverClientIds||{};
+var RU_TTL_MS=10*60*1000;
+function recentKey(school,camp){return "recent_uploads_v1|||"+school+"|||"+camp;}
+function loadRecentUploads(school,camp){
+  try{
+    var raw=localStorage.getItem(recentKey(school,camp));if(!raw)return [];
+    var list=JSON.parse(raw)||[];
+    var now=Date.now();
+    list=list.filter(function(x){return x&&x.ts&&(now-x.ts)<RU_TTL_MS;});
+    return list;
+  }catch(e){return [];}
+}
+function saveRecentUploads(school,camp,list){
+  try{localStorage.setItem(recentKey(school,camp),JSON.stringify(list||[]));}catch(e){}
+}
+function rememberRecentUpload(school,camp,entry){
+  if(!entry||!entry.fileId)return;
+  var list=loadRecentUploads(school,camp);
+  var exists=list.some(function(x){return (entry.cid&&x.cid===entry.cid)||x.fileId===entry.fileId;});
+  if(!exists){list.push({cid:entry.cid||"",fileId:entry.fileId,fileName:entry.fileName||"",ts:Date.now()});saveRecentUploads(school,camp,list);}
+}
+function pruneRecentUploadsBySync(school,camp,serverPhotos){
+  try{
+    var list=loadRecentUploads(school,camp);
+    if(!list.length)return [];
+    var have={};
+    (serverPhotos||[]).forEach(function(p){if(p){if(p.clientId)have["cid:"+p.clientId]=1;if(p.fileId)have["fid:"+p.fileId]=1;}});
+    var remain=list.filter(function(x){return !(have["cid:"+x.cid]||have["fid:"+x.fileId]);});
+    if(remain.length!==list.length)saveRecentUploads(school,camp,remain);
+    return remain;
+  }catch(e){return [];}
+}
 function restoreQueuesFromIdb(){
   idbCleanupExpired().then(function(){return idbGetAllPhotos();}).then(function(items){
     if(!items||!items.length)return;
@@ -1057,6 +1095,8 @@ function restoreQueuesFromIdb(){
         idbDeletePhoto(it.id);skipped++;return;
       }
       if(!captureQueues[it.queueKey])captureQueues[it.queueKey]=[];
+      var __dupInMem=captureQueues[it.queueKey].some(function(q){return q.clientId===it.clientId;});
+      if(__dupInMem){skipped++;return;}
       var f=it.blob;
       try{if(it.name&&!f.name){f=new File([it.blob],it.name,{type:it.type||"image/jpeg"});}}catch(e){}
       captureQueues[it.queueKey].push({
@@ -1197,14 +1237,14 @@ function renderCaptureQueue(block,key){
   if(existing){existing.innerHTML=html;}
   else {var wrap=document.createElement("div");wrap.className="capture-queue";wrap.innerHTML=html;block.querySelector(".camp-action-row").insertAdjacentElement("afterend",wrap);}
 }
-function movePendingToCompleted(block,item){
+function movePendingToCompleted(block,item,fileId){
   try{
     var url=item._blobUrl||URL.createObjectURL(item.file);
     var cid=item.clientId||"";
     var pend=cid?block.querySelector('.cq-item[data-cid="'+cid+'"]'):null;
     if(pend){pend.classList.add("is-leaving");}
-    addUploadedItemFromUrl(block,url,{animate:true});
-  }catch(e){try{addUploadedItemFromUrl(block,URL.createObjectURL(item.file),{animate:true});}catch(e2){}}
+    addUploadedItemFromUrl(block,url,{animate:true,clientId:cid,fileId:fileId||""});
+  }catch(e){try{addUploadedItemFromUrl(block,URL.createObjectURL(item.file),{animate:true,clientId:(item&&item.clientId)||"",fileId:fileId||""});}catch(e2){}}
 }
 function readFileAsBase64(file){
   return new Promise(function(resolve,reject){
@@ -1279,7 +1319,11 @@ function addUploadedItemFromUrl(block,imgUrl,opts){
       if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(wrap,anchor.nextSibling);}
       else{block.appendChild(wrap);}
     }else{gal=wrap.querySelector(".uploaded-gallery");}
+    var dupSel=opts.clientId?'.u-item[data-cid="'+opts.clientId+'"]':(opts.fileId?'.u-item[data-fid="'+opts.fileId+'"]':null);
+    if(dupSel&&gal.querySelector(dupSel))return;
     var item=document.createElement("div");item.className="u-item"+(opts.animate?" is-arriving":"");
+    if(opts.clientId)item.setAttribute("data-cid",opts.clientId);
+    if(opts.fileId)item.setAttribute("data-fid",opts.fileId);
     var n=gal.children.length+1;
     item.innerHTML='<img loading="lazy" src="'+imgUrl+'" alt="업로드 '+n+'" onerror="handleUploadedImgError(this)"><div class="u-num">'+n+'</div>';
     item.onclick=function(){openUploadedViewer(imgUrl);};
@@ -1372,7 +1416,8 @@ function processOneItem(block,key,item){
     if(res&&res.status==="ok"){
       if(item.idbId!=null)idbDeletePhoto(item.idbId);
       if(item.clientId)window._serverClientIds[item.clientId]=1;
-      movePendingToCompleted(block,item);
+      try{rememberRecentUpload(school,camp,{cid:item.clientId||"",fileId:res.fileId||"",fileName:res.fileName||""});}catch(re){}
+      movePendingToCompleted(block,item,res.fileId||"");
       var q=captureQueues[key]||[];var idx=q.indexOf(item);if(idx>=0)q.splice(idx,1);
       setTimeout(function(){renderCaptureQueue(block,key);},260);
     } else { item.status="pending"; renderCaptureQueue(block,key); }
