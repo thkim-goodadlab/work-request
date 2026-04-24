@@ -15,7 +15,6 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=gcvbnnigi1&submodules=geocoder"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/piexifjs/1.0.6/piexif.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -93,7 +92,10 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
 .map-label{background:var(--surface);border:1.5px solid var(--accent);border-radius:6px;padding:2px 7px;font-size:10px;font-weight:800;color:var(--accent);white-space:nowrap;pointer-events:none;transform:translateY(-8px);box-shadow:var(--shadow-sm)}
 .map-label.done{background:var(--positive-bg);border-color:var(--positive);color:var(--positive);opacity:.35}
 #naverMap{width:100%;height:680px;transition:none}
-#naverMap.map-large{position:fixed!important;top:8px;left:8px;right:8px;bottom:8px;width:auto!important;height:auto!important;z-index:10000;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.35)}
+.map-section.map-large{position:fixed!important;top:8px;left:8px;right:8px;bottom:8px;margin:0!important;z-index:10000;display:flex;flex-direction:column;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.35);background:var(--surface)}
+.map-section.map-large .section-title{flex-shrink:0}
+.map-section.map-large .camp-filter-row{flex-shrink:0}
+.map-section.map-large #naverMap{flex:1;height:auto!important;width:100%;border-radius:0 0 14px 14px}
 body.has-large-map{overflow:hidden}
 .map-legend{padding:10px 18px;display:flex;gap:16px;border-top:1px solid var(--border-light)}
 .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary);font-weight:600}
@@ -133,6 +135,14 @@ body.has-large-map{overflow:hidden}
 .region-row td{background:var(--bg)!important;font-size:12px!important;font-weight:800!important;color:var(--text-muted)!important;padding:8px 18px!important;text-align:left!important}
 .school-row:active td{background:var(--accent-lighter)!important}
 .school-row td:first-child{text-decoration:none}
+.school-header-row td{background:var(--surface-alt)!important;padding:10px 14px!important;text-align:left!important;border-bottom:1px solid var(--border)!important;border-top:1px solid var(--border)!important}
+.school-header-row .sh-name{font-size:14px;font-weight:700;color:var(--accent);letter-spacing:-0.01em}
+.school-header-row .sh-sub{font-size:11px;font-weight:500;color:var(--text-muted);margin-left:8px}
+.school-header-row:active td{background:var(--accent-lighter)!important}
+.school-table .camp-name-cell{font-size:12px;color:var(--text);font-weight:500;text-align:left!important;padding-left:14px!important;max-width:220px;white-space:normal;line-height:1.35;word-break:keep-all}
+.school-table .camp-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle;flex-shrink:0;box-shadow:0 0 0 1px rgba(0,0,0,0.06)}
+.school-row td{border-bottom:1px dashed var(--border-light)!important}
+.school-row-last td{border-bottom:1px solid var(--border)!important}
 .svg-check{vertical-align:middle}
 .detail-header{background:var(--gradient-header);color:#fff;padding:22px 20px 18px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
 .detail-header h1{font-size:1.315rem;font-weight:900;letter-spacing:-0.03em}
@@ -175,19 +185,24 @@ body.has-large-map{overflow:hidden}
 .cdv{color:var(--text-secondary);font-weight:500}
 .req-row .cdl{color:var(--accent)}
 .req-text{color:var(--accent);font-weight:700}
-.note-row{margin-top:6px;padding-top:6px;border-top:1px dashed var(--border)}
-.note-input{flex:1;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:9px 12px;font-size:13px;font-family:inherit;background:var(--surface);color:var(--text);outline:none;min-width:0;transition:all 0.2s}
-.note-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)}
-.note-input::placeholder{color:var(--text-muted)}
+.bld-input-row{margin-top:6px;padding-top:6px;border-top:1px dashed var(--border)}
+.bld-input-row .cdl{color:#0F766E}
+.bld-request-row .cdl{color:#0F766E}
+.bld-request-text{color:#0F766E;font-weight:700}
+.building-input{flex:1;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:9px 12px;font-size:13px;font-family:inherit;background:var(--surface);color:var(--text);outline:none;min-width:0;transition:all 0.2s}
+.building-input:focus{border-color:#0F766E;box-shadow:0 0 0 3px rgba(15,118,110,0.15)}
+.building-input::placeholder{color:var(--text-muted);font-size:11.5px}
+.building-input.invalid{border-color:#DC2626;background:#FEF2F2;animation:bldShake 0.35s}
+@keyframes bldShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 .camp-action-row{display:flex;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border-light)}
-.photo-btn{display:flex;align-items:center;justify-content:center;gap:5px;flex:1;background:var(--accent-lighter);color:var(--accent);border:1.5px solid var(--accent-light);border-radius:var(--r-sm);padding:10px;font-size:13px;font-weight:700;text-decoration:none;touch-action:manipulation;font-family:inherit;cursor:pointer;transition:all 0.15s}
-.photo-btn:active{transform:scale(0.97);background:var(--accent-light)}
-.photo-btn-disabled{display:flex;align-items:center;justify-content:center;flex:1;background:var(--surface-alt);color:var(--text-muted);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px;font-size:13px}
+.btn-drive{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:var(--r-sm);font-size:13px;font-weight:700;text-decoration:none;border:1.5px solid var(--border);background:var(--surface-alt);color:var(--text-secondary);cursor:pointer;touch-action:manipulation;font-family:inherit;transition:all 0.15s;white-space:nowrap}
+.btn-drive:active{transform:scale(0.97);background:var(--bg)}
+.btn-drive-disabled{opacity:0.45;cursor:not-allowed;pointer-events:none}
 .complete-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px;font-size:13px;font-weight:700;background:var(--surface);color:var(--text-secondary);cursor:pointer;touch-action:manipulation;font-family:inherit;transition:all 0.2s}
 .complete-btn:active{transform:scale(0.97)}
 .complete-btn.checked{background:var(--positive-bg);color:var(--positive);border-color:var(--positive-light)}
 .camp-block.done{opacity:0.35}
-.bottom-bar{position:fixed;bottom:76px;left:12px;right:12px;display:none;align-items:center;gap:10px;z-index:150;transition:transform 0.25s ease}
+.bottom-bar{position:fixed;bottom:calc(76px + env(safe-area-inset-bottom,0px));left:16px;right:16px;display:none;align-items:center;gap:10px;z-index:210;transition:transform 0.25s ease}
 .bottom-bar.hidden-by-scroll{transform:translateY(140%)}
 .bottom-bar.show{display:flex}
 .bottom-progress{flex:1;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:10px 16px;border-radius:var(--r-md);box-shadow:var(--shadow-float);border:1px solid var(--border);display:flex;align-items:center;gap:12px}
@@ -225,10 +240,10 @@ body.has-large-map{overflow:hidden}
   .region-divider{margin:14px 12px 6px}
   .progress-summary{margin:10px 10px 0}
   #naverMap{height:260px}
-  .bottom-bar{bottom:72px;left:8px;right:8px;gap:8px}
+  .bottom-bar{bottom:calc(72px + env(safe-area-inset-bottom,0px));left:10px;right:10px;gap:8px}
   .bottom-progress{padding:8px 12px;gap:8px}
   .camp-action-row{gap:6px}
-  .photo-btn,.complete-btn{padding:9px 6px;font-size:12px}
+  .complete-btn,.btn-drive{padding:9px 6px;font-size:12px}
 }
 @media(max-width:340px){
   .total-card .value{font-size:1.166rem}
@@ -244,7 +259,7 @@ body.has-large-map{overflow:hidden}
 .progress-in-header .progress-track{height:6px;background:rgba(255,255,255,0.12);border-radius:4px;overflow:hidden}
 .progress-in-header .progress-fill{height:100%;background:linear-gradient(90deg,var(--brand-sky-400),#fff);border-radius:4px;transition:width 0.7s cubic-bezier(0.34,1.56,0.64,1)}
 .camp-filter-row{display:flex;gap:7px;padding:10px 14px 6px;flex-wrap:wrap}
-.camp-filter-btn{flex:1;min-width:0;padding:6px 6px;border-radius:10px;font-size:11px;font-weight:800;border:1.5px solid transparent;background:#fff;cursor:pointer;font-family:inherit;transition:all 0.15s;letter-spacing:-0.02em;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.15}
+.camp-filter-btn{flex:0 0 calc((100% - 21px)/4);min-width:0;padding:6px 6px;border-radius:10px;font-size:11px;font-weight:800;border:1.5px solid transparent;background:#fff;cursor:pointer;font-family:inherit;transition:all 0.15s;letter-spacing:-0.02em;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.15}
 .camp-filter-btn.active{color:#fff}
 .camp-filter-btn .cf-dday{font-weight:900;font-size:11px;display:block}
 .camp-filter-btn .cf-name{font-size:11px;display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -271,87 +286,33 @@ body.has-large-map{overflow:hidden}
 .ap-item{color:var(--brand-success)!important}
 .card.camp-filter-hidden{display:none!important}
 .map-school-dot-row{display:flex;gap:4px;margin-top:4px;flex-wrap:wrap}
-.camp-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
-.camp-chip .chip-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.school-camps-inline{margin-top:4px;display:flex;gap:4px;flex-wrap:wrap}
-.school-camps-inline .camp-chip{font-size:11px;padding:2px 7px}
+.camp-titles{display:block;margin-top:3px;font-size:11px;color:var(--text-muted);font-weight:500;line-height:1.35;white-space:normal}
 .school-table tbody td:first-child{padding-top:10px;padding-bottom:10px}
 .camp-block-header .camp-name-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle;flex-shrink:0}
 .camp-block{position:relative;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.06);border:1px solid var(--border-light);border-left-width:5px;margin:10px 18px 12px;border-radius:12px;overflow:hidden}
 .camp-block .camp-block-header{background:var(--surface-alt)}
 .camp-block .camp-block-body{background:#fff}
 .camp-block.done{opacity:0.4}
-.camp-action-upload{flex-wrap:wrap}
-.camp-action-upload>.photo-btn,.camp-action-upload>.complete-btn{flex:1 1 0!important;min-width:0;padding:10px 6px!important;font-size:13px!important;height:42px;box-sizing:border-box}
-.photo-btn-upload{background:var(--accent-lighter)!important;color:var(--accent)!important;border-color:var(--accent-light)!important}
-.photo-btn-upload:active{background:var(--accent-light)!important}
-.photo-btn-drive{background:var(--surface-alt)!important;color:var(--text-muted)!important;border-color:var(--border)!important}
-.upload-progress{width:100%;margin-top:6px}
-.upload-progress-bar{height:5px;background:var(--surface-alt);border-radius:3px;overflow:hidden}
-.upload-progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.3s ease}
-.upload-progress-text{font-size:12px;color:var(--text-muted);font-weight:600;margin-top:3px;text-align:center}
-.capture-queue{width:100%;margin-top:8px;padding:11px 12px 10px;background:linear-gradient(180deg,#FFF8E6 0%,#FFF 100%);border:1.5px solid #FFD98F;border-radius:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7)}
-.cq-head{display:flex;align-items:center;gap:7px;margin-bottom:8px;flex-wrap:wrap}
-.cq-dot{width:8px;height:8px;border-radius:50%;background:#E6940A;box-shadow:0 0 0 3px rgba(230,148,10,0.2);flex-shrink:0;animation:cqDotPulse 1.4s ease-in-out infinite}
-@keyframes cqDotPulse{0%,100%{box-shadow:0 0 0 3px rgba(230,148,10,0.2)}50%{box-shadow:0 0 0 6px rgba(230,148,10,0.05)}}
-.cq-label{font-size:13.5px;font-weight:800;color:#8E5400;letter-spacing:-0.02em}
-.cq-label b{color:#B26A00;font-size:15px;font-weight:900;margin:0 2px}
-.cq-badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:800;line-height:1.5;letter-spacing:-0.01em;margin-left:4px}
-.cq-badge.cq-up{background:#E8F3FF;color:#1E5FD4;border:1px solid #BCD7F8}
-.cq-badge.cq-retry{background:#FFEFE0;color:#C45A10;border:1px solid #FFD5B0}
-.cq-badge.cq-gps{background:#FEE2E2;color:#B91C1C;border:1px solid #FECACA}
-.cq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.cq-item{position:relative;aspect-ratio:1;border-radius:9px;overflow:hidden;background:#f0f0f0;border:1.5px solid #FFD98F;box-shadow:0 1px 3px rgba(180,130,20,0.08);transition:opacity 0.25s ease, transform 0.25s ease}
-.cq-item img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.96)}
-.cq-item.is-uploading{border-color:#5DA1F4}
-.cq-item.is-uploading img{filter:brightness(0.78)}
-.cq-item.is-retry{border-color:#F57C3F}
-.cq-item.is-leaving{opacity:0;transform:scale(0.86)}
-.cq-num{position:absolute;top:4px;left:4px;min-width:20px;height:20px;padding:0 6px;background:linear-gradient(135deg,#FFA726,#FF7043);color:#fff;font-size:11px;font-weight:900;border-radius:10px;display:flex;align-items:center;justify-content:center;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,0.25);letter-spacing:-0.02em}
-.cq-spin{position:absolute;top:50%;left:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border:2.5px solid rgba(255,255,255,0.35);border-top-color:#fff;border-radius:50%;animation:cqSpin 0.8s linear infinite}
-@keyframes cqSpin{to{transform:rotate(360deg)}}
-.uploaded-gallery-wrap{margin-top:10px;padding:11px 12px 10px;background:linear-gradient(180deg,#ECFDF5 0%,#FFF 100%);border:1.5px solid #A7F3D0;border-radius:10px}
-.uploaded-gallery-label{font-size:13.5px;font-weight:800;color:#047857;margin-bottom:8px;display:flex;align-items:center;gap:6px;letter-spacing:-0.02em}
-.uploaded-gallery-label .ug-check{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#10B981,#059669);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;box-shadow:0 1px 3px rgba(5,150,105,0.3)}
-.uploaded-gallery-label .ug-count{color:#065F46;font-size:15px;font-weight:900;margin:0 2px}
-.uploaded-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.uploaded-gallery .u-item{position:relative;aspect-ratio:1;border-radius:9px;overflow:hidden;background:#f0f0f0;border:1.5px solid #A7F3D0;cursor:pointer;touch-action:manipulation;transition:opacity 0.3s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1)}
-.uploaded-gallery .u-item img{width:100%;height:100%;object-fit:cover;display:block}
-.uploaded-gallery .u-item.is-arriving{opacity:0;transform:scale(0.7)}
-.uploaded-gallery .u-item .u-num{position:absolute;top:4px;left:4px;min-width:20px;height:20px;padding:0 6px;background:linear-gradient(135deg,#10B981,#059669);color:#fff;font-size:11px;font-weight:900;border-radius:10px;display:flex;align-items:center;justify-content:center;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,0.22);letter-spacing:-0.02em}
-.uploaded-collapsed{margin-top:10px;padding:11px 14px;background:linear-gradient(180deg,#ECFDF5 0%,#FFF 100%);border:1.5px solid #A7F3D0;border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;touch-action:manipulation;transition:background 0.15s}
-.uploaded-collapsed:active{background:#D1FAE5}
-.uploaded-collapsed .uc-label{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#047857;letter-spacing:-0.02em}
-.uploaded-collapsed .uc-label .ug-check{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#10B981,#059669);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;box-shadow:0 1px 3px rgba(5,150,105,0.3)}
-.uploaded-collapsed .uc-label b{color:#065F46;font-size:15px;margin:0 1px}
-.uploaded-collapsed .uc-action{font-size:12.5px;font-weight:800;color:#059669;display:flex;align-items:center;gap:4px}
-.uploaded-viewer{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:10001;display:flex;align-items:center;justify-content:center;padding:20px}
-.uploaded-viewer img{max-width:100%;max-height:100%;object-fit:contain}
-.gps-guide-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px}
-.gps-guide-box{background:#fff;border-radius:14px;padding:20px;max-width:340px;width:100%}
-.gps-guide-box h3{font-size:18px;font-weight:800;margin-bottom:10px;color:var(--text)}
-.gps-guide-box p{font-size:15px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;white-space:pre-line}
-.gps-guide-box button{width:100%;padding:11px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;font-size:16px;cursor:pointer;font-family:inherit;margin-top:6px}
-.gps-guide-box button.secondary{background:var(--surface-alt);color:var(--text-secondary)}
 .is-zero,.is-zero *{color:#9CA3AF !important;background:transparent !important;border-color:#E5E7EB !important}
-.tab-btn,.bottom-tab,.filter-chip,.photo-btn,.drive-btn,.complete-btn,.directions-btn,.approval-badge,.search-input,button,input[type="text"],input[type="search"],textarea{min-height:44px;box-sizing:border-box}
+.tab-btn,.bottom-tab,.filter-chip,.complete-btn,.directions-btn,.approval-badge,.search-input,button,input[type="text"],input[type="search"],textarea{min-height:44px;box-sizing:border-box}
 .approval-badge{min-width:44px;display:inline-flex;align-items:center;justify-content:center}
 </style>
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1776905409591;
-  // v3.9.10: 무한 새로고침 방지 — 세션당 1회만 체크, 플래그를 "체크 시작 시점"에 바로 세팅.
-  // (이전 v3.9.9는 location.replace 분기에서 플래그를 안 찍어서 루프 발생)
-  if(sessionStorage.getItem("__verChecked"))return;
-  sessionStorage.setItem("__verChecked","1");
+  var BUILD_TS=1777000315954;
+  var urlV=0;try{var m=location.search.match(/[?&]v=(\d+)/);if(m)urlV=parseInt(m[1]);}catch(e){}
+  var lastSeen=0;try{lastSeen=parseInt(localStorage.getItem("lastSeenVer")||"0");}catch(e){}
   fetch(location.pathname+"?_="+Date.now(),{method:"HEAD",cache:"no-store"}).then(function(r){
     var lm=r.headers.get("last-modified");
     if(!lm)return;
     var srvTs=new Date(lm).getTime();
+    if(urlV&&urlV>=srvTs){try{localStorage.setItem("lastSeenVer",String(srvTs));}catch(e){}return;}
+    if(lastSeen>=srvTs)return;
     if(srvTs>BUILD_TS+30000){
       try{if(window.__uploadInProgress)return;}catch(e){}
-      location.replace(location.pathname+"?v="+srvTs);
+      var showBanner=function(){var b=document.getElementById("newVerBanner");if(!b)return;b.style.display="flex";b.onclick=function(){try{localStorage.setItem("lastSeenVer",String(srvTs));}catch(e){}location.replace(location.pathname+"?v="+srvTs);};};
+      if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",showBanner);else showBanner();
     }
   }).catch(function(){});
 }catch(e){}})();</script>
@@ -361,7 +322,7 @@ body.has-large-map{overflow:hidden}
   <div class="summary-header">
     <div class="header-top">
       <h1>김태준 작업요청서</h1>
-      <div class="updated-tag">4/23 09:49 업데이트</div>
+      <div class="updated-tag">4/24 12:11 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/3</span></div>
@@ -370,16 +331,16 @@ body.has-large-map{overflow:hidden}
   </div>
   <div class="map-section" id="mapSection">
     <div class="section-title"><span>학교 위치</span></div>
-    <div class="camp-filter-row"><button class="camp-filter-btn active" data-camp="" style="border-color:var(--border);color:var(--text-secondary)" onclick="filterMapByCamp(this,'')"><span class="cf-dday">ALL</span><span class="cf-name">전체</span></button><button class="camp-filter-btn" data-camp="육군3사관학교_생도모집 (포스터)" data-color="#57bb8a" style="border-color:#57bb8a;color:#0F172A;background:#ebf7f1" onclick="filterMapByCamp(this,'육군3사관학교_생도모집 (포스터)')"><span class="cf-dday">D-7</span><span class="cf-name">육군3사관학교</span></button><button class="camp-filter-btn" data-camp="육군3사관학교_생도모집 (현수막)" data-color="#34a853" style="border-color:#34a853;color:#0F172A;background:#e7f5ea" onclick="filterMapByCamp(this,'육군3사관학교_생도모집 (현수막)')"><span class="cf-dday">D-7</span><span class="cf-name">육군3사관학교</span></button></div>
+    <div class="camp-filter-row"><button class="camp-filter-btn active" data-camp="" style="border-color:var(--border);color:var(--text-secondary)" onclick="filterMapByCamp(this,'')"><span class="cf-dday">ALL</span><span class="cf-name">전체</span></button><button class="camp-filter-btn" data-camp="육군3사관학교_생도모집 (포스터)" data-color="#57bb8a" style="border-color:#57bb8a;color:#0F172A;background:#ebf7f1" onclick="filterMapByCamp(this,'육군3사관학교_생도모집 (포스터)')"><span class="cf-dday">D-6</span><span class="cf-name">육군3사관학교</span></button><button class="camp-filter-btn" data-camp="육군3사관학교_생도모집 (현수막)" data-color="#34a853" style="border-color:#34a853;color:#0F172A;background:#e7f5ea" onclick="filterMapByCamp(this,'육군3사관학교_생도모집 (현수막)')"><span class="cf-dday">D-6</span><span class="cf-name">육군3사관학교</span></button></div>
     <div id="naverMap"></div>
   </div>
-  <div class="camp-card" data-camp="육군3사관학교_생도모집 (포스터)"><div class="cc-head"><span class="cc-dday soon" data-deadline="260430" style="background:#57bb8a">D-7</span><span class="cc-advertiser">육군3사관학교</span><span class="cc-approval approval-yes">승인</span><span class="cc-deadline">4월 30일 목요일</span></div><div class="cc-title">생도모집 (포스터)</div><div class="cc-progress-wrap"><div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%;background:#57bb8a"></div></div><div class="cc-progress-text"><span class="cc-progress-done">0개교 완료 (0%)</span><span class="cc-progress-remain">1개교 남음</span></div></div><div class="cc-stats"><div class="cc-stat"><div class="lbl">학교</div><div class="val">1<span style="font-size:10px;font-weight:600;color:var(--text-muted)">개교</span></div><div class="sub cc-school-remain">남음 1</div></div><div class="cc-stat"><div class="lbl">포스터</div><div class="val">20<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-poster-remain">남음 20</div></div><div class="cc-stat"><div class="lbl">현수막</div><div class="val">0<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-banner-remain">남음 0</div></div></div><div class="cc-request"><span class="req-lbl">📋 요청사항</span><span class="req-txt">시안A+B 교차 부착<br>유동인구 많은 곳</span></div></div><div class="camp-card" data-camp="육군3사관학교_생도모집 (현수막)"><div class="cc-head"><span class="cc-dday soon" data-deadline="260430" style="background:#34a853">D-7</span><span class="cc-advertiser">육군3사관학교</span><span class="cc-approval approval-no">비승인</span><span class="cc-deadline">4월 30일 목요일</span></div><div class="cc-title">생도모집 (현수막)</div><div class="cc-progress-wrap"><div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%;background:#34a853"></div></div><div class="cc-progress-text"><span class="cc-progress-done">0개교 완료 (0%)</span><span class="cc-progress-remain">2개교 남음</span></div></div><div class="cc-stats"><div class="cc-stat"><div class="lbl">학교</div><div class="val">2<span style="font-size:10px;font-weight:600;color:var(--text-muted)">개교</span></div><div class="sub cc-school-remain">남음 2</div></div><div class="cc-stat"><div class="lbl">포스터</div><div class="val">0<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-poster-remain">남음 0</div></div><div class="cc-stat"><div class="lbl">현수막</div><div class="val">4<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-banner-remain">남음 4</div></div></div><div class="cc-request"><span class="req-lbl">📋 요청사항</span><span class="req-txt">시안 2종<br>유동인구 많은 곳</span></div></div>
+  <div class="camp-card" data-camp="육군3사관학교_생도모집 (포스터)"><div class="cc-head"><span class="cc-dday soon" data-deadline="260430" style="background:#57bb8a">D-6</span><span class="cc-advertiser">육군3사관학교</span><span class="cc-approval approval-yes">승인</span><span class="cc-deadline">4월 30일 목요일</span></div><div class="cc-title">생도모집 (포스터)</div><div class="cc-progress-wrap"><div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%;background:#57bb8a"></div></div><div class="cc-progress-text"><span class="cc-progress-done">0개교 완료 (0%)</span><span class="cc-progress-remain">1개교 남음</span></div></div><div class="cc-stats"><div class="cc-stat"><div class="lbl">학교</div><div class="val">1<span style="font-size:10px;font-weight:600;color:var(--text-muted)">개교</span></div><div class="sub cc-school-remain">남음 1</div></div><div class="cc-stat"><div class="lbl">포스터</div><div class="val">20<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-poster-remain">남음 20</div></div><div class="cc-stat"><div class="lbl">현수막</div><div class="val">0<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-banner-remain">남음 0</div></div></div><div class="cc-request"><span class="req-lbl">📋 요청사항</span><span class="req-txt">시안A+B 교차 부착<br>유동인구 많은 곳</span></div></div><div class="camp-card" data-camp="육군3사관학교_생도모집 (현수막)"><div class="cc-head"><span class="cc-dday soon" data-deadline="260430" style="background:#34a853">D-6</span><span class="cc-advertiser">육군3사관학교</span><span class="cc-approval approval-no">비승인</span><span class="cc-deadline">4월 30일 목요일</span></div><div class="cc-title">생도모집 (현수막)</div><div class="cc-progress-wrap"><div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%;background:#34a853"></div></div><div class="cc-progress-text"><span class="cc-progress-done">0개교 완료 (0%)</span><span class="cc-progress-remain">2개교 남음</span></div></div><div class="cc-stats"><div class="cc-stat"><div class="lbl">학교</div><div class="val">2<span style="font-size:10px;font-weight:600;color:var(--text-muted)">개교</span></div><div class="sub cc-school-remain">남음 2</div></div><div class="cc-stat"><div class="lbl">포스터</div><div class="val">0<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-poster-remain">남음 0</div></div><div class="cc-stat"><div class="lbl">현수막</div><div class="val">4<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-banner-remain">남음 4</div></div></div><div class="cc-request"><span class="req-lbl">📋 요청사항</span><span class="req-txt">시안 2종<br>유동인구 많은 곳</span></div></div>
   <div class="school-list-section">
     <div class="section-title">전체 학교 <span style="font-size:11px;color:var(--accent);font-weight:600;margin-left:4px">(클릭 시 상세 이동)</span></div>
     <div style="overflow-x:auto">
       <table class="school-table">
-        <thead><tr><th>학교이름</th><th>포스터</th><th>현수막</th><th>급여</th><th>완료</th></tr></thead>
-        <tbody><tr class="region-row"><td colspan="5">제주 (3개교 · 완료 0)</td></tr><tr class="school-row" data-school="제주관광대학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td>제주관광대학교</td><td></td><td>2</td><td>20,000</td><td class="school-check-cell"></td></tr><tr class="school-row" data-school="제주한라대학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td>제주한라대학교</td><td></td><td>2</td><td>20,000</td><td class="school-check-cell"></td></tr><tr class="school-row" data-school="제주대학교 아라캠퍼스" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td>제주대학교 아라캠퍼스</td><td>20</td><td></td><td>20,000</td><td class="school-check-cell"></td></tr></tbody>
+        <thead><tr><th>광고주</th><th>포스터</th><th>현수막</th><th>급여</th><th>완료</th></tr></thead>
+        <tbody><tr class="region-row"><td colspan="5">제주 (3개교 · 완료 0)</td></tr><tr class="school-header-row" data-school="제주관광대학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td colspan="5"><span class="sh-name">제주관광대학교</span><span class="sh-sub">1개 광고주</span></td></tr><tr class="school-row school-row-last" data-school="제주관광대학교" data-adv="육군3사관학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td class="camp-name-cell" style="border-left:4px solid #34a853"><span class="camp-dot" style="background:#34a853"></span>육군3사관학교<span class="camp-titles">생도모집 (현수막)</span></td><td></td><td>2</td><td>20,000</td><td class="school-check-cell"></td></tr><tr class="school-header-row" data-school="제주한라대학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td colspan="5"><span class="sh-name">제주한라대학교</span><span class="sh-sub">1개 광고주</span></td></tr><tr class="school-row school-row-last" data-school="제주한라대학교" data-adv="육군3사관학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td class="camp-name-cell" style="border-left:4px solid #34a853"><span class="camp-dot" style="background:#34a853"></span>육군3사관학교<span class="camp-titles">생도모집 (현수막)</span></td><td></td><td>2</td><td>20,000</td><td class="school-check-cell"></td></tr><tr class="school-header-row" data-school="제주대학교 아라캠퍼스" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td colspan="5"><span class="sh-name">제주대학교 아라캠퍼스</span><span class="sh-sub">1개 광고주</span></td></tr><tr class="school-row school-row-last" data-school="제주대학교 아라캠퍼스" data-adv="육군3사관학교" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td class="camp-name-cell" style="border-left:4px solid #57bb8a"><span class="camp-dot" style="background:#57bb8a"></span>육군3사관학교<span class="camp-titles">생도모집 (포스터)</span></td><td>20</td><td></td><td>20,000</td><td class="school-check-cell"></td></tr></tbody>
         <tfoot><tr><td>합계 (3개교)</td><td>20</td><td>4</td><td>60,000</td><td id="sumFootDone">0</td></tr></tfoot>
       </table>
     </div>
@@ -400,7 +361,7 @@ body.has-large-map{overflow:hidden}
       <span class="search-clear" id="searchClear" onclick="clearSearch()">&#x2715;</span>
     </div>
   </div>
-  <div id="cardsContainer"><div class="region-divider"><span class="label">제주</span><span class="line"></span></div><div class="card" id="school-1" data-school-name="제주관광대학교"><div class="card-header"><div class="card-num">1</div><div class="card-school">제주관광대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%EA%B4%80%EA%B4%91%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주관광대학교'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 애월읍 평화로 2715</div><div class="camp-block" data-school="제주관광대학교" data-camp="육군3사관학교_생도모집 (현수막)" data-poster="0" data-banner="2"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (현수막)</span><span class="approval-badge approval-no">비승인</span><span class="camp-dday soon" data-deadline="260430">D-7</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">2장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">시안 2종<br>유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/1D6QJn8t5CS5jmHGAIcbDp8y8sA3QP-SK" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'1D6QJn8t5CS5jmHGAIcbDp8y8sA3QP-SK')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-2" data-school-name="제주한라대학교"><div class="card-header"><div class="card-num">2</div><div class="card-school">제주한라대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%ED%95%9C%EB%9D%BC%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주한라대학교'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 한라대학로 38</div><div class="camp-block" data-school="제주한라대학교" data-camp="육군3사관학교_생도모집 (현수막)" data-poster="0" data-banner="2"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (현수막)</span><span class="approval-badge approval-no">비승인</span><span class="camp-dday soon" data-deadline="260430">D-7</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">2장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">시안 2종<br>유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/1GABo6oNg2pC7JgKMVNwybH_3q_DOmIYv" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'1GABo6oNg2pC7JgKMVNwybH_3q_DOmIYv')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-3" data-school-name="제주대학교 아라캠퍼스"><div class="card-header"><div class="card-num">3</div><div class="card-school">제주대학교 아라캠퍼스</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%EB%8C%80%ED%95%99%EA%B5%90%20%EC%95%84%EB%9D%BC%EC%BA%A0%ED%8D%BC%EC%8A%A4&appname=goodadlab" class="btn-navi" target="_blank" onclick="window.open('https://map.naver.com/v5/search/'+encodeURIComponent('제주대학교 아라캠퍼스'),'_blank');return false;">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 대학로 102</div><div class="camp-block" data-school="제주대학교 아라캠퍼스" data-camp="육군3사관학교_생도모집 (포스터)" data-poster="20" data-banner="0"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (포스터)</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday soon" data-deadline="260430">D-7</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">20장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">시안A+B 교차 부착<br>유동인구 많은 곳</span></div><div class="camp-detail-row note-row"><span class="cdl">비고</span><input type="text" class="note-input" placeholder="승인장소 및 부착장소, 특이사항을 입력 해 주세요." value="" onblur="saveNote(this)" /></div><div class="camp-action-row camp-action-upload"><button class="photo-btn photo-btn-upload" onclick="startCameraCapture(this)">📷 사진 촬영</button><a href="https://drive.google.com/drive/folders/1Jnq-QmxyZb3SC9370FJSKkp2Q7ZCy1b2" class="photo-btn photo-btn-drive" onclick="return handleDriveClick(event,'1Jnq-QmxyZb3SC9370FJSKkp2Q7ZCy1b2')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div></div>
+  <div id="cardsContainer"><div class="region-divider"><span class="label">제주</span><span class="line"></span></div><div class="card" id="school-1" data-school-name="제주관광대학교"><div class="card-header"><div class="card-num">1</div><div class="card-school">제주관광대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%EA%B4%80%EA%B4%91%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" onclick="return openNaverApp('제주관광대학교')">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 애월읍 평화로 2715</div><div class="camp-block" data-school="제주관광대학교" data-camp="육군3사관학교_생도모집 (현수막)" data-adv="육군3사관학교" data-poster="0" data-banner="2"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (현수막)</span><span class="approval-badge approval-no">비승인</span><span class="camp-dday soon" data-deadline="260430">D-6</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">2장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">시안 2종<br>유동인구 많은 곳</span></div><div class="camp-detail-row bld-input-row"><span class="cdl">비고</span><input type="text" class="building-input" placeholder="실제 부착하신 건물명을 적어주세요. (미입력 시 작업완료 처리 불가)" value="" onblur="saveBuilding(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1D6QJn8t5CS5jmHGAIcbDp8y8sA3QP-SK" class="btn-drive" onclick="return handleDriveClick(event,'1D6QJn8t5CS5jmHGAIcbDp8y8sA3QP-SK')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-2" data-school-name="제주한라대학교"><div class="card-header"><div class="card-num">2</div><div class="card-school">제주한라대학교</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%ED%95%9C%EB%9D%BC%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" onclick="return openNaverApp('제주한라대학교')">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 한라대학로 38</div><div class="camp-block" data-school="제주한라대학교" data-camp="육군3사관학교_생도모집 (현수막)" data-adv="육군3사관학교" data-poster="0" data-banner="2"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (현수막)</span><span class="approval-badge approval-no">비승인</span><span class="camp-dday soon" data-deadline="260430">D-6</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">2장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">시안 2종<br>유동인구 많은 곳</span></div><div class="camp-detail-row bld-input-row"><span class="cdl">비고</span><input type="text" class="building-input" placeholder="실제 부착하신 건물명을 적어주세요. (미입력 시 작업완료 처리 불가)" value="" onblur="saveBuilding(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1GABo6oNg2pC7JgKMVNwybH_3q_DOmIYv" class="btn-drive" onclick="return handleDriveClick(event,'1GABo6oNg2pC7JgKMVNwybH_3q_DOmIYv')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-3" data-school-name="제주대학교 아라캠퍼스"><div class="card-header"><div class="card-num">3</div><div class="card-school">제주대학교 아라캠퍼스</div><a href="nmap://search?query=%EC%A0%9C%EC%A3%BC%EB%8C%80%ED%95%99%EA%B5%90%20%EC%95%84%EB%9D%BC%EC%BA%A0%ED%8D%BC%EC%8A%A4&appname=goodadlab" class="btn-navi" onclick="return openNaverApp('제주대학교 아라캠퍼스')">🧭 길찾기</a></div><div class="card-addr">제주특별자치도 제주시 대학로 102</div><div class="camp-block" data-school="제주대학교 아라캠퍼스" data-camp="육군3사관학교_생도모집 (포스터)" data-adv="육군3사관학교" data-poster="20" data-banner="0"><div class="camp-block-header"><span class="camp-name">육군3사관학교_생도모집 (포스터)</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday soon" data-deadline="260430">D-6</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">20장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">시안A+B 교차 부착<br>유동인구 많은 곳</span></div><div class="camp-detail-row bld-input-row"><span class="cdl">비고</span><input type="text" class="building-input" placeholder="실제 부착하신 건물명을 적어주세요. (미입력 시 작업완료 처리 불가)" value="" onblur="saveBuilding(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1Jnq-QmxyZb3SC9370FJSKkp2Q7ZCy1b2" class="btn-drive" onclick="return handleDriveClick(event,'1Jnq-QmxyZb3SC9370FJSKkp2Q7ZCy1b2')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div></div>
 </div>
 <div class="bottom-bar" id="bottomBar">
   <div class="bottom-progress">
@@ -410,19 +371,25 @@ body.has-large-map{overflow:hidden}
   </div>
   <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#x2191;</button>
 </div>
+<div id="newVerBanner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#2563EB;color:#fff;padding:10px 14px;font-size:14px;font-weight:600;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15)">
+  <span>&#x1F504; 새 버전이 있습니다 &mdash; 눌러서 새로고침</span>
+</div>
 <div class="tab-nav">
   <button class="tab-btn active" ontouchend="event.preventDefault();switchPage('pageSummary',this)" onclick="switchPage('pageSummary',this)"><span class="tab-icon">&#x25C9;</span>요약</button>
   <button class="tab-btn" ontouchend="event.preventDefault();switchPage('pageDetail',this)" onclick="switchPage('pageDetail',this)"><span class="tab-icon">&#x2261;</span>상세</button>
 </div>
 <script>
 (function(){var ua=navigator.userAgent||"";var isInApp=/KAKAOTALK|NAVER|Line|FBAN|FBAV|Instagram|Whale/i.test(ua);if(!isInApp)return;var isAndroid=/Android/i.test(ua);var isIOS=/iPhone|iPad|iPod/i.test(ua);var url=location.href;if(isAndroid){location.href="intent://"+url.replace(/^https?:\/\//,"")+"#Intent;scheme=https;package=com.android.chrome;end";}else if(isIOS&&/KAKAOTALK/i.test(ua)){location.href="kakaotalk://web/openExternal?url="+encodeURIComponent(url);}})();
-var WEB_APP_URL="https://script.google.com/macros/s/AKfycbz2LO4HaJiABrdqSy1XI7x4CoOdTyF_fwYToVYoRssVXiYvHCjeiP2nNytMMpgKqhGhAA/exec",WORKER_NAME="김태준";
+var WEB_APP_URL="https://script.google.com/macros/s/AKfycbzWyoa0VRxbVpKR8K6yen4PucC1VHHsq-pshwGC1JiJcZtUtJsynbWThiaw26g02yBZyw/exec",WORKER_NAME="김태준";
 var MAP_DATA=[{"school":"제주관광대학교","region":"제주","addr":"제주특별자치도 제주시 애월읍 평화로 2715","done":false,"dday":"soon"},{"school":"제주한라대학교","region":"제주","addr":"제주특별자치도 제주시 한라대학로 38","done":false,"dday":"soon"},{"school":"제주대학교 아라캠퍼스","region":"제주","addr":"제주특별자치도 제주시 대학로 102","done":false,"dday":"soon"}];
 var SVG_CHECKED='<svg class="svg-check" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 var SVG_UNCHECKED='<svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg>';
 var SVG_CHECK_SM='<svg class="svg-check" viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="9" fill="#059669"/><path d="M6 10l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 function switchPage(id,btn){
   document.body.style.overflow="";
+  document.body.classList.remove("has-large-map");
+  var __sec=document.getElementById("mapSection");if(__sec)__sec.classList.remove("map-large");
+  var __me=document.getElementById("naverMap");if(__me)__me.classList.remove("map-large");
   document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active")});
   document.getElementById(id).classList.add("active");
   document.querySelectorAll(".tab-btn").forEach(function(b){b.classList.remove("active")});
@@ -446,12 +413,22 @@ function updateProgress(){
 }
 updateProgress();
 function toggleCampDone(btn){
-  btn.classList.toggle("checked");
   var block=btn.closest(".camp-block"),card=btn.closest(".card");
   var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");
+  var bInp=block.querySelector(".building-input");
+  if(!btn.classList.contains("checked")){
+    if(bInp&&!bInp.value.trim()){
+      bInp.classList.add("invalid");showToast("\u26A0 부착 장소를 기입해 주세요");
+      setTimeout(function(){bInp.classList.remove("invalid");},2000);
+      try{bInp.focus();}catch(e){}
+      return;
+    }
+  }
+  btn.classList.toggle("checked");
   if(btn.classList.contains("checked")){
     block.classList.add("done");btn.innerHTML=SVG_CHECKED+" 완료됨";doneCount++;
     var now=new Date();var ts=(now.getMonth()+1)+"/"+now.getDate()+" "+now.getHours().toString().padStart(2,"0")+":"+now.getMinutes().toString().padStart(2,"0");
+    if(bInp&&bInp.value.trim()){callWebApp({action:"note",school:school,camp:camp,text:bInp.value.trim()});}
     callWebApp({action:"complete",school:school,camp:camp,time:ts});showToast("\u2713 "+school+" 완료");
   } else {
     block.classList.remove("done");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";doneCount--;
@@ -464,6 +441,7 @@ function toggleCampDone(btn){
   updateProgress();refreshCampSummaryStats();refreshCampDoneStatus();refreshTotalsGrid();syncSchoolTable();
 }
 function saveNote(el){var block=el.closest(".camp-block");callWebApp({action:"note",school:block.getAttribute("data-school"),camp:block.getAttribute("data-camp"),text:el.value.trim()});showToast("\u2713 비고 저장")}
+function saveBuilding(el){var v=el.value.trim();var block=el.closest(".camp-block");callWebApp({action:"note",school:block.getAttribute("data-school"),camp:block.getAttribute("data-camp"),text:v});if(v)el.classList.remove("invalid");showToast("\u2713 비고 저장")}
 function handleDriveClick(e,folderId){
   var ua=navigator.userAgent||"";
   var webUrl="https://drive.google.com/drive/folders/"+folderId;
@@ -479,6 +457,16 @@ function handleDriveClick(e,folderId){
   }
   return true;
 }
+function openNaverApp(query){
+  var q=encodeURIComponent(query);
+  var ua=navigator.userAgent||"";
+  if(/Android/i.test(ua)){
+    window.location="intent://search?query="+q+"&appname=goodadlab#Intent;scheme=nmap;package=com.nhn.android.nmap;end";
+  }else{
+    window.location="nmap://search?query="+q+"&appname=goodadlab";
+  }
+  return false;
+}
 function filterCards(){var q=document.getElementById("searchInput").value.trim().toLowerCase();document.getElementById("searchClear").style.display=q?"block":"none";document.querySelectorAll(".region-divider").forEach(function(d){d.style.display=q?"none":""});document.querySelectorAll(".card").forEach(function(c){c.classList.toggle("hidden",q&&(c.getAttribute("data-school-name")||"").toLowerCase().indexOf(q)===-1)})}
 function searchAndScroll(){var q=document.getElementById("searchInput").value.trim().toLowerCase();if(!q)return;var cards=document.querySelectorAll(".card");for(var i=0;i<cards.length;i++){var nm=(cards[i].getAttribute("data-school-name")||"").toLowerCase();if(nm.indexOf(q)!==-1){var hdr=document.querySelector(".detail-header");var off=hdr?hdr.offsetHeight+10:80;window.scrollTo({top:cards[i].getBoundingClientRect().top+window.pageYOffset-off,behavior:"smooth"});document.getElementById("searchInput").blur();break}}}
 function clearSearch(){document.getElementById("searchInput").value="";filterCards()}
@@ -488,7 +476,26 @@ function showSingleSchool(schoolName){singleSchoolMode=true;document.querySelect
 function showAllSchools(){singleSchoolMode=false;singleSchoolOrigin=null;document.querySelectorAll(".region-divider").forEach(function(d){d.style.display=""});document.querySelectorAll(".card").forEach(function(c){c.classList.remove("hidden")});document.getElementById("backToList").style.display="none";document.querySelector(".search-wrap").style.display="";window.scrollTo(0,0)}
 function goBackFromSingleSchool(){var origin=singleSchoolOrigin;showAllSchools();if(origin==="pageSummary"){var sumBtn=document.querySelectorAll(".tab-btn")[0];if(sumBtn)switchPage("pageSummary",sumBtn)}}
 function goToSchoolDetail(schoolName){singleSchoolOrigin="pageSummary";var detailBtn=document.querySelectorAll(".tab-btn")[1];if(detailBtn)switchPage("pageDetail",detailBtn);requestAnimationFrame(function(){showSingleSchool(schoolName)})}
-function syncSchoolTable(){document.querySelectorAll(".school-row").forEach(function(row){var sn=row.getAttribute("data-school");var cards=document.querySelectorAll(".card[data-school-name]");var card=null;for(var i=0;i<cards.length;i++){if(cards[i].getAttribute("data-school-name")===sn){card=cards[i];break}}if(!card)return;var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});var cell=row.querySelector(".school-check-cell");if(allDone){cell.innerHTML=SVG_CHECK_SM;row.style.opacity="0.4"}else{cell.innerHTML="";row.style.opacity="1"}})}
+function syncSchoolTable(){
+  document.querySelectorAll(".school-row").forEach(function(row){
+    var sn=row.getAttribute("data-school");var an=row.getAttribute("data-adv");
+    if(!sn||!an)return;
+    var blocks=document.querySelectorAll('.camp-block[data-school="'+sn.replace(/"/g,'\\"')+'"][data-adv="'+an.replace(/"/g,'\\"')+'"]');
+    if(!blocks.length)return;
+    var allDone=true;
+    blocks.forEach(function(b){var btn=b.querySelector(".complete-btn");if(!btn||!btn.classList.contains("checked"))allDone=false});
+    var cell=row.querySelector(".school-check-cell");
+    if(allDone){cell.innerHTML=SVG_CHECK_SM;row.style.opacity="0.5"}else{cell.innerHTML="";row.style.opacity="1"}
+  });
+  document.querySelectorAll(".school-header-row").forEach(function(hdr){
+    var sn=hdr.getAttribute("data-school");if(!sn)return;
+    var rows=document.querySelectorAll('.school-row[data-school="'+sn.replace(/"/g,'\\"')+'"]');
+    if(!rows.length)return;
+    var allDone=true;
+    rows.forEach(function(r){if(!r.querySelector(".school-check-cell").innerHTML)allDone=false});
+    hdr.style.opacity=allDone?"0.5":"1";
+  });
+}
 var mapMarkers={},mapLabels={},naverMapObj=null,mapInitDone=false;
 function getMarkerSizeForZoom(z){var s=12+(z-7)*2;if(s<12)s=12;if(s>30)s=30;return Math.round(s);}
 function getCampOffsetPx(idx,total,size){
@@ -515,7 +522,7 @@ function makeSvgIcon(color,size,offX,offY){
   return{content:'<div style="width:'+size+'px;height:'+size+'px">'+svg+'</div>',size:new naver.maps.Size(size,size),anchor:new naver.maps.Point(size/2-offX,size/2-offY)};
 }
 function syncMapFromCards(){document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});var sn=card.getAttribute("data-school-name");if(sn)updateMapMarker(sn,allDone)})}
-function goToSchoolCard(schoolName){singleSchoolOrigin="pageSummary";var detailBtn=document.querySelectorAll(".tab-btn")[1];if(detailBtn)switchPage("pageDetail",detailBtn);requestAnimationFrame(function(){showSingleSchool(schoolName)})}
+function goToSchoolCard(schoolName){var sec=document.getElementById("mapSection");if(sec)sec.classList.remove("map-large");var mapEl2=document.getElementById("naverMap");if(mapEl2)mapEl2.classList.remove("map-large");document.body.classList.remove("has-large-map");singleSchoolOrigin="pageSummary";var detailBtn=document.querySelectorAll(".tab-btn")[1];if(detailBtn)switchPage("pageDetail",detailBtn);requestAnimationFrame(function(){showSingleSchool(schoolName)})}
 function addMapControlButtons(){
   try{
     var mapEl=document.getElementById("naverMap");if(!mapEl)return;
@@ -526,11 +533,11 @@ function addMapControlButtons(){
     var fsEnterSvg='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>';
     var fsExitSvg='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>';
     fsBtn.innerHTML=fsEnterSvg;
-    fsBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();var isLarge=mapEl.classList.toggle("map-large");document.body.classList.toggle("has-large-map",isLarge);fsBtn.innerHTML=isLarge?fsExitSvg:fsEnterSvg;fsBtn.title=isLarge?"원래 크기":"크게보기";setTimeout(function(){try{if(naverMapObj)naver.maps.Event.trigger(naverMapObj,"resize");}catch(e){}},220);};
+    fsBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();var sec=document.getElementById("mapSection")||mapEl.parentElement;var isLarge=sec.classList.toggle("map-large");document.body.classList.toggle("has-large-map",isLarge);fsBtn.innerHTML=isLarge?fsExitSvg:fsEnterSvg;fsBtn.title=isLarge?"원래 크기":"크게보기";setTimeout(function(){try{if(naverMapObj)naver.maps.Event.trigger(naverMapObj,"resize");}catch(e){}},220);};
     mapEl.appendChild(fsBtn);
     var locBtn=document.createElement("button");locBtn.type="button";locBtn.title="내 위치";locBtn.setAttribute("aria-label","내 위치");
-    locBtn.style.cssText=btnCss+"top:50%;right:10px;transform:translateY(-50%);padding:0;";
-    locBtn.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>';
+    locBtn.style.cssText=btnCss+"top:56px;right:10px;padding:0;";
+    locBtn.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#03C75A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5" fill="#03C75A" stroke="none"/><line x1="12" y1="1.5" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22.5" y2="12"/></svg>';
     locBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();if(!navigator.geolocation){alert("이 브라우저는 위치 정보를 지원하지 않습니다");return;}locBtn.style.opacity="0.5";navigator.geolocation.getCurrentPosition(function(pos){locBtn.style.opacity="1";if(!naverMapObj)return;var lat=pos.coords.latitude,lng=pos.coords.longitude;var ll=new naver.maps.LatLng(lat,lng);naverMapObj.setCenter(ll);naverMapObj.setZoom(14);if(window.__myLocMarker)window.__myLocMarker.setMap(null);window.__myLocMarker=new naver.maps.Marker({map:naverMapObj,position:ll,icon:{content:'<div style="width:16px;height:16px;background:#4F46E5;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 2px rgba(79,70,229,0.3),0 2px 6px rgba(0,0,0,0.3)"></div>',size:new naver.maps.Size(16,16),anchor:new naver.maps.Point(8,8)},zIndex:1000});},function(err){locBtn.style.opacity="1";var msg=(err&&err.code===1)?"위치 권한이 거부되었습니다. 브라우저 설정에서 위치 권한을 허용해 주세요":(err&&err.message)||"위치를 가져올 수 없습니다";alert(msg);},{enableHighAccuracy:true,timeout:10000,maximumAge:0});};
     mapEl.appendChild(locBtn);
   }catch(e){if(window.console&&console.warn)console.warn("addMapControlButtons error",e);}
@@ -538,7 +545,7 @@ function addMapControlButtons(){
 (function(){try{if(typeof naver==="undefined"||!naver.maps){document.getElementById("naverMap").innerHTML="<p style=\"padding:20px;text-align:center;color:var(--text-muted)\">지도 로딩 실패</p>";return}var mc=document.getElementById("naverMap");naverMapObj=new naver.maps.Map(mc,{center:new naver.maps.LatLng(36.5,127.5),zoom:7,zoomControl:false,mapDataControl:false,scaleControl:false});addMapControlButtons();var bounds=new naver.maps.LatLngBounds();var cnt=0;var schools=MAP_DATA.filter(function(s){return s.addr});if(!schools.length){document.getElementById("naverMap").innerHTML="<p style=\"padding:40px 20px;text-align:center;color:var(--positive);font-weight:700\">모든 학교 작업 완료!</p>";mapInitDone=true;return}var geoRemain=schools.length;var usedCoords={};schools.forEach(function(s,i){setTimeout(function(){naver.maps.Service.geocode({query:s.addr},function(status,response){if(status===naver.maps.Service.Status.OK&&response.v2.addresses.length>0){var addr=response.v2.addresses[0];var lat=parseFloat(addr.y),lng=parseFloat(addr.x);var coordKey=lat.toFixed(4)+","+lng.toFixed(4);if(usedCoords[coordKey]){var oc=usedCoords[coordKey];lat+=0.0004*oc;lng+=0.0003*oc;usedCoords[coordKey]=oc+1}else{usedCoords[coordKey]=1}var coords=new naver.maps.LatLng(lat,lng);var campsForSchool=(SCHOOL_CAMPAIGNS[s.school]||[]).slice();if(!campsForSchool.length)campsForSchool=[{camp:"",deadline:""}];campsForSchool.sort(cmpDeadlineAsc);var curSize=getMarkerSizeForZoom(naverMapObj.getZoom());var markerList=campsForSchool.map(function(c,idx){
   var col=(CAMP_COLORS&&CAMP_COLORS[c.camp])||"#94A3B8";
   var off=getCampOffsetPx(idx,campsForSchool.length,curSize);
-  var mk=new naver.maps.Marker({map:naverMapObj,position:coords,title:s.school,icon:makeSvgIcon(col,curSize,off.x,off.y),zIndex:100});
+  var mk=new naver.maps.Marker({map:naverMapObj,position:coords,title:s.school,icon:makeSvgIcon(col,curSize,off.x,off.y),zIndex:1000-idx});
   naver.maps.Event.addListener(mk,"click",function(){goToSchoolCard(s.school);});
   return{marker:mk,camp:c.camp,deadline:c.deadline};
 });mapMarkers[s.school]={markers:markerList,coords:coords,done:s.done,dday:s.dday};if(!s.done){bounds.extend(coords);cnt++}if(cnt>=Math.min(schools.filter(function(x){return!x.done}).length,5)&&cnt>0)naverMapObj.fitBounds(bounds)}geoRemain--;if(geoRemain<=0){mapInitDone=true;syncMapFromCards();applyZoomToAllMarkers();}})},i*150)});var __zoomTimer=null;
@@ -588,14 +595,7 @@ window.addEventListener("scroll",function(){
 document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".tab-btn").forEach(function(b){b.addEventListener("click",function(){var n=document.querySelector(".tab-nav");if(n)n.classList.remove("hidden-by-scroll");var bb=document.getElementById("bottomBar");if(bb)bb.classList.remove("hidden-by-scroll");});});});
 var SYNC_CACHE_KEY="sync_cache_v1_"+WORKER_NAME;
 function applySyncData(data,reset){
-  if(reset){document.querySelectorAll(".uploaded-gallery-wrap,.uploaded-collapsed").forEach(function(w){if(w&&w.parentNode)w.parentNode.removeChild(w);});}
-  document.querySelectorAll(".camp-block").forEach(function(block){var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");var key=school+"|||"+camp;if(!data[key])return;var info=data[key];var btn=block.querySelector(".complete-btn");if(info.postDate&&!btn.classList.contains("checked")){btn.classList.add("checked");btn.innerHTML=SVG_CHECKED+" 완료됨";block.classList.add("done");doneCount++}else if(!info.postDate&&btn.classList.contains("checked")){btn.classList.remove("checked");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";block.classList.remove("done");doneCount--}var noteInput=block.querySelector(".note-input");if(noteInput&&info.note)noteInput.value=info.note;
-    if(info.photos&&info.photos.length){
-      info.photos.forEach(function(p){if(p&&p.clientId)window._serverClientIds[p.clientId]=1;});
-      var photoUrls=info.photos.filter(function(p){return p&&p.fileId;}).map(function(p){return p.thumb||("https://drive.google.com/thumbnail?id="+encodeURIComponent(p.fileId)+"&sz=w400");});
-      block.__pendingPhotos=photoUrls;
-      if(block.__expandedPhotos){renderExpandedGallery(block);}else{renderCollapsedSummary(block,photoUrls.length);}
-    }
+  document.querySelectorAll(".camp-block").forEach(function(block){var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");var key=school+"|||"+camp;if(!data[key])return;var info=data[key];var btn=block.querySelector(".complete-btn");if(info.postDate&&!btn.classList.contains("checked")){btn.classList.add("checked");btn.innerHTML=SVG_CHECKED+" 완료됨";block.classList.add("done");doneCount++}else if(!info.postDate&&btn.classList.contains("checked")){btn.classList.remove("checked");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";block.classList.remove("done");doneCount--}var bldInput=block.querySelector(".building-input");if(bldInput&&document.activeElement!==bldInput)bldInput.value=info.note||"";
   });
   document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});if(allDone)card.classList.add("all-done");else card.classList.remove("all-done");var sn2=card.getAttribute("data-school-name");if(sn2)updateMapMarker(sn2,allDone)});
   updateProgress();syncSchoolTable();refreshCampSummaryStats();refreshCampDoneStatus();refreshTotalsGrid();if(mapInitDone)syncMapFromCards();else setTimeout(syncMapFromCards,MAP_DATA.length*160+1000);
@@ -608,12 +608,12 @@ function fetchSync(fresh){
 (function syncOnLoad(){
   var ss=document.getElementById("syncStatus");
   var hadCache=false;
-  try{var cached=sessionStorage.getItem(SYNC_CACHE_KEY);if(cached){applySyncData(JSON.parse(cached),false);hadCache=true;}}catch(e){}
+  try{var cached=localStorage.getItem(SYNC_CACHE_KEY);if(cached){applySyncData(JSON.parse(cached),false);hadCache=true;}}catch(e){}
   if(!hadCache)ss.classList.add("show");
-  fetchSync(true).then(function(json){
-    if(json.status==="ok"&&json.data){applySyncData(json.data,hadCache);try{sessionStorage.setItem(SYNC_CACHE_KEY,JSON.stringify(json.data));}catch(e){}}
-    ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400);
-  }).catch(function(){ss.classList.remove("show");setTimeout(restoreQueuesFromIdb,400);});
+  fetchSync(false).then(function(json){
+    if(json.status==="ok"&&json.data){applySyncData(json.data,hadCache);try{localStorage.setItem(SYNC_CACHE_KEY,JSON.stringify(json.data));}catch(e){}}
+    ss.classList.remove("show");
+  }).catch(function(){ss.classList.remove("show");});
 })();
 function refreshDday(){
   var today=new Date();today.setHours(0,0,0,0);
@@ -803,7 +803,7 @@ function updateMapMarkerByCamp(schoolName){
     var col=(CAMP_COLORS&&CAMP_COLORS[mk.camp])||"#94A3B8";
     var off=getCampOffsetPx(pos,visibleIdx.length,size);
     mk.marker.setIcon(makeSvgIcon(col,size,off.x,off.y));
-    mk.marker.setZIndex(z+pos);
+    mk.marker.setZIndex(z+(visibleIdx.length-pos));
     mk.marker.setVisible(true);
   });
 }
@@ -855,37 +855,6 @@ syncMapFromCards=function(){Object.keys(mapMarkers).forEach(function(sn){updateM
 var __origToggle=toggleCampDone;
 toggleCampDone=function(btn){__origToggle(btn);refreshCampCards();var card=btn.closest(".card");if(card){var sn=card.getAttribute("data-school-name");if(sn)updateMapMarkerByCamp(sn);}};
 refreshCampCards();
-function injectSchoolCampChips(){
-  document.querySelectorAll(".school-row").forEach(function(row){
-    var sn=row.getAttribute("data-school");
-    if(!sn)return;
-    var camps=SCHOOL_CAMPAIGNS[sn]||[];
-    if(!camps.length)return;
-    var cell=row.querySelector("td:first-child");
-    if(!cell||cell.querySelector(".school-camps-inline"))return;
-    var sorted=camps.slice().sort(cmpDeadlineAsc);
-    var wrap=document.createElement("div");
-    wrap.className="school-camps-inline";
-    sorted.forEach(function(c){
-      var col=CAMP_COLORS[c.camp]||"#94A3B8";
-      var parts=c.camp.split("_");
-      var advert=parts[0];
-      var qtyParts=[];
-      if(c.poster>0)qtyParts.push("포"+c.poster);
-      if(c.banner>0)qtyParts.push("현"+c.banner);
-      var qtyStr=qtyParts.length?" "+qtyParts.join("·"):"";
-      var payStr=c.pay>0?" ₩"+c.pay.toLocaleString():"";
-      var chip=document.createElement("span");
-      chip.className="camp-chip";
-      chip.style.background=col+"1A";
-      chip.style.color="#0F172A";
-      chip.innerHTML='<span class="chip-dot" style="background:'+col+'"></span>'+advert+qtyStr+payStr;
-      wrap.appendChild(chip);
-    });
-    cell.appendChild(wrap);
-  });
-}
-injectSchoolCampChips();
 function injectCampNameDots(){
   document.querySelectorAll(".camp-block").forEach(function(block){
     var cn=block.getAttribute("data-camp");
@@ -904,434 +873,5 @@ function injectCampNameDots(){
   });
 }
 injectCampNameDots();
-var captureQueues={};
-var gpsPermissionGranted=false;
-function queueKey(block){return block.getAttribute("data-school")+"|||"+block.getAttribute("data-camp");}
-var IDB_NAME="uploadQueueDB",IDB_STORE="photos",IDB_VERSION=1,IDB_MAX_AGE_MS=48*60*60*1000;
-var __idbDb=null;
-function idbOpen(){
-  return new Promise(function(resolve,reject){
-    if(__idbDb){resolve(__idbDb);return;}
-    if(!window.indexedDB){reject(new Error("IDB unavailable"));return;}
-    var req=indexedDB.open(IDB_NAME,IDB_VERSION);
-    req.onerror=function(){reject(req.error);};
-    req.onupgradeneeded=function(){
-      var db=req.result;
-      if(!db.objectStoreNames.contains(IDB_STORE)){
-        var st=db.createObjectStore(IDB_STORE,{keyPath:"id",autoIncrement:true});
-        st.createIndex("queueKey","queueKey",{unique:false});
-        st.createIndex("ts","ts",{unique:false});
-      }
-    };
-    req.onsuccess=function(){__idbDb=req.result;resolve(__idbDb);};
-  });
-}
-function generateClientId(){
-  try{
-    if(window.crypto&&crypto.getRandomValues){
-      var b=new Uint8Array(8);crypto.getRandomValues(b);
-      var s="";for(var i=0;i<b.length;i++){var h=b[i].toString(16);s+=(h.length<2?"0":"")+h;}
-      return s;
-    }
-  }catch(e){}
-  return (Date.now().toString(16)+Math.random().toString(16).substring(2)).substring(0,16);
-}
-function idbAddPhoto(qKey,file,gps,clientId){
-  return idbOpen().then(function(db){return new Promise(function(resolve,reject){
-    var tx=db.transaction(IDB_STORE,"readwrite");
-    var req=tx.objectStore(IDB_STORE).add({
-      queueKey:qKey,ts:Date.now(),blob:file,
-      name:(file&&file.name)||("photo_"+Date.now()+".jpg"),
-      type:(file&&file.type)||"image/jpeg",
-      gpsLat:gps?gps.lat:null, gpsLng:gps?gps.lng:null,
-      clientId:clientId||null
-    });
-    req.onsuccess=function(){resolve(req.result);};
-    req.onerror=function(){reject(req.error);};
-  });});
-}
-function idbDeletePhoto(id){
-  if(id==null)return Promise.resolve();
-  return idbOpen().then(function(db){return new Promise(function(resolve){
-    var tx=db.transaction(IDB_STORE,"readwrite");
-    tx.objectStore(IDB_STORE).delete(id);
-    tx.oncomplete=function(){resolve();};
-    tx.onerror=function(){resolve();};
-  });}).catch(function(){});
-}
-function idbCleanupExpired(){
-  return idbOpen().then(function(db){return new Promise(function(resolve){
-    var cutoff=Date.now()-IDB_MAX_AGE_MS;
-    var tx=db.transaction(IDB_STORE,"readwrite");
-    var idx=tx.objectStore(IDB_STORE).index("ts");
-    var req=idx.openCursor(IDBKeyRange.upperBound(cutoff));
-    var n=0;
-    req.onsuccess=function(e){var c=e.target.result;if(c){c.delete();n++;c.continue();}else resolve(n);};
-    req.onerror=function(){resolve(0);};
-  });}).catch(function(){return 0;});
-}
-function idbGetAllPhotos(){
-  return idbOpen().then(function(db){return new Promise(function(resolve){
-    var tx=db.transaction(IDB_STORE,"readonly");
-    var req=tx.objectStore(IDB_STORE).getAll();
-    req.onsuccess=function(){resolve(req.result||[]);};
-    req.onerror=function(){resolve([]);};
-  });}).catch(function(){return [];});
-}
-window._serverClientIds=window._serverClientIds||{};
-function restoreQueuesFromIdb(){
-  idbCleanupExpired().then(function(){return idbGetAllPhotos();}).then(function(items){
-    if(!items||!items.length)return;
-    var count=0;var touchedKeys={};var skipped=0;
-    items.forEach(function(it){
-      if(!it.clientId){
-        idbDeletePhoto(it.id);skipped++;return;
-      }
-      if(window._serverClientIds[it.clientId]){
-        idbDeletePhoto(it.id);skipped++;return;
-      }
-      if(!captureQueues[it.queueKey])captureQueues[it.queueKey]=[];
-      var f=it.blob;
-      try{if(it.name&&!f.name){f=new File([it.blob],it.name,{type:it.type||"image/jpeg"});}}catch(e){}
-      captureQueues[it.queueKey].push({
-        file:f, gps:(it.gpsLat!=null&&it.gpsLng!=null)?{lat:it.gpsLat,lng:it.gpsLng}:null,
-        idbId:it.id, status:"pending", attempts:0, clientId:it.clientId||null
-      });
-      touchedKeys[it.queueKey]=true;count++;
-    });
-    var esc=function(s){return (window.CSS&&CSS.escape)?CSS.escape(s):s;};
-    Object.keys(touchedKeys).forEach(function(k){
-      var parts=k.split("|||");
-      var block=document.querySelector('.camp-block[data-school="'+esc(parts[0])+'"][data-camp="'+esc(parts[1])+'"]');
-      if(block){renderCaptureQueue(block,k);ensureUploadWorker(block,k);ensureUploadWorker(block,k);}
-    });
-    if(count>0)showToast("\uD83D\uDCE6 이전 세션 사진 "+count+"장 이어서 업로드");
-  }).catch(function(){});
-}
-window.addEventListener("pageshow",function(e){if(e.persisted)setTimeout(restoreQueuesFromIdb,300);});
-function getDeviceGps(){
-  return new Promise(function(resolve){
-    if(!navigator.geolocation){resolve(null);return;}
-    navigator.geolocation.getCurrentPosition(
-      function(pos){resolve({lat:pos.coords.latitude,lng:pos.coords.longitude});},
-      function(){resolve(null);},
-      {enableHighAccuracy:true,timeout:10000,maximumAge:60000}
-    );
-  });
-}
-function closeGpsGuide(){var el=document.getElementById("gpsGuideOverlay");if(el)el.parentNode.removeChild(el);}
-function showGpsGuide(reason){
-  closeGpsGuide();
-  var msg="",title="",btn="확인";
-  if(reason==="inapp"){title="외부 브라우저에서 열어주세요";msg="카카오톡/네이버 등 인앱 브라우저에서는\nGPS 위치 권한 요청이 차단됩니다.\n\n우측 상단 ⋮ 버튼 → \"Chrome\"(안드로이드) 또는\n\"Safari\"(아이폰)로 열어주세요.";}
-  else if(reason==="denied"){title="GPS 권한이 필요합니다";msg="사진 업로드 시 GPS 좌표를 함께 기록하려면\n위치 권한을 허용해주세요.\n\n브라우저 주소창 왼쪽 자물쇠 아이콘 →\n위치 → 허용으로 변경 후 재시도.";}
-  var ov=document.createElement("div");ov.id="gpsGuideOverlay";ov.className="gps-guide-overlay";
-  ov.innerHTML='<div class="gps-guide-box"><h3>'+title+'</h3><p>'+msg+'</p><button onclick="closeGpsGuide()">'+btn+'</button></div>';
-  document.body.appendChild(ov);
-}
-function detectInAppBrowser(){return /KAKAOTALK|NAVER|Line|FBAN|FBAV|Instagram|Whale/i.test(navigator.userAgent||"");}
-function startCameraCapture(btn){
-  if(btn.__cool)return;btn.__cool=true;setTimeout(function(){btn.__cool=false;},1000);
-  if(detectInAppBrowser()){showGpsGuide("inapp");return;}
-  var block=btn.closest(".camp-block");
-  if(!gpsPermissionGranted&&navigator.geolocation){
-    showToast("\uD83D\uDCCD GPS 권한 요청 중...");
-    navigator.geolocation.getCurrentPosition(
-      function(){gpsPermissionGranted=true;showToast("\u2713 GPS 허용됨. 이제 촬영해주세요.");},
-      function(){gpsPermissionGranted=true;showToast("\u26A0 GPS 없이 업로드됩니다 (데스크톱/권한없음).");},
-      {enableHighAccuracy:true,timeout:8000,maximumAge:0}
-    );
-    return;
-  }
-  if(!gpsPermissionGranted)gpsPermissionGranted=true;
-  doCapture(btn,block,queueKey(block));
-}
-function pickPhotoExt(file){
-  var t=((file&&file.type)||"").toLowerCase();
-  if(t.indexOf("heic")!==-1)return"heic";
-  if(t.indexOf("heif")!==-1)return"heif";
-  if(t.indexOf("png")!==-1)return"png";
-  if(t.indexOf("webp")!==-1)return"webp";
-  if(t.indexOf("jpeg")!==-1||t.indexOf("jpg")!==-1)return"jpg";
-  var nm=(file&&file.name)||"";
-  var m=nm.match(/\.(heic|heif|png|webp|jpe?g)$/i);
-  return m?m[1].toLowerCase().replace("jpeg","jpg"):"jpg";
-}
-function saveFileToDevice(file){
-  try{
-    if(!file)return false;
-    var ts=new Date();
-    var stamp=ts.getFullYear()+("0"+(ts.getMonth()+1)).slice(-2)+("0"+ts.getDate()).slice(-2)+"_"+("0"+ts.getHours()).slice(-2)+("0"+ts.getMinutes()).slice(-2)+("0"+ts.getSeconds()).slice(-2);
-    var dlName="photo_"+stamp+"."+pickPhotoExt(file);
-    var reader=new FileReader();
-    reader.onload=function(){
-      try{
-        var dataUrl=reader.result;
-        if(!dataUrl)return;
-        var a=document.createElement("a");
-        a.href=dataUrl;a.download=dlName;a.rel="noopener";a.style.display="none";
-        document.body.appendChild(a);a.click();
-        setTimeout(function(){try{document.body.removeChild(a);}catch(e){}},3000);
-      }catch(e){}
-    };
-    reader.onerror=function(){};
-    reader.readAsDataURL(file);
-    return true;
-  }catch(e){return false;}
-}
-function doCapture(btn,block,key){
-  var input=document.createElement("input");
-  input.type="file";input.accept="image/*";input.capture="environment";
-  input.style.display="none";
-  var __handled=false;
-  input.addEventListener("change",function(e){
-    if(__handled)return;
-    __handled=true;
-    var file=e.target.files&&e.target.files[0];
-    if(!file)return;
-    saveFileToDevice(file);
-    getDeviceGps().then(function(gps){
-      if(!captureQueues[key])captureQueues[key]=[];
-      var cid=generateClientId();
-      var item={file:file,gps:gps,status:"pending",attempts:0,clientId:cid};
-      captureQueues[key].push(item);
-      renderCaptureQueue(block,key);
-      idbAddPhoto(key,file,gps,cid).then(function(id){item.idbId=id;}).catch(function(){});
-      ensureUploadWorker(block,key);ensureUploadWorker(block,key);
-    });
-  });
-  document.body.appendChild(input);input.click();
-  setTimeout(function(){try{document.body.removeChild(input);}catch(e){}},60000);
-}
-function renderCaptureQueue(block,key){
-  var queue=captureQueues[key]||[];
-  var existing=block.querySelector(".capture-queue");
-  if(!queue.length){if(existing)existing.remove();return;}
-  var uploading=0,retrying=0;
-  for(var j=0;j<queue.length;j++){var q=queue[j];if(q.status==="uploading")uploading++;if((q.attempts||0)>0)retrying++;}
-  var gpsOk=queue.filter(function(q){return q.gps;}).length;
-  var badges="";
-  if(uploading)badges+='<span class="cq-badge cq-up">\u2191 업로드중 '+uploading+'</span>';
-  if(retrying)badges+='<span class="cq-badge cq-retry">\u21BB 재시도 '+retrying+'</span>';
-  if(gpsOk<queue.length)badges+='<span class="cq-badge cq-gps">\u26A0 GPS '+(queue.length-gpsOk)+'</span>';
-  var head='<div class="cq-head"><span class="cq-dot"></span><span class="cq-label">대기중 <b>'+queue.length+'</b>장</span>'+badges+'</div>';
-  var gridHtml='<div class="cq-grid">';
-  for(var j2=0;j2<queue.length;j2++){
-    var qi=queue[j2];
-    if(!qi._blobUrl){try{qi._blobUrl=URL.createObjectURL(qi.file);}catch(be){qi._blobUrl="";}}
-    var stCls=qi.status==="uploading"?" is-uploading":((qi.attempts||0)>0?" is-retry":"");
-    gridHtml+='<div class="cq-item'+stCls+'" data-cid="'+(qi.clientId||"")+'">'
-      +'<img src="'+qi._blobUrl+'" alt="대기 '+(j2+1)+'">'
-      +'<div class="cq-num">'+(j2+1)+'</div>';
-    if(qi.status==="uploading")gridHtml+='<div class="cq-spin"></div>';
-    gridHtml+='</div>';
-  }
-  gridHtml+='</div>';
-  var html=head+gridHtml;
-  if(existing){existing.innerHTML=html;}
-  else {var wrap=document.createElement("div");wrap.className="capture-queue";wrap.innerHTML=html;block.querySelector(".camp-action-row").insertAdjacentElement("afterend",wrap);}
-}
-function movePendingToCompleted(block,item){
-  try{
-    var url=item._blobUrl||URL.createObjectURL(item.file);
-    var cid=item.clientId||"";
-    var pend=cid?block.querySelector('.cq-item[data-cid="'+cid+'"]'):null;
-    if(pend){pend.classList.add("is-leaving");}
-    addUploadedItemFromUrl(block,url,{animate:true});
-  }catch(e){try{addUploadedItemFromUrl(block,URL.createObjectURL(item.file),{animate:true});}catch(e2){}}
-}
-function readFileAsBase64(file){
-  return new Promise(function(resolve,reject){
-    var reader=new FileReader();
-    reader.onload=function(){var s=reader.result||"";var idx=s.indexOf(",");resolve(idx>=0?s.substring(idx+1):s);};
-    reader.onerror=function(){reject(reader.error);};
-    reader.readAsDataURL(file);
-  });
-}
-function readFileAsDataUrl(file){
-  return new Promise(function(resolve,reject){
-    var reader=new FileReader();
-    reader.onload=function(){resolve(reader.result||"");};
-    reader.onerror=function(){reject(reader.error);};
-    reader.readAsDataURL(file);
-  });
-}
-function injectGpsToJpegDataUrl(dataUrl, lat, lng){
-  try{
-    if(typeof piexif==="undefined")return dataUrl;
-    if(lat==null||lng==null)return dataUrl;
-    if(!/^data:image\/jpe?g/i.test(dataUrl))return dataUrl;
-    var exifObj;
-    try{exifObj=piexif.load(dataUrl);}
-    catch(e){exifObj={"0th":{},"Exif":{},"GPS":{},"Interop":{},"1st":{},"thumbnail":null};}
-    if(!exifObj.GPS)exifObj.GPS={};
-    var absLat=Math.abs(Number(lat)),absLng=Math.abs(Number(lng));
-    exifObj.GPS[piexif.GPSIFD.GPSLatitudeRef]=Number(lat)>=0?"N":"S";
-    exifObj.GPS[piexif.GPSIFD.GPSLatitude]=piexif.GPSHelper.degToDmsRational(absLat);
-    exifObj.GPS[piexif.GPSIFD.GPSLongitudeRef]=Number(lng)>=0?"E":"W";
-    exifObj.GPS[piexif.GPSIFD.GPSLongitude]=piexif.GPSHelper.degToDmsRational(absLng);
-    var ts=new Date();
-    exifObj.GPS[piexif.GPSIFD.GPSDateStamp]=ts.getUTCFullYear()+":"+String(ts.getUTCMonth()+1).padStart(2,"0")+":"+String(ts.getUTCDate()).padStart(2,"0");
-    exifObj.GPS[piexif.GPSIFD.GPSTimeStamp]=[[ts.getUTCHours(),1],[ts.getUTCMinutes(),1],[ts.getUTCSeconds(),1]];
-    var exifBytes=piexif.dump(exifObj);
-    return piexif.insert(exifBytes, dataUrl);
-  }catch(e){return dataUrl;}
-}
-function extractBase64(dataUrl){var idx=(dataUrl||"").indexOf(",");return idx>=0?dataUrl.substring(idx+1):(dataUrl||"");}
-function getMimeType(name){var e=(name||"").toLowerCase().split(".").pop();var m={jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",heic:"image/heic",heif:"image/heif",webp:"image/webp"};return m[e]||"image/jpeg";}
-var __wakeLock=null;
-function acquireWakeLock(){try{if("wakeLock" in navigator){navigator.wakeLock.request("screen").then(function(wl){__wakeLock=wl;if(wl&&wl.addEventListener)wl.addEventListener("release",function(){});}).catch(function(){});}}catch(e){}}
-function releaseWakeLock(){try{if(__wakeLock){__wakeLock.release().catch(function(){});__wakeLock=null;}}catch(e){}}
-document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible"&&window.__uploadInProgress)acquireWakeLock();});
-function uploadSingle(payload,tries){
-  tries=tries||0;
-  var action=payload.action||"upload_photo";
-  var url=WEB_APP_URL+(WEB_APP_URL.indexOf("?")<0?"?":"&")+"action="+encodeURIComponent(action);
-  return fetch(url,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)})
-    .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
-    .then(function(t){
-      try{return JSON.parse(t);}
-      catch(e){return{status:"error",message:"응답파싱실패: "+(t||"").substring(0,80)};}
-    })
-    .catch(function(err){
-      if(tries<2){return new Promise(function(res){setTimeout(function(){res(uploadSingle(payload,tries+1));},1500*(tries+1));});}
-      return{status:"error",message:String(err&&err.message||err)};
-    });
-}
-function addUploadedItemFromUrl(block,imgUrl,opts){
-  try{
-    opts=opts||{};
-    var wrap=block.querySelector(".uploaded-gallery-wrap");
-    var gal;
-    if(!wrap){
-      wrap=document.createElement("div");wrap.className="uploaded-gallery-wrap";
-      var lbl=document.createElement("div");lbl.className="uploaded-gallery-label";
-      lbl.innerHTML='<span class="ug-check">\u2713</span> 업로드 완료 <b class="ug-count">0</b>장';
-      gal=document.createElement("div");gal.className="uploaded-gallery";
-      wrap.appendChild(lbl);wrap.appendChild(gal);
-      var anchor=block.querySelector(".capture-queue")||block.querySelector(".camp-action-row");
-      if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(wrap,anchor.nextSibling);}
-      else{block.appendChild(wrap);}
-    }else{gal=wrap.querySelector(".uploaded-gallery");}
-    var item=document.createElement("div");item.className="u-item"+(opts.animate?" is-arriving":"");
-    var n=gal.children.length+1;
-    item.innerHTML='<img loading="lazy" src="'+imgUrl+'" alt="업로드 '+n+'" onerror="handleUploadedImgError(this)"><div class="u-num">'+n+'</div>';
-    item.onclick=function(){openUploadedViewer(imgUrl);};
-    gal.appendChild(item);
-    if(opts.animate){setTimeout(function(){item.classList.remove("is-arriving");},20);}
-    var cnt=wrap.querySelector(".ug-count");if(cnt)cnt.textContent=gal.children.length;
-  }catch(e){}
-}
-function handleUploadedImgError(img){
-  try{
-    var item=img.closest(".u-item");if(!item)return;
-    var gal=item.parentNode;if(!gal)return;
-    var wrap=gal.closest(".uploaded-gallery-wrap");
-    item.remove();
-    var nums=gal.querySelectorAll(".u-num");
-    for(var i=0;i<nums.length;i++){nums[i].textContent=i+1;}
-    if(wrap){var cnt=wrap.querySelector(".ug-count");if(cnt)cnt.textContent=gal.children.length;}
-    if(gal.children.length===0&&wrap){wrap.style.display="none";}
-  }catch(e){}
-}
-function addToUploadedGallery(block,rawFile){
-  try{
-    block.__expandedPhotos=true;
-    var collapsed=block.querySelector(".uploaded-collapsed");if(collapsed&&collapsed.parentNode)collapsed.parentNode.removeChild(collapsed);
-    addUploadedItemFromUrl(block,URL.createObjectURL(rawFile));
-  }catch(e){}
-}
-function renderCollapsedSummary(block,count){
-  try{
-    var oldGal=block.querySelector(".uploaded-gallery-wrap");if(oldGal&&oldGal.parentNode)oldGal.parentNode.removeChild(oldGal);
-    var oldSum=block.querySelector(".uploaded-collapsed");if(oldSum&&oldSum.parentNode)oldSum.parentNode.removeChild(oldSum);
-    if(!count)return;
-    var sum=document.createElement("div");sum.className="uploaded-collapsed";
-    sum.innerHTML='<span class="uc-label"><span class="ug-check">\u2713</span>업로드 완료 <b>'+count+'</b>장</span><span class="uc-action">\uD83D\uDCF7 펼쳐보기 \u25B6</span>';
-    sum.onclick=function(){block.__expandedPhotos=true;renderExpandedGallery(block);};
-    var anchor=block.querySelector(".capture-queue")||block.querySelector(".camp-action-row");
-    if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(sum,anchor.nextSibling);else block.appendChild(sum);
-  }catch(e){}
-}
-function renderExpandedGallery(block){
-  try{
-    var collapsed=block.querySelector(".uploaded-collapsed");if(collapsed&&collapsed.parentNode)collapsed.parentNode.removeChild(collapsed);
-    var existing=block.querySelector(".uploaded-gallery-wrap");if(existing&&existing.parentNode)existing.parentNode.removeChild(existing);
-    var urls=block.__pendingPhotos||[];
-    urls.forEach(function(u){addUploadedItemFromUrl(block,u);});
-  }catch(e){}
-}
-function openUploadedViewer(url){
-  var ov=document.createElement("div");ov.className="uploaded-viewer";
-  ov.innerHTML='<img src="'+url+'">';
-  ov.onclick=function(){document.body.removeChild(ov);};
-  document.body.appendChild(ov);
-}
-var MAX_PARALLEL=2;
-var __workers={};
-function ensureUploadWorker(block,key){
-  var cur=__workers[key]||0;
-  if(cur>=MAX_PARALLEL)return;
-  var queue=captureQueues[key]||[];
-  var hasPending=false;for(var i=0;i<queue.length;i++){if(queue[i].status!=="uploading"){hasPending=true;break;}}
-  if(!hasPending)return;
-  __workers[key]=cur+1;
-  window.__uploadInProgress=true;acquireWakeLock();
-  workerLoop(block,key);
-}
-function workerLoop(block,key){
-  var queue=captureQueues[key]||[];
-  var item=null;for(var i=0;i<queue.length;i++){if(queue[i].status!=="uploading"){item=queue[i];break;}}
-  if(!item){
-    __workers[key]=(__workers[key]||1)-1;if(__workers[key]<=0)delete __workers[key];
-    if(!Object.keys(__workers).length){window.__uploadInProgress=false;releaseWakeLock();}
-    return;
-  }
-  item.status="uploading";renderCaptureQueue(block,key);
-  processOneItem(block,key,item).then(function(){workerLoop(block,key);});
-}
-function processOneItem(block,key,item){
-  var school=block.getAttribute("data-school");var camp=block.getAttribute("data-camp");
-  return readFileAsDataUrl(item.file).then(function(dataUrl){
-    var finalDataUrl=dataUrl;
-    var gps=item.gps||{};
-    if(gps.lat!=null&&gps.lng!=null){finalDataUrl=injectGpsToJpegDataUrl(dataUrl,gps.lat,gps.lng);}
-    var b64=extractBase64(finalDataUrl);
-    var mime=(finalDataUrl.match(/^data:([^;,]+)/)||[,item.file.type||getMimeType(item.file.name)])[1];
-    var payload={action:"upload_photo",school:school,camp:camp,fileName:item.file.name||("photo_"+Date.now()+".jpg"),fileData:b64,mimeType:mime};
-    if(gps.lat!=null&&gps.lng!=null){payload.lat=gps.lat;payload.lng=gps.lng;}
-    if(item.clientId)payload.clientId=item.clientId;
-    return uploadWithBackoff(payload,item,block,key);
-  }).then(function(res){
-    if(res&&res.status==="ok"){
-      if(item.idbId!=null)idbDeletePhoto(item.idbId);
-      if(item.clientId)window._serverClientIds[item.clientId]=1;
-      movePendingToCompleted(block,item);
-      var q=captureQueues[key]||[];var idx=q.indexOf(item);if(idx>=0)q.splice(idx,1);
-      setTimeout(function(){renderCaptureQueue(block,key);},260);
-    } else { item.status="pending"; renderCaptureQueue(block,key); }
-  }).catch(function(){item.status="pending";renderCaptureQueue(block,key);});
-}
-function uploadWithBackoff(payload,item,block,key){
-  return new Promise(function(resolve){
-    function attempt(){
-      uploadSingle(payload,0).then(function(res){
-        if(res&&res.status==="ok"){resolve(res);return;}
-        item.attempts=(item.attempts||0)+1;
-        renderCaptureQueue(block,key);
-        var exp=Math.min(6,item.attempts-1);
-        var delay=Math.min(60000,1000*Math.pow(2,exp));
-        setTimeout(attempt,delay);
-      }).catch(function(){
-        item.attempts=(item.attempts||0)+1;
-        renderCaptureQueue(block,key);
-        var exp=Math.min(6,item.attempts-1);
-        var delay=Math.min(60000,1000*Math.pow(2,exp));
-        setTimeout(attempt,delay);
-      });
-    }
-    attempt();
-  });
-}
 </script>
 </body></html>
