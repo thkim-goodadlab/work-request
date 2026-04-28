@@ -50,8 +50,7 @@
   --shadow-float:0 8px 32px rgba(0,0,0,0.12);
   --r-sm:10px;--r-md:14px;--r-lg:18px;
 }
-html,body{overscroll-behavior-y:none;-webkit-overflow-scrolling:touch}
-body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden;overscroll-behavior-y:contain}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -300,7 +299,7 @@ body.has-large-map{overflow:hidden}
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1777379216849;
+  var BUILD_TS=1777380004959;
   var urlV=0;try{var m=location.search.match(/[?&]v=(\d+)/);if(m)urlV=parseInt(m[1]);}catch(e){}
   var lastSeen=0;try{lastSeen=parseInt(localStorage.getItem("lastSeenVer")||"0");}catch(e){}
   fetch(location.pathname+"?_="+Date.now(),{method:"HEAD",cache:"no-store"}).then(function(r){
@@ -322,7 +321,7 @@ body.has-large-map{overflow:hidden}
   <div class="summary-header">
     <div class="header-top">
       <h1>선우성배 작업요청서</h1>
-      <div class="updated-tag">4/28 21:26 업데이트</div>
+      <div class="updated-tag">4/28 21:39 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">14/36</span></div>
