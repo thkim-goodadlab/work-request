@@ -300,7 +300,7 @@ body.has-large-map{overflow:hidden}
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1777360161473;
+  var BUILD_TS=1777379210543;
   var urlV=0;try{var m=location.search.match(/[?&]v=(\d+)/);if(m)urlV=parseInt(m[1]);}catch(e){}
   var lastSeen=0;try{lastSeen=parseInt(localStorage.getItem("lastSeenVer")||"0");}catch(e){}
   fetch(location.pathname+"?_="+Date.now(),{method:"HEAD",cache:"no-store"}).then(function(r){
@@ -322,7 +322,7 @@ body.has-large-map{overflow:hidden}
   <div class="summary-header">
     <div class="header-top">
       <h1>유효순 작업요청서</h1>
-      <div class="updated-tag">4/28 16:09 업데이트</div>
+      <div class="updated-tag">4/28 21:26 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/3</span></div>
@@ -594,10 +594,24 @@ window.addEventListener("scroll",function(){
 },{passive:true});
 document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".tab-btn").forEach(function(b){b.addEventListener("click",function(){var n=document.querySelector(".tab-nav");if(n)n.classList.remove("hidden-by-scroll");var bb=document.getElementById("bottomBar");if(bb)bb.classList.remove("hidden-by-scroll");});});});
 var SYNC_CACHE_KEY="sync_cache_v1_"+WORKER_NAME;
-function applySyncData(data,reset){
-  document.querySelectorAll(".camp-block").forEach(function(block){var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");var key=school+"|||"+camp;if(!data[key])return;var info=data[key];var btn=block.querySelector(".complete-btn");if(info.postDate&&!btn.classList.contains("checked")){btn.classList.add("checked");btn.innerHTML=SVG_CHECKED+" 완료됨";block.classList.add("done");doneCount++}else if(!info.postDate&&btn.classList.contains("checked")){btn.classList.remove("checked");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";block.classList.remove("done");doneCount--}var bldInput=block.querySelector(".building-input");if(bldInput&&document.activeElement!==bldInput)bldInput.value=info.note||"";
+function applySyncData(data,reset,prune){
+  document.querySelectorAll(".camp-block").forEach(function(block){var school=block.getAttribute("data-school"),camp=block.getAttribute("data-camp");var key=school+"|||"+camp;
+    if(!data[key]){
+      if(prune){
+        var btn0=block.querySelector(".complete-btn");if(btn0&&btn0.classList.contains("checked"))doneCount--;
+        block.style.display="none";block.setAttribute("data-stale","1");
+      }
+      return;
+    }
+    if(block.getAttribute("data-stale")){block.style.display="";block.removeAttribute("data-stale");}
+    var info=data[key];var btn=block.querySelector(".complete-btn");if(info.postDate&&!btn.classList.contains("checked")){btn.classList.add("checked");btn.innerHTML=SVG_CHECKED+" 완료됨";block.classList.add("done");doneCount++}else if(!info.postDate&&btn.classList.contains("checked")){btn.classList.remove("checked");btn.innerHTML=SVG_UNCHECKED+" 작업 완료";block.classList.remove("done");doneCount--}var bldInput=block.querySelector(".building-input");if(bldInput&&document.activeElement!==bldInput)bldInput.value=info.note||"";
   });
-  document.querySelectorAll(".card").forEach(function(card){var allDone=true;card.querySelectorAll(".complete-btn").forEach(function(b){if(!b.classList.contains("checked"))allDone=false});if(allDone)card.classList.add("all-done");else card.classList.remove("all-done");var sn2=card.getAttribute("data-school-name");if(sn2)updateMapMarker(sn2,allDone)});
+  document.querySelectorAll(".card").forEach(function(card){
+    var visibleBlocks=card.querySelectorAll(".camp-block:not([data-stale=\"1\"])");
+    if(prune&&visibleBlocks.length===0){card.style.display="none";return;}
+    card.style.display="";
+    var allDone=true;visibleBlocks.forEach(function(blk){var b=blk.querySelector(".complete-btn");if(b&&!b.classList.contains("checked"))allDone=false});
+    if(allDone)card.classList.add("all-done");else card.classList.remove("all-done");var sn2=card.getAttribute("data-school-name");if(sn2)updateMapMarker(sn2,allDone)});
   updateProgress();syncSchoolTable();refreshCampSummaryStats();refreshCampDoneStatus();refreshTotalsGrid();if(mapInitDone)syncMapFromCards();else setTimeout(syncMapFromCards,MAP_DATA.length*160+1000);
 }
 function fetchSync(fresh){
@@ -608,10 +622,14 @@ function fetchSync(fresh){
 (function syncOnLoad(){
   var ss=document.getElementById("syncStatus");
   var hadCache=false;
-  try{var cached=localStorage.getItem(SYNC_CACHE_KEY);if(cached){applySyncData(JSON.parse(cached),false);hadCache=true;}}catch(e){}
+  try{var cached=localStorage.getItem(SYNC_CACHE_KEY);if(cached){applySyncData(JSON.parse(cached),false,false);hadCache=true;}}catch(e){}
   if(!hadCache)ss.classList.add("show");
-  fetchSync(false).then(function(json){
-    if(json.status==="ok"&&json.data){applySyncData(json.data,hadCache);try{localStorage.setItem(SYNC_CACHE_KEY,JSON.stringify(json.data));}catch(e){}}
+  fetchSync(true).then(function(json){
+    if(json.status==="ok"&&json.data){
+      var hasAny=Object.keys(json.data).length>0;
+      applySyncData(json.data,hadCache,hasAny);
+      try{localStorage.setItem(SYNC_CACHE_KEY,JSON.stringify(json.data));}catch(e){}
+    }
     ss.classList.remove("show");
   }).catch(function(){ss.classList.remove("show");});
 })();
