@@ -299,7 +299,7 @@ body.has-large-map{overflow:hidden}
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1777551367073;
+  var BUILD_TS=1777881864705;
   var urlV=0;try{var m=location.search.match(/[?&]v=(\d+)/);if(m)urlV=parseInt(m[1]);}catch(e){}
   var lastSeen=0;try{lastSeen=parseInt(localStorage.getItem("lastSeenVer")||"0");}catch(e){}
   fetch(location.pathname+"?_="+Date.now(),{method:"HEAD",cache:"no-store"}).then(function(r){
@@ -321,7 +321,7 @@ body.has-large-map{overflow:hidden}
   <div class="summary-header">
     <div class="header-top">
       <h1>변재호완료 작업요청서</h1>
-      <div class="updated-tag">4/30 21:15 업데이트</div>
+      <div class="updated-tag">5/4 17:03 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">1/1</span></div>
@@ -330,7 +330,7 @@ body.has-large-map{overflow:hidden}
   </div>
   <div class="map-section" id="mapSection">
     <div class="section-title"><span>학교 위치</span></div>
-    <div class="camp-filter-row"><button class="camp-filter-btn active" data-camp="" style="border-color:var(--border);color:var(--text-secondary)" onclick="filterMapByCamp(this,'')"><span class="cf-dday">ALL</span><span class="cf-name">전체</span></button><button class="camp-filter-btn" data-camp="디스플레이협회_오토캐드 교육생 모집" data-color="#8064a2" style="border-color:#8064a2;color:#0F172A;background:#f0ecf4" onclick="filterMapByCamp(this,'디스플레이협회_오토캐드 교육생 모집')"><span class="cf-dday">D-6</span><span class="cf-name">디스플레이협회</span></button></div>
+    <div class="camp-filter-row"><button class="camp-filter-btn active" data-camp="" style="border-color:var(--border);color:var(--text-secondary)" onclick="filterMapByCamp(this,'')"><span class="cf-dday">ALL</span><span class="cf-name">전체</span></button><button class="camp-filter-btn" data-camp="디스플레이협회_오토캐드 교육생 모집" data-color="#8064a2" style="border-color:#8064a2;color:#0F172A;background:#f0ecf4" onclick="filterMapByCamp(this,'디스플레이협회_오토캐드 교육생 모집')"><span class="cf-dday">D-2</span><span class="cf-name">디스플레이협회</span></button></div>
     <div id="naverMap"></div>
   </div>
   <div class="camp-card all-done" data-camp="디스플레이협회_오토캐드 교육생 모집"><div class="cc-head"><span class="cc-dday done" data-deadline="260506" style="background:#8064a2">✓ 완료</span><span class="cc-advertiser">디스플레이협회</span><span class="cc-approval approval-yes">승인</span><span class="cc-deadline">5월 6일 수요일</span></div><div class="cc-title">오토캐드 교육생 모집</div><div class="cc-progress-wrap"><div class="cc-progress-bar"><div class="cc-progress-fill" style="width:100%;background:#8064a2"></div></div><div class="cc-progress-text"><span class="cc-progress-done">1개교 완료 (100%)</span><span class="cc-progress-remain">0개교 남음</span></div></div><div class="cc-stats"><div class="cc-stat"><div class="lbl">학교</div><div class="val">1<span style="font-size:10px;font-weight:600;color:var(--text-muted)">개교</span></div><div class="sub cc-school-remain">남음 0</div></div><div class="cc-stat"><div class="lbl">포스터</div><div class="val">10<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-poster-remain">남음 0</div></div><div class="cc-stat"><div class="lbl">현수막</div><div class="val">2<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-banner-remain">남음 0</div></div></div><div class="cc-request"><span class="req-lbl">📋 요청사항</span><span class="req-txt">(1장씩 부착) 승인 받고 디스플레이학과에 부착 해 주세요.</span></div></div>
@@ -380,7 +380,7 @@ body.has-large-map{overflow:hidden}
 <script>
 (function(){var ua=navigator.userAgent||"";var isInApp=/KAKAOTALK|NAVER|Line|FBAN|FBAV|Instagram|Whale/i.test(ua);if(!isInApp)return;var isAndroid=/Android/i.test(ua);var isIOS=/iPhone|iPad|iPod/i.test(ua);var url=location.href;if(isAndroid){location.href="intent://"+url.replace(/^https?:\/\//,"")+"#Intent;scheme=https;package=com.android.chrome;end";}else if(isIOS&&/KAKAOTALK/i.test(ua)){location.href="kakaotalk://web/openExternal?url="+encodeURIComponent(url);}})();
 var WEB_APP_URL="https://script.google.com/macros/s/AKfycbzWyoa0VRxbVpKR8K6yen4PucC1VHHsq-pshwGC1JiJcZtUtJsynbWThiaw26g02yBZyw/exec",WORKER_NAME="변재호완료";
-var MAP_DATA=[{"school":"경북대학교 대구캠퍼스","region":"대구","addr":"대구광역시 북구 대학로 80","done":true,"dday":"soon"}];
+var MAP_DATA=[{"school":"경북대학교 대구캠퍼스","region":"대구","addr":"대구광역시 북구 대학로 80","done":true,"dday":"urgent"}];
 var SVG_CHECKED='<svg class="svg-check" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 var SVG_UNCHECKED='<svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg>';
 var SVG_CHECK_SM='<svg class="svg-check" viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="9" fill="#059669"/><path d="M6 10l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
