@@ -302,7 +302,7 @@ body.has-large-map{overflow:hidden}
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1778241576773;
+  var BUILD_TS=1778249080710;
   var urlV=0;try{var m=location.search.match(/[?&]v=(\d+)/);if(m)urlV=parseInt(m[1]);}catch(e){}
   var lastSeen=0;try{lastSeen=parseInt(localStorage.getItem("lastSeenVer")||"0");}catch(e){}
   fetch(location.pathname+"?_="+Date.now(),{method:"HEAD",cache:"no-store"}).then(function(r){
@@ -324,7 +324,7 @@ body.has-large-map{overflow:hidden}
   <div class="summary-header">
     <div class="header-top">
       <h1>구인_포항 작업요청서</h1>
-      <div class="updated-tag">5/8 20:59 업데이트</div>
+      <div class="updated-tag">5/8 23:04 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/2</span></div>
@@ -342,7 +342,7 @@ body.has-large-map{overflow:hidden}
     <div style="overflow-x:auto">
       <table class="school-table">
         <thead><tr><th>광고주</th><th>포스터</th><th>현수막</th><th>급여</th><th>완료</th></tr></thead>
-        <tbody><tr class="region-row"><td colspan="5">경북 (1개교 · 완료 0)</td></tr><tr class="school-header-row" data-school="포항공과대학교 포스텍 POSTECH" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td colspan="5"><span class="sh-name">포항공과대학교 포스텍 POSTECH</span><span class="sh-sub">2개 광고주</span></td></tr><tr class="school-row" data-school="포항공과대학교 포스텍 POSTECH" data-adv="LS 코피온" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td class="camp-name-cell" style="border-left:4px solid #E6940A"><span class="camp-dot" style="background:#E6940A"></span>LS 코피온<span class="camp-titles">해외봉사 29기 모집</span></td><td>33</td><td>1</td><td>25,000</td><td class="school-check-cell"></td></tr><tr class="school-row school-row-last" data-school="포항공과대학교 포스텍 POSTECH" data-adv="한국여성과학기술인육성재단" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td class="camp-name-cell" style="border-left:4px solid #fce5cd"><span class="camp-dot" style="background:#fce5cd"></span>한국여성과학기술인육성재단<span class="camp-titles">2026 과학기술인 긴급돌봄 지원사업</span></td><td>20</td><td>1</td><td>15,000</td><td class="school-check-cell"></td></tr></tbody>
+        <tbody><tr class="region-row"><td colspan="5">경북 (1개교 · 완료 0)</td></tr><tr class="school-header-row" data-school="포항공과대학교 포스텍 POSTECH" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td colspan="5"><span class="sh-name">포항공과대학교 포스텍 POSTECH</span><span class="sh-sub">2개 광고주</span></td></tr><tr class="school-row" data-school="포항공과대학교 포스텍 POSTECH" data-adv="한국여성과학기술인육성재단" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td class="camp-name-cell" style="border-left:4px solid #fce5cd"><span class="camp-dot" style="background:#fce5cd"></span>한국여성과학기술인육성재단<span class="camp-titles">2026 과학기술인 긴급돌봄 지원사업</span></td><td>20</td><td>1</td><td>15,000</td><td class="school-check-cell"></td></tr><tr class="school-row school-row-last" data-school="포항공과대학교 포스텍 POSTECH" data-adv="LS 코피온" onclick="goToSchoolDetail(this.getAttribute('data-school'))" style="cursor:pointer"><td class="camp-name-cell" style="border-left:4px solid #E6940A"><span class="camp-dot" style="background:#E6940A"></span>LS 코피온<span class="camp-titles">해외봉사 29기 모집</span></td><td>33</td><td>1</td><td>25,000</td><td class="school-check-cell"></td></tr></tbody>
         <tfoot><tr><td>합계 (1개교)</td><td>53</td><td>2</td><td>40,000</td><td id="sumFootDone">0</td></tr></tfoot>
       </table>
     </div>
@@ -759,7 +759,7 @@ function refreshTotalsGrid(){
   var ef=document.getElementById("sumFootDone");if(ef)ef.textContent=doneSchools;
 }
 var CAMP_COLORS={"한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업":"#fce5cd","LS 코피온_해외봉사 29기 모집":"#E6940A"};
-var SCHOOL_CAMPAIGNS={"포항공과대학교 포스텍 POSTECH":[{"camp":"LS 코피온_해외봉사 29기 모집","deadline":"260518","poster":33,"banner":1,"pay":25000},{"camp":"한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업","deadline":"260513","poster":20,"banner":1,"pay":15000}]};
+var SCHOOL_CAMPAIGNS={"포항공과대학교 포스텍 POSTECH":[{"camp":"한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업","deadline":"260513","poster":20,"banner":1,"pay":15000},{"camp":"LS 코피온_해외봉사 29기 모집","deadline":"260518","poster":33,"banner":1,"pay":25000}]};
 var CAMP_ORDER=["한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업","LS 코피온_해외봉사 29기 모집"];
 var currentCampFilters={};
 function hasCampFilter(){for(var k in currentCampFilters)if(currentCampFilters.hasOwnProperty(k))return true;return false;}
