@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="구인_대전 작업요청서">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#1E293B">
+<meta name="theme-color" content="#1A1D27">
 <link rel="apple-touch-icon" href="https://thkim-goodadlab.github.io/work-request/icon-192.png">
 <link rel="icon" type="image/png" sizes="192x192" href="https://thkim-goodadlab.github.io/work-request/icon-192.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -18,31 +18,31 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F8FAFB;
+  --bg:#F9FAFB;
   --surface:#FFFFFF;
-  --surface-alt:#F1F5F9;
-  --border:#E2E8F0;
-  --border-light:#F1F5F9;
-  --text:#0F172A;
-  --text-secondary:#475569;
-  --text-muted:#64748B;
-  --accent:#2563EB;
+  --surface-alt:#F3F4F6;
+  --border:#E5E7EB;
+  --border-light:#F3F4F6;
+  --text:#0D1B3E;
+  --text-secondary:#6B7280;
+  --text-muted:#6B7280;
+  --accent:#2D5DA1;
   --accent-light:#DBEAFE;
-  --accent-lighter:#EFF6FF;
-  --accent-secondary:#7C3AED;
-  --gradient-accent:linear-gradient(135deg,#2563EB,#7C3AED);
-  --gradient-header:linear-gradient(135deg,#1E293B 0%,#334155 100%);
-  --positive:#059669;
-  --positive-light:#D1FAE5;
-  --positive-bg:#ECFDF5;
-  --negative:#DC2626;
-  --negative-light:#FEE2E2;
-  --negative-bg:#FEF2F2;
-  --warning:#D97706;
-  --warning-light:#FEF3C7;
-  --warning-bg:#FFFBEB;
-  --orange:#EA580C;
-  --orange-light:#FFEDD5;
+  --accent-lighter:#DBEAFE;
+  --accent-secondary:#1E3F75;
+  --gradient-accent:linear-gradient(135deg,#2D5DA1,#1E3F75);
+  --gradient-header:linear-gradient(135deg,#1A1D27 0%,#374151 100%);
+  --positive:#0EA47A;
+  --positive-light:#D4EDDA;
+  --positive-bg:#D4EDDA;
+  --negative:#DC3545;
+  --negative-light:#F8D7DA;
+  --negative-bg:#F8D7DA;
+  --warning:#E6940A;
+  --warning-light:#FFF3CD;
+  --warning-bg:#FFF3CD;
+  --orange:#E6940A;
+  --orange-light:#FFF3CD;
   --shadow-xs:0 1px 2px rgba(0,0,0,0.04);
   --shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
   --shadow-md:0 4px 12px rgba(0,0,0,0.07);
@@ -165,7 +165,7 @@ body.has-large-map{overflow:hidden}
 .btn-navi{display:flex;align-items:center;gap:4px;padding:7px 14px;border-radius:var(--r-sm);font-size:12px;font-weight:700;text-decoration:none;border:1px solid var(--border);background:var(--bg);color:var(--text-secondary);flex-shrink:0;transition:all 0.15s;font-family:inherit;white-space:nowrap;cursor:pointer}
 .btn-navi:active{transform:scale(0.96);background:var(--surface-alt)}
 .btn-call{display:flex;align-items:center;gap:4px;padding:7px 14px;border-radius:var(--r-sm);font-size:12px;font-weight:700;text-decoration:none;border:1px solid #0EA47A;background:#0EA47A;color:#FFFFFF;flex-shrink:0;transition:all 0.15s;font-family:inherit;white-space:nowrap;cursor:pointer;margin-left:6px}
-.btn-call:active{transform:scale(0.96);background:#0a8862}
+.btn-call:active{transform:scale(0.96);background:#0EA47A}
 .card-num{width:32px;height:32px;background:var(--gradient-accent);color:#fff;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;box-shadow:0 2px 8px rgba(37,99,235,0.2)}
 .card-school{font-size:16px;font-weight:800;flex:1;letter-spacing:-0.02em}
 .card-addr{padding:2px 18px 8px 62px;font-size:12px;color:var(--text-muted)}
@@ -187,13 +187,13 @@ body.has-large-map{overflow:hidden}
 .req-row .cdl{color:var(--accent)}
 .req-text{color:var(--accent);font-weight:700}
 .bld-input-row{margin-top:6px;padding-top:6px;border-top:1px dashed var(--border)}
-.bld-input-row .cdl{color:#0F766E}
-.bld-request-row .cdl{color:#0F766E}
-.bld-request-text{color:#0F766E;font-weight:700}
+.bld-input-row .cdl{color:#0EA47A}
+.bld-request-row .cdl{color:#0EA47A}
+.bld-request-text{color:#0EA47A;font-weight:700}
 .building-input{flex:1;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:9px 12px;font-size:13px;font-family:inherit;background:var(--surface);color:var(--text);outline:none;min-width:0;transition:all 0.2s}
-.building-input:focus{border-color:#0F766E;box-shadow:0 0 0 3px rgba(15,118,110,0.15)}
+.building-input:focus{border-color:#0EA47A;box-shadow:0 0 0 3px rgba(15,118,110,0.15)}
 .building-input::placeholder{color:var(--text-muted);font-size:11.5px}
-.building-input.invalid{border-color:#DC2626;background:#FEF2F2;animation:bldShake 0.35s}
+.building-input.invalid{border-color:#DC3545;background:#F8D7DA;animation:bldShake 0.35s}
 @keyframes bldShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 .camp-action-row{display:flex;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border-light)}
 .btn-drive{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:var(--r-sm);font-size:13px;font-weight:700;text-decoration:none;border:1.5px solid var(--border);background:var(--surface-alt);color:var(--text-secondary);cursor:pointer;touch-action:manipulation;font-family:inherit;transition:all 0.15s;white-space:nowrap}
@@ -302,7 +302,7 @@ body.has-large-map{overflow:hidden}
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1778249064890;
+  var BUILD_TS=1778328357158;
   var urlV=0;try{var m=location.search.match(/[?&]v=(\d+)/);if(m)urlV=parseInt(m[1]);}catch(e){}
   var lastSeen=0;try{lastSeen=parseInt(localStorage.getItem("lastSeenVer")||"0");}catch(e){}
   fetch(location.pathname+"?_="+Date.now(),{method:"HEAD",cache:"no-store"}).then(function(r){
@@ -324,7 +324,7 @@ body.has-large-map{overflow:hidden}
   <div class="summary-header">
     <div class="header-top">
       <h1>구인_대전 작업요청서</h1>
-      <div class="updated-tag">5/8 23:04 업데이트</div>
+      <div class="updated-tag">5/9 21:05 업데이트</div>
     </div>
     <div class="progress-in-header">
       <div class="progress-label"><span>전체 진행률</span><span id="sumProgressText">0/5</span></div>
@@ -333,10 +333,10 @@ body.has-large-map{overflow:hidden}
   </div>
   <div class="map-section" id="mapSection">
     <div class="section-title"><span>학교 위치</span></div>
-    <div class="camp-filter-row"><button class="camp-filter-btn active" data-camp="" style="border-color:var(--border);color:var(--text-secondary)" onclick="filterMapByCamp(this,'')"><span class="cf-dday">ALL</span><span class="cf-name">전체</span></button><button class="camp-filter-btn" data-camp="한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업" data-color="#fce5cd" style="border-color:#fce5cd;color:#0F172A;background:#fffcf9" onclick="filterMapByCamp(this,'한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업')"><span class="cf-dday">D-5</span><span class="cf-name">한국여성과학기술인육성재단</span></button><button class="camp-filter-btn" data-camp="LS 코피온_해외봉사 29기 모집" data-color="#E6940A" style="border-color:#E6940A;color:#0F172A;background:#FFF3CD" onclick="filterMapByCamp(this,'LS 코피온_해외봉사 29기 모집')"><span class="cf-dday">D-10</span><span class="cf-name">LS 코피온</span></button></div>
+    <div class="camp-filter-row"><button class="camp-filter-btn active" data-camp="" style="border-color:var(--border);color:var(--text-secondary)" onclick="filterMapByCamp(this,'')"><span class="cf-dday">ALL</span><span class="cf-name">전체</span></button><button class="camp-filter-btn" data-camp="한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업" data-color="#fce5cd" style="border-color:#fce5cd;color:#0D1B3E;background:#fffcf9" onclick="filterMapByCamp(this,'한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업')"><span class="cf-dday">D-4</span><span class="cf-name">한국여성과학기술인육성재단</span></button><button class="camp-filter-btn" data-camp="LS 코피온_해외봉사 29기 모집" data-color="#E6940A" style="border-color:#E6940A;color:#0D1B3E;background:#FFF3CD" onclick="filterMapByCamp(this,'LS 코피온_해외봉사 29기 모집')"><span class="cf-dday">D-9</span><span class="cf-name">LS 코피온</span></button></div>
     <div id="naverMap"></div>
   </div>
-  <div class="camp-card" data-camp="한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업"><div class="cc-head"><span class="cc-dday soon" data-deadline="260513" style="background:#fce5cd">D-5</span><span class="cc-advertiser">한국여성과학기술인육성재단</span><span class="cc-approval approval-yes">승인</span><span class="cc-deadline">5월 13일 수요일</span></div><div class="cc-title">2026 과학기술인 긴급돌봄 지원사업</div><div class="cc-progress-wrap"><div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%;background:#fce5cd"></div></div><div class="cc-progress-text"><span class="cc-progress-done">0개교 완료 (0%)</span><span class="cc-progress-remain">3개교 남음</span></div></div><div class="cc-stats"><div class="cc-stat"><div class="lbl">학교</div><div class="val">3<span style="font-size:10px;font-weight:600;color:var(--text-muted)">개교</span></div><div class="sub cc-school-remain">남음 3</div></div><div class="cc-stat"><div class="lbl">포스터</div><div class="val">60<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-poster-remain">남음 60</div></div><div class="cc-stat"><div class="lbl">현수막</div><div class="val">3<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-banner-remain">남음 3</div></div></div><div class="cc-request"><span class="req-lbl">📋 요청사항</span><span class="req-txt">공대, 이과대, 학생회관 위주 부착</span></div></div><div class="camp-card" data-camp="LS 코피온_해외봉사 29기 모집"><div class="cc-head"><span class="cc-dday normal" data-deadline="260518" style="background:#E6940A">D-10</span><span class="cc-advertiser">LS 코피온</span><span class="cc-approval approval-yes">승인</span><span class="cc-deadline">5월 18일 월요일</span></div><div class="cc-title">해외봉사 29기 모집</div><div class="cc-progress-wrap"><div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%;background:#E6940A"></div></div><div class="cc-progress-text"><span class="cc-progress-done">0개교 완료 (0%)</span><span class="cc-progress-remain">2개교 남음</span></div></div><div class="cc-stats"><div class="cc-stat"><div class="lbl">학교</div><div class="val">2<span style="font-size:10px;font-weight:600;color:var(--text-muted)">개교</span></div><div class="sub cc-school-remain">남음 2</div></div><div class="cc-stat"><div class="lbl">포스터</div><div class="val">66<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-poster-remain">남음 66</div></div><div class="cc-stat"><div class="lbl">현수막</div><div class="val">2<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-banner-remain">남음 2</div></div></div><div class="cc-request"><span class="req-lbl">📋 요청사항</span><span class="req-txt">유동인구 많은곳</span></div></div>
+  <div class="camp-card" data-camp="한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업"><div class="cc-head"><span class="cc-dday soon" data-deadline="260513" style="background:#fce5cd">D-4</span><span class="cc-advertiser">한국여성과학기술인육성재단</span><span class="cc-approval approval-yes">승인</span><span class="cc-deadline">5월 13일 수요일</span></div><div class="cc-title">2026 과학기술인 긴급돌봄 지원사업</div><div class="cc-progress-wrap"><div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%;background:#fce5cd"></div></div><div class="cc-progress-text"><span class="cc-progress-done">0개교 완료 (0%)</span><span class="cc-progress-remain">3개교 남음</span></div></div><div class="cc-stats"><div class="cc-stat"><div class="lbl">학교</div><div class="val">3<span style="font-size:10px;font-weight:600;color:var(--text-muted)">개교</span></div><div class="sub cc-school-remain">남음 3</div></div><div class="cc-stat"><div class="lbl">포스터</div><div class="val">60<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-poster-remain">남음 60</div></div><div class="cc-stat"><div class="lbl">현수막</div><div class="val">3<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-banner-remain">남음 3</div></div></div><div class="cc-request"><span class="req-lbl">📋 요청사항</span><span class="req-txt">공대, 이과대, 학생회관 위주 부착</span></div></div><div class="camp-card" data-camp="LS 코피온_해외봉사 29기 모집"><div class="cc-head"><span class="cc-dday normal" data-deadline="260518" style="background:#E6940A">D-9</span><span class="cc-advertiser">LS 코피온</span><span class="cc-approval approval-yes">승인</span><span class="cc-deadline">5월 18일 월요일</span></div><div class="cc-title">해외봉사 29기 모집</div><div class="cc-progress-wrap"><div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%;background:#E6940A"></div></div><div class="cc-progress-text"><span class="cc-progress-done">0개교 완료 (0%)</span><span class="cc-progress-remain">2개교 남음</span></div></div><div class="cc-stats"><div class="cc-stat"><div class="lbl">학교</div><div class="val">2<span style="font-size:10px;font-weight:600;color:var(--text-muted)">개교</span></div><div class="sub cc-school-remain">남음 2</div></div><div class="cc-stat"><div class="lbl">포스터</div><div class="val">66<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-poster-remain">남음 66</div></div><div class="cc-stat"><div class="lbl">현수막</div><div class="val">2<span style="font-size:10px;font-weight:600;color:var(--text-muted)">장</span></div><div class="sub cc-banner-remain">남음 2</div></div></div><div class="cc-request"><span class="req-lbl">📋 요청사항</span><span class="req-txt">유동인구 많은곳</span></div></div>
   <div class="school-list-section">
     <div class="section-title">전체 학교 <span style="font-size:11px;color:var(--accent);font-weight:600;margin-left:4px">(클릭 시 상세 이동)</span></div>
     <div style="overflow-x:auto">
@@ -367,12 +367,12 @@ body.has-large-map{overflow:hidden}
       <span class="search-clear" id="searchClear" onclick="clearSearch()">&#x2715;</span>
     </div>
   </div>
-  <div id="cardsContainer"><div class="region-divider"><span class="label">대전</span><span class="line"></span></div><div class="card" id="school-1" data-school-name="UST 과학기술연합대학원대학교"><div class="card-header"><div class="card-num">1</div><div class="card-school">UST 과학기술연합대학원대학교</div><a href="nmap://search?query=UST%20%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EC%97%B0%ED%95%A9%EB%8C%80%ED%95%99%EC%9B%90%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" onclick="return openNaverApp('UST 과학기술연합대학원대학교')">🧭 길찾기</a></div><div class="card-addr">대전광역시 유성구 가정로 217</div><div class="camp-block" data-school="UST 과학기술연합대학원대학교" data-camp="한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업" data-adv="한국여성과학기술인육성재단" data-poster="20" data-banner="1"><div class="camp-block-header"><span class="camp-name">한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday soon" data-deadline="260513">D-5</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">20장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">공대, 이과대, 학생회관 위주 부착</span></div><div class="camp-detail-row bld-input-row"><span class="cdl">비고</span><input type="text" class="building-input" placeholder="실제 부착하신 건물명을 적어주세요. (미입력 시 작업완료 처리 불가)" value="" onblur="saveBuilding(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1-jZR2wyB5AiPyhLkwvQLsLq-UrzbgF47" class="btn-drive" onclick="return handleDriveClick(event,'1-jZR2wyB5AiPyhLkwvQLsLq-UrzbgF47')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-2" data-school-name="한국과학기술원
+  <div id="cardsContainer"><div class="region-divider"><span class="label">대전</span><span class="line"></span></div><div class="card" id="school-1" data-school-name="UST 과학기술연합대학원대학교"><div class="card-header"><div class="card-num">1</div><div class="card-school">UST 과학기술연합대학원대학교</div><a href="nmap://search?query=UST%20%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EC%97%B0%ED%95%A9%EB%8C%80%ED%95%99%EC%9B%90%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" onclick="return openNaverApp('UST 과학기술연합대학원대학교')">🧭 길찾기</a></div><div class="card-addr">대전광역시 유성구 가정로 217</div><div class="camp-block" data-school="UST 과학기술연합대학원대학교" data-camp="한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업" data-adv="한국여성과학기술인육성재단" data-poster="20" data-banner="1"><div class="camp-block-header"><span class="camp-name">한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday soon" data-deadline="260513">D-4</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">20장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">공대, 이과대, 학생회관 위주 부착</span></div><div class="camp-detail-row bld-input-row"><span class="cdl">비고</span><input type="text" class="building-input" placeholder="실제 부착하신 건물명을 적어주세요. (미입력 시 작업완료 처리 불가)" value="" onblur="saveBuilding(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1-jZR2wyB5AiPyhLkwvQLsLq-UrzbgF47" class="btn-drive" onclick="return handleDriveClick(event,'1-jZR2wyB5AiPyhLkwvQLsLq-UrzbgF47')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E5E7EB" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-2" data-school-name="한국과학기술원
 카이스트 KAIST"><div class="card-header"><div class="card-num">2</div><div class="card-school">한국과학기술원
 카이스트 KAIST</div><a href="nmap://search?query=%ED%95%9C%EA%B5%AD%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EC%9B%90%0A%EC%B9%B4%EC%9D%B4%EC%8A%A4%ED%8A%B8%20KAIST&appname=goodadlab" class="btn-navi" onclick="return openNaverApp('한국과학기술원
 카이스트 KAIST')">🧭 길찾기</a><a href="tel:0423502114" class="btn-call">📞 전화</a></div><div class="card-addr">대전광역시 유성구 대학로 291</div><div class="camp-block" data-school="한국과학기술원
-카이스트 KAIST" data-camp="한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업" data-adv="한국여성과학기술인육성재단" data-poster="20" data-banner="1"><div class="camp-block-header"><span class="camp-name">한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday soon" data-deadline="260513">D-5</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">20장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">공대, 이과대, 학생회관 위주 부착</span></div><div class="camp-detail-row bld-input-row"><span class="cdl">비고</span><input type="text" class="building-input" placeholder="실제 부착하신 건물명을 적어주세요. (미입력 시 작업완료 처리 불가)" value="" onblur="saveBuilding(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1bfn_mDai0DtHLnS8v3wwnfTx3-INFWE8" class="btn-drive" onclick="return handleDriveClick(event,'1bfn_mDai0DtHLnS8v3wwnfTx3-INFWE8')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div><div class="camp-block" data-school="한국과학기술원
-카이스트 KAIST" data-camp="LS 코피온_해외봉사 29기 모집" data-adv="LS 코피온" data-poster="33" data-banner="1"><div class="camp-block-header"><span class="camp-name">LS 코피온_해외봉사 29기 모집</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday normal" data-deadline="260518">D-10</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">33장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">유동인구 많은곳</span></div><div class="camp-detail-row bld-input-row"><span class="cdl">비고</span><input type="text" class="building-input" placeholder="실제 부착하신 건물명을 적어주세요. (미입력 시 작업완료 처리 불가)" value="" onblur="saveBuilding(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1iPZHEjb1UA-wS6yR5bufnjruPHP2k3iC" class="btn-drive" onclick="return handleDriveClick(event,'1iPZHEjb1UA-wS6yR5bufnjruPHP2k3iC')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-3" data-school-name="충남대학교"><div class="card-header"><div class="card-num">3</div><div class="card-school">충남대학교</div><a href="nmap://search?query=%EC%B6%A9%EB%82%A8%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" onclick="return openNaverApp('충남대학교')">🧭 길찾기</a><a href="tel:0428215114" class="btn-call">📞 전화</a></div><div class="card-addr">대전광역시 유성구 대학로 99</div><div class="camp-block" data-school="충남대학교" data-camp="한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업" data-adv="한국여성과학기술인육성재단" data-poster="20" data-banner="1"><div class="camp-block-header"><span class="camp-name">한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday soon" data-deadline="260513">D-5</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">20장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">공대, 이과대, 학생회관 위주 부착</span></div><div class="camp-detail-row bld-input-row"><span class="cdl">비고</span><input type="text" class="building-input" placeholder="실제 부착하신 건물명을 적어주세요. (미입력 시 작업완료 처리 불가)" value="" onblur="saveBuilding(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1WjS7s5rELoFNA_YV5zCmoysuHWYG-ugq" class="btn-drive" onclick="return handleDriveClick(event,'1WjS7s5rELoFNA_YV5zCmoysuHWYG-ugq')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div><div class="camp-block" data-school="충남대학교" data-camp="LS 코피온_해외봉사 29기 모집" data-adv="LS 코피온" data-poster="33" data-banner="1"><div class="camp-block-header"><span class="camp-name">LS 코피온_해외봉사 29기 모집</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday normal" data-deadline="260518">D-10</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">33장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">유동인구 많은곳</span></div><div class="camp-detail-row bld-request-row"><span class="cdl">부착건물</span><span class="cdv bld-request-text">개별시안</span></div><div class="camp-detail-row bld-input-row"><span class="cdl">비고</span><input type="text" class="building-input" placeholder="실제 부착하신 건물명을 적어주세요. (미입력 시 작업완료 처리 불가)" value="" onblur="saveBuilding(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/18xCtKFU7q2SanB_lSNFS_BGx5XoaLEQ-" class="btn-drive" onclick="return handleDriveClick(event,'18xCtKFU7q2SanB_lSNFS_BGx5XoaLEQ-')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div></div>
+카이스트 KAIST" data-camp="한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업" data-adv="한국여성과학기술인육성재단" data-poster="20" data-banner="1"><div class="camp-block-header"><span class="camp-name">한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday soon" data-deadline="260513">D-4</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">20장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">공대, 이과대, 학생회관 위주 부착</span></div><div class="camp-detail-row bld-input-row"><span class="cdl">비고</span><input type="text" class="building-input" placeholder="실제 부착하신 건물명을 적어주세요. (미입력 시 작업완료 처리 불가)" value="" onblur="saveBuilding(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1bfn_mDai0DtHLnS8v3wwnfTx3-INFWE8" class="btn-drive" onclick="return handleDriveClick(event,'1bfn_mDai0DtHLnS8v3wwnfTx3-INFWE8')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E5E7EB" stroke-width="2"/></svg> 작업 완료</button></div></div></div><div class="camp-block" data-school="한국과학기술원
+카이스트 KAIST" data-camp="LS 코피온_해외봉사 29기 모집" data-adv="LS 코피온" data-poster="33" data-banner="1"><div class="camp-block-header"><span class="camp-name">LS 코피온_해외봉사 29기 모집</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday normal" data-deadline="260518">D-9</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">33장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">유동인구 많은곳</span></div><div class="camp-detail-row bld-input-row"><span class="cdl">비고</span><input type="text" class="building-input" placeholder="실제 부착하신 건물명을 적어주세요. (미입력 시 작업완료 처리 불가)" value="" onblur="saveBuilding(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1iPZHEjb1UA-wS6yR5bufnjruPHP2k3iC" class="btn-drive" onclick="return handleDriveClick(event,'1iPZHEjb1UA-wS6yR5bufnjruPHP2k3iC')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E5E7EB" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div><div class="card" id="school-3" data-school-name="충남대학교"><div class="card-header"><div class="card-num">3</div><div class="card-school">충남대학교</div><a href="nmap://search?query=%EC%B6%A9%EB%82%A8%EB%8C%80%ED%95%99%EA%B5%90&appname=goodadlab" class="btn-navi" onclick="return openNaverApp('충남대학교')">🧭 길찾기</a><a href="tel:0428215114" class="btn-call">📞 전화</a></div><div class="card-addr">대전광역시 유성구 대학로 99</div><div class="camp-block" data-school="충남대학교" data-camp="한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업" data-adv="한국여성과학기술인육성재단" data-poster="20" data-banner="1"><div class="camp-block-header"><span class="camp-name">한국여성과학기술인육성재단_2026 과학기술인 긴급돌봄 지원사업</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday soon" data-deadline="260513">D-4</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">20장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">공대, 이과대, 학생회관 위주 부착</span></div><div class="camp-detail-row bld-input-row"><span class="cdl">비고</span><input type="text" class="building-input" placeholder="실제 부착하신 건물명을 적어주세요. (미입력 시 작업완료 처리 불가)" value="" onblur="saveBuilding(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/1WjS7s5rELoFNA_YV5zCmoysuHWYG-ugq" class="btn-drive" onclick="return handleDriveClick(event,'1WjS7s5rELoFNA_YV5zCmoysuHWYG-ugq')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E5E7EB" stroke-width="2"/></svg> 작업 완료</button></div></div></div><div class="camp-block" data-school="충남대학교" data-camp="LS 코피온_해외봉사 29기 모집" data-adv="LS 코피온" data-poster="33" data-banner="1"><div class="camp-block-header"><span class="camp-name">LS 코피온_해외봉사 29기 모집</span><span class="approval-badge approval-yes">승인</span><span class="camp-dday normal" data-deadline="260518">D-9</span></div><div class="camp-block-body"><div class="camp-detail-row"><span class="cdl">포스터</span><span class="cdv">33장</span></div><div class="camp-detail-row"><span class="cdl">현수막</span><span class="cdv">1장</span></div><div class="camp-detail-row req-row"><span class="cdl">요청</span><span class="cdv req-text">유동인구 많은곳</span></div><div class="camp-detail-row bld-request-row"><span class="cdl">부착건물</span><span class="cdv bld-request-text">개별시안</span></div><div class="camp-detail-row bld-input-row"><span class="cdl">비고</span><input type="text" class="building-input" placeholder="실제 부착하신 건물명을 적어주세요. (미입력 시 작업완료 처리 불가)" value="" onblur="saveBuilding(this)" /></div><div class="camp-action-row"><a href="https://drive.google.com/drive/folders/18xCtKFU7q2SanB_lSNFS_BGx5XoaLEQ-" class="btn-drive" onclick="return handleDriveClick(event,'18xCtKFU7q2SanB_lSNFS_BGx5XoaLEQ-')">📁 Drive</a><button class="complete-btn" onclick="toggleCampDone(this)"><svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E5E7EB" stroke-width="2"/></svg> 작업 완료</button></div></div></div></div></div>
 </div>
 <div class="bottom-bar" id="bottomBar">
   <div class="bottom-progress">
@@ -382,7 +382,7 @@ body.has-large-map{overflow:hidden}
   </div>
   <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#x2191;</button>
 </div>
-<div id="newVerBanner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#2563EB;color:#fff;padding:10px 14px;font-size:14px;font-weight:600;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15)">
+<div id="newVerBanner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#2D5DA1;color:#fff;padding:10px 14px;font-size:14px;font-weight:600;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15)">
   <span>&#x1F504; 새 버전이 있습니다 &mdash; 눌러서 새로고침</span>
 </div>
 <div class="tab-nav">
@@ -393,9 +393,9 @@ body.has-large-map{overflow:hidden}
 (function(){var ua=navigator.userAgent||"";var isInApp=/KAKAOTALK|NAVER|Line|FBAN|FBAV|Instagram|Whale/i.test(ua);if(!isInApp)return;var isAndroid=/Android/i.test(ua);var isIOS=/iPhone|iPad|iPod/i.test(ua);var url=location.href;if(isAndroid){location.href="intent://"+url.replace(/^https?:\/\//,"")+"#Intent;scheme=https;package=com.android.chrome;end";}else if(isIOS&&/KAKAOTALK/i.test(ua)){location.href="kakaotalk://web/openExternal?url="+encodeURIComponent(url);}})();
 var WEB_APP_URL="https://script.google.com/macros/s/AKfycbzWyoa0VRxbVpKR8K6yen4PucC1VHHsq-pshwGC1JiJcZtUtJsynbWThiaw26g02yBZyw/exec",WORKER_NAME="구인_대전";
 var MAP_DATA=[{"school":"UST 과학기술연합대학원대학교","region":"대전","addr":"대전광역시 유성구 가정로 217","done":false,"dday":"soon"},{"school":"한국과학기술원\n카이스트 KAIST","region":"대전","addr":"대전광역시 유성구 대학로 291","done":false,"dday":"soon"},{"school":"충남대학교","region":"대전","addr":"대전광역시 유성구 대학로 99","done":false,"dday":"soon"}];
-var SVG_CHECKED='<svg class="svg-check" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="#059669"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-var SVG_UNCHECKED='<svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E2E8F0" stroke-width="2"/></svg>';
-var SVG_CHECK_SM='<svg class="svg-check" viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="9" fill="#059669"/><path d="M6 10l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var SVG_CHECKED='<svg class="svg-check" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="#0EA47A"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var SVG_UNCHECKED='<svg class="svg-uncheck" viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E5E7EB" stroke-width="2"/></svg>';
+var SVG_CHECK_SM='<svg class="svg-check" viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="9" fill="#0EA47A"/><path d="M6 10l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 function switchPage(id,btn){
   document.body.style.overflow="";
   document.body.classList.remove("has-large-map");
@@ -541,20 +541,20 @@ function addMapControlButtons(){
     var btnCss="position:absolute;z-index:100;cursor:pointer;background:#fff;border:1px solid rgba(0,0,0,0.18);border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.18);user-select:none;-webkit-user-select:none;touch-action:manipulation;";
     var fsBtn=document.createElement("button");fsBtn.type="button";fsBtn.title="크게보기";fsBtn.setAttribute("aria-label","크게보기");
     fsBtn.style.cssText=btnCss+"top:10px;right:10px;padding:0;";
-    var fsEnterSvg='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>';
-    var fsExitSvg='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>';
+    var fsEnterSvg='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5DA1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>';
+    var fsExitSvg='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5DA1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>';
     fsBtn.innerHTML=fsEnterSvg;
     fsBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();var sec=document.getElementById("mapSection")||mapEl.parentElement;var isLarge=sec.classList.toggle("map-large");document.body.classList.toggle("has-large-map",isLarge);fsBtn.innerHTML=isLarge?fsExitSvg:fsEnterSvg;fsBtn.title=isLarge?"원래 크기":"크게보기";setTimeout(function(){try{if(naverMapObj)naver.maps.Event.trigger(naverMapObj,"resize");}catch(e){}},220);};
     mapEl.appendChild(fsBtn);
     var locBtn=document.createElement("button");locBtn.type="button";locBtn.title="내 위치";locBtn.setAttribute("aria-label","내 위치");
     locBtn.style.cssText=btnCss+"top:56px;right:10px;padding:0;";
     locBtn.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#03C75A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5" fill="#03C75A" stroke="none"/><line x1="12" y1="1.5" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22.5" y2="12"/></svg>';
-    locBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();if(!navigator.geolocation){alert("이 브라우저는 위치 정보를 지원하지 않습니다");return;}locBtn.style.opacity="0.5";navigator.geolocation.getCurrentPosition(function(pos){locBtn.style.opacity="1";if(!naverMapObj)return;var lat=pos.coords.latitude,lng=pos.coords.longitude;var ll=new naver.maps.LatLng(lat,lng);naverMapObj.setCenter(ll);naverMapObj.setZoom(14);if(window.__myLocMarker)window.__myLocMarker.setMap(null);window.__myLocMarker=new naver.maps.Marker({map:naverMapObj,position:ll,icon:{content:'<div style="width:16px;height:16px;background:#4F46E5;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 2px rgba(79,70,229,0.3),0 2px 6px rgba(0,0,0,0.3)"></div>',size:new naver.maps.Size(16,16),anchor:new naver.maps.Point(8,8)},zIndex:1000});},function(err){locBtn.style.opacity="1";var msg=(err&&err.code===1)?"위치 권한이 거부되었습니다. 브라우저 설정에서 위치 권한을 허용해 주세요":(err&&err.message)||"위치를 가져올 수 없습니다";alert(msg);},{enableHighAccuracy:true,timeout:10000,maximumAge:0});};
+    locBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();if(!navigator.geolocation){alert("이 브라우저는 위치 정보를 지원하지 않습니다");return;}locBtn.style.opacity="0.5";navigator.geolocation.getCurrentPosition(function(pos){locBtn.style.opacity="1";if(!naverMapObj)return;var lat=pos.coords.latitude,lng=pos.coords.longitude;var ll=new naver.maps.LatLng(lat,lng);naverMapObj.setCenter(ll);naverMapObj.setZoom(14);if(window.__myLocMarker)window.__myLocMarker.setMap(null);window.__myLocMarker=new naver.maps.Marker({map:naverMapObj,position:ll,icon:{content:'<div style="width:16px;height:16px;background:#2D5DA1;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 2px rgba(79,70,229,0.3),0 2px 6px rgba(0,0,0,0.3)"></div>',size:new naver.maps.Size(16,16),anchor:new naver.maps.Point(8,8)},zIndex:1000});},function(err){locBtn.style.opacity="1";var msg=(err&&err.code===1)?"위치 권한이 거부되었습니다. 브라우저 설정에서 위치 권한을 허용해 주세요":(err&&err.message)||"위치를 가져올 수 없습니다";alert(msg);},{enableHighAccuracy:true,timeout:10000,maximumAge:0});};
     mapEl.appendChild(locBtn);
   }catch(e){if(window.console&&console.warn)console.warn("addMapControlButtons error",e);}
 }
 (function(){try{if(typeof naver==="undefined"||!naver.maps){document.getElementById("naverMap").innerHTML="<p style=\"padding:20px;text-align:center;color:var(--text-muted)\">지도 로딩 실패</p>";return}var mc=document.getElementById("naverMap");naverMapObj=new naver.maps.Map(mc,{center:new naver.maps.LatLng(36.5,127.5),zoom:7,zoomControl:false,mapDataControl:false,scaleControl:false});addMapControlButtons();var bounds=new naver.maps.LatLngBounds();var cnt=0;var schools=MAP_DATA.filter(function(s){return s.addr});if(!schools.length){document.getElementById("naverMap").innerHTML="<p style=\"padding:40px 20px;text-align:center;color:var(--positive);font-weight:700\">모든 학교 작업 완료!</p>";mapInitDone=true;return}var geoRemain=schools.length;var usedCoords={};schools.forEach(function(s,i){setTimeout(function(){naver.maps.Service.geocode({query:s.addr},function(status,response){if(status===naver.maps.Service.Status.OK&&response.v2.addresses.length>0){var addr=response.v2.addresses[0];var lat=parseFloat(addr.y),lng=parseFloat(addr.x);var coordKey=lat.toFixed(4)+","+lng.toFixed(4);if(usedCoords[coordKey]){var oc=usedCoords[coordKey];lat+=0.0004*oc;lng+=0.0003*oc;usedCoords[coordKey]=oc+1}else{usedCoords[coordKey]=1}var coords=new naver.maps.LatLng(lat,lng);var campsForSchool=(SCHOOL_CAMPAIGNS[s.school]||[]).slice();if(!campsForSchool.length)campsForSchool=[{camp:"",deadline:""}];campsForSchool.sort(cmpDeadlineAsc);var curSize=getMarkerSizeForZoom(naverMapObj.getZoom());var markerList=campsForSchool.map(function(c,idx){
-  var col=(CAMP_COLORS&&CAMP_COLORS[c.camp])||"#94A3B8";
+  var col=(CAMP_COLORS&&CAMP_COLORS[c.camp])||"#9CA3AF";
   var off=getCampOffsetPx(idx,campsForSchool.length,curSize);
   var mk=new naver.maps.Marker({map:naverMapObj,position:coords,title:s.school,icon:makeSvgIcon(col,curSize,off.x,off.y),zIndex:1000-idx});
   naver.maps.Event.addListener(mk,"click",function(){goToSchoolCard(s.school);});
@@ -569,7 +569,7 @@ function applyZoomToAllMarkers(){
     var total=entry.markers.length;
     entry.markers.forEach(function(mk,idx){
       if(!mk.marker.getVisible())return;
-      var col=(CAMP_COLORS&&CAMP_COLORS[mk.camp])||"#94A3B8";
+      var col=(CAMP_COLORS&&CAMP_COLORS[mk.camp])||"#9CA3AF";
       var off=getCampOffsetPx(idx,total,size);
       mk.marker.setIcon(makeSvgIcon(col,size,off.x,off.y));
     });
@@ -832,7 +832,7 @@ function updateMapMarkerByCamp(schoolName){
   entry.markers.forEach(function(mk,idx){
     var pos=visibleIdx.indexOf(idx);
     if(pos<0){mk.marker.setVisible(false);return;}
-    var col=(CAMP_COLORS&&CAMP_COLORS[mk.camp])||"#94A3B8";
+    var col=(CAMP_COLORS&&CAMP_COLORS[mk.camp])||"#9CA3AF";
     var off=getCampOffsetPx(pos,visibleIdx.length,size);
     mk.marker.setIcon(makeSvgIcon(col,size,off.x,off.y));
     mk.marker.setZIndex(z+(visibleIdx.length-pos));
@@ -853,7 +853,7 @@ function filterMapByCamp(btn,campName){
     b.classList.toggle("active",isActive);
     if(col){
       if(isActive){b.style.background=col;b.style.color="#fff";}
-      else{b.style.background="";b.style.color="#0F172A";}
+      else{b.style.background="";b.style.color="#0D1B3E";}
     }
   });
   Object.keys(mapMarkers).forEach(function(sn){updateMapMarkerByCamp(sn)});
@@ -891,7 +891,7 @@ function injectCampNameDots(){
   document.querySelectorAll(".camp-block").forEach(function(block){
     var cn=block.getAttribute("data-camp");
     if(!cn)return;
-    var col=CAMP_COLORS[cn]||"#94A3B8";
+    var col=CAMP_COLORS[cn]||"#9CA3AF";
     block.style.borderLeftColor=col;
     var hdr=block.querySelector(".camp-block-header");
     if(hdr)hdr.style.background=col+"1F";
