@@ -154,15 +154,18 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   .progress-detail{flex-direction:column;gap:6px}
 }
 @media print{
-  .report-header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .school-card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
-  .photo-thumb{break-inside:avoid}
-  .lightbox,.live-indicator{display:none!important}
-  body{background:#fff}
+  @page{size:A4;margin:12mm}
+  body{background:#fff!important;color:#1A1D27!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .report-header,.kpi-grid,.progress-section{break-inside:avoid;page-break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .section{break-before:page;page-break-before:always}
+  .section:first-of-type{break-before:auto;page-break-before:auto}
+  .school-card{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #ddd;margin-bottom:8mm}
+  .photo-thumb{break-inside:avoid;page-break-inside:avoid}
+  .photo-grid img{max-height:45mm;object-fit:cover}
+  .photo-grid{grid-template-columns:repeat(3,1fr);gap:3mm}
+  .lightbox,.live-indicator,.refresh-btn,.no-print,button.no-print{display:none!important}
   .kpi-card,.progress-bar-wrap,.summary-table-wrap,.school-card{box-shadow:none}
-  .kpi-card{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .progress-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .photo-grid{grid-template-columns:repeat(2,1fr)}
+  .kpi-card,.progress-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .card-body.collapsed{max-height:none!important;opacity:1}
   a[href]::after{content:none!important}
 }
@@ -174,7 +177,7 @@ a[target="_blank"]::after{content:" \2197";color:var(--text-muted);font-size:.9e
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1778502671440;
+  var BUILD_TS=1778506434133;
   // v3.9.10: 무한 새로고침 방지 — 세션당 1회만 체크, 플래그를 "체크 시작 시점"에 바로 세팅.
   if(sessionStorage.getItem("__verChecked"))return;
   sessionStorage.setItem("__verChecked","1");
@@ -204,12 +207,13 @@ a[target="_blank"]::after{content:" \2197";color:var(--text-muted);font-size:.9e
   </div>
 </div>
 <div class="container">
+<div id="printBanner" class="no-print" style="display:none;background:#DBEAFE;border:1px solid #4A8ED6;border-radius:12px;padding:16px 20px;margin:0 0 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap"></div>
 <div id="reportContent">
   <div class="loading-wrap"><div class="loading-spinner"></div><div class="loading-text">데이터를 불러오는 중...</div></div>
 </div>
 <div class="report-footer" style="text-align:left;padding:32px 16px 40px">
   <div class="footer-inner">
-    <div><img src="https://lh3.googleusercontent.com/d/1GBm8WrDq7Qo4IfODOMeZEs4JrO2Y4Pq3" alt="좋은광고연구소" style="height:19px;object-fit:contain"></div>
+    <div><img src="https://lh3.googleusercontent.com/d/1bRxTWK1OzoQl4CiX5Wri_dT-swSHxLuU" alt="좋은광고연구소" style="height:19px;object-fit:contain"></div>
     <div class="footer-info">주식회사 좋은광고연구소 ㅣ goodadlab@goodadlab.co.kr ㅣ 1522-3235</div>
   </div>
 </div>
@@ -222,6 +226,26 @@ var NAVER_CLIENT_ID = "gcvbnnigi1";
 var AUTO_REFRESH_SEC = 300;
 
 function escHtml(s){if(!s)return"";return s.toString().replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+
+// 인쇄용 모드: URL에 ?print=1 이 있으면 학교당 사진 4장으로 제한 + eager 로드
+try{window._printMode=(new URLSearchParams(location.search)).get("print")==="1";}catch(e){window._printMode=false;}
+if(window._printMode){
+  document.documentElement.classList.add("print-mode");
+  document.body&&document.body.classList.add("print-mode");
+  document.addEventListener("DOMContentLoaded",function(){
+    var b=document.getElementById("printBanner");if(!b)return;
+    b.style.display="flex";
+    b.innerHTML='<div style="flex:1;min-width:240px"><div style="font-size:14px;font-weight:700;color:#1E3F75;margin-bottom:4px">📄 인쇄용 보고서 모드</div><div style="font-size:12px;color:#374151;line-height:1.5">학교당 사진을 <b>대표 6장</b>으로 제한해 PDF 저장이 빨라지도록 구성했습니다. 전체 사진은 일반 보고서 화면에서 확인 가능합니다.</div></div><button onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px;background:#0D1B3E;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:inherit;white-space:nowrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>인쇄 / PDF 저장 (Ctrl+P)</button>';
+  });
+}
+function openPrintMode(){
+  try{var u=new URL(location.href);u.searchParams.set("print","1");window.open(u.toString(),"_blank");}
+  catch(e){window.open(location.href+(location.search?"&":"?")+"print=1","_blank");}
+}
+// 인쇄 직전 lazy 사진 강제 로드 (Ctrl+P / 메뉴 인쇄 대응)
+window.addEventListener("beforeprint",function(){
+  document.querySelectorAll('img[loading="lazy"]').forEach(function(img){img.loading="eager";});
+});
 
 function loadReportData(){
   fetch(WEB_APP_URL+"?action=report_data&camp="+encodeURIComponent(CAMP_KEY))
@@ -264,7 +288,9 @@ function renderReport(data){
   if(campDriveUrlSaved){
     h+='<a href="'+campDriveUrlSaved+'" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:var(--shadow-sm);transition:opacity 0.15s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>전체 원본 사진 다운로드</a>';
   }
-  h+='<button onclick="generatePPT()" style="display:inline-flex;align-items:center;gap:8px;background:#1A1D27;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:inherit;box-shadow:var(--shadow-sm);transition:opacity 0.15s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>결과보고서 생성 (PPT)</button>';
+  if(!window._printMode){
+    h+='<button class="no-print" onclick="openPrintMode()" style="display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;color:#0D1B3E;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:1.5px solid #0D1B3E;cursor:pointer;font-family:inherit;box-shadow:var(--shadow-sm);transition:opacity 0.15s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>인쇄용 보고서 (PDF용)</button>';
+  }
   h+='</div>';
   var gpsPoints=[];
   for(var gi=0;gi<schools.length;gi++){
@@ -336,7 +362,9 @@ function renderReport(data){
         h+='<div class="photo-section" style="padding-top:12px"><div class="photo-label" style="display:flex;align-items:center;gap:12px"><span>부착 사진</span>';
         if(sc2GpsForLink.length>0)h+='<a href="javascript:void(0)" class="drive-link" onclick="event.stopPropagation();openSchoolMap(\''+escHtml(sc2.name)+'\','+JSON.stringify(sc2GpsForLink).replace(/"/g,"&quot;")+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>지도보기</a>';
         h+='</div><div class="photo-grid">';
-        for(var pi=0;pi<photos.length;pi++){h+='<div class="photo-thumb" onclick="openLightbox(\''+photos[pi]+'\')"><img src="'+photos[pi]+'" alt="'+escHtml(sc2.name)+' 부착사진 '+(pi+1)+'" loading="lazy" onerror="handleImgError(this)"></div>'}
+        var maxPhotos=window._printMode?Math.min(photos.length,6):photos.length;
+        var loadingAttr=window._printMode?"eager":"lazy";
+        for(var pi=0;pi<maxPhotos;pi++){h+='<div class="photo-thumb" onclick="openLightbox(\''+photos[pi]+'\')"><img src="'+photos[pi]+'" alt="'+escHtml(sc2.name)+' 부착사진 '+(pi+1)+'" loading="'+loadingAttr+'" decoding="async" onerror="handleImgError(this)"></div>'}
         h+='</div></div>';
       }
     } else {
@@ -506,31 +534,8 @@ function openLightbox(src){var lb=document.getElementById("lightbox");document.g
 function closeLightbox(){document.getElementById("lightbox").classList.remove("show");document.body.style.overflow=""}
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox()});
 
-function generatePPT(){
-  var progressEl=document.createElement("div");
-  progressEl.id="pptProgress";
-  progressEl.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:3000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)";
-  progressEl.innerHTML='<div style="background:#fff;border-radius:16px;padding:40px 48px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)"><div style="font-size:16px;font-weight:700;margin-bottom:12px">결과보고서 PPT 생성 중...</div><div id="pptProgressText" style="font-size:13px;color:#6B7280">서버에서 템플릿 기반 PPT를 생성하고 있습니다</div><div style="margin-top:16px"><div class="loading-spinner" style="width:32px;height:32px;border:3px solid #E5E7EB;border-top-color:#2D5DA1;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto"></div></div></div>';
-  document.body.appendChild(progressEl);
-
-  fetch(WEB_APP_URL+"?action=generate_ppt&camp="+encodeURIComponent(CAMP_KEY))
-  .then(function(r){return r.json()})
-  .then(function(json){
-    var el=document.getElementById("pptProgress");
-    if(json.status==="ok"){
-      if(el)el.innerHTML='<div style="background:#fff;border-radius:16px;padding:40px 48px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)"><div style="font-size:40px;margin-bottom:12px">\u2705</div><div style="font-size:16px;font-weight:700;margin-bottom:8px">PPT 생성 완료</div><div style="display:flex;gap:10px;justify-content:center;margin-top:16px"><a href="'+json.url+'" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#1A1D27;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none">다운로드 (PPTX)</a><a href="'+json.viewUrl+'" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#2D5DA1;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none">Google Slides에서 열기</a><button onclick="document.getElementById(\'pptProgress\').remove()" style="padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:1px solid #E5E7EB;background:#fff;color:#6B7280;cursor:pointer">닫기</button></div></div>';
-    } else {
-      if(el)el.innerHTML='<div style="background:#fff;border-radius:16px;padding:40px 48px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);max-width:400px"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><div style="font-size:16px;font-weight:700;margin-bottom:8px;color:#DC3545">PPT 생성 오류</div><div style="font-size:13px;color:#6B7280;margin-bottom:16px">'+escHtml(json.message||"알 수 없는 오류")+'</div><button onclick="document.getElementById(\'pptProgress\').remove()" style="padding:10px 24px;border-radius:10px;font-size:13px;font-weight:700;border:1px solid #E5E7EB;background:#fff;color:#6B7280;cursor:pointer;font-family:inherit">닫기</button></div>';
-    }
-  })
-  .catch(function(err){
-    var el=document.getElementById("pptProgress");
-    if(el)el.innerHTML='<div style="background:#fff;border-radius:16px;padding:40px 48px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);max-width:400px"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><div style="font-size:16px;font-weight:700;margin-bottom:8px;color:#DC3545">네트워크 오류</div><div style="font-size:13px;color:#6B7280;margin-bottom:16px">'+escHtml(err.message)+'</div><button onclick="document.getElementById(\'pptProgress\').remove()" style="padding:10px 24px;border-radius:10px;font-size:13px;font-weight:700;border:1px solid #E5E7EB;background:#fff;color:#6B7280;cursor:pointer;font-family:inherit">닫기</button></div>';
-  });
-}
-
 loadReportData();
-setInterval(loadReportData, AUTO_REFRESH_SEC * 1000);
+if(!window._printMode){setInterval(loadReportData, AUTO_REFRESH_SEC * 1000);}
 
 </script>
 </body></html>
