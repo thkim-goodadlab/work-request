@@ -161,8 +161,8 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   .section:first-of-type{break-before:auto;page-break-before:auto}
   .school-card{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #ddd;margin-bottom:8mm}
   .photo-thumb{break-inside:avoid;page-break-inside:avoid}
-  .photo-grid img{max-height:80mm;object-fit:cover}
-  .photo-grid{grid-template-columns:repeat(2,1fr)}
+  .photo-grid img{max-height:45mm;object-fit:cover}
+  .photo-grid{grid-template-columns:repeat(3,1fr);gap:3mm}
   .lightbox,.live-indicator,.refresh-btn,.no-print,button.no-print{display:none!important}
   .kpi-card,.progress-bar-wrap,.summary-table-wrap,.school-card{box-shadow:none}
   .kpi-card,.progress-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -177,7 +177,7 @@ a[target="_blank"]::after{content:" \2197";color:var(--text-muted);font-size:.9e
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1778504114283;
+  var BUILD_TS=1778507431853;
   // v3.9.10: 무한 새로고침 방지 — 세션당 1회만 체크, 플래그를 "체크 시작 시점"에 바로 세팅.
   if(sessionStorage.getItem("__verChecked"))return;
   sessionStorage.setItem("__verChecked","1");
@@ -235,7 +235,7 @@ if(window._printMode){
   document.addEventListener("DOMContentLoaded",function(){
     var b=document.getElementById("printBanner");if(!b)return;
     b.style.display="flex";
-    b.innerHTML='<div style="flex:1;min-width:240px"><div style="font-size:14px;font-weight:700;color:#1E3F75;margin-bottom:4px">📄 인쇄용 보고서 모드</div><div style="font-size:12px;color:#374151;line-height:1.5">학교당 사진을 <b>대표 4장</b>으로 제한해 PDF 저장이 빨라지도록 구성했습니다. 전체 사진은 일반 보고서 화면에서 확인 가능합니다.</div></div><button onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px;background:#0D1B3E;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:inherit;white-space:nowrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>인쇄 / PDF 저장 (Ctrl+P)</button>';
+    b.innerHTML='<div style="flex:1;min-width:240px"><div style="font-size:14px;font-weight:700;color:#1E3F75;margin-bottom:4px">📄 인쇄용 보고서 모드</div><div style="font-size:12px;color:#374151;line-height:1.5">학교당 사진을 <b>대표 6장</b>으로 제한해 PDF 저장이 빨라지도록 구성했습니다. 전체 사진은 일반 보고서 화면에서 확인 가능합니다.</div></div><button onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px;background:#0D1B3E;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:inherit;white-space:nowrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>인쇄 / PDF 저장 (Ctrl+P)</button>';
   });
 }
 function openPrintMode(){
@@ -362,7 +362,7 @@ function renderReport(data){
         h+='<div class="photo-section" style="padding-top:12px"><div class="photo-label" style="display:flex;align-items:center;gap:12px"><span>부착 사진</span>';
         if(sc2GpsForLink.length>0)h+='<a href="javascript:void(0)" class="drive-link" onclick="event.stopPropagation();openSchoolMap(\''+escHtml(sc2.name)+'\','+JSON.stringify(sc2GpsForLink).replace(/"/g,"&quot;")+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>지도보기</a>';
         h+='</div><div class="photo-grid">';
-        var maxPhotos=window._printMode?Math.min(photos.length,4):photos.length;
+        var maxPhotos=window._printMode?Math.min(photos.length,6):photos.length;
         var loadingAttr=window._printMode?"eager":"lazy";
         for(var pi=0;pi<maxPhotos;pi++){h+='<div class="photo-thumb" onclick="openLightbox(\''+photos[pi]+'\')"><img src="'+photos[pi]+'" alt="'+escHtml(sc2.name)+' 부착사진 '+(pi+1)+'" loading="'+loadingAttr+'" decoding="async" onerror="handleImgError(this)"></div>'}
         h+='</div></div>';
