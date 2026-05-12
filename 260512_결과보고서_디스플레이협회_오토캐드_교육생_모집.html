@@ -165,9 +165,14 @@ body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFo
   .section{break-before:page;page-break-before:always}
   .section:first-of-type{break-before:auto;page-break-before:auto}
   .school-card{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #ddd;margin-bottom:8mm}
-  .photo-thumb{break-inside:avoid;page-break-inside:avoid}
-  .photo-grid img{max-height:38mm;object-fit:cover}
+  .photo-thumb{break-inside:avoid;page-break-inside:avoid;aspect-ratio:4/3;width:100%;height:auto;border:1px solid #ddd;border-radius:4px;overflow:hidden}
+  .photo-grid .photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;max-height:none}
   .photo-grid{grid-template-columns:repeat(4,1fr);gap:3mm}
+  .header-sub{display:none!important}
+  #metaSchools{display:none!important}
+  .school-card-header{flex-direction:row!important;align-items:center!important;flex-wrap:nowrap!important;gap:12px}
+  .school-info{flex:1 1 auto;min-width:0}
+  .header-qty,.school-status,.card-toggle{flex-shrink:0}
   .lightbox,.live-indicator,.refresh-btn,.no-print,button.no-print{display:none!important}
   .kpi-card,.progress-bar-wrap,.summary-table-wrap,.school-card{box-shadow:none}
   .kpi-card,.progress-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -182,7 +187,7 @@ a[target="_blank"]::after{content:" \2197";color:var(--text-muted);font-size:.9e
 </head>
 <body>
 <script>(function(){try{
-  var BUILD_TS=1778559968906;
+  var BUILD_TS=1778560798331;
   // v3.9.10: 무한 새로고침 방지 — 세션당 1회만 체크, 플래그를 "체크 시작 시점"에 바로 세팅.
   if(sessionStorage.getItem("__verChecked"))return;
   sessionStorage.setItem("__verChecked","1");
@@ -213,7 +218,7 @@ a[target="_blank"]::after{content:" \2197";color:var(--text-muted);font-size:.9e
   </div>
 </div>
 <div class="container">
-<div id="printBanner" class="no-print" style="display:none;background:#DBEAFE;border:1px solid #4A8ED6;border-radius:12px;padding:16px 20px;margin:0 0 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap"></div>
+<div id="printBanner" class="no-print" style="display:none;background:#DBEAFE;border:1px solid #4A8ED6;border-radius:12px;padding:16px 20px;margin:28px 0 16px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap"></div>
 <div id="reportContent">
   <div class="loading-wrap"><div class="loading-spinner"></div><div class="loading-text">데이터를 불러오는 중...</div></div>
 </div>
@@ -242,7 +247,7 @@ if(window._printMode){
   document.addEventListener("DOMContentLoaded",function(){
     var b=document.getElementById("printBanner");if(!b)return;
     b.style.display="flex";
-    b.innerHTML='<div style="flex:1;min-width:240px"><div style="font-size:14px;font-weight:700;color:#1E3F75;margin-bottom:4px">📄 인쇄용 보고서 모드</div><div style="font-size:12px;color:#374151;line-height:1.5">학교당 사진을 <b>대표 6장</b>으로 제한해 PDF 저장이 빨라지도록 구성했습니다. 전체 사진은 일반 보고서 화면에서 확인 가능합니다.</div></div><button onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px;background:#0D1B3E;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:inherit;white-space:nowrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>인쇄 / PDF 저장 (Ctrl+P)</button>';
+    b.innerHTML='<div style="flex:1;min-width:240px"><div style="font-size:14px;font-weight:700;color:#1E3F75;margin-bottom:4px">📄 인쇄용 보고서 모드</div><div style="font-size:12px;color:#374151;line-height:1.5">학교당 사진을 <b>대표 8장</b>으로 제한해 PDF 저장이 빨라지도록 구성했습니다. 전체 사진은 일반 보고서 화면에서 확인 가능합니다.</div></div><button onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px;background:#0D1B3E;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:inherit;white-space:nowrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>인쇄 / PDF 저장 (Ctrl+P)</button>';
   });
 }
 function openPrintMode(){
@@ -320,6 +325,12 @@ function renderReport(data){
     h+='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0EA47A" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>';
     h+='GPS 및 사진은 1시간 간격으로 자동 업데이트 됩니다.<br><span style="color:#6B7280;font-weight:500">실내 깊은곳에서는 GPS가 수집되지 않습니다.</span>';
     h+='</div></div></div>';
+  } else if(window._printMode){
+    h+='<div class="section fade-in" style="animation-delay:0.11s"><div class="section-title">부착 위치 현황</div>';
+    h+='<div style="margin:0 16px 14px;padding:14px 16px;background:#FFF8E1;border:1px solid #FFE0B2;border-left:4px solid #E6940A;border-radius:8px;display:flex;gap:12px;align-items:flex-start">';
+    h+='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E6940A" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+    h+='<div style="flex:1;font-size:13px;line-height:1.6;color:#7A5A00"><b style="display:block;font-size:13px;font-weight:800;color:#0D1B3E;margin-bottom:4px">부착 위치 현황 — 시범 운영 안내</b>본 지도는 현재 시범 운영 단계로, 일부 학교의 GPS 정보가 수집되지 않을 수 있는 점 양해 부탁드립니다. 정확한 부착 현장은 아래 <b>학교별 상세 사진</b>을 참고해 주시기 바라며, 지속적인 시스템 안정화를 통해 모든 학교의 위치 정보를 제공할 수 있도록 개선해 나가겠습니다.</div>';
+    h+='</div></div>';
   }
   h+='<div class="section fade-in" style="animation-delay:0.12s"><div class="section-title">전체 학교 요약</div>';
   h+='<div class="summary-table-wrap"><div style="overflow-x:auto"><table class="summary-table">';
@@ -373,7 +384,7 @@ function renderReport(data){
         h+='<div class="photo-section" style="padding-top:12px"><div class="photo-label" style="display:flex;align-items:center;gap:12px"><span>부착 사진</span>';
         if(sc2GpsForLink.length>0)h+='<a href="javascript:void(0)" class="drive-link" onclick="event.stopPropagation();openSchoolMap(\''+escHtml(sc2.name)+'\','+JSON.stringify(sc2GpsForLink).replace(/"/g,"&quot;")+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>지도보기</a>';
         h+='</div><div class="photo-grid">';
-        var maxPhotos=window._printMode?Math.min(photos.length,6):photos.length;
+        var maxPhotos=window._printMode?Math.min(photos.length,8):photos.length;
         var loadingAttr=window._printMode?"eager":"lazy";
         for(var pi=0;pi<maxPhotos;pi++){h+='<div class="photo-thumb" onclick="openLightbox(\''+photos[pi]+'\')"><img src="'+photos[pi]+'" alt="'+escHtml(sc2.name)+' 부착사진 '+(pi+1)+'" loading="'+loadingAttr+'" decoding="async" onerror="handleImgError(this)"></div>'}
         h+='</div></div>';
