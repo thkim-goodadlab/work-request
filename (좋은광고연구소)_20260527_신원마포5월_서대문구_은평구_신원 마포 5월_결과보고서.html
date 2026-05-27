@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>신원마포5월_서대문구_은평구_신원 마포 5월 결과보고서</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F9FAFB;--surface:#FFFFFF;--surface-alt:#F3F4F6;
+  --border:#E5E7EB;--border-light:#F3F4F6;
+  --text:#0D1B3E;--text-secondary:#6B7280;--text-muted:#6B7280;
+  --accent:#2D5DA1;--accent-light:#DBEAFE;--accent-lighter:#DBEAFE;
+  --positive:#0EA47A;--positive-light:#D4EDDA;--positive-bg:#D4EDDA;
+  --negative:#DC3545;--negative-light:#F8D7DA;--negative-bg:#F8D7DA;
+  --warning:#E6940A;--warning-light:#FFF3CD;--warning-bg:#FFF3CD;
+  --orange:#E6940A;--orange-light:#FFF3CD;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,0.07);
+  --r:14px;
+}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;background:#E5E7EB;color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;padding:24px 16px}
+.report-page{max-width:1280px;margin:0 auto;background:var(--bg);border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08),0 1px 3px rgba(0,0,0,0.06)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .4s ease both}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.skeleton{background:linear-gradient(90deg,var(--surface-alt) 25%,#E5E7EB 50%,var(--surface-alt) 75%);background-size:200% 100%;animation:pulse 1.5s ease-in-out infinite;border-radius:8px;height:20px}
+.report-header{background:linear-gradient(135deg,#1A1D27 0%,#374151 100%);color:#fff;padding:40px 0;position:relative;overflow:hidden}
+.report-header::before{content:"";position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.03),transparent 70%);pointer-events:none}
+.header-inner{max-width:1280px;margin:0 auto;padding:0 24px;position:relative}
+.header-label{font-size:12px;font-weight:700;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+.header-title{font-size:2rem;font-weight:900;letter-spacing:-0.04em;line-height:1.2}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.5);margin-top:6px;font-weight:500}
+.header-meta{display:flex;gap:20px;margin-top:20px;flex-wrap:wrap}
+.meta-chip{background:rgba(255,255,255,0.08);padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:6px}
+.meta-chip svg{width:14px;height:14px;opacity:0.5}
+.header-logo{position:absolute;top:20px;right:24px}
+.logo-mark{display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:20px;height:20px}
+.logo-text{font-size:13px;font-weight:900;color:rgba(255,255,255,0.7);letter-spacing:-0.03em}
+.live-indicator{display:inline-flex;align-items:center;gap:6px;background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.2);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;color:#0EA47A}
+.live-dot{width:6px;height:6px;background:#0EA47A;border-radius:50%;animation:pulse 2s ease-in-out infinite}
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:28px;position:relative;z-index:1}
+.kpi-card{background:var(--surface);border-radius:var(--r);padding:24px 20px;box-shadow:var(--shadow-md);border:1px solid var(--border-light);text-align:center}
+.kpi-value{font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums}
+.kpi-label{font-size:12px;font-weight:700;color:var(--text-muted);margin-top:10px;text-transform:uppercase;letter-spacing:0.04em}
+.kpi-sub{font-size:12px;font-weight:600;margin-top:8px}
+.kpi-card .kpi-value{color:#0D1B3E}
+.kpi-card .kpi-sub{color:#2D5DA1}
+.kpi-card.progress{border-top:3px solid #0EA47A}
+.kpi-card.progress .kpi-value{color:#0EA47A;font-size:2.2rem}
+.kpi-card.progress .kpi-sub{color:#0EA47A}
+.progress-section{margin-top:32px}
+.progress-bar-wrap{background:var(--surface);border-radius:var(--r);padding:20px 24px;box-shadow:var(--shadow-sm);border:1px solid var(--border-light)}
+.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.progress-title{font-size:13px;font-weight:700;color:var(--text-secondary)}
+.progress-pct{font-size:22px;font-weight:900;color:var(--positive)}
+.progress-track{height:14px;background:var(--surface-alt);border-radius:7px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--positive));border-radius:7px;transition:width 0.8s ease}
+.progress-detail{display:flex;gap:24px;margin-top:12px;font-size:12px;color:var(--text-muted);font-weight:600}
+.progress-detail span{display:flex;align-items:center;gap:4px}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-done{background:var(--positive)}.dot-remain{background:var(--border)}
+.section{margin-top:36px}
+.section-title{font-size:13px;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.section-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.region-group{margin-bottom:24px}
+.region-label{font-size:16px;font-weight:800;color:var(--text);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--border-light);display:flex;align-items:center;gap:8px}
+.region-count{font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-lighter);padding:2px 8px;border-radius:10px}
+.summary-table-wrap{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow-sm);border:1px solid var(--border-light);overflow:hidden}
+.summary-table{width:100%;border-collapse:collapse}
+.summary-table thead th{font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em;padding:10px 14px;text-align:left;background:var(--surface-alt);border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:5;box-shadow:inset 0 -1px 0 rgba(0,0,0,.08)}
+.summary-table thead th:nth-child(n+4){text-align:center}
+.summary-table tbody td{font-size:14px;padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text-secondary);vertical-align:middle}
+.summary-table tbody td:first-child{font-weight:700;color:var(--text);text-align:center}
+.summary-table tbody td:nth-child(n+4){text-align:center}
+.summary-table tbody tr:last-child td{border-bottom:none}
+.summary-table tbody tr:hover td{background:var(--accent-lighter)}
+.summary-table tfoot td{font-size:14px;font-weight:800;padding:10px 14px;background:var(--surface-alt);color:var(--text);border-top:1px solid var(--border)}
+.summary-table tfoot td:nth-child(n+4){text-align:center}
+.region-tag{font-size:12px;font-weight:600;color:var(--text-muted)}
+.summary-note{font-size:12px;color:var(--text-muted);max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.date-text{font-variant-numeric:tabular-nums;font-weight:600;color:var(--text)}
+.school-card{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow-sm);border:1px solid var(--border-light);overflow:hidden;margin-bottom:16px;transition:all 0.3s ease}
+.school-card.card-done{opacity:1}
+.school-card.card-pending{opacity:0.7}
+.school-card.card-pending .school-card-header{border-bottom:none}
+.school-card-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border-light);cursor:pointer;transition:background 0.15s;gap:12px;user-select:none}
+.school-card-header:hover{background:var(--surface-alt)}
+.card-body{overflow:hidden;transition:max-height 0.35s ease,opacity 0.25s ease}
+.card-body.collapsed{max-height:0!important;opacity:0;padding:0}
+.card-toggle{width:20px;height:20px;flex-shrink:0;transition:transform 0.25s ease;color:var(--text-muted)}
+.card-toggle.open{transform:rotate(180deg)}
+.header-qty{display:flex;align-items:center;gap:12px;margin-left:auto;margin-right:12px;flex-shrink:0}
+.school-info{display:flex;align-items:center;gap:12px}
+.school-num{width:28px;height:28px;background:var(--accent);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+.school-name{font-size:15px;font-weight:800;letter-spacing:-0.02em}
+.school-addr{font-size:12px;color:var(--text-muted);margin-top:1px}
+.school-status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px}
+.status-done{background:var(--positive-bg);color:var(--positive)}
+.status-pending{background:var(--surface-alt);color:var(--text-muted)}
+.qty-header{display:flex;gap:16px;padding:12px 20px;border-bottom:1px solid var(--border-light);background:var(--surface-alt)}
+.qty-item{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700}
+.qty-item .qty-label{font-size:12px;font-weight:600;color:var(--text-muted)}
+.qty-poster{color:#1E3F75}.qty-banner{color:var(--orange)}
+.attach-info{padding:12px 20px;display:flex;gap:24px;flex-wrap:wrap;font-size:13px;border-bottom:1px solid var(--border-light)}
+.attach-info-item{display:flex;align-items:center;gap:6px}
+.attach-info-label{font-size:12px;font-weight:600;color:var(--text-muted)}
+.attach-info-value{font-weight:700;color:var(--text)}
+.photo-section{padding:0 20px 16px}
+.photo-label{font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.photo-thumb{aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:var(--surface-alt);position:relative;cursor:pointer;border:1px solid var(--border-light)}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.2s}
+.photo-thumb:hover img{transform:scale(1.05)}
+.photo-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:12px;flex-direction:column;gap:4px}
+.photo-placeholder svg{width:24px;height:24px;opacity:0.3}
+.drive-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--accent);text-decoration:none;padding:4px 10px;border-radius:8px;transition:background 0.15s}
+.drive-link:hover{background:var(--accent-lighter)}
+.drive-link svg{width:14px;height:14px}
+.loading-wrap{text-align:center;padding:80px 20px}
+.loading-spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:14px;color:var(--text-muted);font-weight:600}
+.error-wrap{text-align:center;padding:80px 20px;color:var(--negative)}
+.refresh-btn{background:var(--accent);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;margin-top:16px;font-family:inherit}
+.report-footer{margin-top:48px;padding:28px 0;border-top:1px solid var(--border);text-align:left}
+.footer-inner{display:flex;align-items:center;gap:16px}
+.footer-logo{font-size:13px;font-weight:800;color:var(--text-muted);letter-spacing:-0.01em;flex-shrink:0}
+.footer-info{font-size:12px;color:var(--text-muted)}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;display:none;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.lightbox.show{display:flex}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.lightbox-close{position:fixed;top:20px;right:20px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+@media(max-width:768px){
+  body{padding:0}
+  .report-page{border-radius:0;box-shadow:none}
+  .kpi-grid{grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+  .kpi-value{font-size:1.5rem}
+  .header-title{font-size:1.5rem}
+  .container{padding:0 16px}
+  .report-header{padding:28px 0}
+  .header-logo{position:static;margin-bottom:14px}
+  .school-card-header{flex-direction:column;align-items:flex-start;gap:10px}
+  .photo-grid{grid-template-columns:repeat(2,1fr);gap:6px}
+  .photo-thumb{min-height:120px}
+  .attach-info{flex-direction:column;gap:6px}
+}
+@media(max-width:480px){
+  .kpi-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .kpi-card{padding:18px 14px}
+  .kpi-value{font-size:1.3rem}
+  .header-title{font-size:1.3rem}
+  .progress-detail{flex-direction:column;gap:6px}
+}
+@media print{
+  @page{size:A4 landscape;margin:10mm}
+  body{background:#fff!important;color:#1A1D27!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:0!important}
+  .report-page{box-shadow:none!important;border-radius:0!important;max-width:none!important;background:#FFFFFF!important}
+  .map-wrap{display:none!important}
+  .kpi-card,.progress-bar-wrap,.summary-table-wrap,.school-card{background:#F9FAFB!important;border:1px solid #E5E7EB!important;box-shadow:none!important}
+  .summary-table thead th,.summary-table tfoot td{background:#F3F4F6!important}
+  .school-card-header{background:transparent!important}
+  .report-header,.kpi-grid,.progress-section{break-inside:avoid;page-break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .section{break-before:page;page-break-before:always}
+  .section:first-of-type{break-before:auto;page-break-before:auto}
+  .school-card{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #ddd;margin-bottom:8mm}
+  .photo-thumb{break-inside:avoid;page-break-inside:avoid;aspect-ratio:4/3;width:100%;height:auto;border:1px solid #ddd;border-radius:4px;overflow:hidden}
+  .photo-grid .photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;max-height:none}
+  .photo-grid{grid-template-columns:repeat(4,1fr);gap:3mm}
+  .header-sub{display:none!important}
+  #metaSchools{display:none!important}
+  .school-card-header{flex-direction:row!important;align-items:center!important;flex-wrap:nowrap!important;gap:12px}
+  .school-info{flex:1 1 auto;min-width:0}
+  .header-qty,.school-status,.card-toggle{flex-shrink:0}
+  .lightbox,.live-indicator,.refresh-btn,.no-print,button.no-print{display:none!important}
+  .kpi-card,.progress-bar-wrap,.summary-table-wrap,.school-card{box-shadow:none}
+  .kpi-card,.progress-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card-body.collapsed{max-height:none!important;opacity:1}
+  a[href]::after{content:none!important}
+}
+a:hover,.summary-table a:hover{text-decoration:underline}
+.drive-link:hover{text-decoration:underline;background:var(--accent-lighter)}
+.kpi-label,.kpi-sub,.progress-detail,.summary-note,.region-tag,.school-addr,.school-status,.qty-item .qty-label,.attach-info-label,.photo-label,.drive-link,.footer-info{font-size:13px}
+a[target="_blank"]::after{content:" \2197";color:var(--text-muted);font-size:.9em}
+</style>
+</head>
+<body>
+<script>(function(){try{
+  var BUILD_TS=1779871740395;
+  // v3.9.10: 무한 새로고침 방지 — 세션당 1회만 체크, 플래그를 "체크 시작 시점"에 바로 세팅.
+  if(sessionStorage.getItem("__verChecked"))return;
+  sessionStorage.setItem("__verChecked","1");
+  fetch(location.pathname+"?_="+Date.now(),{method:"HEAD",cache:"no-store"}).then(function(r){
+    var lm=r.headers.get("last-modified");
+    if(!lm)return;
+    var srvTs=new Date(lm).getTime();
+    if(srvTs>BUILD_TS+30000){location.replace(location.pathname+"?v="+srvTs);}
+  }).catch(function(){});
+}catch(e){}})();</script>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&#x2715;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+<div class="report-page">
+<div class="report-header">
+  <div class="header-inner">
+    <div class="header-label">Campaign Report</div>
+    <div class="header-title">신원마포5월_서대문구_은평구_신원 마포 5월 결과보고서</div>
+    <div class="header-sub">좋은광고연구소 광고 게첨 실시간 현황</div>
+    <div class="header-meta">
+      <div class="meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>마감 : 5월 27일 수요일</div>
+      <div class="meta-chip" id="metaSchools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>로딩 중...</div>
+      <div class="live-indicator"><span class="live-dot"></span>실시간</div>
+      <div class="meta-chip" id="metaManager" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span id="managerName"></span></div>
+      <div class="meta-chip" id="metaUpdated" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="updatedText"></span></div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div id="printBanner" class="no-print" style="display:none;background:#DBEAFE;border:1px solid #4A8ED6;border-radius:12px;padding:16px 20px;margin:28px 0 16px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap"></div>
+<div id="reportContent">
+  <div class="loading-wrap"><div class="loading-spinner"></div><div class="loading-text">데이터를 불러오는 중...</div></div>
+</div>
+<div class="report-footer" style="text-align:left;padding:32px 16px 40px">
+  <div class="footer-inner">
+    <div><img src="https://lh3.googleusercontent.com/d/1bRxTWK1OzoQl4CiX5Wri_dT-swSHxLuU" alt="좋은광고연구소" style="height:19px;object-fit:contain"></div>
+    <div class="footer-info">주식회사 좋은광고연구소 ㅣ goodadlab@goodadlab.co.kr ㅣ 1522-3235</div>
+  </div>
+</div>
+</div>
+</div>
+<script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=gcvbnnigi1"></script>
+<script>
+window.__INITIAL_REPORT_DATA__ = {"status":"ok","updatedAt":"2026년 5월 27일 17시 49분","campDriveUrl":"https://drive.google.com/drive/folders/1A8xYm416lQ3y-iudwTFZEJ53Nc-wqTFj","manager":"박시현ㅣ 010-5905-3274 ㅣ sh.park@goodadlab.co.kr","stats":{"totalSchools":58,"totalPoster":740,"totalBanner":0,"donePoster":740,"doneBanner":0,"doneSchools":58,"remainSchools":0,"pct":100,"regionText":"서울 58"},"schools":[{"name":"래미안루센티아","addr":"서울 서대문구 남가좌동 175","addrClean":"서울 서대문구 남가좌동 175","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":27,"bQty":0,"postDate":"2026년 5월 21일 11시 19분","note":"래미안 루센티아(27장/55000원/관리실 제출)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1ec1RYxY_q8c2WDejCV7aEwkCvJGRPVAm=w1200","https://lh3.googleusercontent.com/d/1Hz9OvEiK8BOptqAMKrEmixpfubjT4p0s=w1200","https://lh3.googleusercontent.com/d/1UZHlVQF3REZ_1Wd8pWeG4lRyKEzREUpc=w1200","https://lh3.googleusercontent.com/d/1in-0NRLi99mWuAryd3vb58aHeEamw6-P=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1KhUG9_zyPTjy9BJ_qb0nHn8pAI9LbOBL","gps":{"poster":[],"banner":[]}},{"name":"DMC에코자이","addr":"서울 서대문구 남가좌동 224","addrClean":"서울 서대문구 남가좌동 224","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":26,"bQty":0,"postDate":"2026년 5월 19일 14시 03분","note":"자리없음","isDone":true,"photos":[],"driveUrl":"https://drive.google.com/drive/folders/1pG6nOc9i7bt-2MtsIPDqqUscmJCi3RDs","gps":{"poster":[],"banner":[]}},{"name":"DMC금호리첸시아","addr":"서울 서대문구 남가좌동 286-1","addrClean":"서울 서대문구 남가좌동 286-1","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":12,"bQty":0,"postDate":"2026년 5월 20일 11시 51분","note":"DMC 금호 리첸시아(12장/49500원/관리실 제출)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1XzOH8wc2iCW2Mi84IOHbP7WNqb4ZC-2X=w1200","https://lh3.googleusercontent.com/d/1kCN6GSIz_H-gZwxPQHuyBzL-vv8pklwb=w1200","https://lh3.googleusercontent.com/d/14pEglz9rn1j6DtJcrohqcbi-w22V3KYe=w1200","https://lh3.googleusercontent.com/d/1okNizGeyMNS3a7R8Owrdreeqaf-LpWgD=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1_7CmhTLkm4vMfOcV28TSBNIxSH01ESlH","gps":{"poster":[],"banner":[]}},{"name":"DMC센트럴아이파크","addr":"서울 서대문구 남가좌동 369-10","addrClean":"서울 서대문구 남가좌동 369-10","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":20,"bQty":0,"postDate":"2026년 5월 19일 14시 58분","note":"DMC센트럴아이파크(19장/55000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1PcPcSYrooPk9c7eM1O_xmFApLkUmu8bu=w1200","https://lh3.googleusercontent.com/d/18vIlJFpDTkZWos7KD-DYcfWCLYeR3CGL=w1200","https://lh3.googleusercontent.com/d/1NAUS4IMNYU0mLKUiSkYTlKEM4lOeQlwU=w1200","https://lh3.googleusercontent.com/d/1j6o1X68OlAzVmLaNvb7LIzrpC_6Zz5SY=w1200","https://lh3.googleusercontent.com/d/1WWdvi3zRCZU5h6L_07CtBn0xrQi_tIY9=w1200","https://lh3.googleusercontent.com/d/1r_MTNAwi7xe1t6c-xt5_JeZhoP-Uvn9H=w1200","https://lh3.googleusercontent.com/d/1E3Tj-SipvqYBQaIZnTnufiaT2odeMkMc=w1200","https://lh3.googleusercontent.com/d/18yvgnQaa08D9yV0EnuRp9omDbCAq9b3p=w1200","https://lh3.googleusercontent.com/d/12t9UiwieAgKjcCH_boCVkU_F9QR59VTS=w1200","https://lh3.googleusercontent.com/d/1Ejn_PbGm0xA3dGNXDKUTaGlSRa3FCEKV=w1200","https://lh3.googleusercontent.com/d/1CWAG8uouc_hSfgwuX7P1K4VbEvKod8Ti=w1200","https://lh3.googleusercontent.com/d/18wITl6eOqjIBFWzeDbBH2U6ZjYl7D8NU=w1200","https://lh3.googleusercontent.com/d/1hGY-1-vIQzmSzEtvlUPTn3vqbk2WvJQk=w1200","https://lh3.googleusercontent.com/d/1GiM_XXgE1ph8w5Ky_sZ0tQkW0zo2K23Z=w1200","https://lh3.googleusercontent.com/d/1RtR1vIvbhNZcD9fmUbWKFdayInYul-uw=w1200"],"driveUrl":"https://drive.google.com/drive/folders/19L_Q9YuXiEqL7SZzk6Lj--TtMfXpLjw6","gps":{"poster":[],"banner":[]}},{"name":"남가좌현대","addr":"서울 서대문구 남가좌동 376","addrClean":"서울 서대문구 남가좌동 376","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":24,"bQty":0,"postDate":"2026년 5월 19일 15시 06분","note":"자리없음","isDone":true,"photos":[],"driveUrl":"https://drive.google.com/drive/folders/11hLWjXH2ACKnPjKLt8Y1sm1oEJOT19Cr","gps":{"poster":[],"banner":[]}},{"name":"DMC래미안클라시스","addr":"서울 서대문구 남가좌동 377","addrClean":"서울 서대문구 남가좌동 377","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":22,"bQty":0,"postDate":"2026년 5월 19일 13시 56분","note":"DMC 래미안 클라시스(22장/44000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1_YpDA3nZUfgAF0A96mOnF3zYZmAPzCBX=w1200","https://lh3.googleusercontent.com/d/14psWGj2JzYTv3hbSKVJazDzWhJMtfwR7=w1200","https://lh3.googleusercontent.com/d/1bt7a8hhu9CXW69A8a53eOKWP3Y_un7qQ=w1200","https://lh3.googleusercontent.com/d/1S4qIcA2-EnmsHxw3GFPsp6gPAaPAVAlN=w1200","https://lh3.googleusercontent.com/d/1-sKG6WysSP6c0wHE0EFeJv-eRVas8nZ0=w1200","https://lh3.googleusercontent.com/d/1ZoUBO4GKQQzzCOwpFNL4cgOHeafVgyPJ=w1200","https://lh3.googleusercontent.com/d/11-C38veD9FW36uBW1CJrJ5npJwtXkDhv=w1200","https://lh3.googleusercontent.com/d/1MgqL2uFwxMwd_NDpzKdtq0Cl7WpIIu_n=w1200","https://lh3.googleusercontent.com/d/1tl3eQphTBT1A1UFzPLyLBPPv7elkQVcX=w1200","https://lh3.googleusercontent.com/d/1LIpdhJ2om5f8WYD0Y6mwRpR2zO_kV6lw=w1200","https://lh3.googleusercontent.com/d/1yuzH51m4dOpHV-u1WY5hZk-ZXujOZ93U=w1200","https://lh3.googleusercontent.com/d/1Q634qo8DPQI6mF_JLrShN3tzKJVjI63H=w1200","https://lh3.googleusercontent.com/d/1r9X6or_naZSK_FIiqL3mHS3knq3NnZFj=w1200","https://lh3.googleusercontent.com/d/1yZGM4tCzuZ9uUUCsKWosZtoezLU6qxiR=w1200","https://lh3.googleusercontent.com/d/1GxIcvJ_7fYxmJSEmgLUPJypjG0QTcFT4=w1200","https://lh3.googleusercontent.com/d/1VPsVTiWRp1qg1zRUYi8Utp4v6gkkBc1L=w1200","https://lh3.googleusercontent.com/d/1QhSmiF_Fpg2iWn-P8q2RnJOv4E3Zkg97=w1200","https://lh3.googleusercontent.com/d/1KIb8pZpWhbpSOq5lYGXD-J08U7oXXTWG=w1200","https://lh3.googleusercontent.com/d/1bNXVm9XDmyNF0y00FVE3JzPZhW7sOp3-=w1200","https://lh3.googleusercontent.com/d/1jCLVpIqLrKczRdg_LErIHHxd27rLPEyN=w1200","https://lh3.googleusercontent.com/d/19ugRhewRfJVmFCLqPFknXajjwC9oAsX6=w1200","https://lh3.googleusercontent.com/d/12vNrHapJXIu5WxtmuSRI_L-VJJDHcCwS=w1200","https://lh3.googleusercontent.com/d/1l_TfwKKVBmZ4J-GEuqreVhvmEbLmDYHu=w1200","https://lh3.googleusercontent.com/d/1PuNuTwgkQzS4_FMZn5umDjy7QW83RYDC=w1200","https://lh3.googleusercontent.com/d/1AB524v7s62nnnKe0X8ma653BmU6NKalM=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1SupDWYFnrgWwdvinHiqOakYw1LPxl0Qp","gps":{"poster":[],"banner":[]}},{"name":"남가좌삼삼성래미안2차","addr":"서울 서대문구 남가좌동 379","addrClean":"서울 서대문구 남가좌동 379","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":12,"bQty":0,"postDate":"2026년 5월 19일 11시 27분","note":"남가좌 래미안 2차(19장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1vQ57KsVw0V4VVo6EnUS1WM8Uqy7eE4UM=w1200","https://lh3.googleusercontent.com/d/1sjB-lUtC-A1vA53SHhWIS2p8s2eOstji=w1200","https://lh3.googleusercontent.com/d/10ENDZnWS6btmhEMA7Gns6VM1ts8TTHmX=w1200","https://lh3.googleusercontent.com/d/1Qdd9Dy4M1nsGnnqtb-Nube9BJjkvBgXQ=w1200","https://lh3.googleusercontent.com/d/1qc9CSMUc-0Rggs9TsYHRNCNUV2L4hAcS=w1200","https://lh3.googleusercontent.com/d/1MNbEDdrbWC68TIJByofM2parpDQUHmD3=w1200","https://lh3.googleusercontent.com/d/1SU-fom0DxNWNAflQXRoTg5scVki3P6wi=w1200","https://lh3.googleusercontent.com/d/1u5iwk2AGqhbXlvosCjcS2aEixoT95sIz=w1200","https://lh3.googleusercontent.com/d/109Ia3P5ylUzUswZNWS1hmWzLjlYy7e-5=w1200","https://lh3.googleusercontent.com/d/11i7PpQLCq9GBJqiM7tucPKsLGrXR9APJ=w1200","https://lh3.googleusercontent.com/d/1_pu6S1uGyAITKeK0j_MZ8AdDebatnlNQ=w1200","https://lh3.googleusercontent.com/d/1rXzB3y8M6bG9fYF2cjMnOfAYZ7r86QES=w1200","https://lh3.googleusercontent.com/d/1H67itajIQUpJ4nrPfi_62McmjItQLlFy=w1200","https://lh3.googleusercontent.com/d/1yA0tOe12JJHd0MTJdgpxOKWwYqOGKjT3=w1200","https://lh3.googleusercontent.com/d/1qujrRgSnIF-dsPHjwOvQZc1kyr0vdiF-=w1200","https://lh3.googleusercontent.com/d/1pb2TBPh6t2lEf64T3pUDqZZ0nyz8FMwD=w1200","https://lh3.googleusercontent.com/d/1b_yNUScb_mmBgtuMfFdkUVEm6lLFvUdF=w1200","https://lh3.googleusercontent.com/d/1IlcnXZG8lTYxKKcXT9gSFA6B1CePeQJT=w1200","https://lh3.googleusercontent.com/d/1Er-LA3QT17wrPXaysh8SaMVTxxlBWi3k=w1200","https://lh3.googleusercontent.com/d/1coWQ5eERkdNNwRAgteogNswUMlUiuwON=w1200","https://lh3.googleusercontent.com/d/12AXGrDSxCAboLU7jLoP_AQUbMjy1DT00=w1200","https://lh3.googleusercontent.com/d/1sbyQVYKTNEyuVTkGN2QXLb31QbfFPbcs=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1VM3tlHGK1tag8C30cYvqp9g37Xg2p5y0","gps":{"poster":[],"banner":[]}},{"name":"DMC센트레빌","addr":"서울 서대문구 남가좌동 381","addrClean":"서울 서대문구 남가좌동 381","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":15,"bQty":0,"postDate":"2026년 5월 19일 12시 06분","note":"DMC 센트레빌(13장/55000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1IsMALVUMxFtDgIwE_Ynk3OOzPNs0B9Nj=w1200","https://lh3.googleusercontent.com/d/1FAExqQS3YZjvkKSaAQ9m6YXZwzfz8MDF=w1200","https://lh3.googleusercontent.com/d/1-WBuUGc8fSQsiksIPdSxPC2qnOTCCk32=w1200","https://lh3.googleusercontent.com/d/1te03DfAclBOqp8NBdoz6h28QOLM3lkiw=w1200","https://lh3.googleusercontent.com/d/1KSW8-8_-ygsWZRLsaGdfMvZ2B5gtYdiK=w1200","https://lh3.googleusercontent.com/d/1RON1jrqmTN8UP18iSW5Gf3FRhM2deFMK=w1200","https://lh3.googleusercontent.com/d/179kj5N-kXfrBhNq2IPB7InB8QktQOuRk=w1200","https://lh3.googleusercontent.com/d/18wpHUfrDquSytFRZ9baFf-8EH_rnM45U=w1200","https://lh3.googleusercontent.com/d/1T7LHTStNl8RdcHJLkANo03NKpl1AiU0A=w1200","https://lh3.googleusercontent.com/d/1m860RAwLq_tTNgqb0zMgLpthZH6ItWGX=w1200","https://lh3.googleusercontent.com/d/1iaU5rLDHqWgpHRdR88SxuMQ-ECP05F6V=w1200","https://lh3.googleusercontent.com/d/1W-mreFcZgoubephEfIIRs61xF6wfZipq=w1200","https://lh3.googleusercontent.com/d/1Ie7I85kpGDT1wk3gpXao9ZYCKWDGgWhh=w1200","https://lh3.googleusercontent.com/d/1pk0YM3bSnHICibf9Xx1FIk64DvvnCXCL=w1200","https://lh3.googleusercontent.com/d/1IRb3w7pjJEgtc4ssWcTAH98dfkIr7Ni2=w1200","https://lh3.googleusercontent.com/d/19A5hVrsW1R3N348p3UXxU4M_0ZAq1dnp=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1oAslwiWD4tMlzaF92grVciKBxGLvWaCe","gps":{"poster":[],"banner":[]}},{"name":"냉천동부센트레빌","addr":"서울 서대문구 냉천동 260","addrClean":"서울 서대문구 냉천동 260","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":7,"bQty":0,"postDate":"2026년 5월 19일 09시 42분","note":"동부센트레빌(7장/50000원/관리실 제출/세금계산서 미발행)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1pxkirVDxex11-59BOGvtehP420JAq2IC=w1200","https://lh3.googleusercontent.com/d/17ayGFm1kzTXFcacly4-U6s-HYxbVSD23=w1200","https://lh3.googleusercontent.com/d/1VF8CfKh1YmChBc7AeFkV59qk1ua1aCPd=w1200","https://lh3.googleusercontent.com/d/1gM2OWvuPqMoDiJTN7s68CttjI53ZjScz=w1200","https://lh3.googleusercontent.com/d/1-P5xRbMGsC2EsIegnu_1lfpBU6r4eU8C=w1200"],"driveUrl":"https://drive.google.com/drive/folders/19YNXju16jRcHjPi8p1S0ZBHUb1ayEyhP","gps":{"poster":[],"banner":[]}},{"name":"돈의문센트레빌","addr":"서울 서대문구 냉천동 261","addrClean":"서울 서대문구 냉천동 261","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":22,"bQty":0,"postDate":"2026년 5월 19일 10시 22분","note":"돈의문 센트레빌(20장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/195eFoLOdGxd8osImMcy9uPyjhKH7cDcx=w1200","https://lh3.googleusercontent.com/d/19pS4xZ7gZ-cODsNNtiVQw0ifwAv4fFmk=w1200","https://lh3.googleusercontent.com/d/1ytz22eiKbpxLvrSVU1lMpbhRD6zDJoAB=w1200","https://lh3.googleusercontent.com/d/16qtE2k4f34PkN8hUd3HM6W5VFd3vMGvt=w1200","https://lh3.googleusercontent.com/d/10YG5n7-96J5RWFLGhOCNcTkfZAMzmm2p=w1200","https://lh3.googleusercontent.com/d/1dJM87wZ-5sA8o0GF6DPLHua4Y1Q-U0ia=w1200","https://lh3.googleusercontent.com/d/1GHYx--SGT_GidI5-P1GN2dTpq5saBHaK=w1200","https://lh3.googleusercontent.com/d/1MjGNdFahR6aERGKfq_5sUppNyH9H7mFy=w1200","https://lh3.googleusercontent.com/d/1pVn0CXy3Xvcsu44G1TLVsX-uKBEIibYw=w1200","https://lh3.googleusercontent.com/d/18d4cOcEscdRH7olwwvIyO_I4q0_ApnE1=w1200","https://lh3.googleusercontent.com/d/1DMzdi8-F0AVyuQ-e0zN40ek_RbzORmei=w1200","https://lh3.googleusercontent.com/d/10DMGyk7BtAuCPcHJYdE3dyBtTC65ckNc=w1200","https://lh3.googleusercontent.com/d/18eZgfYlVpvbxumRK6hrtQh958lGlpCnu=w1200","https://lh3.googleusercontent.com/d/10guVXI9zDeASRO8DfW1c10PRf_bdMybV=w1200","https://lh3.googleusercontent.com/d/1aUi6D02-32MMa_tSo-gNFfLcJNATgEVf=w1200","https://lh3.googleusercontent.com/d/1gPTuxOq-z47oE8mYr8059mQMqFiyVsLl=w1200","https://lh3.googleusercontent.com/d/1POWTXWtw_IM9PNyUoOVOqV3bu57MY4z0=w1200","https://lh3.googleusercontent.com/d/1lk1tWH30ihkZBXKDm3RflPsZmNC8MvyX=w1200","https://lh3.googleusercontent.com/d/15nqy07LAwHiYsuh42snnI-gHmK4Xr428=w1200","https://lh3.googleusercontent.com/d/1S9jS-LSJUAvB0XN0vjxTxeHY1gp5WjGj=w1200","https://lh3.googleusercontent.com/d/1nlV77R62OFyfYX9RTt6i2V8RBRSpHzgI=w1200","https://lh3.googleusercontent.com/d/1ffbpjdZgZWhd9FcsO_iwzJEhQjEpALeV=w1200","https://lh3.googleusercontent.com/d/1Pj5sQUzhvZL5f4C3a-X_F8sCqkQV-2Zc=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1r2hgY2vYHFy_YbJSULfYlAH85bJhqChP","gps":{"poster":[],"banner":[]}},{"name":"DMC요진","addr":"서울 서대문구 북가좌동 150","addrClean":"서울 서대문구 북가좌동 150","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":2,"bQty":0,"postDate":"2026년 5월 19일 17시 37분","note":"DMC요진(2장/30000원/관리실 제출/세금계산서x)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1wKA5IJlznYp6uNITCNxHqbEusAQy0RDV=w1200","https://lh3.googleusercontent.com/d/1SyOrsLryQspNMomkcDw9nJ9SNs03J-Ol=w1200","https://lh3.googleusercontent.com/d/1YXduANdHJB-k50FXME1z-mcpTBsFlZBF=w1200","https://lh3.googleusercontent.com/d/1PbMTRyrDhY9EISF2rDFjXAZa4hy_XfxP=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1IAep-DxgOne96jDUNGOT79SswlJVb3iU","gps":{"poster":[],"banner":[]}},{"name":"월드컵현대","addr":"서울 서대문구 북가좌동 371-1","addrClean":"서울 서대문구 북가좌동 371-1","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":8,"bQty":0,"postDate":"2026년 5월 21일 14시 18분","note":"월드컵 현대 아파트(7장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1muEI7vehhfW3LYsesO6Ga03K1tWL7gpZ=w1200","https://lh3.googleusercontent.com/d/1GWKh7v9sWIg4zsuQWv0aggd5HsFcYY6i=w1200","https://lh3.googleusercontent.com/d/1Bwv8IwbRGuqWRYBGVFBDZ_KT2y8x0dQf=w1200","https://lh3.googleusercontent.com/d/1CSh4L1j4YAWN_OCudk0vCsfQvGCZ8emJ=w1200","https://lh3.googleusercontent.com/d/1hltOJ-k2rT76sFoa-2wO-0592wUMSZ0g=w1200","https://lh3.googleusercontent.com/d/1abOr7kcLedOqMkPjakCYVKV0CIvQ2LeO=w1200","https://lh3.googleusercontent.com/d/14NUSV9rlOrTe8JMYV_bRJC2BB8rIOd_d=w1200","https://lh3.googleusercontent.com/d/1Kb_EBgEU1TllSEoUtrJauSEmfOCEdQlV=w1200","https://lh3.googleusercontent.com/d/10sYhHxpayoA6Hb6O3CYMJQwoiKw2uQ0o=w1200","https://lh3.googleusercontent.com/d/1oOStrCXQZcdgFnTsXK1y2ERDhChWL8Xr=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1qyRVSOgODlIvMQC1ow4F4zwp24TdgORy","gps":{"poster":[],"banner":[]}},{"name":"DMC한양","addr":"서울 서대문구 북가좌동 431","addrClean":"서울 서대문구 북가좌동 431","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":15,"bQty":0,"postDate":"2026년 5월 19일 16시 18분","note":"DMC 한양(13장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1N3sV6WmE5IpN-4KkCTKUj2Bkj02vN_8J=w1200","https://lh3.googleusercontent.com/d/1iijxzdUNhcTywUlxIP_B0zjYM6zn7Vd1=w1200","https://lh3.googleusercontent.com/d/1JJBl7CEPuW5pVgbhIsmKUa4jNYD0HA36=w1200","https://lh3.googleusercontent.com/d/1dMjGe1pbPolsPBajeMDEWTBA0vLsxZkB=w1200","https://lh3.googleusercontent.com/d/1JIc0WPgMv31St2BFH0vy66JHv6iqD779=w1200","https://lh3.googleusercontent.com/d/1SUXq3hGizYM_mgbvZWoivZ6AJPDQV9RJ=w1200","https://lh3.googleusercontent.com/d/1kO-35r8PoA-pWVMmXfJ4oenCWA0OA6Nc=w1200","https://lh3.googleusercontent.com/d/1jTUi4ALoYMbL-PcdCyKXRrmVuvDBBSCY=w1200","https://lh3.googleusercontent.com/d/1-KIcQmjbjXXwIDHRWhk30ToVr2hctZoT=w1200","https://lh3.googleusercontent.com/d/1oQTGeSFcjWwV5cglVsOMfAHcfqVPep3D=w1200","https://lh3.googleusercontent.com/d/16dMJVOX0nCJTW3ita0gJvYfRSvp8WPjF=w1200","https://lh3.googleusercontent.com/d/1NRAUlzHRQT-hERWJwATYE5Mv5RkbMr9i=w1200","https://lh3.googleusercontent.com/d/18w9IhujXEo2F3TNOofCfixZltje5IU_4=w1200","https://lh3.googleusercontent.com/d/1VghRyJD1VCT3_qmG8M-K-D08H-Jyu4cO=w1200","https://lh3.googleusercontent.com/d/1O3G2KbJ1_5-FKQyQAD4rwBhQYnDd5_eX=w1200","https://lh3.googleusercontent.com/d/1q7zsYTnulqcIyHUA2N2EhuXJKXoN4roV=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1qEY560QJAuvyS2NLYiAQo4kljm22PVIR","gps":{"poster":[],"banner":[]}},{"name":"북가좌삼호","addr":"서울 서대문구 북가좌동 449","addrClean":"서울 서대문구 북가좌동 449","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":20,"bQty":0,"postDate":"2026년 5월 19일 15시 30분","note":"자리없음","isDone":true,"photos":[],"driveUrl":"https://drive.google.com/drive/folders/1f6u0zMjAyYhL6cHss1lwJc2v0CmLGI9a","gps":{"poster":[],"banner":[]}},{"name":"DMC현대","addr":"서울 서대문구 북가좌동 453","addrClean":"서울 서대문구 북가좌동 453","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":9,"bQty":0,"postDate":"2026년 5월 19일 16시 36분","note":"DMC 현대(8장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1H1HueT6E9RdtkP8NdLFRFIu5O3yfqTjx=w1200","https://lh3.googleusercontent.com/d/19o0t8Y4IPbo8tJJkXDlXPIR1v3eKruuU=w1200","https://lh3.googleusercontent.com/d/1E5Es60B7m8m6wWEc-QqmlvDjhj72RQdL=w1200","https://lh3.googleusercontent.com/d/1jBKCrGf8ADuVlCmzM05e7S9XSaAHhiI8=w1200","https://lh3.googleusercontent.com/d/10qSE6iNqkwfAYLyYs39CVfgs7mN9zjKA=w1200","https://lh3.googleusercontent.com/d/1-yf5j0QXq2gbAxqmC8nGLuQZRBc7-jYz=w1200","https://lh3.googleusercontent.com/d/1SN4Cu4nvULBHqXD-O-Ce9oJMf0Vr2xlo=w1200","https://lh3.googleusercontent.com/d/1KGsshJWGmxOqcN_blMevjJ0BYDvGZl0k=w1200","https://lh3.googleusercontent.com/d/12dBpINJQ1nnYXDnGbsuyuZL9viu94YKW=w1200","https://lh3.googleusercontent.com/d/1Sr7lMwNSikBxsmXr5V6bh0KjQTB8jMNi=w1200","https://lh3.googleusercontent.com/d/1XdtEWvFBkKY3epN_0x_tI4kOtIV1N7Nn=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1vim3Swv7w0zYQVckr8CYnV-bgBnxYeUm","gps":{"poster":[],"banner":[]}},{"name":"북가좌신일해피트리","addr":"서울 서대문구 북가좌동 455","addrClean":"서울 서대문구 북가좌동 455","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":6,"bQty":0,"postDate":"2026년 5월 19일 16시 59분","note":"북가좌 신일 해피트리(6장/50000원/관리실 제출/세금계산서x)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/16zpOP4dQvjmfSTuBfJKUHx3g2dLVFU-S=w1200","https://lh3.googleusercontent.com/d/1QzFfqo0Y2rRfkEpI55arcnzxBj_2987q=w1200","https://lh3.googleusercontent.com/d/1tXrhM26n0dlPygS8V0XMXabW9c2lRcA6=w1200","https://lh3.googleusercontent.com/d/1sTH9g5OD469wemtb0ozFdctjmtb9cXbC=w1200","https://lh3.googleusercontent.com/d/17tSRDbS4vjEreU5jOapAnqlo7rmvmIhj=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1fLnbv_wKV4Nub5c1OMd3yugzDBDmA1O5","gps":{"poster":[],"banner":[]}},{"name":"DMC휴먼빌","addr":"서울 서대문구 북가좌동 456","addrClean":"서울 서대문구 북가좌동 456","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":8,"bQty":0,"postDate":"2026년 5월 19일 15시 46분","note":"DMC 휴먼빌(8장/33000원/관리실 제출)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1AlF4ZtRDeSi6d2pI3sQ4u9tSDa43KeaC=w1200","https://lh3.googleusercontent.com/d/1cjBPWngvRQTXrKBcUhv3jjJFAcDc9Akh=w1200","https://lh3.googleusercontent.com/d/1j2LG49YR9eiITtB7Ex3OxrctZ93vA2H3=w1200","https://lh3.googleusercontent.com/d/1k8bcA3QXaBW0Gn_rDRh831aedOVIYPSB=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1yw0QHxKb7g73PHkx7Mt8HalQ45by8HLl","gps":{"poster":[],"banner":[]}},{"name":"DMC아이파크","addr":"서울 서대문구 북가좌동 458","addrClean":"서울 서대문구 북가좌동 458","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":11,"bQty":0,"postDate":"2026년 5월 21일 11시 40분","note":"DMC 아이파크(10장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1hQkL0A-i_z2JfzSv6zW0UbJ1PWk7xHNA=w1200","https://lh3.googleusercontent.com/d/13H1TqdCCgT3RFIRKOSRzyR-BlQSQ21kr=w1200","https://lh3.googleusercontent.com/d/1RKQuyMIq2fVLUhJ5ORuNUs0k3P7oRNWh=w1200","https://lh3.googleusercontent.com/d/11QzYJ0tZJWvbs46O1xIWz2wA_kyHfMV_=w1200","https://lh3.googleusercontent.com/d/1xB5lDmQzhJpQ_v_0MhhqevJnvNRQdQz2=w1200","https://lh3.googleusercontent.com/d/1vMSaow2rpHkHoHMNB3lXnW--X1JDzPjd=w1200","https://lh3.googleusercontent.com/d/1V4rvHmQOPtr43gKoELFbs4feqgkAbGAz=w1200","https://lh3.googleusercontent.com/d/1uzFwGhS2hjSlteUi2_ZzGT1Nea1oa39-=w1200","https://lh3.googleusercontent.com/d/1F5XKf8NJyedIfvEAt8KlYNJxD9Egvg24=w1200","https://lh3.googleusercontent.com/d/1e4tnhbfwvbEY9_sqb7xx-quEGv0-nNjt=w1200","https://lh3.googleusercontent.com/d/1XGTd7Bm-ED47eUBuEDfMpSGu9ztpmEVY=w1200","https://lh3.googleusercontent.com/d/1hHP21_svILO2D8AjlYIdUYWLnNyMsds6=w1200","https://lh3.googleusercontent.com/d/1ryi4o6uSXta081t_s5WRndx3i6qZEyPi=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1NoHe0h7mHoXZEoHqsE_SPH-x8zzgDvDl","gps":{"poster":[],"banner":[]}},{"name":"DMC두산위브","addr":"서울 서대문구 북가좌동 459","addrClean":"서울 서대문구 북가좌동 459","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":8,"bQty":0,"postDate":"2026년 5월 19일 13시 15분","note":"DMC 두산위브(8장/33000원/관리실 제출)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1u0J2wf9jg-EywiLwVmLPdnW8iSRoY9XS=w1200","https://lh3.googleusercontent.com/d/11ckPIeVRgYl_y_DT-jgeL3LhsAQkFhKH=w1200","https://lh3.googleusercontent.com/d/1-R6KxK-tF0lw4LprvPmYxMneD8Rn0emu=w1200","https://lh3.googleusercontent.com/d/1xQ37_OMd-sp4xBO2-J7og4DEoA_DLBUY=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1WDRWlIu86qwCKolHvlpdls1U6r2CmiHs","gps":{"poster":[],"banner":[]}},{"name":"이랜드해가든","addr":"서울 서대문구 북가좌동 460","addrClean":"서울 서대문구 북가좌동 460","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":8,"bQty":0,"postDate":"2026년 5월 19일 17시 15분","note":"이랜드해가든(8장/50000원/관리실 제출/세금계산서x)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1TBvG_Dl-9R2Glyw15LIMph423pkQ_RQn=w1200","https://lh3.googleusercontent.com/d/1HlWfD2mR8AvM-nnikbPIpSPVqQyGkpgE=w1200","https://lh3.googleusercontent.com/d/1iwV2jmwcgtHedHoUUIg9r2iuPPZtQjkT=w1200","https://lh3.googleusercontent.com/d/1rVFTJHkQaqTHoc3X46ly0VhO74sfHZym=w1200","https://lh3.googleusercontent.com/d/1dzu6A4Czoll8Hqr5rFf6_Bf2DHo-ncU3=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1sRRgmnb9HmCPmQesnx9j99W0h1_0Og8l","gps":{"poster":[],"banner":[]}},{"name":"북아현두산","addr":"서울 서대문구 북아현동 1009","addrClean":"서울 서대문구 북아현동 1009","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":8,"bQty":0,"postDate":"2026년 5월 21일 10시 08분","note":"북아현 두산 아파트(7장/44000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1KLfsRDOC4qqgqV5O1DdEyaJKsfqwBWGF=w1200","https://lh3.googleusercontent.com/d/1DP2adTQ6gmrOKgICtSorbqiXgMoO8ND7=w1200","https://lh3.googleusercontent.com/d/17B3i6ho06pcjmRt-eOqPoQq7Jc8KYH7G=w1200","https://lh3.googleusercontent.com/d/1R1aW7YkUWH62lNhGN2WMprxM13pyRZrY=w1200","https://lh3.googleusercontent.com/d/1URsWZpOJBMoDG6qqKQgFSRhzq2UXeEng=w1200","https://lh3.googleusercontent.com/d/1nd7wX9BB7HNyH8-v96Jb-u23N8fWYlx8=w1200","https://lh3.googleusercontent.com/d/1LrKTe0yybFAXcq3yqIO-paP4f_7_nItH=w1200","https://lh3.googleusercontent.com/d/1PLTq33AjfHoQwof_E1Id9dCOMSejKIdV=w1200","https://lh3.googleusercontent.com/d/1sqW_-k3fOysFcGQ6ktZ5cE2ISU2sRXyg=w1200","https://lh3.googleusercontent.com/d/1bPvbXkotAO0RYakS1Xdg6dMyd9LD7_p4=w1200"],"driveUrl":"https://drive.google.com/drive/folders/13FBwJm2vGH4AAaOqi9W6Zp8PrtXSQIRT","gps":{"poster":[],"banner":[]}},{"name":"연희대림","addr":"서울 서대문구 연희동 700","addrClean":"서울 서대문구 연희동 700","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":13,"bQty":0,"postDate":"2026년 5월 26일 15시 17분","note":"연희 대림(11장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1Frcp_hmLBIMYo-hrxOfHlci124FWC5Pt=w1200","https://lh3.googleusercontent.com/d/1IM45A4Yl7YUGQoIBrSADfbPP9lMiGSeO=w1200","https://lh3.googleusercontent.com/d/10oozbsMZPFqBNJuZnj404rLvK3a-uSvV=w1200","https://lh3.googleusercontent.com/d/1KlTtdOwULOInr9_2yqBtTSyY9oGyiaaF=w1200","https://lh3.googleusercontent.com/d/1vueCOtx0iTWyedr7wMW0v5rCSRPugv2n=w1200","https://lh3.googleusercontent.com/d/1Rw4U0KVr2MPnFs7IjMFR_D59ALick1Hy=w1200","https://lh3.googleusercontent.com/d/1mIua6gVvXZFQI2wvtXbPwXLc_ev_wnDV=w1200","https://lh3.googleusercontent.com/d/1cTzaFyx_j5yy-t1V0hBGHQ8Bwhq3WkEQ=w1200","https://lh3.googleusercontent.com/d/1PeZ11DQAsy3NmEXRAVO2_vPD-ny1lCi2=w1200","https://lh3.googleusercontent.com/d/10K9k4EkVZPaXvvqBwHNzMokcLV7B2lFW=w1200","https://lh3.googleusercontent.com/d/11JoZvFA0_3HJnLtP2CmQkP2QiIHJpyO3=w1200","https://lh3.googleusercontent.com/d/1LHCKR1s6M6zhSiOQAn28EQQzAshLK8Er=w1200","https://lh3.googleusercontent.com/d/1MJOEZpgm3yUGCdvl1ifmCcb7Y9xVS32B=w1200","https://lh3.googleusercontent.com/d/1XO2tFzKq44gv9KJZbzCvy5z2_C9wgNRC=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1wdyvyXSiDzarOd8T-YwkUgBA_taMkcfA","gps":{"poster":[],"banner":[]}},{"name":"연희임광","addr":"서울 서대문구 연희동 738","addrClean":"서울 서대문구 연희동 738","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":5,"bQty":0,"postDate":"2026년 5월 21일 10시 40분","note":"연희임광(5장/20000원/관리실 제출/세금계산서x)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/11bx2CBZZmlFf4P1pfjDfL5fAgqgY3Yfl=w1200","https://lh3.googleusercontent.com/d/1ONCCF39BsjDAZgAMk71MKDpf-KpA5wFo=w1200","https://lh3.googleusercontent.com/d/1sq1DngRJKhTxd_d0ofhrHOaZL3ge7u3V=w1200","https://lh3.googleusercontent.com/d/1dwU7xBkPIvIpEOqBghIplT5mD-ius4gH=w1200","https://lh3.googleusercontent.com/d/1XHRJx32h7fQ7ljFgaryvn9MwUAsRs6z6=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1u11QZW7C0ZPVw2QtsBbjEzdr_IVssNi7","gps":{"poster":[],"banner":[]}},{"name":"연희대우","addr":"서울 서대문구 연희동 739","addrClean":"서울 서대문구 연희동 739","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":13,"bQty":0,"postDate":"2026년 5월 20일 11시 13분","note":"연희 대우(12장/55000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1_jEabKoUImGLLZClEicagWXPOcTMkKmW=w1200","https://lh3.googleusercontent.com/d/1zM9Tdyq0wi2iRDbOpbG5Fl_JvwI1p9sF=w1200","https://lh3.googleusercontent.com/d/1Vcrd24zd4hiLZjEU8CcG3qwTkhMOIghA=w1200","https://lh3.googleusercontent.com/d/1RuhgZgLk85KmVx6fxxQg-N8WIC0sbCu0=w1200","https://lh3.googleusercontent.com/d/1jDRw6lgjksnCYsSAc3HrrwsLCgqAr797=w1200","https://lh3.googleusercontent.com/d/1uxqn3c81c-12wxd48t4Gbfl7r58KP_HW=w1200","https://lh3.googleusercontent.com/d/1ULRIiwG7gn1qwVqlsBeK3Wb1tDVeyBls=w1200","https://lh3.googleusercontent.com/d/19_zVjYKhR9j2dgMjG7LKunLVkwB4KL2_=w1200","https://lh3.googleusercontent.com/d/1D3V1g1KKusYYu4D8sag8g0WBPu6iAFj9=w1200","https://lh3.googleusercontent.com/d/1ieC5v-kSyIH8xtGS8DkHMGmiBE9DT48k=w1200","https://lh3.googleusercontent.com/d/1v6mwr9Vi90Ospu2fn3RB0lJEFMjoqjXM=w1200","https://lh3.googleusercontent.com/d/1fMPAusTT1kWICo0Fwsaz8lFS1FoNfTNd=w1200","https://lh3.googleusercontent.com/d/1vzUSSjw2JQ1JV_6XIeinOFzzxHet3140=w1200","https://lh3.googleusercontent.com/d/19qVVbKqHLbrAvyUS49MAi1BfVLTtm-m4=w1200","https://lh3.googleusercontent.com/d/1BvwLEW8qxSlWrvbST4-lzxCp12YgZLBf=w1200"],"driveUrl":"https://drive.google.com/drive/folders/13xwVzD8kH7F6x5anNDglbnFipCaKzFDJ","gps":{"poster":[],"banner":[]}},{"name":"연희성원","addr":"서울 서대문구 연희동 740","addrClean":"서울 서대문구 연희동 740","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":17,"bQty":0,"postDate":"2026년 5월 26일 16시 21분","note":"연희 성원(16장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1J8OvDuXRISEzd7LhnrkQhoB-6PTneE67=w1200","https://lh3.googleusercontent.com/d/17wdd-0kYE76pDkRgu9llIWbBbPd5Ha8m=w1200","https://lh3.googleusercontent.com/d/1TtPVXQXSIjxCStP-r0c9azYTozXWJzto=w1200","https://lh3.googleusercontent.com/d/1643A_EoZOYkhQjyp5cl0qIr6zhxGnCUa=w1200","https://lh3.googleusercontent.com/d/1nexOOhvxQkjw9Z0UQEexPhlFkpNjG1JH=w1200","https://lh3.googleusercontent.com/d/1Myc4PrW6JBQLsKwa5N_HQimBfDaasW-k=w1200","https://lh3.googleusercontent.com/d/1W503A86c0QD5SLMyAAbOu7vbMv0lkChE=w1200","https://lh3.googleusercontent.com/d/1qfxHT7kiuTWHudGPd2Yg79R8FzG2u6XF=w1200","https://lh3.googleusercontent.com/d/1QsfLn9QQMnk-tNt6OhLmgBnXy3FKC3-1=w1200","https://lh3.googleusercontent.com/d/1CNRZiLDUjDhdKht3LvgONGP4jK6gEISx=w1200","https://lh3.googleusercontent.com/d/1ZcC9vwAOo7NdciXXuWB5lderbQA4u4q8=w1200","https://lh3.googleusercontent.com/d/1NxP4PwnpJURHlhipObp6VL0UB5SltdZe=w1200","https://lh3.googleusercontent.com/d/10_fp8XxllwEeZnv0JYvSJBrqmiOh0lol=w1200","https://lh3.googleusercontent.com/d/1Ra6n-p5IN4xnNzyRkGg5ByWlj_8rxLYb=w1200","https://lh3.googleusercontent.com/d/1MPVKDJLfl4hWjukE1Ebx7PAJstx1IIjp=w1200","https://lh3.googleusercontent.com/d/1oMKuldqWj6f7Fj6grJ7rinzlbtYlrD0y=w1200","https://lh3.googleusercontent.com/d/1IffpKxvMBYoCvmi4lJ3ecPpKo_StgGat=w1200","https://lh3.googleusercontent.com/d/1pQgQYevuzi2ccmdJ9aNkxfe_WOqRjR2t=w1200","https://lh3.googleusercontent.com/d/1yMnQnLtjmqaAGJXnam3_U4dCJH6o5NuN=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1kpDF6dxG1d-8P8cp77RyKn8MKaiveKQr","gps":{"poster":[],"banner":[]}},{"name":"연희성원상떼빌팰리스","addr":"서울 서대문구 연희동 742-1","addrClean":"서울 서대문구 연희동 742-1","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":9,"bQty":0,"postDate":"2026년 5월 26일 15시 35분","note":"연희 성원상떼빌(9장/30000원/관리실 제출/세금계산서x)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1q1-xSHHOCczqTZYyIHMYySF7DbJ51n1f=w1200","https://lh3.googleusercontent.com/d/1CHcSXh2Op1IH3kCHL6nzSx8VfXCGk4Ne=w1200","https://lh3.googleusercontent.com/d/1BrziRgvc5Ajg6C9l-01eL-Ew1JDDcfqZ=w1200","https://lh3.googleusercontent.com/d/1xpLI19SbLTLAQW76NLC4k2CRbvnfTfgk=w1200","https://lh3.googleusercontent.com/d/1qF2ovO6es6yKREG8robaRKVp64KeKqzB=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1J8aLDzKTJLRENHbgDOpBySX65-LgbfSH","gps":{"poster":[],"banner":[]}},{"name":"충정로 SK VIEW","addr":"서울 서대문구 합동 118","addrClean":"서울 서대문구 합동 118","region":"서울","regionOrd":1,"subAddr":"서대문구","pQty":4,"bQty":0,"postDate":"2026년 5월 20일 10시 06분","note":"충정로 sk뷰 아파트(4장/33000원/관리실 제출)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1Ob-KQy-6i9SxbwPXHCHRh0Ps73bzVyeX=w1200","https://lh3.googleusercontent.com/d/1hVPf4ROCvgQtEmPDLVNSsA95uY26azkD=w1200","https://lh3.googleusercontent.com/d/13SNrVSOyZwQyZqn_s36HwWC9ZVDthtZR=w1200","https://lh3.googleusercontent.com/d/1Kb_LhqzqlPZfdrWXWsvIY9ugHwCzmgu7=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1ZOheVzYsFvkJlBAqYjk7Of-H2V12Em50","gps":{"poster":[],"banner":[]}},{"name":"갈현동베르빌(아파트)","addr":"서울 은평구 갈현동 465-12","addrClean":"서울 은평구 갈현동 465-12","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":7,"bQty":0,"postDate":"2026년 5월 22일 11시 41분","note":"갈현동 베르빌(7장/30000원/관리실 제출/세금계산서x)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1Ux2TzCjmf0T8dCPBmB6YDpQVnb2bEbOP=w1200","https://lh3.googleusercontent.com/d/1ZVgEXQyWedD_37qCphRp9uRUCWo1JDJS=w1200","https://lh3.googleusercontent.com/d/1PkHZg9XCBbSyf6pIU2Fq9fdIwYukRDRE=w1200","https://lh3.googleusercontent.com/d/1YQawglcMruy6enav7n0KbiotDB_7QIDX=w1200","https://lh3.googleusercontent.com/d/1Kyk2y9M9xgy97VDTTDhBrYvRuzWsLCf3=w1200"],"driveUrl":"https://drive.google.com/drive/folders/17fT5mismP70ow8XLbHrH2-HsLTd4TEND","gps":{"poster":[],"banner":[]}},{"name":"갈현현대","addr":"서울 은평구 갈현동 537","addrClean":"서울 은평구 갈현동 537","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":8,"bQty":0,"postDate":"2026년 5월 22일 13시 58분","note":"갈현 현대(7장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/10KvhsUfq4FPSKTAnNTaXfKTRKCWUmgVg=w1200","https://lh3.googleusercontent.com/d/1EYNJLYXiWXX_C6DP7Z4YDaDOJgfedwrG=w1200","https://lh3.googleusercontent.com/d/1kpcPGBCu_2svoT5LZe8qt5JoxvlA6SGY=w1200","https://lh3.googleusercontent.com/d/1FPpY1pb9qhHKM3GPTm0kYop67S_yyGA_=w1200","https://lh3.googleusercontent.com/d/1OgSrW6D87pVPQ-WiSdFQU1Q7gDuskz_a=w1200","https://lh3.googleusercontent.com/d/1f_eVe5tcmHnOrrtbTPMR8TdE8ASMmRTh=w1200","https://lh3.googleusercontent.com/d/1GI455ABhrVaC2PGwcUY3dtghu6eb5qSr=w1200","https://lh3.googleusercontent.com/d/1ZISUPwsQ3Z-qo4BdBErK1IxK8AlucWML=w1200","https://lh3.googleusercontent.com/d/1bv3kgjx7Xts3VPv-Ya4TlBKlHOllYAo_=w1200","https://lh3.googleusercontent.com/d/1csKHgjArvEsImK-2ChQ_V5dTL7iYYya0=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1jOgfoAVtXaLfORYSaTqd3qxPGi1-WmeJ","gps":{"poster":[],"banner":[]}},{"name":"갈현미미","addr":"서울 은평구 갈현동 538","addrClean":"서울 은평구 갈현동 538","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":9,"bQty":0,"postDate":"2026년 5월 22일 14시 17분","note":"갈현 미미(9장/33000원/관리실 제출)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1BV5yrNHEGQai7BJa2wy0YPzJNkigLlsq=w1200","https://lh3.googleusercontent.com/d/117DYeyqeaF63Wq8Ow2IP0kLurkSLy0eP=w1200","https://lh3.googleusercontent.com/d/1kPoW2nYQHWvNwglDv8CB5UqgqblQGxZj=w1200","https://lh3.googleusercontent.com/d/1r4jkK7FR6REfbj-3d7WEEE-jEIOlUixd=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1Nm-xZu-3ob8XzOIcet8egjEH3U9YGPS0","gps":{"poster":[],"banner":[]}},{"name":"갈현동건영","addr":"서울 은평구 갈현동 541-1","addrClean":"서울 은평구 갈현동 541-1","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":8,"bQty":0,"postDate":"2026년 5월 26일 14시 20분","note":"갈현동 건영(8장/30000원/관리실 제출/세금계산서x)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1J_KGDREOcOel2ATtDbT45lx4U44zw4KV=w1200","https://lh3.googleusercontent.com/d/1UZzZnyCo8U94eCyGuKqMHBRT17AiNm4K=w1200","https://lh3.googleusercontent.com/d/1TnJgXGt_cZszPHCMqgf2lvXBhAd_epKo=w1200","https://lh3.googleusercontent.com/d/15iOU6jiMBicUcspZdH_Xg_eZKj-UnjSq=w1200","https://lh3.googleusercontent.com/d/1tvnI7Fb8epr1VkWnCbdGp0-d9ryDK8b2=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1n1d-S-aZrv-K8pHaRv_YYJmD7eIeyC0x","gps":{"poster":[],"banner":[]}},{"name":"갈현코오롱하늘채","addr":"서울 은평구 갈현동 545","addrClean":"서울 은평구 갈현동 545","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":11,"bQty":0,"postDate":"2026년 5월 22일 13시 34분","note":"코오롱 하늘채(8장/22000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1Mzc_Kg5MBmhI6U48mxD3CuegKZCdhsWs=w1200","https://lh3.googleusercontent.com/d/1zqL1itFgLUbqWlLqtEuEMMcKXECz_jIb=w1200","https://lh3.googleusercontent.com/d/1WE_ZPiYo54pNH6auZSwFIMXlPhZ8Jldh=w1200","https://lh3.googleusercontent.com/d/1WFCU1f27td0UJBGNEQrn4d5SiIYefIw-=w1200","https://lh3.googleusercontent.com/d/10zZb91Ryn9guVh5yHX_WNzQB_--q7RxH=w1200","https://lh3.googleusercontent.com/d/1uTqyCTbzO_vFsXlNe-rHGvtKs1t0KrQ3=w1200","https://lh3.googleusercontent.com/d/1vHCkZdRKnG5u7g7Q-r4Bs--4gdByZBOA=w1200","https://lh3.googleusercontent.com/d/1Upi9BbsrRxOSik4fq3u1b620folxi9gt=w1200","https://lh3.googleusercontent.com/d/1V58jX6GSejfDHuKbre0sLkDrzMVZ8xbR=w1200","https://lh3.googleusercontent.com/d/1xTZeOdrDbNd021lTi84h52sleLGxp5jr=w1200","https://lh3.googleusercontent.com/d/1Y47hLLrrVMg8oNv7z2iXeZoeu3OI-Y_C=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1tVMYaa4_HRQ2kPLxKypIydIGx3KzcKxd","gps":{"poster":[],"banner":[]}},{"name":"갈현e편한세상2단지","addr":"서울 은평구 갈현동 546(2단지)","addrClean":"서울 은평구 갈현동 546(2단지)","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":11,"bQty":0,"postDate":"2026년 5월 22일 15시 29분","note":"갈현 e편한세상 2차(10장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1AQsocUaSCfI4wqrojwLftOWU9aljq6fA=w1200","https://lh3.googleusercontent.com/d/1Gw6juxKUaagnTXoxV8od7u9K2Evavjf8=w1200","https://lh3.googleusercontent.com/d/1HfanD2b_Rvq8UeVPlz_twPAU8XNLhhlS=w1200","https://lh3.googleusercontent.com/d/1LjnazCty5NlRHxmx0OTWDTWLMUL-6coE=w1200","https://lh3.googleusercontent.com/d/19T0stbFU2HNTP2bSudSOPerRvekSRybJ=w1200","https://lh3.googleusercontent.com/d/1xwgdc44X2mWLvND9PiXz6HDROlACgpcU=w1200","https://lh3.googleusercontent.com/d/19zGPhxubmauWSo2-xdy74k_tlthgShba=w1200","https://lh3.googleusercontent.com/d/1U0IbBl4gcZ3X463sDjuU1khT_HeFv_7V=w1200","https://lh3.googleusercontent.com/d/1oBguQ4RQlYQnX_mHRd7eWMTSBFFhOz79=w1200","https://lh3.googleusercontent.com/d/1q4BFcCLMKqoAJD_f5W2U9aVNjxXSFGSZ=w1200","https://lh3.googleusercontent.com/d/1whS6Vs9VXbL0d_flrwenAIe5PAdSiRUB=w1200","https://lh3.googleusercontent.com/d/1CBRVowp9MEQnnzcxJJWfd1JpeGKu7Ad6=w1200","https://lh3.googleusercontent.com/d/1kzz1thxv53o1OiYPZWrOzPwOqcXa1wR8=w1200"],"driveUrl":"https://drive.google.com/drive/folders/19Gw1XQ8WVFUHMEnb6BiZRPCiOP5F6VFf","gps":{"poster":[],"banner":[]}},{"name":"브라운스톤구산","addr":"서울 은평구 구산동 159-10","addrClean":"서울 은평구 구산동 159-10","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":9,"bQty":0,"postDate":"2026년 5월 22일 15시 51분","note":"브라운스톤 구산(9장/33000원/관리실 제출)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1n1HTQNGSsgcT_6YJANlhvPxakbEkyWBa=w1200","https://lh3.googleusercontent.com/d/1aRlbR5x3eMcxDwnYWl4WF6r3JCWFrM7U=w1200","https://lh3.googleusercontent.com/d/18f-6jM1CV7QYYkxjRmWnFUZKiMwvKoYW=w1200","https://lh3.googleusercontent.com/d/1T6FVqN36ZREq_d7O0Yka0EE1UvhXfe6z=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1u4iuO_EPxOMtwkY6Dt5mHYxEzqL8HkMG","gps":{"poster":[],"banner":[]}},{"name":"구산경남아너스빌","addr":"서울 은평구 구산동 224","addrClean":"서울 은평구 구산동 224","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":15,"bQty":0,"postDate":"2026년 5월 22일 16시 29분","note":"구산 경남 아너스빌(14장/55000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1jhdHGI4Taaql_ZtiXznRHLEXoqDmMn6X=w1200","https://lh3.googleusercontent.com/d/1UdJN8_3XqxwAwfzOOYyEPm8y3iK0Is1g=w1200","https://lh3.googleusercontent.com/d/1Pl-FAlrfqCYGX0-ospo14qkSEgyCTshb=w1200","https://lh3.googleusercontent.com/d/1INo14v6bhT9ELgdWfa7zPWmoUF_61Ho7=w1200","https://lh3.googleusercontent.com/d/1Sa3KrhfLhNWSHqnNnnvOXomTU_b8p7s2=w1200","https://lh3.googleusercontent.com/d/1g3JrVP7Z44AsNrb0TBv0JW1gnqK_WXEk=w1200","https://lh3.googleusercontent.com/d/1qNX_qBcEJLjyo9EKD9x2DCgeNbhMQRdi=w1200","https://lh3.googleusercontent.com/d/14doC4Xc30zO910zQTJh9vdUkPZYQlgEq=w1200","https://lh3.googleusercontent.com/d/1qk5RCKqktdT4T-jJRR60DpimgnXGfr_0=w1200","https://lh3.googleusercontent.com/d/1P_NowvxK-3eJvsPPybdTWqB_qh0M8_Tz=w1200","https://lh3.googleusercontent.com/d/1k2QkhPzdZJcw3XG6RCvNwlE-vfxzoOWe=w1200","https://lh3.googleusercontent.com/d/1hPXf_3g_d20ar-iIHM8qlbmtVvig0L29=w1200","https://lh3.googleusercontent.com/d/12U3sN1nhDO9RAy_hoAy1Wpb6KldBf9JN=w1200","https://lh3.googleusercontent.com/d/1178dZTrG5NdlY8jpoSbSE7LxVu7a4m0f=w1200","https://lh3.googleusercontent.com/d/1tTLRcN_aiDGJMd-oKVHYw9HhKh3Mwu5e=w1200","https://lh3.googleusercontent.com/d/12NiowlZUAexWIvrf1beUMNMVGxLJB6Er=w1200","https://lh3.googleusercontent.com/d/1LgygDNjDfZ0LJ9VZs2SjIM6QXyewYcCJ=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1S-vGFTe50WwVjyjDFd-HyVq34O05v-yj","gps":{"poster":[],"banner":[]}},{"name":"갈현동현대","addr":"서울 은평구 구산동 382","addrClean":"서울 은평구 구산동 382","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":10,"bQty":0,"postDate":"2026년 5월 22일 15시 07분","note":"갈현동 현대(10장/33000원/관리실 제출)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1bjGbyrGsENAlV59uw1tp5AQoF-YWq8cK=w1200","https://lh3.googleusercontent.com/d/1G2PssKNL3fyi-VJ6Bps8f_4NxWl6TPZ8=w1200","https://lh3.googleusercontent.com/d/1YiFX_3hSX6_8lDPZz4vSmP_ZLv2t7AfA=w1200","https://lh3.googleusercontent.com/d/1SuJfalGcvepDUdy08BkJkmgW8zzLqAqK=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1K56l2doRijHbq23gAxCUGpnesDjkebf3","gps":{"poster":[],"banner":[]}},{"name":"갈현1단지e-편한세상","addr":"서울 은평구 구산동 547","addrClean":"서울 은평구 구산동 547","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":10,"bQty":0,"postDate":"2026년 5월 22일 15시 09분","note":"자리없음","isDone":true,"photos":[],"driveUrl":"https://drive.google.com/drive/folders/1Q6LuSD43pdae3P-OCcm0bVDNEz0elh6-","gps":{"poster":[],"banner":[]}},{"name":"녹번동대림","addr":"서울 은평구 녹번동 276","addrClean":"서울 은평구 녹번동 276","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":11,"bQty":0,"postDate":"2026년 5월 20일 17시 03분","note":"녹번 대림 아파트(10장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1E0tbHT4rlVUDFvnynTbJW7d7tBxFGjy-=w1200","https://lh3.googleusercontent.com/d/1HzQAL7L8dbbCFwd-R3nWfFjZYGX6tFVw=w1200","https://lh3.googleusercontent.com/d/1JM6eY_65Eb7EgQ126cFDE8BfvFjgOnx0=w1200","https://lh3.googleusercontent.com/d/14IkIma7UWNy5a53SubVHbSSKcrwcboIa=w1200","https://lh3.googleusercontent.com/d/1ivREzAuniamS_4TckC1LbNWsz6oMey2O=w1200","https://lh3.googleusercontent.com/d/1_F_ITpWxGxRxCt8ZHU1A_wZM4OLUhWp6=w1200","https://lh3.googleusercontent.com/d/1RHgANGpPkHt_WnSCIFYrURwxoPuLrwLf=w1200","https://lh3.googleusercontent.com/d/1L-KNdHZWg_ohBsnD8vK1zOzZk_7q-HuL=w1200","https://lh3.googleusercontent.com/d/1-OoAkTaGDzjrlCpO5Yq7yuwnLdXxm0n1=w1200","https://lh3.googleusercontent.com/d/1Q1hEzfcrLpH6EWoAOE3NQPM25IudIedc=w1200","https://lh3.googleusercontent.com/d/1iIX9n2-eJ_ke0lsMthNlUnDWLuh4BGwu=w1200","https://lh3.googleusercontent.com/d/1y2V9AuAXtg1oOjo0IaeuIz1JCTxRQHuZ=w1200","https://lh3.googleusercontent.com/d/1FsPoW49PhjuGpj3RBLcySTTvKwCTPc_9=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1w1MG59Oc35pJdq1Yk-PD-te1bsugqrGW","gps":{"poster":[],"banner":[]}},{"name":"녹번2차 현대","addr":"서울 은평구 녹번동 278-1","addrClean":"서울 은평구 녹번동 278-1","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":10,"bQty":0,"postDate":"2026년 5월 21일 16시 44분","note":"녹번 현대 2차(8장/30000원/직접게시/세금계산서x)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1MXSeR91jL3X17TaeS9tujzMrNDincwgt=w1200","https://lh3.googleusercontent.com/d/1JnwBGOTL_Zd2lSZDkqwyr_jRoExqL93q=w1200","https://lh3.googleusercontent.com/d/1NqAUrAAicdpMNq9XNMvwUCDj9n7IXA0O=w1200","https://lh3.googleusercontent.com/d/1X1RVxApzjCuX-rQ5YTH5sYgpszzFIYYn=w1200","https://lh3.googleusercontent.com/d/1v5xjjUdXG4ar7UQcWoYn85gZmQawRi5t=w1200","https://lh3.googleusercontent.com/d/1_w_dr2dcI4-w_CYdJ7GfAHrS6vB43LWu=w1200","https://lh3.googleusercontent.com/d/1IJk57Ycutql4WsnFo4VpBqycLZ5MV1Ys=w1200","https://lh3.googleusercontent.com/d/1-PwS6lRUB3BBjoyFHSbG-CbG3yMsSqM7=w1200","https://lh3.googleusercontent.com/d/1k4i8Unqn-l2cKJZbUuhmvGm5tOSwuz8s=w1200","https://lh3.googleusercontent.com/d/1CI_HtBJzaPyQ3uyym03IdqwDrMvOUTiQ=w1200","https://lh3.googleusercontent.com/d/1dFKgUGZNdG5qmT6ABCOAS8GrtHjHaDK4=w1200","https://lh3.googleusercontent.com/d/18r-pBynJV-SAE9mOnSOQkj7feJA8Ko8k=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1V-UOHyzd-FzAw6r3FbL-rUnP7y-TMuxH","gps":{"poster":[],"banner":[]}},{"name":"녹번JR","addr":"서울 은평구 녹번동 280-1","addrClean":"서울 은평구 녹번동 280-1","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":8,"bQty":0,"postDate":"2026년 5월 20일 17시 31분","note":"녹번 JR 아파트(7장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1iHoj7snVGHeVkoLySgjbwYneysedm7kr=w1200","https://lh3.googleusercontent.com/d/18J2FV2NaoeEjy3pIVuyoZ1s7QLmtSqVr=w1200","https://lh3.googleusercontent.com/d/19Cg5FjdrLAMvICTCJznMSB_bAb6odbLR=w1200","https://lh3.googleusercontent.com/d/14UIHI9VaYnj3fiY1l7W_mg9B8UuQRpnb=w1200","https://lh3.googleusercontent.com/d/1iVgVhhcmDjpfu42y-LkmDX6h_y7PtXFi=w1200","https://lh3.googleusercontent.com/d/1F5aHCkJTAiwyR1lSdnncgKDl1G-o0F0Y=w1200","https://lh3.googleusercontent.com/d/1FHzN3DtlwcDbo7VKnmSItWL8T0sbMQHX=w1200","https://lh3.googleusercontent.com/d/1wSafDiwwzB9XOOFS4NDdaxY1fS7f9Roe=w1200","https://lh3.googleusercontent.com/d/1cqCTnSphoZih3V35svVl9LpawLqUNugi=w1200","https://lh3.googleusercontent.com/d/1-0CSf8pe1adJic7HeWnzrmv6OAstjmJF=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1hZ4dkJ4I4NszXHY0TGqGkIeA5zm9QbJG","gps":{"poster":[],"banner":[]}},{"name":"래미안베라힐즈아파트","addr":"서울 은평구 녹번동 283","addrClean":"서울 은평구 녹번동 283","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":70,"bQty":0,"postDate":"2026년 5월 21일 14시 33분","note":"자리없음","isDone":true,"photos":[],"driveUrl":"https://drive.google.com/drive/folders/16PT5ULBPgJb0OysfY52kdvxGQoOuieJt","gps":{"poster":[],"banner":[]}},{"name":"대조삼성타운","addr":"서울 은평구 대조동 231","addrClean":"서울 은평구 대조동 231","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":8,"bQty":0,"postDate":"2026년 5월 21일 17시 03분","note":"대조 삼성타운(8장/33000원/관리실 제출)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/14jRSpHrs7MIq06Yd-y0zSnkfNgOdEowb=w1200","https://lh3.googleusercontent.com/d/1Zx4BLlBNSYovVBKcIoZJD6TEpyiX92WC=w1200","https://lh3.googleusercontent.com/d/1UOkVlg_k9WervAr191FC3fpNcTQSzHfS=w1200","https://lh3.googleusercontent.com/d/1fPJpfET7cVnKUxZXqXetfRo1l6eqzW7r=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1VSGKxZE5mQ6tuvahx7N22t3p4-8YapS5","gps":{"poster":[],"banner":[]}},{"name":"북한산수자인","addr":"서울 은평구 불광동 189-37","addrClean":"서울 은평구 불광동 189-37","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":7,"bQty":0,"postDate":"2026년 5월 26일 12시 01분","note":"북한산 수자인(7장/33000원/관리실 제출)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1sRo4AlaxylMaoQdzaE5g0AE6RLkGvQz6=w1200","https://lh3.googleusercontent.com/d/1nr9MxtDZKf6Cyvw1W0osiBO4UxdKb57p=w1200","https://lh3.googleusercontent.com/d/1R2yTLykBdfZWP1hd4Ua2s0rIlmM5TuFV=w1200","https://lh3.googleusercontent.com/d/1oYS-3EhcOaH5RO9NN_2aDW7-GV7Qoke-=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1RGqWzyiaKZZTxY3JyxsYQvgVsZIjcHcy","gps":{"poster":[],"banner":[]}},{"name":"불광미성","addr":"서울 은평구 불광동 248","addrClean":"서울 은평구 불광동 248","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":18,"bQty":0,"postDate":"2026년 5월 20일 16시 14분","note":"불광 미성 아파트(15장/55000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1j8pCvzelv5gU_Na74_WoTHwt2DZvmrCM=w1200","https://lh3.googleusercontent.com/d/1Su8rpYSIGfBNONAQUR2DNU10waSFZ93j=w1200","https://lh3.googleusercontent.com/d/1XdoxAIcKXw8Rbi3jwsX9RFCLgXD1DRYH=w1200","https://lh3.googleusercontent.com/d/1z-yL9IHf-ke4-K185gDyUuwuBflVs90B=w1200","https://lh3.googleusercontent.com/d/1RuR0mvvMJVOHXLOvAOWrnzCPph-ZWwax=w1200","https://lh3.googleusercontent.com/d/1LF4d9Jne-F3bSCsKFXKzUDskKJIlABD6=w1200","https://lh3.googleusercontent.com/d/1ht6xe5rsbWO1m6yaKIW1WamtFLKK6hcP=w1200","https://lh3.googleusercontent.com/d/1UwKLIJ4-GBMGK1-DsKgBzWb3S9lbUbf1=w1200","https://lh3.googleusercontent.com/d/1igQWHXmo8vDo63T5HN4gkzgogNaPLzax=w1200","https://lh3.googleusercontent.com/d/15h06FfR3AzExMZcysXWEqXA68EdbMfIX=w1200","https://lh3.googleusercontent.com/d/19YBSiOV37k34MM35MEMZwGoH771Y_1eJ=w1200","https://lh3.googleusercontent.com/d/145krlKaS17Vcs2-rNimtjAclPnzQ5SvT=w1200","https://lh3.googleusercontent.com/d/1dIU_HRRsPw5ftmjp4i1qvXG3A_7EPbeH=w1200","https://lh3.googleusercontent.com/d/1TwznLVTydG0qTHTaCNPTUBmMvQK81Bjo=w1200","https://lh3.googleusercontent.com/d/1Y3mUK6Gf3laUhCEWdVe4X3NK_mOPvIZ3=w1200","https://lh3.googleusercontent.com/d/19ACJLQqwiI2WLCax5Mo3wDmzfBsANOp8=w1200","https://lh3.googleusercontent.com/d/1AGtV68Yt3_hZ-O0pFWRQ7ShOtJzQWnes=w1200","https://lh3.googleusercontent.com/d/1BiLDmDX9C80BPr7w5oGxnHaYBvKiuKPh=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1fXcGcNS9WuVTHAav8RqJo96EwFIWYXYE","gps":{"poster":[],"banner":[]}},{"name":"남해그린힐아파트","addr":"서울 은평구 불광동 632","addrClean":"서울 은평구 불광동 632","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":5,"bQty":0,"postDate":"2026년 5월 20일 15시 17분","note":"남해 그린힐 아파트(5장/50000원/관리실 제출/세금계산서x)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1jICOn0YMJHCV4e9UTqL1vaWxRlKma-G2=w1200","https://lh3.googleusercontent.com/d/1qQB_6HqjNo7z9k84hUhpc0YdpI9Kj_9R=w1200","https://lh3.googleusercontent.com/d/1nx1XIwtJJG_7mb9cOmjL-Eb31IKCNVAN=w1200","https://lh3.googleusercontent.com/d/1GtFLASicP2cu4-W6ChlFr1Xe315C9FZK=w1200"],"driveUrl":"https://drive.google.com/drive/folders/18I0l6_UMzwb9AhVcrbpEChBkMsAaY6Qp","gps":{"poster":[],"banner":[]}},{"name":"북한산현대홈타운","addr":"서울 은평구 불광동 633","addrClean":"서울 은평구 불광동 633","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":27,"bQty":0,"postDate":"2026년 5월 20일 13시 43분","note":"북한산 현대홈타운(26장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1m_PslzbFjez8f4FHFWFahX6BnyeB9XXK=w1200","https://lh3.googleusercontent.com/d/1q5VFl9vetz73hl2kNsxCkl5wBhDdihXU=w1200","https://lh3.googleusercontent.com/d/1iPtiqxC2rTImGXdDQJOmJubERS5TysBI=w1200","https://lh3.googleusercontent.com/d/1pB5o-v44m9xsD3LMoilY2XjrUQV1FoR2=w1200","https://lh3.googleusercontent.com/d/1Quae8i3WFfYAlvblxuDEV8krQNzJZo8-=w1200","https://lh3.googleusercontent.com/d/1jqdTAnqLs8cOnrDRFk6FIAzCcaKhrbYp=w1200","https://lh3.googleusercontent.com/d/1fPSrWcowDvVAB0dJkJ25O6clWwB3_ig0=w1200","https://lh3.googleusercontent.com/d/1kY4SnuBq6z08q88snPnpwavwVUUhfEXG=w1200","https://lh3.googleusercontent.com/d/1YUAxHf3iJGORyfR98MBJ-MsDQgIcgk8e=w1200","https://lh3.googleusercontent.com/d/116ZZxUHbU0EJB8z_0mh3-pV3_NsWH8g9=w1200","https://lh3.googleusercontent.com/d/1jYZ9lSrhL7I_r1lc5ucL1LjU1pUVcJrv=w1200","https://lh3.googleusercontent.com/d/17yqViGl7W5vIkU3OHmMOAA_SE51AhIq_=w1200","https://lh3.googleusercontent.com/d/1vgu8bn1khmEhNLzdIYdayUISqNgXqqv0=w1200","https://lh3.googleusercontent.com/d/1q2zVOCpgH_egV5k8max00ON7IaofqN0C=w1200","https://lh3.googleusercontent.com/d/1pxFutPusuqVpo57EaElvh6hQAfMnu8dS=w1200","https://lh3.googleusercontent.com/d/1ZHKrkqPR9gJigWM9dwP7MC6Oo3S1cbm4=w1200","https://lh3.googleusercontent.com/d/1poDNuSaK36pjKUqam8NEsulyAPk-xlby=w1200","https://lh3.googleusercontent.com/d/10AO67I5lVGM2i82LreKXmJXgkis5oOKK=w1200","https://lh3.googleusercontent.com/d/18j6R-WFr-UpCi5rr6CoTHX1RibN4Vdf1=w1200","https://lh3.googleusercontent.com/d/1qGwgpA7n2V2U30S6Z8FQnzrGZU0-z_D2=w1200","https://lh3.googleusercontent.com/d/1C631wXrby3QqY6XKq71JdO0Pd0SEaM1T=w1200","https://lh3.googleusercontent.com/d/16RsZO-yhZSOQOvuILCGE32d4yzHq28Ir=w1200","https://lh3.googleusercontent.com/d/1TEQctNgjOM_gqLKszlCnsr2JUQhxxhQh=w1200","https://lh3.googleusercontent.com/d/1ICyoOTNfiSqtRWShJzC2MJARNDPdS8tP=w1200","https://lh3.googleusercontent.com/d/1fbB8VAo3bQPN8WZgzTwqA_BFzvfSGNiJ=w1200","https://lh3.googleusercontent.com/d/112lTZCm5wz-q1G6H_U6n-lRX2D4OjmZJ=w1200","https://lh3.googleusercontent.com/d/1rO1M51Pm15EV0xGfDKrhRuCBVtcPNBc6=w1200","https://lh3.googleusercontent.com/d/12BdBpAKEMBjIRCYxeto6K_K9YG1aiUaj=w1200","https://lh3.googleusercontent.com/d/1wgajEcLmEhf5-_a9eCFs9OHPkgCwtgU_=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1HGIaztqrzQBhb2jfhw2GUeOCV_EggtYM","gps":{"poster":[],"banner":[]}},{"name":"북한산힐스테이트1차","addr":"서울 은평구 불광동 635","addrClean":"서울 은평구 불광동 635","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":31,"bQty":0,"postDate":"2026년 5월 20일 14시 49분","note":"북한산 힐스테이트 1차(30장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1YmPfBYeXMc8IiYFhOMcaYNtKq8Gv3xEA=w1200","https://lh3.googleusercontent.com/d/1kXAAgcw556Hvy8jYFggwG13uOvraaxsi=w1200","https://lh3.googleusercontent.com/d/19mkywof_mjHK2xGzOl-WL3e7xlB7j_Ns=w1200","https://lh3.googleusercontent.com/d/1LuR_lo9jyv9bkzb3IQ4KEdmuqdAKJqIm=w1200","https://lh3.googleusercontent.com/d/1z75mnCnstrnm_pz3T9m-HKPhfVszO3xV=w1200","https://lh3.googleusercontent.com/d/1N-1j-NKbWrR4mSSR4CSMlXaPtdEs5Nhg=w1200","https://lh3.googleusercontent.com/d/1V_cUe5h7J9PLpP5SW4kkErjVYU8Kcqpu=w1200","https://lh3.googleusercontent.com/d/1GxeadGCQnXPf7LjE5AaPcnR8DH5a_zGp=w1200","https://lh3.googleusercontent.com/d/1ud45rZxmgxXpDuRl_Z8fiXYaG7b_2XXf=w1200","https://lh3.googleusercontent.com/d/1v9fHP5cRz1hrEsksfYeeN5smNWzE4v3w=w1200","https://lh3.googleusercontent.com/d/1t2SkSxA5sKhuv9cKSp7vz-VdhA3QfVqx=w1200","https://lh3.googleusercontent.com/d/1tNfqd2F5NO0UuV8tvASv0OFQrMVqI1cU=w1200","https://lh3.googleusercontent.com/d/10rqJyaKkzKubIAHbXM5xWEn0gyrihju5=w1200","https://lh3.googleusercontent.com/d/1UPS0FydBspc6YilpdvxUjVVBS9TH44q4=w1200","https://lh3.googleusercontent.com/d/1jNfyOeyvdSupVYyQT3GuEGo68dwxg6jT=w1200","https://lh3.googleusercontent.com/d/16Vz2_RqwUEL4Ilt8newUHfQhFR6Zwra5=w1200","https://lh3.googleusercontent.com/d/1usSVwmSVv03CKUAyl3Knv5mRI6ixm86I=w1200","https://lh3.googleusercontent.com/d/1XOzLIOSvoSIQjzl6V7CRWq5nYaNOM7X9=w1200","https://lh3.googleusercontent.com/d/13GGfxA7dnhNRtClFnChb22cZii66CO0j=w1200","https://lh3.googleusercontent.com/d/1u9KqymYh2oRENkZUcNhetX0U7q41Q_jz=w1200","https://lh3.googleusercontent.com/d/1zFsS6_JIepjBW2gC-XhqTYXUHYzOOZVk=w1200","https://lh3.googleusercontent.com/d/1akVXJno20kjwONRlYES6cdT3oAjD8nXC=w1200","https://lh3.googleusercontent.com/d/1AVf8SNQHh5zG5TvXmN6BNz56DhgyLz5Y=w1200","https://lh3.googleusercontent.com/d/1PRHI_pDBosIziHWxXq-Xz2kP8ZfrgPtn=w1200","https://lh3.googleusercontent.com/d/1SfrmBm6YzRRY4cMEAACLPKc46u4UUC4j=w1200","https://lh3.googleusercontent.com/d/1aFHQ3MrL6VE4CZW4PoWcH4GW1EANJDkc=w1200","https://lh3.googleusercontent.com/d/1aZNZYHFzJdMVqkcLrmQbZfXnsEkpIbAj=w1200","https://lh3.googleusercontent.com/d/1gUQVjuGMaDWudQIVrpyhy6hSs_XsWfjG=w1200","https://lh3.googleusercontent.com/d/1JaHBn3TkyH4FUGbbyv-Cm1VTyp206Vm2=w1200","https://lh3.googleusercontent.com/d/1zbfB8M05XLtkkE6LpYdoWpsNL8YCHxuq=w1200","https://lh3.googleusercontent.com/d/1IHYQny9rD3KoRVJr-1OdlDQZe17JQcEj=w1200","https://lh3.googleusercontent.com/d/1ucOY27RIi-V9oQEDpLDDh_m75gQZ8eaY=w1200","https://lh3.googleusercontent.com/d/1rzt9JJJQwuyNC4HhsnaNndl-2iJhCB7J=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1LTYL8j_3h1XBrl3b1QN4hsL4sADH-cJu","gps":{"poster":[],"banner":[]}},{"name":"북한산대창센시티","addr":"서울 은평구 불광동 71-16","addrClean":"서울 은평구 불광동 71-16","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":8,"bQty":0,"postDate":"2026년 5월 26일 13시 15분","note":"북한산 대창센시티(7장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1KJOIJDO04pK7X9DkKNJ9taGItoVhxR_C=w1200","https://lh3.googleusercontent.com/d/18UbxikuV9W1GIXrkYKuQ5n2SUlDQITag=w1200","https://lh3.googleusercontent.com/d/1YpmZuO1VCBYEdvwaoDTt-VevtTn4IOdv=w1200","https://lh3.googleusercontent.com/d/16o3AwzRh4YRi2v8pD31mmMWvbl1ERzxy=w1200","https://lh3.googleusercontent.com/d/18xkXW8TFxe1zQEdTy-_3jhoA35BjOD_g=w1200","https://lh3.googleusercontent.com/d/16WsH98BpQQ3S5NaZApSNc5R-JJBZqA8K=w1200","https://lh3.googleusercontent.com/d/1G_wU1vMgcvSKpHaFjx_6BBbP9xODiM4g=w1200","https://lh3.googleusercontent.com/d/1y53x6jUcLT3n3ak4RYOkmThtWjuI9Tad=w1200","https://lh3.googleusercontent.com/d/1-LLmdNu7sy2P8240KvWjC6hxOWnUm5-i=w1200","https://lh3.googleusercontent.com/d/1qsIlDb-SrSh81oJvYlV-sA79X7Zt2z6D=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1SxB8SscN18d0pxyBluo-yymj0CE6ULzj","gps":{"poster":[],"banner":[]}},{"name":"갈현동동익파크","addr":"서울 은평구 서오릉로21길 36","addrClean":"서울 은평구 서오릉로21길 36","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":11,"bQty":0,"postDate":"2026년 5월 22일 14시 48분","note":"갈현 동익파크(10장/30000원/직접게시/세금계산서x)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1THkavI69gtQXk3RDtrqel3L8gKd5vOML=w1200","https://lh3.googleusercontent.com/d/18CWplRVshMzpyEXFCoUdc0_aD7hwIF7u=w1200","https://lh3.googleusercontent.com/d/1IulUZVwmclllE53-Djvy4y8hT4lCRoV6=w1200","https://lh3.googleusercontent.com/d/1bdfV4IK2PEdXLJCGVrJ5A_RkkqXWSzm_=w1200","https://lh3.googleusercontent.com/d/1-Uhlkk1tSC5XZpkZovj5-diURP4X2JMc=w1200","https://lh3.googleusercontent.com/d/1VwbknXcx9zCHHrx5dLOGc69PX3UDbopX=w1200","https://lh3.googleusercontent.com/d/1VsdEwLzyhXTIKSrmu3KsjRkvncgmaguY=w1200","https://lh3.googleusercontent.com/d/1vbbmEcbP0_JQsD9ej0Q7DT-CMVetUYqE=w1200","https://lh3.googleusercontent.com/d/1dQydosgnrZ-qn59yeQWXp-OCt3QACMxr=w1200","https://lh3.googleusercontent.com/d/1RJwKQBwKYt4kxPlc59ZUlz4aNFONVAW3=w1200","https://lh3.googleusercontent.com/d/1_6g8tvnR7KRXBfKARq1fKntv0VMRwWTJ=w1200","https://lh3.googleusercontent.com/d/1067P7LkUgjST72rpoBNYmQoryt6CVyjJ=w1200","https://lh3.googleusercontent.com/d/1ZTjeBnYwFBuLIg-D6fAgGZ7jtKAuLrzr=w1200","https://lh3.googleusercontent.com/d/1L9tbvPSfEoL3W2Z9mjARrV7X7xsIj30r=w1200"],"driveUrl":"https://drive.google.com/drive/folders/18X_JBCrvfDjcp0TWPal5BDHcYIlDeTDO","gps":{"poster":[],"banner":[]}},{"name":"응암푸르지오","addr":"서울 은평구 응암동 176","addrClean":"서울 은평구 응암동 176","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":19,"bQty":0,"postDate":"2026년 5월 21일 15시 46분","note":"응암 푸르지오(18장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/10JxGIft7HqtMPDp9Jfm9jL1tu_ZazUCd=w1200","https://lh3.googleusercontent.com/d/13fYfYykN72QcY2O4Z0dtKaACXTxnhTEl=w1200","https://lh3.googleusercontent.com/d/1W88D5YGd4_T5GWwexz-2mOY27_S4MS1x=w1200","https://lh3.googleusercontent.com/d/18_762X1R8mfBitTHd32Jnush1GL5OweE=w1200","https://lh3.googleusercontent.com/d/12n4FFbD9f5sUsCDVGn8YQCopgHP22lpW=w1200","https://lh3.googleusercontent.com/d/1YytlDZUp-03xHm0bllD9mTSmVOzxSvB0=w1200","https://lh3.googleusercontent.com/d/10yhk7-S9MthAcfkFTs7INbhDp91PAtPN=w1200","https://lh3.googleusercontent.com/d/1lRH1HCbGNbNLezabWbqmx468fZ29p3hQ=w1200","https://lh3.googleusercontent.com/d/1Ny4GTiP8hwcLpSWTCTe8njtmWPNEZjzS=w1200","https://lh3.googleusercontent.com/d/15WhyX7sqJ45d4U4oCin4eg1YByKt3OFx=w1200","https://lh3.googleusercontent.com/d/1W2f9boB3fMQfQUr4e20bnP0Fhpj_EXH6=w1200","https://lh3.googleusercontent.com/d/1NJkoDcFmaN2SP8i3pONE3ewHJacV8eso=w1200","https://lh3.googleusercontent.com/d/1wiwrOsI8HnCh-CAQy1QQN0a_JezMiKLF=w1200","https://lh3.googleusercontent.com/d/18Qmrc33PCRg1ONcbdlVxUe3vf71JW2Ix=w1200","https://lh3.googleusercontent.com/d/13C-2EcWgAO0xPuUGWPRfFjjOXcTTycW0=w1200","https://lh3.googleusercontent.com/d/1ttOSDQKbnOI4Xm37ZtYI9OTdUa6la8O-=w1200","https://lh3.googleusercontent.com/d/1XGcOxiMLwEBdFL8QAFs9jZeRzK-ceJZh=w1200","https://lh3.googleusercontent.com/d/11QesipgHtpL7lsZgjbAyX8lQWHg1eJra=w1200","https://lh3.googleusercontent.com/d/1r_5bdq2ujueqblO0DzTO-_iFnQnhmkjB=w1200","https://lh3.googleusercontent.com/d/1q9HGdLacf-kAYoq-c8aEr7yheuaMfjKI=w1200","https://lh3.googleusercontent.com/d/1WivtHelm70hnSZ9eRClAinTtPfpDAjij=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1CQ5iHluNxOp_hJbc_dUgSMbMcXwqg-c0","gps":{"poster":[],"banner":[]}},{"name":"응암대주파크빌","addr":"서울 은평구 응암동 669-1","addrClean":"서울 은평구 응암동 669-1","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":10,"bQty":0,"postDate":"2026년 5월 26일 10시 30분","note":"응암 대주파크빌(10장/55000원/관리실 제출)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1AUp339oVK8tYopaNKXkOdZNiWvqfvdWE=w1200","https://lh3.googleusercontent.com/d/12uFBSs1ZctKVar3P2eJOrE0cEfg8ouC5=w1200","https://lh3.googleusercontent.com/d/11gFQTp9e7pLS1Pohl-Iko3mBgcJdFo3t=w1200","https://lh3.googleusercontent.com/d/1lSI4V7x6hqAW5xW9LfrjwMyurpOApv-4=w1200"],"driveUrl":"https://drive.google.com/drive/folders/12yGXrbYW29mHHJNcmbBXeOmo7Vj4pVqf","gps":{"poster":[],"banner":[]}},{"name":"응암경남","addr":"서울 은평구 응암동 714","addrClean":"서울 은평구 응암동 714","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":7,"bQty":0,"postDate":"2026년 5월 26일 10시 58분","note":"응암 경남(7장/30000원/관리실 제출/세금계산서x)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1DxTx6-6-z0tgX70q-imAPcTmsDA3KmvD=w1200","https://lh3.googleusercontent.com/d/1gELjOjFGgiXF4g_6O2r15TsTyuRW-KSE=w1200","https://lh3.googleusercontent.com/d/1rStdCCmW7ayKEOGTORMgnc8Dcw-3UdjU=w1200","https://lh3.googleusercontent.com/d/1ylFtsyrSaiYZFoG8PJYzMT5N-JD4luKg=w1200","https://lh3.googleusercontent.com/d/1d7DMUyEi67OxDKn_B4u9dMz3eY8aMIOp=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1RoUwu3IpNjZDjd9R6dzF116HAmm8TKhv","gps":{"poster":[],"banner":[]}},{"name":"응암동금호","addr":"서울 은평구 응암동 739","addrClean":"서울 은평구 응암동 739","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":8,"bQty":0,"postDate":"2026년 5월 21일 15시 15분","note":"응암 금호(8장/33000원/관리실 제출)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/15YKt6CJkEdudjV3F5XGgge-oQi9iKaAb=w1200","https://lh3.googleusercontent.com/d/15j5pGEnsEit3lGrZXbws2pc8MJghVWxB=w1200","https://lh3.googleusercontent.com/d/1ouyBn1eSi2NcZgkSkW-MSToh7tQUD_fw=w1200","https://lh3.googleusercontent.com/d/1ohItJQOY-XSauYK8flkhSI_d4uq1lXVL=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1cZQGXNSkeR1W9BQQ7VPUk-w6MJDfQnsB","gps":{"poster":[],"banner":[]}},{"name":"경향렉스빌","addr":"서울 은평구 응암동 96-28","addrClean":"서울 은평구 응암동 96-28","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":4,"bQty":0,"postDate":"2026년 5월 21일 15시 00분","note":"경향렉스빌(4장/30000원/관리실 제출/세금계산서x)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1TDEeZdiUV0WIAmL8RG7NH6HjxIJNe9zL=w1200","https://lh3.googleusercontent.com/d/1KnCGwA6iB48tL7ybj45UEOYpZCPCyBmy=w1200","https://lh3.googleusercontent.com/d/1JtMBJkk5W4e2dajcLZyqQ3zRVVxLCD_X=w1200","https://lh3.googleusercontent.com/d/1qog_A8wkHhAhMEzaRp5DQW1hxYRmtG0J=w1200","https://lh3.googleusercontent.com/d/1ZW0isy4NPzRXdTad-ra1NvTySfNd0TiX=w1200"],"driveUrl":"https://drive.google.com/drive/folders/15N3Lcefa2EELLkfvPYhMjEzWZWDbQzSY","gps":{"poster":[],"banner":[]}},{"name":"수색자이2단지","addr":"서울 은평구 증산동 223-28","addrClean":"서울 은평구 증산동 223-28","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":5,"bQty":0,"postDate":"2026년 5월 21일 13시 58분","note":"수색 자이 2단지(5장/55000원/관리실 제출)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1ztVR1jt6JcxvxUM98qKO__OQJn5hZl9p=w1200","https://lh3.googleusercontent.com/d/19EKAflGsmgcvX_F0Zf_QpzBBo-ir5hmh=w1200","https://lh3.googleusercontent.com/d/1XGZWSYlkLJt9JMwGsX1n0imWGdpBfQTA=w1200","https://lh3.googleusercontent.com/d/101Oc8RNcfkq8erBtYiV98iTUQkjOd_al=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1PeCNZywz7jEboLI1zxiMosqMMoU32lQ-","gps":{"poster":[],"banner":[]}},{"name":"증산우방","addr":"서울 은평구 증산동 244","addrClean":"서울 은평구 증산동 244","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":10,"bQty":0,"postDate":"2026년 5월 21일 13시 29분","note":"증산(DMC)우방(9장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1Rz5QjD1Ng-o7sMfvFNNwegGJ-aun223c=w1200","https://lh3.googleusercontent.com/d/1qNqENUzBF4yc-evAgF_qaNEnFCOc8Nhs=w1200","https://lh3.googleusercontent.com/d/1m9nk24c8y3WdwIu54VzRW_WfQxaQxSWh=w1200","https://lh3.googleusercontent.com/d/1YdmYtKi7neEoeruoVu5QvQrSzEjPPEkM=w1200","https://lh3.googleusercontent.com/d/1VOIZo1EMSyooJMXnhtfujXxPUbCAENIC=w1200","https://lh3.googleusercontent.com/d/1zxTk330emM6au_ijXccTQx5kxqDM8CYC=w1200","https://lh3.googleusercontent.com/d/1ACQTs-rkVh3tLdNw9uPRXCbLoBcO9IaF=w1200","https://lh3.googleusercontent.com/d/1JkqSaYUxnIS134DccSSaXm4MFJT95z6E=w1200","https://lh3.googleusercontent.com/d/1ehzOOuFF-ICtqM3Ej8plmdmK4554PbBT=w1200","https://lh3.googleusercontent.com/d/15jKApuyzjLE5HxJLWv0rZkOV_pNVeH9n=w1200","https://lh3.googleusercontent.com/d/1SXjuIbVYpCoLsW2VpKTjoH3lNWE2S0Vy=w1200","https://lh3.googleusercontent.com/d/1WyHPv-hF4k2bLwiirZWg_g1qDUIHzbJD=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1ipbXbqSW3xqQiBCucRZ4Gz4bDEeAniTR","gps":{"poster":[],"banner":[]}},{"name":"증산월드빌","addr":"서울 은평구 증산동 250","addrClean":"서울 은평구 증산동 250","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":6,"bQty":0,"postDate":"2026년 5월 26일 09시 58분","note":"자리없음","isDone":true,"photos":[],"driveUrl":"https://drive.google.com/drive/folders/1pU79ZuWPDPbgIRJHryCTxxwboSnUvM-t","gps":{"poster":[],"banner":[]}},{"name":"문영마운틴","addr":"서울 은평구 증산동 254","addrClean":"서울 은평구 증산동 254","region":"서울","regionOrd":1,"subAddr":"은평구","pQty":8,"bQty":0,"postDate":"2026년 5월 22일 17시 13분","note":"문영 마운틴(DMC 퀸즈파크)(8장/30000원/관리실 제출/세금계산서x)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1hVGNPPCSyF-iD5AQRsc1Yg5lomMCFzX5=w1200","https://lh3.googleusercontent.com/d/1w7OUJRXG3mB5DO4AQAyawXFhheu2gWlm=w1200","https://lh3.googleusercontent.com/d/130WNjhH2q6anOZtM3EIk7r6P3Ypbz0Fq=w1200","https://lh3.googleusercontent.com/d/1fIUU70-GTnZ2OzRewTRrphIfSlj8FOYJ=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1VsUueW8qV1yGZOD0cymniJVvpKHwiYr2","gps":{"poster":[],"banner":[]}}]};
+window.fetch = function(){
+  return Promise.resolve({
+    json: function(){ return Promise.resolve(window.__INITIAL_REPORT_DATA__); },
+    text: function(){ return Promise.resolve(JSON.stringify(window.__INITIAL_REPORT_DATA__)); }
+  });
+};
+var WEB_APP_URL = "";
+var CAMP_KEY = "신원마포5월_서대문구_은평구_신원 마포 5월";
+var NAVER_CLIENT_ID = "gcvbnnigi1";
+var AUTO_REFRESH_SEC = 300;
+
+function escHtml(s){if(!s)return"";return s.toString().replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+
+// 인쇄용 모드: URL에 ?print=1 이 있으면 학교당 사진 4장으로 제한 + eager 로드
+try{window._printMode=(new URLSearchParams(location.search)).get("print")==="1";}catch(e){window._printMode=false;}
+if(window._printMode){
+  document.documentElement.classList.add("print-mode");
+  document.body&&document.body.classList.add("print-mode");
+  document.addEventListener("DOMContentLoaded",function(){
+    var b=document.getElementById("printBanner");if(!b)return;
+    b.style.display="flex";
+    b.innerHTML='<div style="flex:1;min-width:240px"><div style="font-size:14px;font-weight:700;color:#1E3F75;margin-bottom:4px">📄 인쇄용 보고서 모드</div><div style="font-size:12px;color:#374151;line-height:1.5">학교당 사진을 <b>대표 8장</b>으로 제한해 PDF 저장이 빨라지도록 구성했습니다. 전체 사진은 일반 보고서 화면에서 확인 가능합니다.</div></div><button onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px;background:#0D1B3E;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:inherit;white-space:nowrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>인쇄 / PDF 저장 (Ctrl+P)</button>';
+  });
+}
+function openPrintMode(){
+  try{var u=new URL(location.href);u.searchParams.set("print","1");window.open(u.toString(),"_blank");}
+  catch(e){window.open(location.href+(location.search?"&":"?")+"print=1","_blank");}
+}
+// 인쇄 직전 lazy 사진 강제 로드 (Ctrl+P / 메뉴 인쇄 대응)
+window.addEventListener("beforeprint",function(){
+  document.querySelectorAll('img[loading="lazy"]').forEach(function(img){img.loading="eager";});
+});
+
+function loadReportData(){
+  fetch(WEB_APP_URL+"?action=report_data&camp="+encodeURIComponent(CAMP_KEY))
+  .then(function(r){return r.json()})
+  .then(function(json){
+    if(json.status!=="ok"){showError(json.message||"데이터 로딩 실패");return}
+    renderReport(json);
+  })
+  .catch(function(err){showError("네트워크 오류: "+err.message)})
+}
+
+function showError(msg){
+  document.getElementById("reportContent").innerHTML=
+    '<div class="error-wrap"><div style="font-size:48px;margin-bottom:16px">⚠️</div>'
+    +'<div style="font-size:16px;font-weight:700">'+escHtml(msg)+'</div>'
+    +'<button class="refresh-btn" onclick="loadReportData()">다시 시도</button></div>';
+}
+
+function renderReport(data){
+  window._reportData=data;
+  var s=data.stats, schools=data.schools;
+  var mgrEl=document.getElementById("metaManager");if(data.manager){mgrEl.style.display="";document.getElementById("managerName").textContent="담당: "+data.manager;}else{mgrEl.style.display="";document.getElementById("managerName").textContent="좋은광고연구소";}
+  if(data.updatedAt){var updEl=document.getElementById("metaUpdated");updEl.style.display="";document.getElementById("updatedText").textContent="업데이트: "+data.updatedAt;}
+  var schoolsEl=document.getElementById("metaSchools");if(schoolsEl)schoolsEl.textContent=s.totalSchools+"개교 ("+s.regionText+")";
+  var h="";
+  h+='<div class="kpi-grid fade-in">';
+  h+='<div class="kpi-card schools"><div class="kpi-value">'+s.totalSchools+'</div><div class="kpi-label">대상 학교</div></div>';
+  h+='<div class="kpi-card poster"><div class="kpi-value">'+s.totalPoster+'</div><div class="kpi-label">포스터 (장)</div><div class="kpi-sub">완료 '+s.donePoster+' / 잔여 '+(s.totalPoster-s.donePoster)+'</div></div>';
+  h+='<div class="kpi-card banner"><div class="kpi-value">'+s.totalBanner+'</div><div class="kpi-label">현수막 (장)</div><div class="kpi-sub">완료 '+s.doneBanner+' / 잔여 '+(s.totalBanner-s.doneBanner)+'</div></div>';
+  h+='<div class="kpi-card progress"><div class="kpi-value">'+s.pct+'%</div><div class="kpi-label">진행률</div><div class="kpi-sub">'+s.doneSchools+'/'+s.totalSchools+'개교 완료</div></div>';
+  h+='</div>';
+  h+='<div class="progress-section fade-in" style="animation-delay:0.1s"><div class="progress-bar-wrap">';
+  h+='<div class="progress-header"><span class="progress-title">전체 진행 현황</span><span class="progress-pct">'+s.pct+'%</span></div>';
+  h+='<div class="progress-track"><div class="progress-fill" style="width:'+s.pct+'%"></div></div>';
+  h+='<div class="progress-detail"><span><span class="dot dot-done"></span>완료 '+s.doneSchools+'개교</span>';
+  h+='<span><span class="dot dot-remain"></span>잔여 '+s.remainSchools+'개교</span>';
+  h+='<span style="margin-left:auto;color:var(--text-secondary)">최종 업데이트 : '+data.updatedAt+'</span></div></div></div>';
+  var campDriveUrlSaved=data.campDriveUrl||"";
+  h+='<div style="display:flex;justify-content:flex-end;gap:10px;margin-top:14px;flex-wrap:wrap">';
+  if(campDriveUrlSaved){
+    h+='<a href="'+campDriveUrlSaved+'" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:var(--shadow-sm);transition:opacity 0.15s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>전체 원본 사진 다운로드</a>';
+  }
+  if(!window._printMode){
+    h+='<button class="no-print" onclick="openPrintMode()" style="display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;color:#0D1B3E;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:1.5px solid #0D1B3E;cursor:pointer;font-family:inherit;box-shadow:var(--shadow-sm);transition:opacity 0.15s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>인쇄용 보고서 (PDF용)</button>';
+  }
+  h+='</div>';
+  var gpsPoints=[];
+  for(var gi=0;gi<schools.length;gi++){
+    var gd=schools[gi].gps;
+    if(gd){
+      var pts=gd.poster||[];
+      for(var gj=0;gj<pts.length;gj++){
+        if(pts[gj].lat&&pts[gj].lng&&schools[gi].isDone)gpsPoints.push({name:schools[gi].name,lat:pts[gj].lat,lng:pts[gj].lng});
+      }
+    }
+  }
+  if(gpsPoints.length>0 && !window._printMode){
+    h+='<div class="section fade-in" style="animation-delay:0.11s"><div class="section-title">부착 위치 현황</div>';
+    h+='<div style="margin:0 16px 14px;padding:14px 16px;background:#FFF8E1;border:1px solid #FFE0B2;border-left:4px solid #E6940A;border-radius:8px;display:flex;gap:12px;align-items:flex-start">';
+    h+='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E6940A" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+    h+='<div style="flex:1;font-size:13px;line-height:1.6;color:#7A5A00"><b style="display:block;font-size:13px;font-weight:800;color:#0D1B3E;margin-bottom:4px">부착 위치 현황 — 시범 운영 안내</b>본 지도는 현재 시범 운영 단계로, 일부 학교의 GPS 정보가 수집되지 않을 수 있는 점 양해 부탁드립니다. 정확한 부착 현장은 아래 <b>학교별 상세 사진</b>을 참고해 주시기 바라며, 지속적인 시스템 안정화를 통해 모든 학교의 위치 정보를 제공할 수 있도록 개선해 나가겠습니다.</div>';
+    h+='</div>';
+    h+='<div class="map-wrap" style="padding:0 16px 16px"><div id="reportMap" style="width:100%;height:520px;border-radius:12px;border:1px solid var(--border);overflow:hidden"></div>';
+    h+='<div style="margin-top:10px;padding:10px 14px;background:#D4EDDA;border:1px solid #D4EDDA;border-radius:8px;font-size:12px;color:#0EA47A;display:flex;align-items:center;gap:8px">';
+    h+='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0EA47A" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>';
+    h+='GPS 및 사진은 1시간 간격으로 자동 업데이트 됩니다.<br><span style="color:#6B7280;font-weight:500">실내 깊은곳에서는 GPS가 수집되지 않습니다.</span>';
+    h+='</div></div></div>';
+  }
+  h+='<div class="section fade-in" style="animation-delay:0.12s"><div class="section-title">전체 학교 요약</div>';
+  h+='<div class="summary-table-wrap"><div style="overflow-x:auto"><table class="summary-table">';
+  h+='<thead><tr><th>No.</th><th>학교이름</th><th>주소</th><th>포스터</th><th>현수막</th><th>부착일시</th><th>상태</th><th>부착장소 및 특이사항</th></tr></thead><tbody>';
+  var SVG_DONE='<span class="school-status status-done" style="display:inline-flex;font-size:12px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#0EA47A"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</span>';
+  var SVG_PENDING='<span class="school-status status-pending" style="display:inline-flex;font-size:12px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="none" stroke="#D1D5DB" stroke-width="2"/></svg>대기</span>';
+  for(var i=0;i<schools.length;i++){
+    var sc=schools[i];
+    var pq=typeof sc.pQty==="number"&&sc.pQty>0?sc.pQty:"-";
+    var bq=typeof sc.bQty==="number"&&sc.bQty>0?sc.bQty:"-";
+    var dateCell=sc.postDate?'<td class="date-text">'+escHtml(sc.postDate)+'</td>':'<td style="color:var(--text-muted)">-</td>';
+    var noteText=sc.note||"";
+    var noteCell=noteText?'<td class="summary-note">'+escHtml(noteText)+'</td>':'<td class="summary-note" style="color:var(--text-muted)">-</td>';
+    h+='<tr><td>'+(i+1)+'</td><td><a href="#school-'+(i+1)+'" style="color:var(--accent);text-decoration:none;font-weight:700;cursor:pointer" onclick="event.preventDefault();var el=document.getElementById(\'school-'+(i+1)+'\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'center\'})">'+escHtml(sc.name)+'</a></td><td class="region-tag">'+escHtml(sc.region+" "+sc.subAddr)+'</td>';
+    h+='<td'+(pq!=="-"?' class="qty-poster"':"")+">"+pq+'</td>';
+    h+='<td'+(bq!=="-"?' class="qty-banner"':"")+">"+bq+'</td>';
+    h+=dateCell+'<td>'+(sc.isDone?SVG_DONE:SVG_PENDING)+'</td>'+noteCell+'</tr>';
+  }
+  h+='</tbody><tfoot><tr><td></td><td>합계 '+s.totalSchools+'개교</td><td></td><td class="qty-poster">'+s.totalPoster+'장</td><td class="qty-banner">'+s.totalBanner+'장</td><td></td><td></td><td></td></tr></tfoot></table></div></div>';
+  h+='</div>';
+  h+='<div class="section fade-in" style="animation-delay:0.15s"><div class="section-title">학교별 부착 결과</div>';
+  var curRegion="", regionCounts={};
+  for(var rc=0;rc<schools.length;rc++)regionCounts[schools[rc].region]=(regionCounts[schools[rc].region]||0)+1;
+  var doneRegionCounts={};
+  for(var drc=0;drc<schools.length;drc++){if(schools[drc].isDone)doneRegionCounts[schools[drc].region]=(doneRegionCounts[schools[drc].region]||0)+1;}
+  var TOGGLE_SVG='<svg class="card-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+  for(var si=0;si<schools.length;si++){
+    var sc2=schools[si];
+    if(sc2.region!==curRegion){if(curRegion)h+='</div>';curRegion=sc2.region;h+='<div class="region-group"><div class="region-label">'+curRegion+' <span class="region-count">'+regionCounts[curRegion]+'개교 (완료 '+(doneRegionCounts[curRegion]||0)+')</span></div>'}
+    var numBg=sc2.isDone?"var(--accent)":"var(--text-muted)";
+    var statusHtml2=sc2.isDone?'<div class="school-status status-done"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#0EA47A"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</div>':'<div class="school-status status-pending"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="none" stroke="#D1D5DB" stroke-width="2"/></svg>대기</div>';
+    var qtyHtml2="";
+    if(sc2.pQty)qtyHtml2+='<div class="qty-item"><span class="qty-label">포스터</span><span class="qty-poster">'+sc2.pQty+'장</span></div>';
+    if(sc2.bQty)qtyHtml2+='<div class="qty-item"><span class="qty-label">현수막</span><span class="qty-banner">'+sc2.bQty+'장</span></div>';
+    var cardClass=sc2.isDone?"school-card card-done":"school-card card-pending";
+    var collapsed=sc2.isDone?"":"collapsed";
+    var toggleOpen=sc2.isDone?"open":"";
+    h+='<div id="school-'+(si+1)+'" class="'+cardClass+'">';
+    h+='<div class="school-card-header" onclick="toggleCard(this)"><div class="school-info"><div class="school-num" style="background:'+numBg+'">' +(si+1)+'</div><div><div class="school-name">'+escHtml(sc2.name)+'</div><div class="school-addr">'+escHtml(sc2.addr)+'</div></div></div><div class="header-qty">'+qtyHtml2+'</div>'+statusHtml2+TOGGLE_SVG+'</div>';
+    h+='<div class="card-body '+collapsed+'">';
+    if(sc2.isDone){
+      var noteText2=sc2.note||"";
+      h+='<div class="attach-info">';
+      if(sc2.postDate){h+='<div class="attach-info-item"><span class="attach-info-label">부착일시</span><span class="attach-info-value">'+escHtml(sc2.postDate)+'</span>';
+        h+='</div>';}
+      if(noteText2)h+='<div class="attach-info-item"><span class="attach-info-label">부착장소 및 특이사항</span><span class="attach-info-value">'+escHtml(noteText2)+'</span></div>';
+      h+='</div>';
+      var photos=sc2.photos||[];
+      if(photos.length>0){
+        var sc2GpsForLink=(sc2.gps&&sc2.gps.poster)||[];
+        h+='<div class="photo-section" style="padding-top:12px"><div class="photo-label" style="display:flex;align-items:center;gap:12px"><span>부착 사진</span>';
+        if(sc2GpsForLink.length>0)h+='<a href="javascript:void(0)" class="drive-link" onclick="event.stopPropagation();openSchoolMap(\''+escHtml(sc2.name)+'\','+JSON.stringify(sc2GpsForLink).replace(/"/g,"&quot;")+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>지도보기</a>';
+        h+='</div><div class="photo-grid">';
+        var maxPhotos=window._printMode?Math.min(photos.length,8):photos.length;
+        var loadingAttr=window._printMode?"eager":"lazy";
+        for(var pi=0;pi<maxPhotos;pi++){h+='<div class="photo-thumb" onclick="openLightbox(\''+photos[pi]+'\')"><img src="'+photos[pi]+'" alt="'+escHtml(sc2.name)+' 부착사진 '+(pi+1)+'" loading="'+loadingAttr+'" decoding="async" onerror="handleImgError(this)"></div>'}
+        h+='</div></div>';
+      }
+    } else {
+      h+='<div class="attach-info"><div class="attach-info-item"><span class="attach-info-label">상태</span><span class="attach-info-value" style="color:var(--text-muted)">부착 대기 중</span></div></div>';
+    }
+    h+='</div></div>';
+  }
+  if(curRegion)h+='</div>';
+  h+='</div>';
+  document.getElementById("reportContent").innerHTML=h;
+  if(gpsPoints.length>0&&typeof naver!=="undefined"&&naver.maps){
+    var mapEl=document.getElementById("reportMap");
+    if(mapEl){
+      var bounds=new naver.maps.LatLngBounds();
+      var map=new naver.maps.Map(mapEl,{center:new naver.maps.LatLng(36.5,127.5),zoom:7,zoomControl:false,mapDataControl:false,scaleControl:false,logoControlOptions:{position:naver.maps.Position.BOTTOM_LEFT}});
+      (function addMapControls(){
+        mapEl.style.position="relative";
+        var btnStyle="position:absolute;right:10px;background:#fff;border:1px solid #D1D5DB;border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.15);z-index:100;padding:0";
+        var fsBtn=document.createElement("button");fsBtn.type="button";fsBtn.title="전체화면";
+        fsBtn.style.cssText=btnStyle+";top:10px";
+        fsBtn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>';
+        var fsExitSvg='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>';
+        var fsEnterSvg=fsBtn.innerHTML;
+        fsBtn.onclick=function(){
+          var doc=document;
+          var isFs=doc.fullscreenElement||doc.webkitFullscreenElement;
+          if(isFs){var ex=doc.exitFullscreen||doc.webkitExitFullscreen;if(ex)ex.call(doc);}
+          else{var req=mapEl.requestFullscreen||mapEl.webkitRequestFullscreen;if(req)req.call(mapEl);else alert("전체화면 지원 안됨");}
+        };
+        function onFsChange(){
+          var isFs=document.fullscreenElement||document.webkitFullscreenElement;
+          fsBtn.innerHTML=isFs?fsExitSvg:fsEnterSvg;
+          setTimeout(function(){try{naver.maps.Event.trigger(map,"resize");}catch(e){}},200);
+        }
+        document.addEventListener("fullscreenchange",onFsChange);
+        document.addEventListener("webkitfullscreenchange",onFsChange);
+        mapEl.appendChild(fsBtn);
+        var locBtn=document.createElement("button");locBtn.type="button";locBtn.title="내 위치";
+        locBtn.style.cssText=btnStyle+";top:58px";
+        locBtn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>';
+        var myLocMarker=null;
+        locBtn.onclick=function(){
+          if(!navigator.geolocation){alert("이 브라우저는 위치 정보를 지원하지 않습니다");return;}
+          locBtn.disabled=true;locBtn.style.opacity="0.5";
+          navigator.geolocation.getCurrentPosition(function(pos){
+            var ll=new naver.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
+            map.setCenter(ll);map.setZoom(15);
+            if(myLocMarker)myLocMarker.setMap(null);
+            var dot=document.createElement("div");
+            dot.style.cssText="width:16px;height:16px;background:#4A8ED6;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 6px rgba(59,130,246,0.2),0 2px 6px rgba(0,0,0,0.3)";
+            myLocMarker=new naver.maps.Marker({position:ll,map:map,icon:{content:dot,anchor:new naver.maps.Point(8,8)},zIndex:999});
+            locBtn.disabled=false;locBtn.style.opacity="1";
+          },function(err){
+            alert("위치를 가져올 수 없습니다. 위치 권한을 확인해 주세요.");
+            locBtn.disabled=false;locBtn.style.opacity="1";
+          },{enableHighAccuracy:true,timeout:10000,maximumAge:0});
+        };
+        mapEl.appendChild(locBtn);
+      })();
+      var activeInfoOverlay=null;
+      var allMarkerDots=[];
+      function getMarkerSize(z){return z<=7?10:z<=9?13:z<=11?16:18;}
+      for(var mi=0;mi<gpsPoints.length;mi++){
+        var pos=new naver.maps.LatLng(gpsPoints[mi].lat,gpsPoints[mi].lng);
+        bounds.extend(pos);
+        (function(pos2,name,map2){
+          var sz=getMarkerSize(map2.getZoom());
+          var color="#0EA47A";
+          var wrap=document.createElement("div");
+          wrap.style.cssText="width:24px;height:24px;display:flex;align-items:center;justify-content:center;cursor:pointer";
+          var dot=document.createElement("div");
+          dot.style.cssText="width:"+sz+"px;height:"+sz+"px;background:"+color+";border:2px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.35);transition:width .25s ease,height .25s ease";
+          wrap.appendChild(dot);
+          allMarkerDots.push(dot);
+          var marker=new naver.maps.Marker({position:pos2,map:map2,icon:{content:wrap,anchor:new naver.maps.Point(12,12)}});
+          var infoEl=document.createElement("div");
+          infoEl.style.cssText="padding:4px 8px;font-size:11px;font-weight:700;white-space:nowrap;background:#fff;border:1px solid #ddd;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.15)";
+          infoEl.textContent=name;
+          var infoOverlay=new naver.maps.Marker({position:pos2,map:map2,icon:{content:infoEl,anchor:new naver.maps.Point(0,30)},visible:false});
+          naver.maps.Event.addListener(marker,"click",function(e){if(activeInfoOverlay)activeInfoOverlay.setVisible(false);if(activeInfoOverlay===infoOverlay){activeInfoOverlay=null}else{infoOverlay.setVisible(true);activeInfoOverlay=infoOverlay}});
+        })(pos,gpsPoints[mi].name,map);
+      }
+      naver.maps.Event.addListener(map,"zoom_changed",function(){var ns=getMarkerSize(map.getZoom());for(var di=0;di<allMarkerDots.length;di++){allMarkerDots[di].style.width=ns+"px";allMarkerDots[di].style.height=ns+"px";}});
+      naver.maps.Event.addListener(map,"click",function(){if(activeInfoOverlay){activeInfoOverlay.setVisible(false);activeInfoOverlay=null}});
+      map.fitBounds(bounds);
+    }
+  }
+}
+
+function buildPlaceholder(text){
+  return '<div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>'+(text||"")+'</span></div></div>';
+}
+
+function openSchoolMap(name,gpsArr){
+  var existing=document.getElementById("schoolMapOverlay");
+  if(existing)existing.remove();
+  var overlay=document.createElement("div");
+  overlay.id="schoolMapOverlay";
+  overlay.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:2000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)";
+  var popup=document.createElement("div");
+  popup.style.cssText="background:#fff;border-radius:16px;width:90vw;max-width:700px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3)";
+  var header=document.createElement("div");
+  header.style.cssText="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #E5E7EB";
+  var titleDiv=document.createElement("div");
+  titleDiv.style.cssText="font-size:14px;font-weight:800";
+  titleDiv.innerHTML=escHtml(name)+" <span style=\"color:#0EA47A;font-size:12px\">GPS "+gpsArr.length+"건</span>";
+  var closeBtn=document.createElement("button");
+  closeBtn.textContent="\u2715";
+  closeBtn.style.cssText="background:none;border:none;font-size:20px;cursor:pointer;color:#9CA3AF;padding:4px";
+  closeBtn.addEventListener("click",function(){var el=document.getElementById("schoolMapOverlay");if(el)el.remove()});
+  header.appendChild(titleDiv);
+  header.appendChild(closeBtn);
+  var mapDiv=document.createElement("div");
+  mapDiv.style.cssText="width:100%;height:520px";
+  popup.appendChild(header);
+  popup.appendChild(mapDiv);
+  overlay.appendChild(popup);
+  overlay.addEventListener("click",function(e){if(e.target===overlay)overlay.remove()});
+  document.body.appendChild(overlay);
+  var map=new naver.maps.Map(mapDiv,{center:new naver.maps.LatLng(gpsArr[0].lat,gpsArr[0].lng),zoom:15});
+  var bounds=new naver.maps.LatLngBounds();
+  for(var i=0;i<gpsArr.length;i++){
+    var pos=new naver.maps.LatLng(gpsArr[i].lat,gpsArr[i].lng);
+    bounds.extend(pos);
+    var el=document.createElement("div");
+    el.style.cssText="width:16px;height:16px;background:#0EA47A;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)";
+    new naver.maps.Marker({position:pos,map:map,icon:{content:el,anchor:new naver.maps.Point(8,8)}});
+  }
+  if(gpsArr.length>1)map.fitBounds(bounds);
+  var labelEl=document.createElement("div");
+  labelEl.style.cssText="padding:4px 10px;font-size:11px;font-weight:700;background:#fff;border:1px solid #ddd;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,0.1)";
+  labelEl.textContent=name+" ("+gpsArr.length+"건)";
+  new naver.maps.Marker({position:new naver.maps.LatLng(gpsArr[0].lat,gpsArr[0].lng),map:map,icon:{content:labelEl,anchor:new naver.maps.Point(0,30)}});
+}
+
+function handleImgError(img){
+  var src=img.src;
+  var idMatch=src.match(/\/d\/([^=\/]+)/) || src.match(/[?&]id=([^&]+)/);
+  if(idMatch&&!img.dataset.retried){
+    img.dataset.retried="1";
+    img.src="https://drive.google.com/thumbnail?id="+idMatch[1]+"&sz=w1200";
+    return;
+  }
+  // v3.9.7: 재시도도 실패 → Drive에서 삭제된 사진이므로 썸네일 자체를 제거 + 번호 재카운트
+  try{
+    var thumb=img.closest(".photo-thumb");
+    var grid=thumb&&thumb.parentNode;
+    if(thumb)thumb.remove();
+    if(grid){
+      var remaining=grid.querySelectorAll(".photo-thumb img");
+      for(var i=0;i<remaining.length;i++){
+        var alt=remaining[i].alt||"";
+        remaining[i].alt=alt.replace(/\s\d+$/," "+(i+1));
+      }
+      if(remaining.length===0){var sec=grid.closest(".photo-section");if(sec)sec.style.display="none";}
+    }
+  }catch(e){}
+}
+function toggleCard(headerEl){
+  var card=headerEl.parentElement;
+  var body=card.querySelector(".card-body");
+  var toggle=headerEl.querySelector(".card-toggle");
+  if(body.classList.contains("collapsed")){
+    body.classList.remove("collapsed");
+    body.style.maxHeight=body.scrollHeight+"px";
+    if(toggle)toggle.classList.add("open");
+    setTimeout(function(){body.style.maxHeight="none"},350);
+  } else {
+    body.style.maxHeight=body.scrollHeight+"px";
+    body.offsetHeight;
+    body.classList.add("collapsed");
+    if(toggle)toggle.classList.remove("open");
+  }
+}
+function openLightbox(src){var lb=document.getElementById("lightbox");document.getElementById("lightbox-img").src=src;lb.classList.add("show");document.body.style.overflow="hidden"}
+function closeLightbox(){document.getElementById("lightbox").classList.remove("show");document.body.style.overflow=""}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox()});
+
+loadReportData();
+if(!window._printMode){setInterval(loadReportData, AUTO_REFRESH_SEC * 1000);}
+
+</script>
+</body></html>
