@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>코오롱스포렉스용답점_동대문구 아파트게시판광고 결과보고서</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F9FAFB;--surface:#FFFFFF;--surface-alt:#F3F4F6;
+  --border:#E5E7EB;--border-light:#F3F4F6;
+  --text:#0D1B3E;--text-secondary:#6B7280;--text-muted:#6B7280;
+  --accent:#2D5DA1;--accent-light:#DBEAFE;--accent-lighter:#DBEAFE;
+  --positive:#0EA47A;--positive-light:#D4EDDA;--positive-bg:#D4EDDA;
+  --negative:#DC3545;--negative-light:#F8D7DA;--negative-bg:#F8D7DA;
+  --warning:#E6940A;--warning-light:#FFF3CD;--warning-bg:#FFF3CD;
+  --orange:#E6940A;--orange-light:#FFF3CD;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,0.07);
+  --r:14px;
+}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;background:#E5E7EB;color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;padding:24px 16px}
+.report-page{max-width:1280px;margin:0 auto;background:var(--bg);border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08),0 1px 3px rgba(0,0,0,0.06)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .4s ease both}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.skeleton{background:linear-gradient(90deg,var(--surface-alt) 25%,#E5E7EB 50%,var(--surface-alt) 75%);background-size:200% 100%;animation:pulse 1.5s ease-in-out infinite;border-radius:8px;height:20px}
+.report-header{background:linear-gradient(135deg,#1A1D27 0%,#374151 100%);color:#fff;padding:40px 0;position:relative;overflow:hidden}
+.report-header::before{content:"";position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.03),transparent 70%);pointer-events:none}
+.header-inner{max-width:1280px;margin:0 auto;padding:0 24px;position:relative}
+.header-label{font-size:12px;font-weight:700;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+.header-title{font-size:2rem;font-weight:900;letter-spacing:-0.04em;line-height:1.2}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.5);margin-top:6px;font-weight:500}
+.header-meta{display:flex;gap:20px;margin-top:20px;flex-wrap:wrap}
+.meta-chip{background:rgba(255,255,255,0.08);padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:6px}
+.meta-chip svg{width:14px;height:14px;opacity:0.5}
+.header-logo{position:absolute;top:20px;right:24px}
+.logo-mark{display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:20px;height:20px}
+.logo-text{font-size:13px;font-weight:900;color:rgba(255,255,255,0.7);letter-spacing:-0.03em}
+.live-indicator{display:inline-flex;align-items:center;gap:6px;background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.2);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;color:#0EA47A}
+.live-dot{width:6px;height:6px;background:#0EA47A;border-radius:50%;animation:pulse 2s ease-in-out infinite}
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:28px;position:relative;z-index:1}
+.kpi-card{background:var(--surface);border-radius:var(--r);padding:24px 20px;box-shadow:var(--shadow-md);border:1px solid var(--border-light);text-align:center}
+.kpi-value{font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums}
+.kpi-label{font-size:12px;font-weight:700;color:var(--text-muted);margin-top:10px;text-transform:uppercase;letter-spacing:0.04em}
+.kpi-sub{font-size:12px;font-weight:600;margin-top:8px}
+.kpi-card .kpi-value{color:#0D1B3E}
+.kpi-card .kpi-sub{color:#2D5DA1}
+.kpi-card.progress{border-top:3px solid #0EA47A}
+.kpi-card.progress .kpi-value{color:#0EA47A;font-size:2.2rem}
+.kpi-card.progress .kpi-sub{color:#0EA47A}
+.progress-section{margin-top:32px}
+.progress-bar-wrap{background:var(--surface);border-radius:var(--r);padding:20px 24px;box-shadow:var(--shadow-sm);border:1px solid var(--border-light)}
+.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.progress-title{font-size:13px;font-weight:700;color:var(--text-secondary)}
+.progress-pct{font-size:22px;font-weight:900;color:var(--positive)}
+.progress-track{height:14px;background:var(--surface-alt);border-radius:7px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--positive));border-radius:7px;transition:width 0.8s ease}
+.progress-detail{display:flex;gap:24px;margin-top:12px;font-size:12px;color:var(--text-muted);font-weight:600}
+.progress-detail span{display:flex;align-items:center;gap:4px}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-done{background:var(--positive)}.dot-remain{background:var(--border)}
+.section{margin-top:36px}
+.section-title{font-size:13px;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.section-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.region-group{margin-bottom:24px}
+.region-label{font-size:16px;font-weight:800;color:var(--text);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--border-light);display:flex;align-items:center;gap:8px}
+.region-count{font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-lighter);padding:2px 8px;border-radius:10px}
+.summary-table-wrap{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow-sm);border:1px solid var(--border-light);overflow:hidden}
+.summary-table{width:100%;border-collapse:collapse}
+.summary-table thead th{font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em;padding:10px 14px;text-align:left;background:var(--surface-alt);border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:5;box-shadow:inset 0 -1px 0 rgba(0,0,0,.08)}
+.summary-table thead th:nth-child(n+4){text-align:center}
+.summary-table tbody td{font-size:14px;padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text-secondary);vertical-align:middle}
+.summary-table tbody td:first-child{font-weight:700;color:var(--text);text-align:center}
+.summary-table tbody td:nth-child(n+4){text-align:center}
+.summary-table tbody tr:last-child td{border-bottom:none}
+.summary-table tbody tr:hover td{background:var(--accent-lighter)}
+.summary-table tfoot td{font-size:14px;font-weight:800;padding:10px 14px;background:var(--surface-alt);color:var(--text);border-top:1px solid var(--border)}
+.summary-table tfoot td:nth-child(n+4){text-align:center}
+.region-tag{font-size:12px;font-weight:600;color:var(--text-muted)}
+.summary-note{font-size:12px;color:var(--text-muted);max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.date-text{font-variant-numeric:tabular-nums;font-weight:600;color:var(--text)}
+.school-card{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow-sm);border:1px solid var(--border-light);overflow:hidden;margin-bottom:16px;transition:all 0.3s ease}
+.school-card.card-done{opacity:1}
+.school-card.card-pending{opacity:0.7}
+.school-card.card-pending .school-card-header{border-bottom:none}
+.school-card-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border-light);cursor:pointer;transition:background 0.15s;gap:12px;user-select:none}
+.school-card-header:hover{background:var(--surface-alt)}
+.card-body{overflow:hidden;transition:max-height 0.35s ease,opacity 0.25s ease}
+.card-body.collapsed{max-height:0!important;opacity:0;padding:0}
+.card-toggle{width:20px;height:20px;flex-shrink:0;transition:transform 0.25s ease;color:var(--text-muted)}
+.card-toggle.open{transform:rotate(180deg)}
+.header-qty{display:flex;align-items:center;gap:12px;margin-left:auto;margin-right:12px;flex-shrink:0}
+.school-info{display:flex;align-items:center;gap:12px}
+.school-num{width:28px;height:28px;background:var(--accent);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+.school-name{font-size:15px;font-weight:800;letter-spacing:-0.02em}
+.school-addr{font-size:12px;color:var(--text-muted);margin-top:1px}
+.school-status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px}
+.status-done{background:var(--positive-bg);color:var(--positive)}
+.status-pending{background:var(--surface-alt);color:var(--text-muted)}
+.qty-header{display:flex;gap:16px;padding:12px 20px;border-bottom:1px solid var(--border-light);background:var(--surface-alt)}
+.qty-item{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700}
+.qty-item .qty-label{font-size:12px;font-weight:600;color:var(--text-muted)}
+.qty-poster{color:#1E3F75}.qty-banner{color:var(--orange)}
+.attach-info{padding:12px 20px;display:flex;gap:24px;flex-wrap:wrap;font-size:13px;border-bottom:1px solid var(--border-light)}
+.attach-info-item{display:flex;align-items:center;gap:6px}
+.attach-info-label{font-size:12px;font-weight:600;color:var(--text-muted)}
+.attach-info-value{font-weight:700;color:var(--text)}
+.photo-section{padding:0 20px 16px}
+.photo-label{font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.photo-thumb{aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:var(--surface-alt);position:relative;cursor:pointer;border:1px solid var(--border-light)}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.2s}
+.photo-thumb:hover img{transform:scale(1.05)}
+.photo-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:12px;flex-direction:column;gap:4px}
+.photo-placeholder svg{width:24px;height:24px;opacity:0.3}
+.drive-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--accent);text-decoration:none;padding:4px 10px;border-radius:8px;transition:background 0.15s}
+.drive-link:hover{background:var(--accent-lighter)}
+.drive-link svg{width:14px;height:14px}
+.loading-wrap{text-align:center;padding:80px 20px}
+.loading-spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:14px;color:var(--text-muted);font-weight:600}
+.error-wrap{text-align:center;padding:80px 20px;color:var(--negative)}
+.refresh-btn{background:var(--accent);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;margin-top:16px;font-family:inherit}
+.report-footer{margin-top:48px;padding:28px 0;border-top:1px solid var(--border);text-align:left}
+.footer-inner{display:flex;align-items:center;gap:16px}
+.footer-logo{font-size:13px;font-weight:800;color:var(--text-muted);letter-spacing:-0.01em;flex-shrink:0}
+.footer-info{font-size:12px;color:var(--text-muted)}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;display:none;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.lightbox.show{display:flex}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.lightbox-close{position:fixed;top:20px;right:20px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+@media(max-width:768px){
+  body{padding:0}
+  .report-page{border-radius:0;box-shadow:none}
+  .kpi-grid{grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+  .kpi-value{font-size:1.5rem}
+  .header-title{font-size:1.5rem}
+  .container{padding:0 16px}
+  .report-header{padding:28px 0}
+  .header-logo{position:static;margin-bottom:14px}
+  .school-card-header{flex-direction:column;align-items:flex-start;gap:10px}
+  .photo-grid{grid-template-columns:repeat(2,1fr);gap:6px}
+  .photo-thumb{min-height:120px}
+  .attach-info{flex-direction:column;gap:6px}
+}
+@media(max-width:480px){
+  .kpi-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .kpi-card{padding:18px 14px}
+  .kpi-value{font-size:1.3rem}
+  .header-title{font-size:1.3rem}
+  .progress-detail{flex-direction:column;gap:6px}
+}
+@media print{
+  @page{size:A4 landscape;margin:10mm}
+  body{background:#fff!important;color:#1A1D27!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:0!important}
+  .report-page{box-shadow:none!important;border-radius:0!important;max-width:none!important;background:#FFFFFF!important}
+  .map-wrap{display:none!important}
+  .kpi-card,.progress-bar-wrap,.summary-table-wrap,.school-card{background:#F9FAFB!important;border:1px solid #E5E7EB!important;box-shadow:none!important}
+  .summary-table thead th,.summary-table tfoot td{background:#F3F4F6!important}
+  .school-card-header{background:transparent!important}
+  .report-header,.kpi-grid,.progress-section{break-inside:avoid;page-break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .section{break-before:page;page-break-before:always}
+  .section:first-of-type{break-before:auto;page-break-before:auto}
+  .school-card{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #ddd;margin-bottom:8mm}
+  .photo-thumb{break-inside:avoid;page-break-inside:avoid;aspect-ratio:4/3;width:100%;height:auto;border:1px solid #ddd;border-radius:4px;overflow:hidden}
+  .photo-grid .photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;max-height:none}
+  .photo-grid{grid-template-columns:repeat(4,1fr);gap:3mm}
+  .header-sub{display:none!important}
+  #metaSchools{display:none!important}
+  .school-card-header{flex-direction:row!important;align-items:center!important;flex-wrap:nowrap!important;gap:12px}
+  .school-info{flex:1 1 auto;min-width:0}
+  .header-qty,.school-status,.card-toggle{flex-shrink:0}
+  .lightbox,.live-indicator,.refresh-btn,.no-print,button.no-print{display:none!important}
+  .kpi-card,.progress-bar-wrap,.summary-table-wrap,.school-card{box-shadow:none}
+  .kpi-card,.progress-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card-body.collapsed{max-height:none!important;opacity:1}
+  a[href]::after{content:none!important}
+}
+a:hover,.summary-table a:hover{text-decoration:underline}
+.drive-link:hover{text-decoration:underline;background:var(--accent-lighter)}
+.kpi-label,.kpi-sub,.progress-detail,.summary-note,.region-tag,.school-addr,.school-status,.qty-item .qty-label,.attach-info-label,.photo-label,.drive-link,.footer-info{font-size:13px}
+a[target="_blank"]::after{content:" \2197";color:var(--text-muted);font-size:.9em}
+</style>
+</head>
+<body>
+<script>(function(){try{
+  var BUILD_TS=1783489340355;
+  // v3.9.10: 무한 새로고침 방지 — 세션당 1회만 체크, 플래그를 "체크 시작 시점"에 바로 세팅.
+  if(sessionStorage.getItem("__verChecked"))return;
+  sessionStorage.setItem("__verChecked","1");
+  fetch(location.pathname+"?_="+Date.now(),{method:"HEAD",cache:"no-store"}).then(function(r){
+    var lm=r.headers.get("last-modified");
+    if(!lm)return;
+    var srvTs=new Date(lm).getTime();
+    if(srvTs>BUILD_TS+30000){location.replace(location.pathname+"?v="+srvTs);}
+  }).catch(function(){});
+}catch(e){}})();</script>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&#x2715;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+<div class="report-page">
+<div class="report-header">
+  <div class="header-inner">
+    <div class="header-label">Campaign Report</div>
+    <div class="header-title">코오롱스포렉스용답점_동대문구 아파트게시판광고 결과보고서</div>
+    <div class="header-sub">좋은광고연구소 광고 게첨 실시간 현황</div>
+    <div class="header-meta">
+      <div class="meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>마감 : 7월 9일 목요일</div>
+      <div class="meta-chip" id="metaSchools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>로딩 중...</div>
+      <div class="live-indicator"><span class="live-dot"></span>실시간</div>
+      <div class="meta-chip" id="metaManager" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span id="managerName"></span></div>
+      <div class="meta-chip" id="metaUpdated" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="updatedText"></span></div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div id="printBanner" class="no-print" style="display:none;background:#DBEAFE;border:1px solid #4A8ED6;border-radius:12px;padding:16px 20px;margin:28px 0 16px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap"></div>
+<div id="reportContent">
+  <div class="loading-wrap"><div class="loading-spinner"></div><div class="loading-text">데이터를 불러오는 중...</div></div>
+</div>
+<div class="report-footer" style="text-align:left;padding:32px 16px 40px">
+  <div class="footer-inner">
+    <div><img src="https://lh3.googleusercontent.com/d/1bRxTWK1OzoQl4CiX5Wri_dT-swSHxLuU" alt="좋은광고연구소" style="height:19px;object-fit:contain"></div>
+    <div class="footer-info">주식회사 좋은광고연구소 ㅣ goodadlab@goodadlab.co.kr ㅣ 1522-3235</div>
+  </div>
+</div>
+</div>
+</div>
+<script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=gcvbnnigi1"></script>
+<script>
+window.__INITIAL_REPORT_DATA__ = {"status":"ok","updatedAt":"2026년 7월 8일 14시 42분","campDriveUrl":"https://drive.google.com/drive/folders/17twLbx1EzE7roWqdlyXooo_VLLTw37NT","manager":"박시현ㅣ 010-5905-3274 ㅣ sh.lee@goodadlab.co.kr","stats":{"totalSchools":16,"totalPoster":524,"totalBanner":0,"donePoster":524,"doneBanner":0,"doneSchools":16,"remainSchools":0,"pct":100,"regionText":"서울 16"},"schools":[{"name":"답십리동아","addr":"서울 동대문구 답십리동 10","addrClean":"서울 동대문구 답십리동 10","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":18,"bQty":0,"postDate":"2026년 7월 3일 14시 21분","note":"답십리 동아(18장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1OlrfKsZCLEkJAJAMKTcMmx_pgxwlp4pY=w1200","https://lh3.googleusercontent.com/d/1mwLlPn1OWAPMXRtfHDnyfuqlzR5EwVZk=w1200","https://lh3.googleusercontent.com/d/1oTSqHKEQbuaYqQR4rziF_zo-rAqChLTn=w1200","https://lh3.googleusercontent.com/d/1_GZdOs9MEFnkgJ12CV43QdONNlbgKS_-=w1200","https://lh3.googleusercontent.com/d/17JnB8VGaNi1jrXig-32IC2AcvmUYAXBc=w1200","https://lh3.googleusercontent.com/d/16kidvCe-zgGgaqETQGIOQugy9CZ9KTw3=w1200","https://lh3.googleusercontent.com/d/1L7jRZeD-toNLK3u9o-M40C3BjWRlLHW5=w1200","https://lh3.googleusercontent.com/d/1U2eTdTUKK7R3jUHyA5QL7Rdmy0FXZy4B=w1200","https://lh3.googleusercontent.com/d/154NTOC_zzqc1fP83m7apv5m27XyWQ9oj=w1200","https://lh3.googleusercontent.com/d/18p3sCA5lootm41VVxiSFkyRjW-KuISpS=w1200","https://lh3.googleusercontent.com/d/1kvFWORA4ayFj_EV8ieCToNgvHGB5XwZS=w1200","https://lh3.googleusercontent.com/d/18guI5Sp0mrATyPLD7l51LvjWX93qPA6k=w1200","https://lh3.googleusercontent.com/d/1DcOjZY7Y3ePEACCIk101fzrO-w1Czmq9=w1200","https://lh3.googleusercontent.com/d/1Nxu8PyFGhX0g8TOUMWTAY7baZjddh4ot=w1200","https://lh3.googleusercontent.com/d/1fWJWSTYooN_p5YwLn5SAY3g0_68tOOlw=w1200","https://lh3.googleusercontent.com/d/12_BqHLux0V42yPuoWy4C-x__xG_vecNc=w1200","https://lh3.googleusercontent.com/d/1KEQ0PDOAMl2QckeaYQCF-ep_Bwbgimdb=w1200","https://lh3.googleusercontent.com/d/1MwDAGOUpDYjsVJ99lkxqEjJBplJiLafi=w1200","https://lh3.googleusercontent.com/d/1jKBIPFHrqEq_SpFJQfDO7xVw-CPSk5DI=w1200","https://lh3.googleusercontent.com/d/1klj6OAqsMhUcIpqLpQhj58lyEpFJ5GXT=w1200","https://lh3.googleusercontent.com/d/1Vut0MXO4edoig0pWLHfWQ6Era8aryptS=w1200"],"driveUrl":"https://drive.google.com/drive/folders/19RiwbK1GLHly9ExnA8_83tbedLVnJAmM","gps":{"poster":[{"lat":37.5700634,"lng":127.0619588},{"lat":37.568706,"lng":127.0612885},{"lat":37.5687595,"lng":127.0613694},{"lat":37.5688154,"lng":127.0614296},{"lat":37.5688154,"lng":127.0614296},{"lat":37.5690712,"lng":127.0622813},{"lat":37.5688154,"lng":127.0614296},{"lat":37.5693215,"lng":127.0625652},{"lat":37.5696359,"lng":127.0623233},{"lat":37.5697089,"lng":127.0623672},{"lat":37.5693151,"lng":127.0618877},{"lat":37.5690772,"lng":127.0616074},{"lat":37.5698272,"lng":127.0619285},{"lat":37.5696689,"lng":127.0614844},{"lat":37.5695713,"lng":127.0611062},{"lat":37.5697043,"lng":127.0609375},{"lat":37.5698487,"lng":127.0609519},{"lat":37.5692831,"lng":127.0610496},{"lat":37.5689597,"lng":127.0610569},{"lat":37.5694996,"lng":127.0621269}],"banner":[]}},{"name":"힐스테이트청계","addr":"서울 동대문구 답십리동 1009","addrClean":"서울 동대문구 답십리동 1009","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":28,"bQty":0,"postDate":"2026년 7월 6일 13시 41분","note":"힐스테이트 청계(28장/44000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1BLt2bsnx44HQaZ84jXA3jxiUtMRwOvVj=w1200","https://lh3.googleusercontent.com/d/1_HoC44r4v-MsJ0C_zunj_NWTuuBJso-_=w1200","https://lh3.googleusercontent.com/d/1EksdiNax5uU_QiZmKUMxYcCN3rePVDqh=w1200","https://lh3.googleusercontent.com/d/1Si1rIKrCksCLSOwZwiZslXoWDCoNuC57=w1200","https://lh3.googleusercontent.com/d/1kdCn6WW0sdyS-SqiZNCY_PTbXXM0uhOT=w1200","https://lh3.googleusercontent.com/d/1jbIo8DsKUiPA4cThgXiOunkz2xFuGE2O=w1200","https://lh3.googleusercontent.com/d/1U0ht6kNQmgqvmvHXXvTThoCJ8ivrjBsk=w1200","https://lh3.googleusercontent.com/d/1A_PEWfWqn7yjfYa10jQzOyNJgNSCkbss=w1200","https://lh3.googleusercontent.com/d/1qRyB9PaIjGxM7m-62vwBjsXkmKFXiN0y=w1200","https://lh3.googleusercontent.com/d/1__TSr3HSkIODZkfvjvW28mI8e0p3jqul=w1200","https://lh3.googleusercontent.com/d/1bt-A2nXY3jFKUo1zKBk6Q4BAuvQcLcAg=w1200","https://lh3.googleusercontent.com/d/17xh1t81gsiLPFFi9V2GBPEdrIpX0ctPo=w1200","https://lh3.googleusercontent.com/d/1ilOj4L8GQTo9Ua4kcWVxRg4YJ_3IwLtd=w1200","https://lh3.googleusercontent.com/d/187PCGOGbuYp9P_Bm0YQDyfv8fOQrnOq8=w1200","https://lh3.googleusercontent.com/d/1Y9QXUw_xcqS4XdGTUCFeCmimRIfF5wPO=w1200","https://lh3.googleusercontent.com/d/1pAbkPYeYdkakXi6Wh1qUgr4jVTu9gwqe=w1200","https://lh3.googleusercontent.com/d/1SdOZ8kC98OO9oVXMjaZvzrQpXkCMO32q=w1200","https://lh3.googleusercontent.com/d/1mNRbP9S5EHFWnkr0n3_l2P_3eux-rm5s=w1200","https://lh3.googleusercontent.com/d/1e79SccbFinctiV-gZarXKCZbgOmkZPVZ=w1200","https://lh3.googleusercontent.com/d/1JUoO-rsZI_q2_YeZH12cgGHrd7RxyBAL=w1200","https://lh3.googleusercontent.com/d/1WmTPltuM9vxXqKBg8wnywGumUOWjG15d=w1200","https://lh3.googleusercontent.com/d/1YfM6Zt-1sFMUB1gj_qi73QaMreV4Z_7l=w1200","https://lh3.googleusercontent.com/d/1smyAy1p76lvjUWcLZnno4ZBStwh2V-IL=w1200","https://lh3.googleusercontent.com/d/1BQyD_K_digamXi8lPceoUUJqEd_zfduX=w1200","https://lh3.googleusercontent.com/d/1BJfmOOTI6DHmA8980Wkldo81pgKBCMa6=w1200","https://lh3.googleusercontent.com/d/1AkKO8gp9nivVwL2TZTNV32Z680X3QviE=w1200","https://lh3.googleusercontent.com/d/19-V_5tnUjett_K28f9bJhTXIv_YMOZaK=w1200","https://lh3.googleusercontent.com/d/1rdKdF3Lm-NbXDBKgq-zl9IGjb0TDH5AN=w1200","https://lh3.googleusercontent.com/d/13wwPatMRStmn3jVxM_1XpgkC7liUi9Z8=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1JPpOAqYB-k2CfDY1wG3zzW3umgCSrYch","gps":{"poster":[{"lat":37.571907,"lng":127.0484568},{"lat":37.5719715,"lng":127.0468734},{"lat":37.5708873,"lng":127.0469103},{"lat":37.5717516,"lng":127.0468679},{"lat":37.5719866,"lng":127.0462738},{"lat":37.5719866,"lng":127.0462738},{"lat":37.5719753,"lng":127.0462887},{"lat":37.5717007,"lng":127.0466838},{"lat":37.5708873,"lng":127.0469103},{"lat":37.5719463,"lng":127.0463868},{"lat":37.5714898,"lng":127.0471587},{"lat":37.5713748,"lng":127.0475003},{"lat":37.5714917,"lng":127.0473415},{"lat":37.5713452,"lng":127.0477921},{"lat":37.5712544,"lng":127.045904},{"lat":37.5711906,"lng":127.0486055},{"lat":37.5713383,"lng":127.0482181},{"lat":37.5654867,"lng":127.0569723},{"lat":37.5719324,"lng":127.0480059}],"banner":[]}},{"name":"래미안미드카운티","addr":"서울 동대문구 답십리동 1013","addrClean":"서울 동대문구 답십리동 1013","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":22,"bQty":0,"postDate":"2026년 7월 2일 13시 45분","note":"래미안 미드 카운티(22장/88000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1aRuqM33YKo84OPkXPQGGbCG0KE0GJVnS=w1200","https://lh3.googleusercontent.com/d/1-yKvxwpkay3lYrbTx8GtiVQnlaPRW9Yg=w1200","https://lh3.googleusercontent.com/d/14J6PYY0K49c3j8K2caetNcRGYkFRIgd1=w1200","https://lh3.googleusercontent.com/d/1s38JgnxHMKKo1tEhKluKNaQNcyYBJCqt=w1200","https://lh3.googleusercontent.com/d/1s6MWS6WArSCfqvJV0S9C7cm-eMMlzK3Q=w1200","https://lh3.googleusercontent.com/d/1xeGstFKLZiREZ0WF4U4cmLwbMeOQ8XIj=w1200","https://lh3.googleusercontent.com/d/1b6_3oeeQ4m2Nn-1Nqi8of17IP_1ZSvzb=w1200","https://lh3.googleusercontent.com/d/1ct0ms4XAIcFt6Tm62RAPmA6FxpHBAncH=w1200","https://lh3.googleusercontent.com/d/1HgLiT7S6_iespWgndRqqmxLmnlhCqjvb=w1200","https://lh3.googleusercontent.com/d/1JCM7Bhqv_t6eAIb55zGJW8PODHOKKdBc=w1200","https://lh3.googleusercontent.com/d/1natU1YHxOJqM5LfxNhi-Q5duPmNKcEgt=w1200","https://lh3.googleusercontent.com/d/1qkzZAHvCtzr0q5_kO6b5eO8qHdwiTH_j=w1200","https://lh3.googleusercontent.com/d/1RgHQ7oMnYObsYKen6aSZy3iGmAfpmG9t=w1200","https://lh3.googleusercontent.com/d/1dKEiBZSMTTc3vtNDtCYTdZsmLqn3wGNg=w1200","https://lh3.googleusercontent.com/d/1FzkqbNlL-cvfF01bro2nPUv9LceUFGm1=w1200","https://lh3.googleusercontent.com/d/1S-jSKAP2eHLgTVBWfd6fUc0jCxmlp6lY=w1200","https://lh3.googleusercontent.com/d/1f7Z1Rc9GP4LKBktPH4iX9oOgzByD917U=w1200","https://lh3.googleusercontent.com/d/1tSMUHrWiQQoEbSMluTbx4Y3KvMTOxYW_=w1200","https://lh3.googleusercontent.com/d/1j3eCJk6QDzTT5bkECsgnjXucWreYK1wd=w1200","https://lh3.googleusercontent.com/d/1u7OKYi4eo4i6pRBShOKPQuPJ8nq8TVIT=w1200","https://lh3.googleusercontent.com/d/1XXWNJPOiRWYS60gP5anMA-Lt4lf0d3kx=w1200","https://lh3.googleusercontent.com/d/19sP4zGYkgOD1Y1fIQPeieZUtYPuoZT8C=w1200","https://lh3.googleusercontent.com/d/1cYI7WDjqu8ES5eX28t3Qx1YKn3cCTftJ=w1200","https://lh3.googleusercontent.com/d/1h8gmqMvaHiWAdMW3GJtjm7s9RsLgWPGL=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1tkB81PJs-97wqJzIb5txzHd2sfrrgMSq","gps":{"poster":[{"lat":37.5751283,"lng":127.05550099999999},{"lat":37.5753855,"lng":127.0556777},{"lat":37.5753855,"lng":127.0556777},{"lat":37.5753543,"lng":127.0559602},{"lat":37.577383599722225,"lng":127.0431691},{"lat":37.5743615,"lng":127.05648569972222},{"lat":37.57379279972223,"lng":127.05670259972221},{"lat":37.5741005,"lng":127.05642679972222},{"lat":37.573381599722225,"lng":127.0548605},{"lat":37.5725702,"lng":127.05730769972222},{"lat":37.5786535,"lng":127.04221429972222}],"banner":[]}},{"name":"답십리파크자이","addr":"서울 동대문구 답십리동 1014","addrClean":"서울 동대문구 답십리동 1014","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":30,"bQty":0,"postDate":"2026년 7월 2일 16시 04분","note":"답십리 파크 자이(30장/49500원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1hGkQV5w3K_Yz-iqdYEqAcxDs243LNC7F=w1200","https://lh3.googleusercontent.com/d/1wml3MQpNgUbBbi48kPLilD7cYmf5e2xR=w1200","https://lh3.googleusercontent.com/d/1mWiL4ofVaJcqdCxHDtIITg-s5nj0Q_u_=w1200","https://lh3.googleusercontent.com/d/1j8HaoucrcH3hfbRVJfKvq5PA8_BZSQ7G=w1200","https://lh3.googleusercontent.com/d/12eVM4wCziSjqN3wzwKWMPgoxyUJ9d0-h=w1200","https://lh3.googleusercontent.com/d/1CCsKoBdZflPsSvwngq3gBBgj0ZI12mtT=w1200","https://lh3.googleusercontent.com/d/1MTyvCZTtKT-bPbqZiCFn7nwudJKeBdNB=w1200","https://lh3.googleusercontent.com/d/14c1mWXjtjz0pzaEZ8-7OZO2x1lAR_HFq=w1200","https://lh3.googleusercontent.com/d/12jQk25rOHEoIP-hgB-GGPQHeigUiyWz1=w1200","https://lh3.googleusercontent.com/d/1CQ2245vyGlIIwg_F8z4c8iWslmPuqbVj=w1200","https://lh3.googleusercontent.com/d/1_SU4e0wwb4QrwwWxQqairhCbLt7pXakF=w1200","https://lh3.googleusercontent.com/d/1dj3lokWunfQDibbszH8sTl_47U2pTnGo=w1200","https://lh3.googleusercontent.com/d/1NB1kDleYVSuawVtwFwufc8SVZkgwvrVo=w1200","https://lh3.googleusercontent.com/d/1hPvimMNgw_XNRFVKvovqbDGg9Wmo9Niy=w1200","https://lh3.googleusercontent.com/d/14NfDK6M-AfS0tdLaP_URtevC7pbV9oK7=w1200","https://lh3.googleusercontent.com/d/1OCvZs2mIbdTksYflWP0rUF1CmXrcT7mE=w1200","https://lh3.googleusercontent.com/d/15gkVc0abEkEjpBzvBbbBZuk1uQIvCGur=w1200","https://lh3.googleusercontent.com/d/1IMKv-DezTMvZro2tG2-AGpVN6z_j66vq=w1200","https://lh3.googleusercontent.com/d/16qOYgeFk4qbgc9ygGmHKOrk8hTco_gZm=w1200","https://lh3.googleusercontent.com/d/1lLDg7PUH_TShZphvXYWoZw4IENv4enb2=w1200","https://lh3.googleusercontent.com/d/1ovLZQ0qCKpSeU_nIKZg5dwI7h7im6rJE=w1200","https://lh3.googleusercontent.com/d/1JG5vzcCtLyq1I3xaGFstlLC-rf5sIzp1=w1200","https://lh3.googleusercontent.com/d/11sJ5vGzeky7d9P8mAoRG4a33zXVsgggZ=w1200","https://lh3.googleusercontent.com/d/1y9_quYKRwk-j4nfwjqjR19YUvgsrtaNJ=w1200","https://lh3.googleusercontent.com/d/19_8aZ8cSJ5nYae4X6I_VC1Xt-jaHX8un=w1200","https://lh3.googleusercontent.com/d/1ivWMy6JtExRBH7vHY1igJeRAhIXLcrY1=w1200","https://lh3.googleusercontent.com/d/1YD1C903wMWvfCJIiF-VbqsX-0SUoB8pb=w1200","https://lh3.googleusercontent.com/d/10KAwim-5r7F3vZsAnqUsngksk9w0KucI=w1200","https://lh3.googleusercontent.com/d/1HWk8tYlySUQGb831SvCkJlpPmGuMTKBu=w1200","https://lh3.googleusercontent.com/d/1Sb0wHGimr8yooptG-opUQ9rRln-dFV9x=w1200","https://lh3.googleusercontent.com/d/1c5sMMJNK5e-h1HQORgaTrnjeizrL7SUY=w1200","https://lh3.googleusercontent.com/d/1Lq9xPJB5OB0V-bkANuC65gDoOmsOqfZa=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1FswT7tfA9W0bjvWuQTnCSnE2upD_18Cg","gps":{"poster":[{"lat":37.5683044,"lng":127.0586701},{"lat":37.5675636,"lng":127.0593517},{"lat":37.5701933,"lng":127.0606613},{"lat":37.5701933,"lng":127.0606613},{"lat":37.5701933,"lng":127.0606613},{"lat":37.5701933,"lng":127.0606613},{"lat":37.5701933,"lng":127.0606613},{"lat":37.5760443,"lng":127.0620027},{"lat":37.5760443,"lng":127.0620027},{"lat":37.5760443,"lng":127.0620027},{"lat":37.5760443,"lng":127.0620027},{"lat":37.5701933,"lng":127.0606613},{"lat":37.5760443,"lng":127.0620027},{"lat":37.5760443,"lng":127.0620027},{"lat":37.5701933,"lng":127.0606613},{"lat":37.5760443,"lng":127.0620027},{"lat":37.567923,"lng":127.0589845},{"lat":37.567923,"lng":127.0589845},{"lat":37.5760443,"lng":127.0620027}],"banner":[]}},{"name":"래미안위브","addr":"서울 동대문구 답십리동 130","addrClean":"서울 동대문구 답십리동 130","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":56,"bQty":0,"postDate":"2026년 7월 6일 11시 38분","note":"래미안 위브(56장/110000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1JEay14ap3HoAuVpTAkP34B-bUdIeFsiH=w1200","https://lh3.googleusercontent.com/d/1jR0EE_Dc3RPfDIHa2-l73i3f1qZ7AoSY=w1200","https://lh3.googleusercontent.com/d/1WazgLa7ZpHFGQmWhrU74VLOwpGMgxWIB=w1200","https://lh3.googleusercontent.com/d/1k6BDnC1TnfsbMR96ojktyjY72seDrdB3=w1200","https://lh3.googleusercontent.com/d/1z7DSF7fTgjUVso7VP85udsHhgBmYtMKY=w1200","https://lh3.googleusercontent.com/d/1U5C3_ke2nK-sYvUUBNiEwV2mhZhyB5dv=w1200","https://lh3.googleusercontent.com/d/1VZAuFXY34lZ2H5zlvyY-uqZV-T8YVQaw=w1200","https://lh3.googleusercontent.com/d/1s2zpKqFgnsRfxgpLcmpNeI6bt4Wb9mBN=w1200","https://lh3.googleusercontent.com/d/1-BcsuTiINCcfie_5uBt7hhJZ8APblL9O=w1200","https://lh3.googleusercontent.com/d/1f3brhhWx2b0ZRsOXNzVKSuF4mlk1UteA=w1200","https://lh3.googleusercontent.com/d/1hzip__n7Xog1cWqphBWi8F5u0eS-fCJx=w1200","https://lh3.googleusercontent.com/d/17YyvWRwLKo4TT3fou6r980FyaZmJmgjV=w1200","https://lh3.googleusercontent.com/d/1LsG3_JmhVmtd9yjY3ypb9Mjne_Whhru0=w1200","https://lh3.googleusercontent.com/d/18aW68E9W9lmBUAgfCVxjXSH0av-QZvTu=w1200","https://lh3.googleusercontent.com/d/1Dy-9v1FhSSK9acwLSS_-WlGru-0YECPx=w1200","https://lh3.googleusercontent.com/d/1L2NqhtO2gNiQqGSj6sZp-HSsTv8IFhl1=w1200","https://lh3.googleusercontent.com/d/1IYmv-Z39TN3wev8TWGyWztC4DVJXp0I6=w1200","https://lh3.googleusercontent.com/d/1XF9lI5WA1gzU_35Y87kDwvB8VqtBqUbr=w1200","https://lh3.googleusercontent.com/d/1WusdiFwNDoVHlr7ReLNXgFqmjmTP7Osd=w1200","https://lh3.googleusercontent.com/d/1mFEYtcPddDacIFYgZbSCQ3F8l0SzUYnJ=w1200","https://lh3.googleusercontent.com/d/1AXWID-O5THyNSjcMRYxvXezfLKva35G6=w1200","https://lh3.googleusercontent.com/d/1gBXkADs3f_A3tvZjphTFwkCwx-_AhMxe=w1200","https://lh3.googleusercontent.com/d/1DbmofDp5Ky9LPvghYS3-GHXaevMypzfs=w1200","https://lh3.googleusercontent.com/d/1YYnnWtKf2OQ5HJmVy0w-qxtLHTSAND_f=w1200","https://lh3.googleusercontent.com/d/1NMFoaEHb-QXwnql49tMRLKVgCaN9SMub=w1200","https://lh3.googleusercontent.com/d/1mrPkaYWRguDfh2yWnzaXpwik0rxXR_-U=w1200","https://lh3.googleusercontent.com/d/1emKFCPxxOmgkEcdDVci7I6P9sUh03DHK=w1200","https://lh3.googleusercontent.com/d/1ainv909dmLK8fr9ngpMa0KPXZzSVLLs3=w1200","https://lh3.googleusercontent.com/d/1aCE6honm9aAewWtqMBCWGQqWCc-llxjR=w1200","https://lh3.googleusercontent.com/d/1EIdcfL1FBHP1D92A8ODj-ApMiPxQcJQN=w1200","https://lh3.googleusercontent.com/d/159O9Z_-xR3pt2dOU19lbw0z0ktvG9mBj=w1200","https://lh3.googleusercontent.com/d/1Gi2B7tISNo-6uIruzc4MqOHz8MuwCnYN=w1200","https://lh3.googleusercontent.com/d/1TF4cX2Y0QZRiGQhH9-GPRjuENg7oo46S=w1200","https://lh3.googleusercontent.com/d/1zvmo-VHi644ta-gLE78yxwFQEViC_3PL=w1200","https://lh3.googleusercontent.com/d/1D6WqwI9K-qsvk4kXrslAPkuNDTkSY0Jw=w1200","https://lh3.googleusercontent.com/d/1UGBSdO9XolXkuPKYkR9Ll9rFd82PW2KG=w1200","https://lh3.googleusercontent.com/d/1LWFzcvfF21NjOGS_8v6A5mzrUfN6FcsS=w1200","https://lh3.googleusercontent.com/d/1TNzm2Txjv7vhcJCrLSlbp6KThnjlSPWn=w1200","https://lh3.googleusercontent.com/d/1-L9rWhYNP0YU3SB2olM_aqMBvBDR4Nif=w1200","https://lh3.googleusercontent.com/d/1hK-RiiIPJ1FwFVU-DJCtNycUcXNEaO1T=w1200","https://lh3.googleusercontent.com/d/1YyQZkdT0iqPJWU_9qgdaeUYLJEO_V5xA=w1200","https://lh3.googleusercontent.com/d/1xjVTwShHrsSHmmO4xS_tSNczlJX41PkD=w1200","https://lh3.googleusercontent.com/d/1vfL3v0uwTXW5RdKPDYhxiAF1fLwRXg2V=w1200","https://lh3.googleusercontent.com/d/1ef8_AjV1LcezrFrjcBcr4rhAE8eP9DxY=w1200","https://lh3.googleusercontent.com/d/1YnkxTX1r3A4R7p22QZwYIE6xaQcl_Zme=w1200","https://lh3.googleusercontent.com/d/1KmibwIcIELUogxZr3MIYeULVo3ro5ibc=w1200","https://lh3.googleusercontent.com/d/19pLsKHxX5MjkaC68ihnCpsJ-M1vWULMO=w1200","https://lh3.googleusercontent.com/d/13223cXyKY51RAHFZs_y_7GRQpJZxevui=w1200","https://lh3.googleusercontent.com/d/1Z2sZ7xNGVt_OuZIjsHvWvCpXgw9E8uhz=w1200","https://lh3.googleusercontent.com/d/1wIt3HJCXxMtQJADSrGMJOuEBuP8EXnYh=w1200","https://lh3.googleusercontent.com/d/13819Cn3M3abqB8R673GSLRinmea0M46A=w1200","https://lh3.googleusercontent.com/d/1ZrKCvXbWTGXe74JQ5Rjz_H6sjzr6Dsn9=w1200","https://lh3.googleusercontent.com/d/1ZF_zUqt6W3wLynQQayqhUHIEiOwYjkAn=w1200","https://lh3.googleusercontent.com/d/19ZTDdENs6baBrI5kdwTz3pR0U2xrNa_K=w1200","https://lh3.googleusercontent.com/d/1xLHrRd1SGJOCY4bobJaAnaXb_U3X5IyI=w1200","https://lh3.googleusercontent.com/d/1yvegw56mBN6hzg-mcU_qNtFStMWwyVik=w1200","https://lh3.googleusercontent.com/d/1wnCEZtreoIWPfMlcZwSNxGH7gXW_R6cH=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1Nbh06GtEdawauapQahm2bCOhR7hAhJJK","gps":{"poster":[{"lat":37.5692198,"lng":127.0518032},{"lat":37.5701021,"lng":127.0532306},{"lat":37.5728779,"lng":127.0524668},{"lat":37.5728779,"lng":127.0524668},{"lat":37.5725464,"lng":127.0521648},{"lat":37.5727463,"lng":127.0528682},{"lat":37.572214,"lng":127.0527433},{"lat":37.5717573,"lng":127.0530575},{"lat":37.5723511,"lng":127.0531517},{"lat":37.5718903,"lng":127.0533278},{"lat":37.572807,"lng":127.0542892},{"lat":37.5725542,"lng":127.0526123},{"lat":37.572189,"lng":127.0542587},{"lat":37.5720527,"lng":127.0547434},{"lat":37.5719383,"lng":127.0555593},{"lat":37.5717596,"lng":127.054368},{"lat":37.5711934,"lng":127.0541728},{"lat":37.5704803,"lng":127.0549627},{"lat":37.5709661,"lng":127.0550254},{"lat":37.5712975,"lng":127.0553014},{"lat":37.5701968,"lng":127.0545303},{"lat":37.5696626,"lng":127.0540305},{"lat":37.5701266,"lng":127.0541632},{"lat":37.5692919,"lng":127.0542421},{"lat":37.5702701,"lng":127.0532208},{"lat":37.5705994,"lng":127.0539566},{"lat":37.5711603,"lng":127.0515617},{"lat":37.5704753,"lng":127.0531313},{"lat":37.5710074,"lng":127.0532716}],"banner":[]}},{"name":"동답한신","addr":"서울 동대문구 답십리동 42","addrClean":"서울 동대문구 답십리동 42","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":9,"bQty":0,"postDate":"2026년 7월 3일 13시 33분","note":"동답 한신(9장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1g2J9QQYOOhB3zHPgSYuyXOmlUmlVBXoZ=w1200","https://lh3.googleusercontent.com/d/1xZjU-tk3HFGv0-NF6NlYvY_5cil8GiNF=w1200","https://lh3.googleusercontent.com/d/1qvTPWiIIE14-W_z0Qu_GQgxjNAToHz8R=w1200","https://lh3.googleusercontent.com/d/1YDFNLpMSLyZD71StLBzGaCPgXcipOW9S=w1200","https://lh3.googleusercontent.com/d/1Q1c83PjPDKOloDTOcoHatqy_8YWdqlA5=w1200","https://lh3.googleusercontent.com/d/1itWdRUPNDPjS4brhoP5-OtVd7bvCtGiT=w1200","https://lh3.googleusercontent.com/d/16onGxa25dvj-IL5-XDcxydgCaa6TISRC=w1200","https://lh3.googleusercontent.com/d/11f5HvZdapU-_ueBhdDYtycEQVAShMSa9=w1200","https://lh3.googleusercontent.com/d/1RbSMk8fpS4HTl2k2szsu9xOOp_HjJydA=w1200","https://lh3.googleusercontent.com/d/1sKU6XsuTXlT3JAtJCRRt-ASQIjQA5hZU=w1200","https://lh3.googleusercontent.com/d/1X_Ty8ByFejCX3ZIUVIqYG3ZEHWIJDZLn=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1McBABmCA4dvd5SHqYjy9KktkhN4jeaak","gps":{"poster":[{"lat":37.5712794,"lng":127.0623782},{"lat":37.571169,"lng":127.0633036},{"lat":37.571169,"lng":127.0633036},{"lat":37.5709868,"lng":127.0626023},{"lat":37.5705837,"lng":127.0620554},{"lat":37.5706196,"lng":127.0626666},{"lat":37.5710022,"lng":127.0629391}],"banner":[]}},{"name":"답십리청솔우성","addr":"서울 동대문구 답십리동 80","addrClean":"서울 동대문구 답십리동 80","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":26,"bQty":0,"postDate":"2026년 7월 2일 14시 53분","note":"자리없음","isDone":true,"photos":[],"driveUrl":"https://drive.google.com/drive/folders/1k-fm293pdZndUDbTWCpPV_BzvKUo_kEy","gps":{"poster":[],"banner":[]}},{"name":"우성그린","addr":"서울 동대문구 답십리동 989-1","addrClean":"서울 동대문구 답십리동 989-1","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":14,"bQty":0,"postDate":"2026년 7월 8일 13시 45분","note":"우성 그린(14장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1Iv_VxToLvjaekU4feD_CHoRJ2GVGlTS8=w1200","https://lh3.googleusercontent.com/d/1qUcPsK37KZnBKDWiT6kc7LfGQ7D7zzz1=w1200","https://lh3.googleusercontent.com/d/1a8JOGswsdj-MshEww6yUsEbI2EbqU0nw=w1200","https://lh3.googleusercontent.com/d/1u7CKB4haEfQMcsGKhFa60sAKL9l4M2mc=w1200","https://lh3.googleusercontent.com/d/12n9s8AP0NPP1GXEhELd67RIF9Re7A4P_=w1200","https://lh3.googleusercontent.com/d/1NZWyqmtjKbS4k8whcxz1sOpAGU0kpQf6=w1200","https://lh3.googleusercontent.com/d/1DS_hS2eKXXEZyz4bwJrSlwn_pmAKNlr3=w1200","https://lh3.googleusercontent.com/d/1FkLtwDR-zFi96nyqhgDpwg6hMoAr6LQJ=w1200","https://lh3.googleusercontent.com/d/1w5supOdDPCAdmdYo-5i29mvodo9yvuOP=w1200","https://lh3.googleusercontent.com/d/18tCUF7w0im41WWHJaoeCwDGN3FexpyYZ=w1200","https://lh3.googleusercontent.com/d/1IwckezqarKcU_paMkCfd7RJg2JlAE3dC=w1200","https://lh3.googleusercontent.com/d/1NbmkG6_d2EZ7XVILDfH7QwbrV_Smn60o=w1200","https://lh3.googleusercontent.com/d/1s3H7dZgZnLoMpI0Eg3fOuYbVDffTT5Xl=w1200","https://lh3.googleusercontent.com/d/1by95RcesxrAYzxhCxUewM6HpeBM1L1R9=w1200","https://lh3.googleusercontent.com/d/1RP-ixAzAqJBx3XAdpFk6Vtbvhdndab47=w1200","https://lh3.googleusercontent.com/d/11ZHLz9rS2e_HUihlGYNdgmG1AC8Ea5FK=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1RUVtozWs8OBCdsjIuZPZAs5sTx65MMuH","gps":{"poster":[{"lat":37.5741751,"lng":127.0666338},{"lat":37.5746589,"lng":127.0660204},{"lat":37.5746869,"lng":127.0656947},{"lat":37.5746869,"lng":127.0656947},{"lat":37.5745081,"lng":127.06548},{"lat":37.5747492,"lng":127.0656476},{"lat":37.5748395,"lng":127.0656478},{"lat":37.5750033,"lng":127.0658262},{"lat":37.5751529,"lng":127.0662076},{"lat":37.5749329,"lng":127.0659114},{"lat":37.5747196,"lng":127.0664075},{"lat":37.574396,"lng":127.0663593}],"banner":[]}},{"name":"답십리두산","addr":"서울 동대문구 답십리동 990","addrClean":"서울 동대문구 답십리동 990","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":18,"bQty":0,"postDate":"2026년 7월 2일 16시 42분","note":"답십리 두산(18장/44000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1lJdtOBURAokRJspZr9l_3inBV6A337rh=w1200","https://lh3.googleusercontent.com/d/1Z1VYEu36MpJ_Ky628UGokwNHptFOiMie=w1200","https://lh3.googleusercontent.com/d/1TY-5Y63cyzCGUEOdtRQ8nei3-sFmTIpk=w1200","https://lh3.googleusercontent.com/d/10uIu1jsnPHoJbWdeDWMjq-2WUOQ10IKl=w1200","https://lh3.googleusercontent.com/d/1F4XjR5lTC99guAaBxzEiPd7DNPze7cY1=w1200","https://lh3.googleusercontent.com/d/1X4ZRFh2lsKxsHmTKIWmwMaPToR3artFt=w1200","https://lh3.googleusercontent.com/d/10twXV22XZrL9nToTCCqhNrzIZ-rhwKTG=w1200","https://lh3.googleusercontent.com/d/12XdkBjrI-4tDv5-rZd2ZxgCcMzZ8LuUw=w1200","https://lh3.googleusercontent.com/d/1A8_y5Ma5GJ1PKQ0-wcv3MElplxxtFtp-=w1200","https://lh3.googleusercontent.com/d/1o50R5Fui6KwRcBq8vMHxPD6V9ZxoNDTo=w1200","https://lh3.googleusercontent.com/d/1msKJdaxm_kYldkPp49ssmhzNWz9651PJ=w1200","https://lh3.googleusercontent.com/d/1qdW7kJ3UDqHk864H0VtWiCfFKQUaAQ-H=w1200","https://lh3.googleusercontent.com/d/10s37PwSR1ClpseTTWuFkQg77pn3y9aTk=w1200","https://lh3.googleusercontent.com/d/1SoPJpN6ivj3jaY9h6R5PGeNJIA14mhrP=w1200","https://lh3.googleusercontent.com/d/1bE733Wx4gkfnOlJ5Cjctj8FviplI8-xG=w1200","https://lh3.googleusercontent.com/d/1WFrMTMblZlPUoBlfMNqa8fb8ZOEJP6oi=w1200","https://lh3.googleusercontent.com/d/1Y5lafPKjOqP2tmpWazv8pxt4o_56TTuS=w1200","https://lh3.googleusercontent.com/d/1ZON2FMay3UBGwfiCri-21_4-SFONfO3j=w1200","https://lh3.googleusercontent.com/d/1rt2KVZazqhtwxuZxDWERuAGrE7ync7Xm=w1200","https://lh3.googleusercontent.com/d/1jQnoaRBAPMVot2aOAh30riZ3AJjmYDK6=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1J02XUw2tKot-Hzc_gte5VF0HWpIC4g62","gps":{"poster":[{"lat":37.567942799722225,"lng":127.0593374},{"lat":37.5694279,"lng":127.05982729972222},{"lat":37.569820999722225,"lng":127.05993739972222},{"lat":37.5695094,"lng":127.0604917},{"lat":37.5696224,"lng":127.0605295},{"lat":37.5698347,"lng":127.0605477},{"lat":37.569960899722226,"lng":127.06033619972222},{"lat":37.569737,"lng":127.0601484},{"lat":37.569820999722225,"lng":127.05993739972222},{"lat":37.5692297,"lng":127.06012889972222},{"lat":37.569115699722225,"lng":127.05984119972221},{"lat":37.5690157,"lng":127.0606848},{"lat":37.5690485,"lng":127.06051169999999},{"lat":37.568605599722225,"lng":127.05992039972222},{"lat":37.568637899722226,"lng":127.06006309972221},{"lat":37.57130229972223,"lng":127.0592857},{"lat":37.5720541,"lng":127.05925129972222}],"banner":[]}},{"name":"답십리두산위브","addr":"서울 동대문구 답십리동 998-0","addrClean":"서울 동대문구 답십리동 998-0","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":24,"bQty":0,"postDate":"2026년 7월 2일 17시 24분","note":"답십리 두산위브(24장/33000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/16Kaew2UBL3AgGnxWgLHy9H6gcsLfxCQJ=w1200","https://lh3.googleusercontent.com/d/1MhE6oVPwSksAFKeHZ8xG52MvJPq2m18Z=w1200","https://lh3.googleusercontent.com/d/1WN19rfAYovhvHJxS2pO1kmvsF-jHiqeX=w1200","https://lh3.googleusercontent.com/d/10qR2gDgpT6SyuXhIutImaZSr_ZF8DmpL=w1200","https://lh3.googleusercontent.com/d/1QuvZ9Gy0eur_T3CMqYNa5XAMJjesApRo=w1200","https://lh3.googleusercontent.com/d/1nSvZIkgYgW26um3QjWiVItRz32XwNPj5=w1200","https://lh3.googleusercontent.com/d/18LK6vCM6-X0ejQW-v1WlTgLaU8bJrk64=w1200","https://lh3.googleusercontent.com/d/1ZFxCnGj-GvMio4laz2TCmUBbot_CPPoS=w1200","https://lh3.googleusercontent.com/d/1bfQPe0YpJo2b0Xkt8UH-Ijdj_xMxJ9tw=w1200","https://lh3.googleusercontent.com/d/1DWneAIhjiSnYStwpd8GYZYItMoQ45X4Z=w1200","https://lh3.googleusercontent.com/d/1V0aRVS1lofFIKxbw9HRcLZBT7uQW4iUT=w1200","https://lh3.googleusercontent.com/d/1SEKR7T-mC2IqVOm4aViuCwdnauZrtPUu=w1200","https://lh3.googleusercontent.com/d/1Pz8xw_ePpO9jFk9j4-oET036-8Hh00XX=w1200","https://lh3.googleusercontent.com/d/1s8mVHqlFTE0r7AFQU1yFb_STYt4uLpoh=w1200","https://lh3.googleusercontent.com/d/16n1UrLMB5ngZMb_s30wuGH_h4Yrg2nOu=w1200","https://lh3.googleusercontent.com/d/17tg0IgBvkKaDYacVTNTxk8QiNl_199S_=w1200","https://lh3.googleusercontent.com/d/1mHzd4_lGlb-Ds5UXS09IPjeRUjUVVGEz=w1200","https://lh3.googleusercontent.com/d/1xDIC9cXT58CWF28Ha1aMlQ6dF_K8JVeX=w1200","https://lh3.googleusercontent.com/d/1bmr7GlClhZpZd2At7QiJ5hNBtfLqiP1f=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1f-gXu8HvitAGHb6Md1SSoWvSwCqvXXWK","gps":{"poster":[{"lat":37.5658326,"lng":127.0582919},{"lat":37.5663631,"lng":127.0566297},{"lat":37.5667069,"lng":127.0570989},{"lat":37.5660206,"lng":127.0572074},{"lat":37.5664317,"lng":127.057406},{"lat":37.566524,"lng":127.0575868},{"lat":37.566741,"lng":127.0581077},{"lat":37.5666117,"lng":127.0586453},{"lat":37.5664459,"lng":127.0585428},{"lat":37.5664037,"lng":127.0579998},{"lat":37.5660157,"lng":127.0577538},{"lat":37.5661644,"lng":127.057918},{"lat":37.5659889,"lng":127.0575941},{"lat":37.5655286,"lng":127.0574911},{"lat":37.5653846,"lng":127.0572791},{"lat":37.5657165,"lng":127.0570668}],"banner":[]}},{"name":"장안현대힐스테이트","addr":"서울 동대문구 장안동 329-2","addrClean":"서울 동대문구 장안동 329-2","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":18,"bQty":0,"postDate":"2026년 7월 6일 13시 57분","note":"자리없음","isDone":true,"photos":[],"driveUrl":"https://drive.google.com/drive/folders/13JI-qI-DaLG7LDmjdy_4QsoKLEPVLWZB","gps":{"poster":[],"banner":[]}},{"name":"래미안장안2차","addr":"서울 동대문구 장안동 329-3","addrClean":"서울 동대문구 장안동 329-3","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":40,"bQty":0,"postDate":"2026년 7월 7일 11시 27분","note":"래미안 장안 2차(40장/77000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1EDLXW5RGoLQEb7PE9U6nO7kfjjiCnVgt=w1200","https://lh3.googleusercontent.com/d/1uzr3Jxg65VxAf9Wx-mp-3QZoevVj34kZ=w1200","https://lh3.googleusercontent.com/d/1RURPXMp8vtKLMKPGQhBTaBPlcem_zBLM=w1200","https://lh3.googleusercontent.com/d/1xt_zPZfG-QPCQoYBRGhhqUDvWUiz4Tme=w1200","https://lh3.googleusercontent.com/d/1EnvHJdGNcom-g3j_yNwpo52-SK1eop0P=w1200","https://lh3.googleusercontent.com/d/1BpEcMi2Nn8voQvb9YZJnifNL6m3-CgF4=w1200","https://lh3.googleusercontent.com/d/1mtcVLCyG5sZ9pfurCODAysbA3p8VkItf=w1200","https://lh3.googleusercontent.com/d/1FbfTYhH_ZbH2rHhPV7NihgC2AjhqclNJ=w1200","https://lh3.googleusercontent.com/d/1AMiI9RPu519Yf-bE2tiV_Oje8MzhIFco=w1200","https://lh3.googleusercontent.com/d/1JVTc0RsKJ8OlODkMT1_nDbcsCaK56o_Q=w1200","https://lh3.googleusercontent.com/d/1gHe8uVk8zOYao1eLBS0354FWv99Won5d=w1200","https://lh3.googleusercontent.com/d/17wKCukSCFtYc4g7BYCaRPnSULy_aZSto=w1200","https://lh3.googleusercontent.com/d/18eHKDxahfMztp5K8Y75s_y_f2IvHqn37=w1200","https://lh3.googleusercontent.com/d/15aNq9mC7pGC2dPQmo6G8I7XxVDL0ycfk=w1200","https://lh3.googleusercontent.com/d/1kOT3WxsIFstYGIIiL8V1CqKBNvmxR9_j=w1200","https://lh3.googleusercontent.com/d/1KK1NSD0nJYEfhBwXF6-Y5QdSS_1oiOEa=w1200","https://lh3.googleusercontent.com/d/101URR3pviIjYS4JBkXEoUYb2-vZwzCIz=w1200","https://lh3.googleusercontent.com/d/1TttI4NomGmTu2r7ovBplzFOdkYufKI1P=w1200","https://lh3.googleusercontent.com/d/1MwID_n_7E1xg6YGjqxlQix0Btb-5KnUe=w1200","https://lh3.googleusercontent.com/d/1mDyBiqyRlMytRwzQhCA3aQDaTqDDEItR=w1200","https://lh3.googleusercontent.com/d/1XkC1wme3pD55SIXSKCnvUy3OJhLvinL3=w1200","https://lh3.googleusercontent.com/d/1onsJ_kvjO8MXM_aLLxXzsJMUFccLooLF=w1200","https://lh3.googleusercontent.com/d/1QZKpd3XxEbzJ2BEwv9Vs0Pvpje7G8Uf3=w1200","https://lh3.googleusercontent.com/d/12BczlQa2rkz1DElfujOHyS3_QZQGDTEN=w1200","https://lh3.googleusercontent.com/d/1XKOB3-wQB10RQK2g2BtyiIdy9TwPjvZ8=w1200","https://lh3.googleusercontent.com/d/1Mxa0-4iF6C7XopY0-DCfBLdbw8FZOvsA=w1200","https://lh3.googleusercontent.com/d/1RHlVfVKYbZae1qdGR3aNabiE3kEtV0bj=w1200","https://lh3.googleusercontent.com/d/1H_xLNUl_StSWeQD59O0ynzm3LAcw-rK3=w1200","https://lh3.googleusercontent.com/d/1qXznQWuFGsrvy72cizYgALxbA8ZVbck0=w1200","https://lh3.googleusercontent.com/d/1yEqhL-X1Hnewozx0bnMp2qJLKExPQPkB=w1200","https://lh3.googleusercontent.com/d/1NDbX4yXNamyLNMv6v1ZwY0yibrfK4Efp=w1200","https://lh3.googleusercontent.com/d/17OExSW5P2KqSNlnX_1lRmQN_p7qbm4Xb=w1200","https://lh3.googleusercontent.com/d/1wo40wXgCCOjhGlu60Iz-szE5EgVC_oGX=w1200","https://lh3.googleusercontent.com/d/1r5YG96hZ42emaRiNsWoFJ1NqOj7Wrpmt=w1200","https://lh3.googleusercontent.com/d/1ZoT7mKNYJDvE_z86KOJSsEk_rIZ0OmCT=w1200","https://lh3.googleusercontent.com/d/1wCZSDoMKCGnuPxaSXLoKxFwaVu8VP-Cu=w1200","https://lh3.googleusercontent.com/d/1WbIv1XGmCs2XEHBae-f1sZYYm-JBYAC1=w1200","https://lh3.googleusercontent.com/d/1pNByi58-p3PlJ0mui8aX8PX0QIv7TJT0=w1200","https://lh3.googleusercontent.com/d/1ItjPT2GkgZdmlTHXjLnTU0xPb_DF63PB=w1200","https://lh3.googleusercontent.com/d/1uBX0iNgD1d2EXb1kGISe5xo3EjATmLx5=w1200","https://lh3.googleusercontent.com/d/1GkpaCgY9cIElMumlw6ckWKsNeYwRc5mT=w1200","https://lh3.googleusercontent.com/d/18f7ZVibWEXz81JioIuuhYUb6Le_g4Yzv=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1T2VBtw_nACF7ZmOakGlxiHgnyKDJKlOM","gps":{"poster":[{"lat":37.5727468,"lng":127.0738488},{"lat":37.5743418,"lng":127.0748344},{"lat":37.5741852,"lng":127.0753261},{"lat":37.5745112,"lng":127.0751985},{"lat":37.5749579,"lng":127.0743601},{"lat":37.5745112,"lng":127.0751985},{"lat":37.5733964,"lng":127.0742097},{"lat":37.5735541,"lng":127.0742421},{"lat":37.573412,"lng":127.0751853},{"lat":37.5732498,"lng":127.0761223},{"lat":37.5740088,"lng":127.0760752},{"lat":37.5747245,"lng":127.0759021},{"lat":37.5747245,"lng":127.0759021},{"lat":37.5748046,"lng":127.0757988},{"lat":37.5748046,"lng":127.0757988},{"lat":37.5746003,"lng":127.0753463},{"lat":37.5744374,"lng":127.0756009},{"lat":37.5740752,"lng":127.0754996},{"lat":37.5736514,"lng":127.0753355},{"lat":37.5737762,"lng":127.0753897},{"lat":37.5739225,"lng":127.0754937},{"lat":37.5742746,"lng":127.0753344}],"banner":[]}},{"name":"장안현대홈타운","addr":"서울 동대문구 장안동 336","addrClean":"서울 동대문구 장안동 336","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":41,"bQty":0,"postDate":"2026년 7월 6일 15시 19분","note":"장안 현대홈타운(41장/110000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1mA9HpZfi0w_4wn1FIackF0pW6BPXKYoV=w1200","https://lh3.googleusercontent.com/d/1Gpz_SHXYJKpNvZe0oXcz-q5kZNXWaNxT=w1200","https://lh3.googleusercontent.com/d/1-Fgymt96ff5Ze8osM1otY6ePMr2J8v_v=w1200","https://lh3.googleusercontent.com/d/1iKaTTJ9owoRNhGrMt0bSKRpD4qsfb8MU=w1200","https://lh3.googleusercontent.com/d/1ChoUHXuOdCKGdAVStvSWz4XfgHUEtcjw=w1200","https://lh3.googleusercontent.com/d/13dD4Y1WE_6HdliiFv3n3McioBksTrj-x=w1200","https://lh3.googleusercontent.com/d/15oe5bv_vn7shgoNMIiHqNuqEz4TV8rtq=w1200","https://lh3.googleusercontent.com/d/1vPjxrxpMRUJAbpLmXCzid9XZtZAacnvX=w1200","https://lh3.googleusercontent.com/d/1zaZ9duicR056dmmCj0ZpjH28bntpj-r6=w1200","https://lh3.googleusercontent.com/d/1OYPXaWN0JmmR1_vRE5imRoTVfwusSfSV=w1200","https://lh3.googleusercontent.com/d/1yia9gG82eomRqUTx4mK6OfQIEci22N-p=w1200","https://lh3.googleusercontent.com/d/1ZQ7j-qugQivprtC_n2N03pQLJPbWEMSh=w1200","https://lh3.googleusercontent.com/d/1hg0kDdJ6Iuyrwln0RxMOJ_8sCQL2Emqz=w1200","https://lh3.googleusercontent.com/d/1tZZ-YqUMHXF1Nr17FrJVOWtE-OznJn-W=w1200","https://lh3.googleusercontent.com/d/1qpuazY2mIWleCcWIOce4wtGW86rphxlu=w1200","https://lh3.googleusercontent.com/d/1X9HgtKZpIsWyfiUwxgdmcJqOFBLGY_Aq=w1200","https://lh3.googleusercontent.com/d/1wOpj03plehCwR8ZuCLlPcAYTZkj4qF8w=w1200","https://lh3.googleusercontent.com/d/1L8HquoAM6xm7york7iOTVD19JnAZh6Dk=w1200","https://lh3.googleusercontent.com/d/1CbrRUg9BNMEfZFjRNHyA93AXBEzvYTkf=w1200","https://lh3.googleusercontent.com/d/1HTDM_VIfHreHoP7AOfJ9QEDgsPR1P-O4=w1200","https://lh3.googleusercontent.com/d/1OOxoSTSjr4ZFTCFohIVOMgOprYNfwbIU=w1200","https://lh3.googleusercontent.com/d/117ddDgZ3Rj1iMys8eYNdBTW28-OXyR3H=w1200","https://lh3.googleusercontent.com/d/1b260hkzXg03CNgSjMXlenUeinVY7LEE_=w1200","https://lh3.googleusercontent.com/d/1EBYXK5Q4ZoUZr95EUc2Lm0O7RF-cfCyB=w1200","https://lh3.googleusercontent.com/d/1zZYNHmvPPrtuUnOKYzGMKlO-bFk8_Fgj=w1200","https://lh3.googleusercontent.com/d/1JHU0Hfdv9sc2nfuPvsdBGByqfeMqBDo9=w1200","https://lh3.googleusercontent.com/d/12UPqQqXE2-cp5XJU1aLCGHrvmxHbJET-=w1200","https://lh3.googleusercontent.com/d/1xvVmhkgwJRs6vHkTHPvqcp_9AuTkfQHs=w1200","https://lh3.googleusercontent.com/d/1tcLUqsr11KCjnnMNxHvUklGsfs-zECD4=w1200","https://lh3.googleusercontent.com/d/1HO4fHvoRiIeNiFzVXbUqhpZEjLdmQ4D6=w1200","https://lh3.googleusercontent.com/d/1NNSBjIQ3fFXUDOwIW_d3pXylEJFlKCOP=w1200","https://lh3.googleusercontent.com/d/1Ne7JfsxCjR5egKPajHLKWur3azPpOf5m=w1200","https://lh3.googleusercontent.com/d/1pHNCeynSbe3q7Wg16DAbtXVjLWzo3k5x=w1200","https://lh3.googleusercontent.com/d/13gJZ3n_FaANJyN-9xa2M02BmTcNXU5tH=w1200","https://lh3.googleusercontent.com/d/1qw_IFjg-wg8cjswBucm-iybzcnyeKBe1=w1200","https://lh3.googleusercontent.com/d/1MJoJqih-ZUtgqfr1RfrqWzyGhiMAQ3Vj=w1200","https://lh3.googleusercontent.com/d/14q_62H5Dov8IbgwKzLm1nBnpHF2Ecr1Z=w1200","https://lh3.googleusercontent.com/d/1uh2UWlB6Wp3wOhb8IwwdWPUyYZrjCI7L=w1200","https://lh3.googleusercontent.com/d/1OFL21lEJOUoBbZN3KIq1RYdPSoZ8Hjmu=w1200","https://lh3.googleusercontent.com/d/1LeHQW7N3McnQ92qDD-vGzRJ4Pfl4c7vg=w1200","https://lh3.googleusercontent.com/d/1IfV10qy2xtP7x3wGslcxT0ASGmez4umT=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1KLaxKAjEdBa81Mblt3jl64qn4qjKTbRp","gps":{"poster":[{"lat":37.569619,"lng":127.0754886},{"lat":37.5696966,"lng":127.0750947},{"lat":37.5702604,"lng":127.0757077},{"lat":37.5701589,"lng":127.0751612},{"lat":37.5706392,"lng":127.0760463},{"lat":37.5709875,"lng":127.0759663},{"lat":37.5710692,"lng":127.0759738},{"lat":37.571051,"lng":127.0756982},{"lat":37.5708124,"lng":127.0749085},{"lat":37.5711068,"lng":127.0749704},{"lat":37.5709637,"lng":127.0749124},{"lat":37.5707459,"lng":127.0747731},{"lat":37.5702414,"lng":127.0745035},{"lat":37.5703697,"lng":127.0744648},{"lat":37.5698231,"lng":127.0745468},{"lat":37.5698231,"lng":127.0745468},{"lat":37.5694354,"lng":127.0741061},{"lat":37.5693029,"lng":127.0738884},{"lat":37.5693029,"lng":127.0738884},{"lat":37.5688447,"lng":127.0738159},{"lat":37.5701277,"lng":127.0741411},{"lat":37.5689813,"lng":127.0734859},{"lat":37.5689813,"lng":127.0734859},{"lat":37.5682746,"lng":127.0735876},{"lat":37.5701649,"lng":127.0742359},{"lat":37.5701649,"lng":127.0742359},{"lat":37.5681319,"lng":127.0729271},{"lat":37.5675011,"lng":127.0726599},{"lat":37.5671644,"lng":127.0727736},{"lat":37.567095,"lng":127.0725656},{"lat":37.5673605,"lng":127.073169},{"lat":37.5688106,"lng":127.0738631},{"lat":37.5686296,"lng":127.0740014},{"lat":37.5686296,"lng":127.0740014},{"lat":37.5689435,"lng":127.0747976},{"lat":37.5691545,"lng":127.0751769},{"lat":37.5689537,"lng":127.0745068}],"banner":[]}},{"name":"전농SK","addr":"서울 동대문구 전농동 10","addrClean":"서울 동대문구 전농동 10","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":37,"bQty":0,"postDate":"2026년 7월 2일 14시 42분","note":"전농 SK(37장/55000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1YFTC789vX_htDFwlhcOEJC_gRAXF3TZx=w1200","https://lh3.googleusercontent.com/d/1SXyP-9QZpHCp1j6CP7iCWE9YIXWDpu59=w1200","https://lh3.googleusercontent.com/d/1K4OdHV3yRAHYvs9aMgmzGRvj249q1pln=w1200","https://lh3.googleusercontent.com/d/1WwzFv_4FCf9tGDRQ-C4IRhNt0DhVO5S9=w1200","https://lh3.googleusercontent.com/d/17rmW5WnsaowEsGatfq-jAui44DpahjsK=w1200","https://lh3.googleusercontent.com/d/1_IeHGHDhGuT85PGR_0JqOM3T4uYg86wd=w1200","https://lh3.googleusercontent.com/d/1pU_FGAtHRo3GqEPv5XEkvg13O7gCUDnX=w1200","https://lh3.googleusercontent.com/d/1n2Uic1yCH1lX8UaSINUKcTywvn_Ob18D=w1200","https://lh3.googleusercontent.com/d/12SziEmV8Cq_5JH0BzIZoAgX6TfUXzZNE=w1200","https://lh3.googleusercontent.com/d/1DCYV9aJWfUN0RXyEIxfGe23FxknuUNMg=w1200","https://lh3.googleusercontent.com/d/1RCcVd8XHdDeGwcpcng7RN3vnAJ_W_C36=w1200","https://lh3.googleusercontent.com/d/1mzuFH3j-rLhWik8rcMXKV2eoeDraEkCD=w1200","https://lh3.googleusercontent.com/d/1HcxhuWTfIqO1ioVzOy4cF3s-1LHH1jm3=w1200","https://lh3.googleusercontent.com/d/1QtxE5gm7UsO7v6JNEvz422DLZvUlIIm0=w1200","https://lh3.googleusercontent.com/d/1weInY8Sp41FZPvTebgC6g6t9-d6Qrlwv=w1200","https://lh3.googleusercontent.com/d/1EtwTxV1wz90OlFRwsMG-4bXZXhFI0Vau=w1200","https://lh3.googleusercontent.com/d/1KiOb3PFzODz9aFtyzMypEJeWbfHvLBVL=w1200","https://lh3.googleusercontent.com/d/1VHNofy630iYHK4194uNt3gz89Ap4uEev=w1200","https://lh3.googleusercontent.com/d/1BXZRmwfW2KX9lmbi0BoULbuVWWRg4XnI=w1200","https://lh3.googleusercontent.com/d/17WaZGUxo-m6VExA7kWLX3i8fN-qKMQ3y=w1200","https://lh3.googleusercontent.com/d/1jyK3_WqnKnz-3AyquoHjpeLvXMoKzxp2=w1200","https://lh3.googleusercontent.com/d/10FDBVAD_vSa0I_ATwCK8jJcK_ffFvI9a=w1200","https://lh3.googleusercontent.com/d/1JGb96tdgGGcc6JV7upy_xEfkLGbfKROH=w1200","https://lh3.googleusercontent.com/d/1LzUP6O17YRDkLRU8hIRUh-NJ9KjMAut0=w1200","https://lh3.googleusercontent.com/d/1nml0-8qf05hH14F0zBD27XThydqhOQQx=w1200","https://lh3.googleusercontent.com/d/1vtEOq24giwfU6ixOUzI-xEF3xnO1MylM=w1200","https://lh3.googleusercontent.com/d/1eFlyxdxE9mL_9NLP8-k7xwmigB-axtEr=w1200","https://lh3.googleusercontent.com/d/13RGjTMUD5SscQsYXXYN2VW12Fm75YOkd=w1200","https://lh3.googleusercontent.com/d/1aY8KdjPHHcsU2GhIFFcglAO4mhJEeufz=w1200","https://lh3.googleusercontent.com/d/1MOTbVHa68RKu8SHUKtBHrL-dRAsaj1LI=w1200","https://lh3.googleusercontent.com/d/1lBoNcruYtZOiCxE5K86gxd0Y7M0EPbHD=w1200","https://lh3.googleusercontent.com/d/1rl4ZvX9jfUCDC8unGp_l5adqMCK2inEq=w1200","https://lh3.googleusercontent.com/d/1Jka7g50zkrrcgHgnFS1SJ7eug9zhNYDD=w1200","https://lh3.googleusercontent.com/d/1L1iBPQ2EnT5JgGQi8uMjmt6KMxpGwTVt=w1200","https://lh3.googleusercontent.com/d/1A2wg-tisn5mhJLSOEhjcrrUSBYSctO7F=w1200","https://lh3.googleusercontent.com/d/1BIT6OHrc4qWiK-ai04TNKSIk9R8fm2Ns=w1200","https://lh3.googleusercontent.com/d/1sj3WjWEz7Khy_smpSzDyRwsGTgBfQi7N=w1200","https://lh3.googleusercontent.com/d/1efbBQcSzFBxG0S_GNBi4L2wijv1aK_N2=w1200","https://lh3.googleusercontent.com/d/138IWG60r5357ly7LBLJMfZb1dARkQeC0=w1200"],"driveUrl":"https://drive.google.com/drive/folders/18auukFd1qYKe36wWRwnn_a_UXK7yisdB","gps":{"poster":[{"lat":37.575626,"lng":127.0601577},{"lat":37.5763029,"lng":127.0610143},{"lat":37.5762371,"lng":127.0603145},{"lat":37.5764218,"lng":127.0606094},{"lat":37.576496,"lng":127.0607986},{"lat":37.5762577,"lng":127.0607658},{"lat":37.5762104,"lng":127.0606917},{"lat":37.5763336,"lng":127.061528},{"lat":37.5766289,"lng":127.0614868},{"lat":37.5766056,"lng":127.0617554},{"lat":37.5769006,"lng":127.0622014},{"lat":37.5768249,"lng":127.061642},{"lat":37.5773485,"lng":127.0615898},{"lat":37.5772799,"lng":127.061379},{"lat":37.5771694,"lng":127.0611515},{"lat":37.5770748,"lng":127.0608545},{"lat":37.5771904,"lng":127.0608603},{"lat":37.5768817,"lng":127.0600856},{"lat":37.5769869,"lng":127.0595483},{"lat":37.5768379,"lng":127.0595301},{"lat":37.5765365,"lng":127.0596362},{"lat":37.5768137,"lng":127.0590707},{"lat":37.5765845,"lng":127.0592587},{"lat":37.5763601,"lng":127.0595886},{"lat":37.5762335,"lng":127.0591841},{"lat":37.5761971,"lng":127.0593904},{"lat":37.5759088,"lng":127.059712},{"lat":37.5761696,"lng":127.0596049}],"banner":[]}},{"name":"전농우성","addr":"서울 동대문구 전농동 6","addrClean":"서울 동대문구 전농동 6","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":31,"bQty":0,"postDate":"2026년 7월 3일 12시 23분","note":"전농 우성(31장/77000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/13xTa2P9B1kHiioH9eHT8gDX_LNjqybD4=w1200","https://lh3.googleusercontent.com/d/1Ys2UQwpUOJc37lnxSr3MRkPau9IFnK5A=w1200","https://lh3.googleusercontent.com/d/1n_FkG5dC8ScmdF1QtcMe4MWN9E82lN09=w1200","https://lh3.googleusercontent.com/d/1XNBwo4oFNmODJFAjCFPAK19f_iy1bolU=w1200","https://lh3.googleusercontent.com/d/1E1B6Jwp0AzwL70Nd0bXOne2IO1XPpWXS=w1200","https://lh3.googleusercontent.com/d/1hMPHJwGlay-sSJqsfawRiUMNe5qEezbo=w1200","https://lh3.googleusercontent.com/d/1_S19B1vKY53ysgPERa850dNDfaoLMMTw=w1200","https://lh3.googleusercontent.com/d/1CvejReh5N1o8xm6172dzUO1VJDGz6__m=w1200","https://lh3.googleusercontent.com/d/14PB6X4XBqiRNActs9grpeqMwDdMVAno0=w1200","https://lh3.googleusercontent.com/d/1puu-HxOZyUyJhBZxuhXHKGXU5-u2g63Z=w1200","https://lh3.googleusercontent.com/d/1Xg-YqJp0hap40CmPFF9y2d7sNqP7pjTv=w1200","https://lh3.googleusercontent.com/d/1C0bis95cStkQureMCN-r8cOOC3t-XRU3=w1200","https://lh3.googleusercontent.com/d/1D5XvZeNsWDacZOtC0SskJeNhg3auJa26=w1200","https://lh3.googleusercontent.com/d/1BHeGXRwdhr24V02z8n6DXbUh5ApOtfSJ=w1200","https://lh3.googleusercontent.com/d/1vmcCLZ4axd-TfznkWhsuSu7-3dZ4VnFt=w1200","https://lh3.googleusercontent.com/d/1GqxLCQsTfc1FKMQkFMF9BzZ-kIOfCQsG=w1200","https://lh3.googleusercontent.com/d/1fZggNIqMk7dapN7xboYuYz-Z-Io-m9LA=w1200","https://lh3.googleusercontent.com/d/17aOFWfYQ9DHZu5NNpcxVWAfovlUByrWu=w1200","https://lh3.googleusercontent.com/d/1Ji31A1pZqdUEVvEqa9QhBv6n8lDoQBvU=w1200","https://lh3.googleusercontent.com/d/1FQraie-w-1uJ0h1ecpAHGT6PEjsorzs2=w1200","https://lh3.googleusercontent.com/d/1zlOkrTN61ASOIsoxdhM0zeH7eVMQIzOJ=w1200","https://lh3.googleusercontent.com/d/1WUBF2CaxZKPMDMFFE5qzI235OXuPH0Xw=w1200","https://lh3.googleusercontent.com/d/1qspCpgU5SWHlbM8vt5l6nddXTgtwNl6b=w1200","https://lh3.googleusercontent.com/d/1BlhafBo-bHvejHMl05GWRYaZfRnNwboj=w1200","https://lh3.googleusercontent.com/d/15xxJL-VFdA5zt1fodmHo-Z8H4QKkmbfP=w1200","https://lh3.googleusercontent.com/d/1KsnmLHXF8nx_37Nt-Nk_MmA1Nie97Qly=w1200","https://lh3.googleusercontent.com/d/1_5LoXa-VivgiZv_D4w4wrhFKWK-_wYrN=w1200","https://lh3.googleusercontent.com/d/10Hw6PnXbUrWkFa_G2BwoB9yket-U69G3=w1200","https://lh3.googleusercontent.com/d/1vrW64v7ly9-Jd2dEkrP2ZkL0K_DBrhyC=w1200","https://lh3.googleusercontent.com/d/1Zb__hYr69bloq2AXk00Uez8770TSTNPd=w1200","https://lh3.googleusercontent.com/d/1yOdDUBVv5-Mmc6NTjvHxmPcorgEZlyeB=w1200","https://lh3.googleusercontent.com/d/1yR-F4vfFI6irgJ7UBxMXbrAWmzJgtyqm=w1200","https://lh3.googleusercontent.com/d/1rUtMv18MKFLaXftZ77OSHLTORqc-ClXa=w1200","https://lh3.googleusercontent.com/d/1_liORjya4e6ze79ZzIbIRa1I0236lNyR=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1KQXS5e7KVkSbS8bD5ezdzxHq7mS6PaSe","gps":{"poster":[{"lat":37.5779301,"lng":127.0658723},{"lat":37.5779301,"lng":127.0658723},{"lat":37.5777996,"lng":127.0658693},{"lat":37.5778238,"lng":127.0658195},{"lat":37.578038,"lng":127.0657924},{"lat":37.5778148,"lng":127.0661432},{"lat":37.5782504,"lng":127.0658601},{"lat":37.5781569,"lng":127.0655262},{"lat":37.5780478,"lng":127.0654053},{"lat":37.5778348,"lng":127.0654699},{"lat":37.578066,"lng":127.0648712},{"lat":37.5776789,"lng":127.0647989},{"lat":37.5776648,"lng":127.0644909},{"lat":37.5772537,"lng":127.0643753},{"lat":37.5770407,"lng":127.0637502},{"lat":37.5769535,"lng":127.0635769},{"lat":37.5765462,"lng":127.0635303},{"lat":37.5772336,"lng":127.0647601},{"lat":37.5767467,"lng":127.0644681},{"lat":37.576795,"lng":127.0648438},{"lat":37.5766516,"lng":127.0651717},{"lat":37.5766785,"lng":127.0653602},{"lat":37.5765565,"lng":127.0659135},{"lat":37.5786807,"lng":127.0662447}],"banner":[]}},{"name":"래미안크레시티","addr":"서울 동대문구 전농동 690","addrClean":"서울 동대문구 전농동 690","region":"서울","regionOrd":1,"subAddr":"동대문구","pQty":112,"bQty":0,"postDate":"2026년 7월 8일 11시 57분","note":"래미안 크레시티(112장/100000원/직접게시)","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1xi-MBCFDvo09w2EJJzjzj-RFDlGhBHRo=w1200","https://lh3.googleusercontent.com/d/1ZWyChuCOgBzNBdQy4a-q9xPCfq73tEN9=w1200","https://lh3.googleusercontent.com/d/1pVk5MZIYS17O5zn3-KO6SuR352SeHD8p=w1200","https://lh3.googleusercontent.com/d/1PYxFu4DWkLSiN_BYjf_NMM9Lsn3cP6Yy=w1200","https://lh3.googleusercontent.com/d/1CkHvBIEog-05i17SZ72_CUXeZ8U7HHPL=w1200","https://lh3.googleusercontent.com/d/1iGQ5LIOhgrzl1f75I139aK90viPEhyrE=w1200","https://lh3.googleusercontent.com/d/1uSiXdFp8rZDVEa-_d8QMr5CgekLfdwrC=w1200","https://lh3.googleusercontent.com/d/1z_0EyH0Cut_CulYDLgk4ZiphVNbwJnZV=w1200","https://lh3.googleusercontent.com/d/1poWIZSmwN-YXW4An_PzIndix9Es2u8-k=w1200","https://lh3.googleusercontent.com/d/1IzK_w0CptPu_QQUfyys_cx0cZQv-pM7d=w1200","https://lh3.googleusercontent.com/d/1kGeUPkesyuVynC5ThXBygLze870zisTn=w1200","https://lh3.googleusercontent.com/d/19UJv39N24ty-RFZw1Bnz3TNjclvybk90=w1200","https://lh3.googleusercontent.com/d/1sTxi5d5LftDsxpljqW9_g6tC50Fv-2Sk=w1200","https://lh3.googleusercontent.com/d/1FkEC4l67H2cjshkydGYZhzxQ9Wiacawx=w1200","https://lh3.googleusercontent.com/d/1qwXNCvAPP4cj0kPVl14fk1AYF-BL_Zny=w1200","https://lh3.googleusercontent.com/d/1Yig2E0rxLohaDDKo3hKj6aUU84YOwNxc=w1200","https://lh3.googleusercontent.com/d/152LmkSOX_VmDbrqHoJhA3Vftllw5yhQM=w1200","https://lh3.googleusercontent.com/d/1TA6xZ3puQEwz5WJO-T3nSJxedIZI_17c=w1200","https://lh3.googleusercontent.com/d/1zWPSjKbQ1aeATtG3gqbxgmGJt295QeyR=w1200","https://lh3.googleusercontent.com/d/1UWX1AOeXb2fvTlEdfhPb6n062jMA7ihp=w1200","https://lh3.googleusercontent.com/d/1Og1oy8JRlQQ7FEuFogY-7hAsb83mjbqO=w1200","https://lh3.googleusercontent.com/d/1ge_wbDKUL3oIlxT_rRmRmqA_udblSrHr=w1200","https://lh3.googleusercontent.com/d/1D_nnh3r0OxTJz2xYsnHCIjLPypj-DYND=w1200","https://lh3.googleusercontent.com/d/1WGswzobOcDB2v-MGc9IRfDWqQ_8Frg40=w1200","https://lh3.googleusercontent.com/d/1HRgn2BaEF4HR1W9c7uJsF-aZgbLcFUZ9=w1200","https://lh3.googleusercontent.com/d/1nRTqnoIvrDjPyN5H3Augnb4gmweGtmiB=w1200","https://lh3.googleusercontent.com/d/1jMn1ElSuDQg5P9hYt7Ga7UURqN-kSl0J=w1200","https://lh3.googleusercontent.com/d/1CY2JAMzMkksjhvfixtkDBjfNN4PXOQOS=w1200","https://lh3.googleusercontent.com/d/1_ogzUgc5no1XMUs9UUj6tNZLZ4cE6cwD=w1200","https://lh3.googleusercontent.com/d/1b9j-9koKHUmp-fY9G6d7UisvPLw24Wuq=w1200","https://lh3.googleusercontent.com/d/1-jlUFssGpw0Yitogv0CCvOrBWBRgR5-L=w1200","https://lh3.googleusercontent.com/d/1NF6EVmwjve0sYLqu4hxAqgiSIsCVkxNa=w1200","https://lh3.googleusercontent.com/d/1d0eImkirmVhvZYLTektIe-eDDwzntPCy=w1200","https://lh3.googleusercontent.com/d/17BqeK-fvccIt-eemAvfGUiWOkCnJufSE=w1200","https://lh3.googleusercontent.com/d/1T6HH5izF85K6br1fX6t3pjvflA-6o-zv=w1200","https://lh3.googleusercontent.com/d/1kTOqaXKPo2GqAgEzTHU_ZwJ9FfBUeaj5=w1200","https://lh3.googleusercontent.com/d/1tO94uCiuFishqjuTI6k2X34NTN5nybWf=w1200","https://lh3.googleusercontent.com/d/1gNGZptU94aeaBuntU9kJ15mGj53bRJrD=w1200","https://lh3.googleusercontent.com/d/14GtYTuSA9QNR62XW4A4WKNgRk3V-Yg_b=w1200","https://lh3.googleusercontent.com/d/1uoN3XZ-0Q6tf4Yjh1A3WTciKe-wvGQxP=w1200","https://lh3.googleusercontent.com/d/1VjLHkBx_RZJStRCxnWiThE5n3QaPHiJS=w1200","https://lh3.googleusercontent.com/d/1G085v4Ja0qesRtgySFGDqfbNpYy2o-xQ=w1200","https://lh3.googleusercontent.com/d/1SFyk5gOQ_AiLuWcAZ5WBqeaobM6kPIDJ=w1200","https://lh3.googleusercontent.com/d/1EfY2JTb25gKKGlGfX_BijoIdW_Duv3_J=w1200","https://lh3.googleusercontent.com/d/11xU370ZQ5EIBkkvJXPKMznKRBIMWQwD6=w1200","https://lh3.googleusercontent.com/d/12YMP6UXPJO2j2cJmmqcDvf185lqXl_FQ=w1200","https://lh3.googleusercontent.com/d/1hCOcsIlS1f___nYpGLCbGt6illo6J_GO=w1200","https://lh3.googleusercontent.com/d/1F9aZbZzzNIKsiASuT1MF6HhVFTVazJG5=w1200","https://lh3.googleusercontent.com/d/1yLkQu5TD99QwJvFfXF1Abp0l554_u4oY=w1200","https://lh3.googleusercontent.com/d/1I3MNSWTyJTiYKBXMff7q4tR8OhY5S_uY=w1200","https://lh3.googleusercontent.com/d/1sBQ0SooAynQWSxspnZw_qnh6MIBDeNKQ=w1200","https://lh3.googleusercontent.com/d/1k0N16umY9sRUSeZB33M9HD1iWfeSGltO=w1200","https://lh3.googleusercontent.com/d/1i2VyzUYWoiTLX5rjLxWZMoIiEk8q-rY9=w1200","https://lh3.googleusercontent.com/d/1E5-HVg1kSbFwkEnKLHq8y3vT7yWOCs69=w1200","https://lh3.googleusercontent.com/d/1warAako7SXD5H2aDQB58VnAPmUgSvOU1=w1200","https://lh3.googleusercontent.com/d/1hjwxtZAbuudi5YJnprvLHyyNXXYvcXv0=w1200","https://lh3.googleusercontent.com/d/1OZJ4TXiPtKJd7vllnYoGfl_vh98MDObj=w1200","https://lh3.googleusercontent.com/d/1pFTnOowzdeyLc4JhBLtR7fMC0yKK39Vi=w1200","https://lh3.googleusercontent.com/d/1Z4zUYPmZNMEJ-tPVMKAed_qt7M9c7ugs=w1200","https://lh3.googleusercontent.com/d/1U26N_6m4E4KJ1YGlmTKnYa8Zzfq_r5p4=w1200","https://lh3.googleusercontent.com/d/10XvAt492UE7QvX5WQF--2bbbuHAEMMv0=w1200","https://lh3.googleusercontent.com/d/1K5x0GJOUXnlfFqaevb2RigO0J4I80cAU=w1200","https://lh3.googleusercontent.com/d/1rdyUoozY22RclgVA7s2sTGXX5B0HMhbP=w1200","https://lh3.googleusercontent.com/d/1HXHtBYE1vEY1gvyTdYNbKX6Qs-1TYSif=w1200","https://lh3.googleusercontent.com/d/1sAWHnGF7sPisRHCPBextdPI2yEAmrl0j=w1200","https://lh3.googleusercontent.com/d/15mL3ikJ8SE07OFSHH8P4_sjsRYr-QOuo=w1200","https://lh3.googleusercontent.com/d/13CHHI8tYyNugKUQuMwH-Y1JypxKFFIyk=w1200","https://lh3.googleusercontent.com/d/1dkXdNZiPkszF8hoUfBiw-bfw33KLDuEU=w1200","https://lh3.googleusercontent.com/d/12lSO7hecA4eooCP6mnHFJ1qONeY0lqrT=w1200","https://lh3.googleusercontent.com/d/1Zm7JpLU3beAroNV2Sc06DtOvbwHalzOZ=w1200","https://lh3.googleusercontent.com/d/1q5naLX_dKuWsMznHnWFO-fTdlfvWXcV8=w1200","https://lh3.googleusercontent.com/d/1oos2rxYpQvd8JBtBuk_7rWJPaNCFCY0f=w1200","https://lh3.googleusercontent.com/d/1QNJ0XVhwO3dhFfQPBg_oXb2GjNa69saX=w1200","https://lh3.googleusercontent.com/d/1dZOGMYpZUxgfRJTV-_EVTdsxe5-NVQfb=w1200","https://lh3.googleusercontent.com/d/1ivEx11dxkyyIfsVKmq7NjhrklxCUE95y=w1200","https://lh3.googleusercontent.com/d/1pf04GG-eeJceikpt_H2n39FZBDSCwOIj=w1200","https://lh3.googleusercontent.com/d/1PjO0wRHEXt0IB0badH8_d77tlM-4ee3e=w1200","https://lh3.googleusercontent.com/d/1owbHrQHjjTRc9nSNG6wgyYgC3r74Wi3s=w1200","https://lh3.googleusercontent.com/d/1A5lCffQXOeqd9w0COeLCHUx27d-JPyLp=w1200","https://lh3.googleusercontent.com/d/1MWPkoD_jdSIcBXzIk7CMlEjme-Lx-Kb6=w1200","https://lh3.googleusercontent.com/d/1aRRrydNJhCzrFhgjZvjihXJ18tSGCZAR=w1200","https://lh3.googleusercontent.com/d/1leJhpzItNr6yvVkOLX0JD8RB9aYKVlQP=w1200","https://lh3.googleusercontent.com/d/1KgNq8jBs5YnMHJbpOsNyhBK_QIN-lyU4=w1200","https://lh3.googleusercontent.com/d/1KstSngKz1qKxlY5Q7XN5g_RT0lJNbnQl=w1200","https://lh3.googleusercontent.com/d/1vJZT0K1v90Qc_BeXFba0ZeiAki2B-FDV=w1200","https://lh3.googleusercontent.com/d/1ZaGOIooQHRQRuzXAQh_5fw2W9ZMaEIbM=w1200","https://lh3.googleusercontent.com/d/1ctC6ieYn8TVGMu1eXgebX7jqXyCSbppv=w1200","https://lh3.googleusercontent.com/d/1jioS81mb02zAXnjnjFkBr_S1tx-8WWc-=w1200","https://lh3.googleusercontent.com/d/1a9wdi-vG4uIsAXJLJ1Q6J-8a1TYbMmWT=w1200","https://lh3.googleusercontent.com/d/1MtvHxtc2M8jPBrA7ODvrgin4-RNDQIPi=w1200","https://lh3.googleusercontent.com/d/1vh4f2MNIz-Rnn4tzxX7jUWuXsQPXC8zG=w1200","https://lh3.googleusercontent.com/d/1q5L6ECmx9J1-6stlIBxE-ze5dx4RwI1P=w1200","https://lh3.googleusercontent.com/d/1m54pDmzE5gAXsQhrb6Hsu7iLbYUeZ1GJ=w1200","https://lh3.googleusercontent.com/d/1MlLODAy7WjCE0J_i4GffI2gwIew4U3kS=w1200","https://lh3.googleusercontent.com/d/1eVdoZMtfWMFWbY_DFkdtVLNoyYSJdPkZ=w1200","https://lh3.googleusercontent.com/d/1IzqWYMC9mZoZgh3cINKZ9DX7sh2nCiUf=w1200","https://lh3.googleusercontent.com/d/1r_U-pQwR3A1cNiKeLyfV-94aAjSA4rCb=w1200","https://lh3.googleusercontent.com/d/1skc10-iH6OGjY2mq9hjWu_QYIcbrRKlR=w1200","https://lh3.googleusercontent.com/d/1LZJOmOxVfxY2AXOk1QfD47NME66-Now7=w1200","https://lh3.googleusercontent.com/d/1wwNG8eTqr-RuUX1KvMeZH0vE0Hnt9ftm=w1200","https://lh3.googleusercontent.com/d/1mJxeauBYlSabmVCxkXqpwPBEM138p35W=w1200","https://lh3.googleusercontent.com/d/1IC1Coiphg23tpF97aodGw-zUGqlDPE3B=w1200","https://lh3.googleusercontent.com/d/18OT-QWokdYVHhv-kpOtlR5ODglsW10Gr=w1200","https://lh3.googleusercontent.com/d/1OqSAn92CtcV_1SUfF1aV2Eb16L_VZqCN=w1200","https://lh3.googleusercontent.com/d/1TGQcvqUbiIuwbvoapweK_1aya8txgty_=w1200","https://lh3.googleusercontent.com/d/17NtbG4Vr8g4JQuqWXL7F4BHZ_QkIuJNF=w1200","https://lh3.googleusercontent.com/d/1hXUM2WTjsjI6ffcnhuW2LdWMLHibJBt4=w1200","https://lh3.googleusercontent.com/d/19_d03pe6qHhVjPAT_JYoR35Ej9szBX6X=w1200","https://lh3.googleusercontent.com/d/1nSOVxX5ZxzrSMPFpS5WbIX5ZQLgg1txx=w1200","https://lh3.googleusercontent.com/d/10TMT3y6vCxWp3ddmWDATytdihDbmw0OX=w1200","https://lh3.googleusercontent.com/d/1nM1arZApQ4WB84zjDZ2yZp9rZVO-87F9=w1200","https://lh3.googleusercontent.com/d/1Ws_U6HdxxXVLFQDTwqlbe8G1Nk7xskkz=w1200","https://lh3.googleusercontent.com/d/1g9y06M7ythnig8J6IF0epKn4-aJxT8Ox=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1mWloyXNd4sZlcssUC1ADQGhvpGI1WSP0","gps":{"poster":[{"lat":37.5761117,"lng":127.051032},{"lat":37.5758738,"lng":127.0511708},{"lat":37.575985,"lng":127.0514444},{"lat":37.5758306,"lng":127.0517055},{"lat":37.5756858,"lng":127.05223},{"lat":37.5756858,"lng":127.05223},{"lat":37.5753663,"lng":127.0525672},{"lat":37.5753663,"lng":127.0525672},{"lat":37.5759694,"lng":127.0519415},{"lat":37.5761787,"lng":127.0529477},{"lat":37.5761787,"lng":127.0529477},{"lat":37.576222,"lng":127.0524845},{"lat":37.576222,"lng":127.0524845},{"lat":37.5759694,"lng":127.0519415},{"lat":37.5767552,"lng":127.0529477},{"lat":37.5761787,"lng":127.0529477},{"lat":37.5759694,"lng":127.0519415},{"lat":37.5759694,"lng":127.0519415},{"lat":37.5770156,"lng":127.0526552},{"lat":37.5759694,"lng":127.0519415},{"lat":37.5767156,"lng":127.0528674},{"lat":37.5753495,"lng":127.0512707},{"lat":37.5749252,"lng":127.0512581},{"lat":37.5748999,"lng":127.0515452},{"lat":37.5748157,"lng":127.0506479},{"lat":37.5752915,"lng":127.0506389},{"lat":37.5750266,"lng":127.0506585},{"lat":37.575926,"lng":127.0512707},{"lat":37.575598,"lng":127.0509724},{"lat":37.5755674,"lng":127.0511433},{"lat":37.575272,"lng":127.0501964},{"lat":37.5730872,"lng":127.0519415},{"lat":37.5755649,"lng":127.0496526},{"lat":37.5755649,"lng":127.0496526},{"lat":37.5755649,"lng":127.0496526},{"lat":37.5730872,"lng":127.0519415},{"lat":37.5760265,"lng":127.0500596},{"lat":37.5757594,"lng":127.0502696},{"lat":37.5757594,"lng":127.0502696},{"lat":37.5755457,"lng":127.050614},{"lat":37.5730872,"lng":127.0519415},{"lat":37.5730872,"lng":127.0519415},{"lat":37.5765593,"lng":127.0506975},{"lat":37.5765593,"lng":127.0506975},{"lat":37.5902078,"lng":127.0626734},{"lat":37.5759956,"lng":127.0505471},{"lat":37.5761666,"lng":127.0508798},{"lat":37.5902078,"lng":127.0626734},{"lat":37.5765861,"lng":127.0515352},{"lat":37.5902078,"lng":127.0626734},{"lat":37.5902078,"lng":127.0626734},{"lat":37.5769552,"lng":127.0508913},{"lat":37.5769626,"lng":127.0508827},{"lat":37.5902078,"lng":127.0626734},{"lat":37.5902078,"lng":127.0626734},{"lat":37.5771625,"lng":127.0513349},{"lat":37.5777054,"lng":127.0532991},{"lat":37.577692,"lng":127.0531986},{"lat":37.5782678,"lng":127.0533883},{"lat":37.5782678,"lng":127.0533883},{"lat":37.5770867,"lng":127.0536184},{"lat":37.5776321,"lng":127.0535478},{"lat":37.5767552,"lng":127.0529477},{"lat":37.5775178,"lng":127.0537322},{"lat":37.5769447,"lng":127.0540442},{"lat":37.5774032,"lng":127.0537703},{"lat":37.5776325,"lng":127.0545094},{"lat":37.5775409,"lng":127.0539538},{"lat":37.5775409,"lng":127.0539538},{"lat":37.5767613,"lng":127.0542549},{"lat":37.5770221,"lng":127.0526642},{"lat":37.5759694,"lng":127.0519415},{"lat":37.5759694,"lng":127.0519415},{"lat":37.576833,"lng":127.0524534}],"banner":[]}}]};
+window.fetch = function(){
+  return Promise.resolve({
+    json: function(){ return Promise.resolve(window.__INITIAL_REPORT_DATA__); },
+    text: function(){ return Promise.resolve(JSON.stringify(window.__INITIAL_REPORT_DATA__)); }
+  });
+};
+var WEB_APP_URL = "";
+var CAMP_KEY = "코오롱스포렉스용답점_동대문구 아파트게시판광고";
+var NAVER_CLIENT_ID = "gcvbnnigi1";
+var AUTO_REFRESH_SEC = 300;
+
+function escHtml(s){if(!s)return"";return s.toString().replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+
+// 인쇄용 모드: URL에 ?print=1 이 있으면 학교당 사진 4장으로 제한 + eager 로드
+try{window._printMode=(new URLSearchParams(location.search)).get("print")==="1";}catch(e){window._printMode=false;}
+if(window._printMode){
+  document.documentElement.classList.add("print-mode");
+  document.body&&document.body.classList.add("print-mode");
+  document.addEventListener("DOMContentLoaded",function(){
+    var b=document.getElementById("printBanner");if(!b)return;
+    b.style.display="flex";
+    b.innerHTML='<div style="flex:1;min-width:240px"><div style="font-size:14px;font-weight:700;color:#1E3F75;margin-bottom:4px">📄 인쇄용 보고서 모드</div><div style="font-size:12px;color:#374151;line-height:1.5">학교당 사진을 <b>대표 8장</b>으로 제한해 PDF 저장이 빨라지도록 구성했습니다. 전체 사진은 일반 보고서 화면에서 확인 가능합니다.</div></div><button onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px;background:#0D1B3E;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:inherit;white-space:nowrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>인쇄 / PDF 저장 (Ctrl+P)</button>';
+  });
+}
+function openPrintMode(){
+  try{var u=new URL(location.href);u.searchParams.set("print","1");window.open(u.toString(),"_blank");}
+  catch(e){window.open(location.href+(location.search?"&":"?")+"print=1","_blank");}
+}
+// 인쇄 직전 lazy 사진 강제 로드 (Ctrl+P / 메뉴 인쇄 대응)
+window.addEventListener("beforeprint",function(){
+  document.querySelectorAll('img[loading="lazy"]').forEach(function(img){img.loading="eager";});
+});
+
+function loadReportData(){
+  fetch(WEB_APP_URL+"?action=report_data&camp="+encodeURIComponent(CAMP_KEY))
+  .then(function(r){return r.json()})
+  .then(function(json){
+    if(json.status!=="ok"){showError(json.message||"데이터 로딩 실패");return}
+    renderReport(json);
+  })
+  .catch(function(err){showError("네트워크 오류: "+err.message)})
+}
+
+function showError(msg){
+  document.getElementById("reportContent").innerHTML=
+    '<div class="error-wrap"><div style="font-size:48px;margin-bottom:16px">⚠️</div>'
+    +'<div style="font-size:16px;font-weight:700">'+escHtml(msg)+'</div>'
+    +'<button class="refresh-btn" onclick="loadReportData()">다시 시도</button></div>';
+}
+
+function renderReport(data){
+  window._reportData=data;
+  var s=data.stats, schools=data.schools;
+  var mgrEl=document.getElementById("metaManager");if(data.manager){mgrEl.style.display="";document.getElementById("managerName").textContent="담당: "+data.manager;}else{mgrEl.style.display="";document.getElementById("managerName").textContent="좋은광고연구소";}
+  if(data.updatedAt){var updEl=document.getElementById("metaUpdated");updEl.style.display="";document.getElementById("updatedText").textContent="업데이트: "+data.updatedAt;}
+  var schoolsEl=document.getElementById("metaSchools");if(schoolsEl)schoolsEl.textContent=s.totalSchools+"개교 ("+s.regionText+")";
+  var h="";
+  h+='<div class="kpi-grid fade-in">';
+  h+='<div class="kpi-card schools"><div class="kpi-value">'+s.totalSchools+'</div><div class="kpi-label">대상 학교</div></div>';
+  h+='<div class="kpi-card poster"><div class="kpi-value">'+s.totalPoster+'</div><div class="kpi-label">포스터 (장)</div><div class="kpi-sub">완료 '+s.donePoster+' / 잔여 '+(s.totalPoster-s.donePoster)+'</div></div>';
+  h+='<div class="kpi-card banner"><div class="kpi-value">'+s.totalBanner+'</div><div class="kpi-label">현수막 (장)</div><div class="kpi-sub">완료 '+s.doneBanner+' / 잔여 '+(s.totalBanner-s.doneBanner)+'</div></div>';
+  h+='<div class="kpi-card progress"><div class="kpi-value">'+s.pct+'%</div><div class="kpi-label">진행률</div><div class="kpi-sub">'+s.doneSchools+'/'+s.totalSchools+'개교 완료</div></div>';
+  h+='</div>';
+  h+='<div class="progress-section fade-in" style="animation-delay:0.1s"><div class="progress-bar-wrap">';
+  h+='<div class="progress-header"><span class="progress-title">전체 진행 현황</span><span class="progress-pct">'+s.pct+'%</span></div>';
+  h+='<div class="progress-track"><div class="progress-fill" style="width:'+s.pct+'%"></div></div>';
+  h+='<div class="progress-detail"><span><span class="dot dot-done"></span>완료 '+s.doneSchools+'개교</span>';
+  h+='<span><span class="dot dot-remain"></span>잔여 '+s.remainSchools+'개교</span>';
+  h+='<span style="margin-left:auto;color:var(--text-secondary)">최종 업데이트 : '+data.updatedAt+'</span></div></div></div>';
+  var campDriveUrlSaved=data.campDriveUrl||"";
+  h+='<div style="display:flex;justify-content:flex-end;gap:10px;margin-top:14px;flex-wrap:wrap">';
+  if(campDriveUrlSaved){
+    h+='<a href="'+campDriveUrlSaved+'" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:var(--shadow-sm);transition:opacity 0.15s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>전체 원본 사진 다운로드</a>';
+  }
+  if(!window._printMode){
+    h+='<button class="no-print" onclick="openPrintMode()" style="display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;color:#0D1B3E;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:1.5px solid #0D1B3E;cursor:pointer;font-family:inherit;box-shadow:var(--shadow-sm);transition:opacity 0.15s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>인쇄용 보고서 (PDF용)</button>';
+  }
+  h+='</div>';
+  var gpsPoints=[];
+  for(var gi=0;gi<schools.length;gi++){
+    var gd=schools[gi].gps;
+    if(gd){
+      var pts=gd.poster||[];
+      for(var gj=0;gj<pts.length;gj++){
+        if(pts[gj].lat&&pts[gj].lng&&schools[gi].isDone)gpsPoints.push({name:schools[gi].name,lat:pts[gj].lat,lng:pts[gj].lng});
+      }
+    }
+  }
+  if(gpsPoints.length>0 && !window._printMode){
+    h+='<div class="section fade-in" style="animation-delay:0.11s"><div class="section-title">부착 위치 현황</div>';
+    h+='<div style="margin:0 16px 14px;padding:14px 16px;background:#FFF8E1;border:1px solid #FFE0B2;border-left:4px solid #E6940A;border-radius:8px;display:flex;gap:12px;align-items:flex-start">';
+    h+='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E6940A" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+    h+='<div style="flex:1;font-size:13px;line-height:1.6;color:#7A5A00"><b style="display:block;font-size:13px;font-weight:800;color:#0D1B3E;margin-bottom:4px">부착 위치 현황 — 시범 운영 안내</b>본 지도는 현재 시범 운영 단계로, 일부 학교의 GPS 정보가 수집되지 않을 수 있는 점 양해 부탁드립니다. 정확한 부착 현장은 아래 <b>학교별 상세 사진</b>을 참고해 주시기 바라며, 지속적인 시스템 안정화를 통해 모든 학교의 위치 정보를 제공할 수 있도록 개선해 나가겠습니다.</div>';
+    h+='</div>';
+    h+='<div class="map-wrap" style="padding:0 16px 16px"><div id="reportMap" style="width:100%;height:520px;border-radius:12px;border:1px solid var(--border);overflow:hidden"></div>';
+    h+='<div style="margin-top:10px;padding:10px 14px;background:#D4EDDA;border:1px solid #D4EDDA;border-radius:8px;font-size:12px;color:#0EA47A;display:flex;align-items:center;gap:8px">';
+    h+='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0EA47A" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>';
+    h+='GPS 및 사진은 1시간 간격으로 자동 업데이트 됩니다.<br><span style="color:#6B7280;font-weight:500">실내 깊은곳에서는 GPS가 수집되지 않습니다.</span>';
+    h+='</div></div></div>';
+  }
+  h+='<div class="section fade-in" style="animation-delay:0.12s"><div class="section-title">전체 학교 요약</div>';
+  h+='<div class="summary-table-wrap"><div style="overflow-x:auto"><table class="summary-table">';
+  h+='<thead><tr><th>No.</th><th>학교이름</th><th>주소</th><th>포스터</th><th>현수막</th><th>부착일시</th><th>상태</th><th>부착장소 및 특이사항</th></tr></thead><tbody>';
+  var SVG_DONE='<span class="school-status status-done" style="display:inline-flex;font-size:12px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#0EA47A"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</span>';
+  var SVG_PENDING='<span class="school-status status-pending" style="display:inline-flex;font-size:12px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="none" stroke="#D1D5DB" stroke-width="2"/></svg>대기</span>';
+  for(var i=0;i<schools.length;i++){
+    var sc=schools[i];
+    var pq=typeof sc.pQty==="number"&&sc.pQty>0?sc.pQty:"-";
+    var bq=typeof sc.bQty==="number"&&sc.bQty>0?sc.bQty:"-";
+    var dateCell=sc.postDate?'<td class="date-text">'+escHtml(sc.postDate)+'</td>':'<td style="color:var(--text-muted)">-</td>';
+    var noteText=sc.note||"";
+    var noteCell=noteText?'<td class="summary-note">'+escHtml(noteText)+'</td>':'<td class="summary-note" style="color:var(--text-muted)">-</td>';
+    h+='<tr><td>'+(i+1)+'</td><td><a href="#school-'+(i+1)+'" style="color:var(--accent);text-decoration:none;font-weight:700;cursor:pointer" onclick="event.preventDefault();var el=document.getElementById(\'school-'+(i+1)+'\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'center\'})">'+escHtml(sc.name)+'</a></td><td class="region-tag">'+escHtml(sc.region+" "+sc.subAddr)+'</td>';
+    h+='<td'+(pq!=="-"?' class="qty-poster"':"")+">"+pq+'</td>';
+    h+='<td'+(bq!=="-"?' class="qty-banner"':"")+">"+bq+'</td>';
+    h+=dateCell+'<td>'+(sc.isDone?SVG_DONE:SVG_PENDING)+'</td>'+noteCell+'</tr>';
+  }
+  h+='</tbody><tfoot><tr><td></td><td>합계 '+s.totalSchools+'개교</td><td></td><td class="qty-poster">'+s.totalPoster+'장</td><td class="qty-banner">'+s.totalBanner+'장</td><td></td><td></td><td></td></tr></tfoot></table></div></div>';
+  h+='</div>';
+  h+='<div class="section fade-in" style="animation-delay:0.15s"><div class="section-title">학교별 부착 결과</div>';
+  var curRegion="", regionCounts={};
+  for(var rc=0;rc<schools.length;rc++)regionCounts[schools[rc].region]=(regionCounts[schools[rc].region]||0)+1;
+  var doneRegionCounts={};
+  for(var drc=0;drc<schools.length;drc++){if(schools[drc].isDone)doneRegionCounts[schools[drc].region]=(doneRegionCounts[schools[drc].region]||0)+1;}
+  var TOGGLE_SVG='<svg class="card-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+  for(var si=0;si<schools.length;si++){
+    var sc2=schools[si];
+    if(sc2.region!==curRegion){if(curRegion)h+='</div>';curRegion=sc2.region;h+='<div class="region-group"><div class="region-label">'+curRegion+' <span class="region-count">'+regionCounts[curRegion]+'개교 (완료 '+(doneRegionCounts[curRegion]||0)+')</span></div>'}
+    var numBg=sc2.isDone?"var(--accent)":"var(--text-muted)";
+    var statusHtml2=sc2.isDone?'<div class="school-status status-done"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#0EA47A"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</div>':'<div class="school-status status-pending"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="none" stroke="#D1D5DB" stroke-width="2"/></svg>대기</div>';
+    var qtyHtml2="";
+    if(sc2.pQty)qtyHtml2+='<div class="qty-item"><span class="qty-label">포스터</span><span class="qty-poster">'+sc2.pQty+'장</span></div>';
+    if(sc2.bQty)qtyHtml2+='<div class="qty-item"><span class="qty-label">현수막</span><span class="qty-banner">'+sc2.bQty+'장</span></div>';
+    var cardClass=sc2.isDone?"school-card card-done":"school-card card-pending";
+    var collapsed=sc2.isDone?"":"collapsed";
+    var toggleOpen=sc2.isDone?"open":"";
+    h+='<div id="school-'+(si+1)+'" class="'+cardClass+'">';
+    h+='<div class="school-card-header" onclick="toggleCard(this)"><div class="school-info"><div class="school-num" style="background:'+numBg+'">' +(si+1)+'</div><div><div class="school-name">'+escHtml(sc2.name)+'</div><div class="school-addr">'+escHtml(sc2.addr)+'</div></div></div><div class="header-qty">'+qtyHtml2+'</div>'+statusHtml2+TOGGLE_SVG+'</div>';
+    h+='<div class="card-body '+collapsed+'">';
+    if(sc2.isDone){
+      var noteText2=sc2.note||"";
+      h+='<div class="attach-info">';
+      if(sc2.postDate){h+='<div class="attach-info-item"><span class="attach-info-label">부착일시</span><span class="attach-info-value">'+escHtml(sc2.postDate)+'</span>';
+        h+='</div>';}
+      if(noteText2)h+='<div class="attach-info-item"><span class="attach-info-label">부착장소 및 특이사항</span><span class="attach-info-value">'+escHtml(noteText2)+'</span></div>';
+      h+='</div>';
+      var photos=sc2.photos||[];
+      if(photos.length>0){
+        var sc2GpsForLink=(sc2.gps&&sc2.gps.poster)||[];
+        h+='<div class="photo-section" style="padding-top:12px"><div class="photo-label" style="display:flex;align-items:center;gap:12px"><span>부착 사진</span>';
+        if(sc2GpsForLink.length>0)h+='<a href="javascript:void(0)" class="drive-link" onclick="event.stopPropagation();openSchoolMap(\''+escHtml(sc2.name)+'\','+JSON.stringify(sc2GpsForLink).replace(/"/g,"&quot;")+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>지도보기</a>';
+        h+='</div><div class="photo-grid">';
+        var maxPhotos=window._printMode?Math.min(photos.length,8):photos.length;
+        var loadingAttr=window._printMode?"eager":"lazy";
+        for(var pi=0;pi<maxPhotos;pi++){h+='<div class="photo-thumb" onclick="openLightbox(\''+photos[pi]+'\')"><img src="'+photos[pi]+'" alt="'+escHtml(sc2.name)+' 부착사진 '+(pi+1)+'" loading="'+loadingAttr+'" decoding="async" onerror="handleImgError(this)"></div>'}
+        h+='</div></div>';
+      }
+    } else {
+      h+='<div class="attach-info"><div class="attach-info-item"><span class="attach-info-label">상태</span><span class="attach-info-value" style="color:var(--text-muted)">부착 대기 중</span></div></div>';
+    }
+    h+='</div></div>';
+  }
+  if(curRegion)h+='</div>';
+  h+='</div>';
+  document.getElementById("reportContent").innerHTML=h;
+  if(gpsPoints.length>0&&typeof naver!=="undefined"&&naver.maps){
+    var mapEl=document.getElementById("reportMap");
+    if(mapEl){
+      var bounds=new naver.maps.LatLngBounds();
+      var map=new naver.maps.Map(mapEl,{center:new naver.maps.LatLng(36.5,127.5),zoom:7,zoomControl:false,mapDataControl:false,scaleControl:false,logoControlOptions:{position:naver.maps.Position.BOTTOM_LEFT}});
+      (function addMapControls(){
+        mapEl.style.position="relative";
+        var btnStyle="position:absolute;right:10px;background:#fff;border:1px solid #D1D5DB;border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.15);z-index:100;padding:0";
+        var fsBtn=document.createElement("button");fsBtn.type="button";fsBtn.title="전체화면";
+        fsBtn.style.cssText=btnStyle+";top:10px";
+        fsBtn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>';
+        var fsExitSvg='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>';
+        var fsEnterSvg=fsBtn.innerHTML;
+        fsBtn.onclick=function(){
+          var doc=document;
+          var isFs=doc.fullscreenElement||doc.webkitFullscreenElement;
+          if(isFs){var ex=doc.exitFullscreen||doc.webkitExitFullscreen;if(ex)ex.call(doc);}
+          else{var req=mapEl.requestFullscreen||mapEl.webkitRequestFullscreen;if(req)req.call(mapEl);else alert("전체화면 지원 안됨");}
+        };
+        function onFsChange(){
+          var isFs=document.fullscreenElement||document.webkitFullscreenElement;
+          fsBtn.innerHTML=isFs?fsExitSvg:fsEnterSvg;
+          setTimeout(function(){try{naver.maps.Event.trigger(map,"resize");}catch(e){}},200);
+        }
+        document.addEventListener("fullscreenchange",onFsChange);
+        document.addEventListener("webkitfullscreenchange",onFsChange);
+        mapEl.appendChild(fsBtn);
+        var locBtn=document.createElement("button");locBtn.type="button";locBtn.title="내 위치";
+        locBtn.style.cssText=btnStyle+";top:58px";
+        locBtn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>';
+        var myLocMarker=null;
+        locBtn.onclick=function(){
+          if(!navigator.geolocation){alert("이 브라우저는 위치 정보를 지원하지 않습니다");return;}
+          locBtn.disabled=true;locBtn.style.opacity="0.5";
+          navigator.geolocation.getCurrentPosition(function(pos){
+            var ll=new naver.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
+            map.setCenter(ll);map.setZoom(15);
+            if(myLocMarker)myLocMarker.setMap(null);
+            var dot=document.createElement("div");
+            dot.style.cssText="width:16px;height:16px;background:#4A8ED6;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 6px rgba(59,130,246,0.2),0 2px 6px rgba(0,0,0,0.3)";
+            myLocMarker=new naver.maps.Marker({position:ll,map:map,icon:{content:dot,anchor:new naver.maps.Point(8,8)},zIndex:999});
+            locBtn.disabled=false;locBtn.style.opacity="1";
+          },function(err){
+            alert("위치를 가져올 수 없습니다. 위치 권한을 확인해 주세요.");
+            locBtn.disabled=false;locBtn.style.opacity="1";
+          },{enableHighAccuracy:true,timeout:10000,maximumAge:0});
+        };
+        mapEl.appendChild(locBtn);
+      })();
+      var activeInfoOverlay=null;
+      var allMarkerDots=[];
+      function getMarkerSize(z){return z<=7?10:z<=9?13:z<=11?16:18;}
+      for(var mi=0;mi<gpsPoints.length;mi++){
+        var pos=new naver.maps.LatLng(gpsPoints[mi].lat,gpsPoints[mi].lng);
+        bounds.extend(pos);
+        (function(pos2,name,map2){
+          var sz=getMarkerSize(map2.getZoom());
+          var color="#0EA47A";
+          var wrap=document.createElement("div");
+          wrap.style.cssText="width:24px;height:24px;display:flex;align-items:center;justify-content:center;cursor:pointer";
+          var dot=document.createElement("div");
+          dot.style.cssText="width:"+sz+"px;height:"+sz+"px;background:"+color+";border:2px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.35);transition:width .25s ease,height .25s ease";
+          wrap.appendChild(dot);
+          allMarkerDots.push(dot);
+          var marker=new naver.maps.Marker({position:pos2,map:map2,icon:{content:wrap,anchor:new naver.maps.Point(12,12)}});
+          var infoEl=document.createElement("div");
+          infoEl.style.cssText="padding:4px 8px;font-size:11px;font-weight:700;white-space:nowrap;background:#fff;border:1px solid #ddd;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.15)";
+          infoEl.textContent=name;
+          var infoOverlay=new naver.maps.Marker({position:pos2,map:map2,icon:{content:infoEl,anchor:new naver.maps.Point(0,30)},visible:false});
+          naver.maps.Event.addListener(marker,"click",function(e){if(activeInfoOverlay)activeInfoOverlay.setVisible(false);if(activeInfoOverlay===infoOverlay){activeInfoOverlay=null}else{infoOverlay.setVisible(true);activeInfoOverlay=infoOverlay}});
+        })(pos,gpsPoints[mi].name,map);
+      }
+      naver.maps.Event.addListener(map,"zoom_changed",function(){var ns=getMarkerSize(map.getZoom());for(var di=0;di<allMarkerDots.length;di++){allMarkerDots[di].style.width=ns+"px";allMarkerDots[di].style.height=ns+"px";}});
+      naver.maps.Event.addListener(map,"click",function(){if(activeInfoOverlay){activeInfoOverlay.setVisible(false);activeInfoOverlay=null}});
+      map.fitBounds(bounds);
+    }
+  }
+}
+
+function buildPlaceholder(text){
+  return '<div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>'+(text||"")+'</span></div></div>';
+}
+
+function openSchoolMap(name,gpsArr){
+  var existing=document.getElementById("schoolMapOverlay");
+  if(existing)existing.remove();
+  var overlay=document.createElement("div");
+  overlay.id="schoolMapOverlay";
+  overlay.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:2000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)";
+  var popup=document.createElement("div");
+  popup.style.cssText="background:#fff;border-radius:16px;width:90vw;max-width:700px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3)";
+  var header=document.createElement("div");
+  header.style.cssText="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #E5E7EB";
+  var titleDiv=document.createElement("div");
+  titleDiv.style.cssText="font-size:14px;font-weight:800";
+  titleDiv.innerHTML=escHtml(name)+" <span style=\"color:#0EA47A;font-size:12px\">GPS "+gpsArr.length+"건</span>";
+  var closeBtn=document.createElement("button");
+  closeBtn.textContent="\u2715";
+  closeBtn.style.cssText="background:none;border:none;font-size:20px;cursor:pointer;color:#9CA3AF;padding:4px";
+  closeBtn.addEventListener("click",function(){var el=document.getElementById("schoolMapOverlay");if(el)el.remove()});
+  header.appendChild(titleDiv);
+  header.appendChild(closeBtn);
+  var mapDiv=document.createElement("div");
+  mapDiv.style.cssText="width:100%;height:520px";
+  popup.appendChild(header);
+  popup.appendChild(mapDiv);
+  overlay.appendChild(popup);
+  overlay.addEventListener("click",function(e){if(e.target===overlay)overlay.remove()});
+  document.body.appendChild(overlay);
+  var map=new naver.maps.Map(mapDiv,{center:new naver.maps.LatLng(gpsArr[0].lat,gpsArr[0].lng),zoom:15});
+  var bounds=new naver.maps.LatLngBounds();
+  for(var i=0;i<gpsArr.length;i++){
+    var pos=new naver.maps.LatLng(gpsArr[i].lat,gpsArr[i].lng);
+    bounds.extend(pos);
+    var el=document.createElement("div");
+    el.style.cssText="width:16px;height:16px;background:#0EA47A;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)";
+    new naver.maps.Marker({position:pos,map:map,icon:{content:el,anchor:new naver.maps.Point(8,8)}});
+  }
+  if(gpsArr.length>1)map.fitBounds(bounds);
+  var labelEl=document.createElement("div");
+  labelEl.style.cssText="padding:4px 10px;font-size:11px;font-weight:700;background:#fff;border:1px solid #ddd;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,0.1)";
+  labelEl.textContent=name+" ("+gpsArr.length+"건)";
+  new naver.maps.Marker({position:new naver.maps.LatLng(gpsArr[0].lat,gpsArr[0].lng),map:map,icon:{content:labelEl,anchor:new naver.maps.Point(0,30)}});
+}
+
+function handleImgError(img){
+  var src=img.src;
+  var idMatch=src.match(/\/d\/([^=\/]+)/) || src.match(/[?&]id=([^&]+)/);
+  if(idMatch&&!img.dataset.retried){
+    img.dataset.retried="1";
+    img.src="https://drive.google.com/thumbnail?id="+idMatch[1]+"&sz=w1200";
+    return;
+  }
+  // v3.9.7: 재시도도 실패 → Drive에서 삭제된 사진이므로 썸네일 자체를 제거 + 번호 재카운트
+  try{
+    var thumb=img.closest(".photo-thumb");
+    var grid=thumb&&thumb.parentNode;
+    if(thumb)thumb.remove();
+    if(grid){
+      var remaining=grid.querySelectorAll(".photo-thumb img");
+      for(var i=0;i<remaining.length;i++){
+        var alt=remaining[i].alt||"";
+        remaining[i].alt=alt.replace(/\s\d+$/," "+(i+1));
+      }
+      if(remaining.length===0){var sec=grid.closest(".photo-section");if(sec)sec.style.display="none";}
+    }
+  }catch(e){}
+}
+function toggleCard(headerEl){
+  var card=headerEl.parentElement;
+  var body=card.querySelector(".card-body");
+  var toggle=headerEl.querySelector(".card-toggle");
+  if(body.classList.contains("collapsed")){
+    body.classList.remove("collapsed");
+    body.style.maxHeight=body.scrollHeight+"px";
+    if(toggle)toggle.classList.add("open");
+    setTimeout(function(){body.style.maxHeight="none"},350);
+  } else {
+    body.style.maxHeight=body.scrollHeight+"px";
+    body.offsetHeight;
+    body.classList.add("collapsed");
+    if(toggle)toggle.classList.remove("open");
+  }
+}
+function openLightbox(src){var lb=document.getElementById("lightbox");document.getElementById("lightbox-img").src=src;lb.classList.add("show");document.body.style.overflow="hidden"}
+function closeLightbox(){document.getElementById("lightbox").classList.remove("show");document.body.style.overflow=""}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox()});
+
+loadReportData();
+if(!window._printMode){setInterval(loadReportData, AUTO_REFRESH_SEC * 1000);}
+
+</script>
+</body></html>
