@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>와이컴마케팅그룹_K-뉴딜 Microsoft AI 디지털 역량강화 교육과정 결과보고서</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F9FAFB;--surface:#FFFFFF;--surface-alt:#F3F4F6;
+  --border:#E5E7EB;--border-light:#F3F4F6;
+  --text:#0D1B3E;--text-secondary:#6B7280;--text-muted:#6B7280;
+  --accent:#2D5DA1;--accent-light:#DBEAFE;--accent-lighter:#DBEAFE;
+  --positive:#0EA47A;--positive-light:#D4EDDA;--positive-bg:#D4EDDA;
+  --negative:#DC3545;--negative-light:#F8D7DA;--negative-bg:#F8D7DA;
+  --warning:#E6940A;--warning-light:#FFF3CD;--warning-bg:#FFF3CD;
+  --orange:#E6940A;--orange-light:#FFF3CD;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,0.07);
+  --r:14px;
+}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;background:#E5E7EB;color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;padding:24px 16px}
+.report-page{max-width:1280px;margin:0 auto;background:var(--bg);border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08),0 1px 3px rgba(0,0,0,0.06)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .4s ease both}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.skeleton{background:linear-gradient(90deg,var(--surface-alt) 25%,#E5E7EB 50%,var(--surface-alt) 75%);background-size:200% 100%;animation:pulse 1.5s ease-in-out infinite;border-radius:8px;height:20px}
+.report-header{background:linear-gradient(135deg,#1A1D27 0%,#374151 100%);color:#fff;padding:40px 0;position:relative;overflow:hidden}
+.report-header::before{content:"";position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.03),transparent 70%);pointer-events:none}
+.header-inner{max-width:1280px;margin:0 auto;padding:0 24px;position:relative}
+.header-label{font-size:12px;font-weight:700;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+.header-title{font-size:2rem;font-weight:900;letter-spacing:-0.04em;line-height:1.2}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.5);margin-top:6px;font-weight:500}
+.header-meta{display:flex;gap:20px;margin-top:20px;flex-wrap:wrap}
+.meta-chip{background:rgba(255,255,255,0.08);padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:6px}
+.meta-chip svg{width:14px;height:14px;opacity:0.5}
+.header-logo{position:absolute;top:20px;right:24px}
+.logo-mark{display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:20px;height:20px}
+.logo-text{font-size:13px;font-weight:900;color:rgba(255,255,255,0.7);letter-spacing:-0.03em}
+.live-indicator{display:inline-flex;align-items:center;gap:6px;background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.2);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;color:#0EA47A}
+.live-dot{width:6px;height:6px;background:#0EA47A;border-radius:50%;animation:pulse 2s ease-in-out infinite}
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:28px;position:relative;z-index:1}
+.kpi-card{background:var(--surface);border-radius:var(--r);padding:24px 20px;box-shadow:var(--shadow-md);border:1px solid var(--border-light);text-align:center}
+.kpi-value{font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums}
+.kpi-label{font-size:12px;font-weight:700;color:var(--text-muted);margin-top:10px;text-transform:uppercase;letter-spacing:0.04em}
+.kpi-sub{font-size:12px;font-weight:600;margin-top:8px}
+.kpi-card .kpi-value{color:#0D1B3E}
+.kpi-card .kpi-sub{color:#2D5DA1}
+.kpi-card.progress{border-top:3px solid #0EA47A}
+.kpi-card.progress .kpi-value{color:#0EA47A;font-size:2.2rem}
+.kpi-card.progress .kpi-sub{color:#0EA47A}
+.progress-section{margin-top:32px}
+.progress-bar-wrap{background:var(--surface);border-radius:var(--r);padding:20px 24px;box-shadow:var(--shadow-sm);border:1px solid var(--border-light)}
+.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.progress-title{font-size:13px;font-weight:700;color:var(--text-secondary)}
+.progress-pct{font-size:22px;font-weight:900;color:var(--positive)}
+.progress-track{height:14px;background:var(--surface-alt);border-radius:7px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--positive));border-radius:7px;transition:width 0.8s ease}
+.progress-detail{display:flex;gap:24px;margin-top:12px;font-size:12px;color:var(--text-muted);font-weight:600}
+.progress-detail span{display:flex;align-items:center;gap:4px}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-done{background:var(--positive)}.dot-remain{background:var(--border)}
+.section{margin-top:36px}
+.section-title{font-size:13px;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.section-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.region-group{margin-bottom:24px}
+.region-label{font-size:16px;font-weight:800;color:var(--text);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--border-light);display:flex;align-items:center;gap:8px}
+.region-count{font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-lighter);padding:2px 8px;border-radius:10px}
+.summary-table-wrap{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow-sm);border:1px solid var(--border-light);overflow:hidden}
+.summary-table{width:100%;border-collapse:collapse}
+.summary-table thead th{font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em;padding:10px 14px;text-align:left;background:var(--surface-alt);border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:5;box-shadow:inset 0 -1px 0 rgba(0,0,0,.08)}
+.summary-table thead th:nth-child(n+4){text-align:center}
+.summary-table tbody td{font-size:14px;padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text-secondary);vertical-align:middle}
+.summary-table tbody td:first-child{font-weight:700;color:var(--text);text-align:center}
+.summary-table tbody td:nth-child(n+4){text-align:center}
+.summary-table tbody tr:last-child td{border-bottom:none}
+.summary-table tbody tr:hover td{background:var(--accent-lighter)}
+.summary-table tfoot td{font-size:14px;font-weight:800;padding:10px 14px;background:var(--surface-alt);color:var(--text);border-top:1px solid var(--border)}
+.summary-table tfoot td:nth-child(n+4){text-align:center}
+.region-tag{font-size:12px;font-weight:600;color:var(--text-muted)}
+.summary-note{font-size:12px;color:var(--text-muted);max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.date-text{font-variant-numeric:tabular-nums;font-weight:600;color:var(--text)}
+.school-card{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow-sm);border:1px solid var(--border-light);overflow:hidden;margin-bottom:16px;transition:all 0.3s ease}
+.school-card.card-done{opacity:1}
+.school-card.card-pending{opacity:0.7}
+.school-card.card-pending .school-card-header{border-bottom:none}
+.school-card-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border-light);cursor:pointer;transition:background 0.15s;gap:12px;user-select:none}
+.school-card-header:hover{background:var(--surface-alt)}
+.card-body{overflow:hidden;transition:max-height 0.35s ease,opacity 0.25s ease}
+.card-body.collapsed{max-height:0!important;opacity:0;padding:0}
+.card-toggle{width:20px;height:20px;flex-shrink:0;transition:transform 0.25s ease;color:var(--text-muted)}
+.card-toggle.open{transform:rotate(180deg)}
+.header-qty{display:flex;align-items:center;gap:12px;margin-left:auto;margin-right:12px;flex-shrink:0}
+.school-info{display:flex;align-items:center;gap:12px}
+.school-num{width:28px;height:28px;background:var(--accent);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+.school-name{font-size:15px;font-weight:800;letter-spacing:-0.02em}
+.school-addr{font-size:12px;color:var(--text-muted);margin-top:1px}
+.school-status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px}
+.status-done{background:var(--positive-bg);color:var(--positive)}
+.status-pending{background:var(--surface-alt);color:var(--text-muted)}
+.qty-header{display:flex;gap:16px;padding:12px 20px;border-bottom:1px solid var(--border-light);background:var(--surface-alt)}
+.qty-item{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700}
+.qty-item .qty-label{font-size:12px;font-weight:600;color:var(--text-muted)}
+.qty-poster{color:#1E3F75}.qty-banner{color:var(--orange)}
+.attach-info{padding:12px 20px;display:flex;gap:24px;flex-wrap:wrap;font-size:13px;border-bottom:1px solid var(--border-light)}
+.attach-info-item{display:flex;align-items:center;gap:6px}
+.attach-info-label{font-size:12px;font-weight:600;color:var(--text-muted)}
+.attach-info-value{font-weight:700;color:var(--text)}
+.photo-section{padding:0 20px 16px}
+.photo-label{font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.photo-thumb{aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:var(--surface-alt);position:relative;cursor:pointer;border:1px solid var(--border-light)}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.2s}
+.photo-thumb:hover img{transform:scale(1.05)}
+.photo-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:12px;flex-direction:column;gap:4px}
+.photo-placeholder svg{width:24px;height:24px;opacity:0.3}
+.drive-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--accent);text-decoration:none;padding:4px 10px;border-radius:8px;transition:background 0.15s}
+.drive-link:hover{background:var(--accent-lighter)}
+.drive-link svg{width:14px;height:14px}
+.loading-wrap{text-align:center;padding:80px 20px}
+.loading-spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:14px;color:var(--text-muted);font-weight:600}
+.error-wrap{text-align:center;padding:80px 20px;color:var(--negative)}
+.refresh-btn{background:var(--accent);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;margin-top:16px;font-family:inherit}
+.report-footer{margin-top:48px;padding:28px 0;border-top:1px solid var(--border);text-align:left}
+.footer-inner{display:flex;align-items:center;gap:16px}
+.footer-logo{font-size:13px;font-weight:800;color:var(--text-muted);letter-spacing:-0.01em;flex-shrink:0}
+.footer-info{font-size:12px;color:var(--text-muted)}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;display:none;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.lightbox.show{display:flex}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.lightbox-close{position:fixed;top:20px;right:20px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+@media(max-width:768px){
+  body{padding:0}
+  .report-page{border-radius:0;box-shadow:none}
+  .kpi-grid{grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+  .kpi-value{font-size:1.5rem}
+  .header-title{font-size:1.5rem}
+  .container{padding:0 16px}
+  .report-header{padding:28px 0}
+  .header-logo{position:static;margin-bottom:14px}
+  .school-card-header{flex-direction:column;align-items:flex-start;gap:10px}
+  .photo-grid{grid-template-columns:repeat(2,1fr);gap:6px}
+  .photo-thumb{min-height:120px}
+  .attach-info{flex-direction:column;gap:6px}
+}
+@media(max-width:480px){
+  .kpi-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .kpi-card{padding:18px 14px}
+  .kpi-value{font-size:1.3rem}
+  .header-title{font-size:1.3rem}
+  .progress-detail{flex-direction:column;gap:6px}
+}
+@media print{
+  @page{size:A4 landscape;margin:10mm}
+  body{background:#fff!important;color:#1A1D27!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:0!important}
+  .report-page{box-shadow:none!important;border-radius:0!important;max-width:none!important;background:#FFFFFF!important}
+  .map-wrap{display:none!important}
+  .kpi-card,.progress-bar-wrap,.summary-table-wrap,.school-card{background:#F9FAFB!important;border:1px solid #E5E7EB!important;box-shadow:none!important}
+  .summary-table thead th,.summary-table tfoot td{background:#F3F4F6!important}
+  .school-card-header{background:transparent!important}
+  .report-header,.kpi-grid,.progress-section{break-inside:avoid;page-break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .section{break-before:page;page-break-before:always}
+  .section:first-of-type{break-before:auto;page-break-before:auto}
+  .school-card{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #ddd;margin-bottom:8mm}
+  .photo-thumb{break-inside:avoid;page-break-inside:avoid;aspect-ratio:4/3;width:100%;height:auto;border:1px solid #ddd;border-radius:4px;overflow:hidden}
+  .photo-grid .photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;max-height:none}
+  .photo-grid{grid-template-columns:repeat(4,1fr);gap:3mm}
+  .header-sub{display:none!important}
+  #metaSchools{display:none!important}
+  .school-card-header{flex-direction:row!important;align-items:center!important;flex-wrap:nowrap!important;gap:12px}
+  .school-info{flex:1 1 auto;min-width:0}
+  .header-qty,.school-status,.card-toggle{flex-shrink:0}
+  .lightbox,.live-indicator,.refresh-btn,.no-print,button.no-print{display:none!important}
+  .kpi-card,.progress-bar-wrap,.summary-table-wrap,.school-card{box-shadow:none}
+  .kpi-card,.progress-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card-body.collapsed{max-height:none!important;opacity:1}
+  a[href]::after{content:none!important}
+}
+a:hover,.summary-table a:hover{text-decoration:underline}
+.drive-link:hover{text-decoration:underline;background:var(--accent-lighter)}
+.kpi-label,.kpi-sub,.progress-detail,.summary-note,.region-tag,.school-addr,.school-status,.qty-item .qty-label,.attach-info-label,.photo-label,.drive-link,.footer-info{font-size:13px}
+a[target="_blank"]::after{content:" \2197";color:var(--text-muted);font-size:.9em}
+</style>
+</head>
+<body>
+<script>(function(){try{
+  var BUILD_TS=1789544077829;
+  // v3.9.10: 무한 새로고침 방지 — 세션당 1회만 체크, 플래그를 "체크 시작 시점"에 바로 세팅.
+  if(sessionStorage.getItem("__verChecked"))return;
+  sessionStorage.setItem("__verChecked","1");
+  fetch(location.pathname+"?_="+Date.now(),{method:"HEAD",cache:"no-store"}).then(function(r){
+    var lm=r.headers.get("last-modified");
+    if(!lm)return;
+    var srvTs=new Date(lm).getTime();
+    if(srvTs>BUILD_TS+30000){location.replace(location.pathname+"?v="+srvTs);}
+  }).catch(function(){});
+}catch(e){}})();</script>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&#x2715;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+<div class="report-page">
+<div class="report-header">
+  <div class="header-inner">
+    <div class="header-label">Campaign Report</div>
+    <div class="header-title">와이컴마케팅그룹_K-뉴딜 Microsoft AI 디지털 역량강화 교육과정 결과보고서</div>
+    <div class="header-sub">좋은광고연구소 광고 게첨 실시간 현황</div>
+    <div class="header-meta">
+      <div class="meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>마감 : 9월 18일 금요일</div>
+      <div class="meta-chip" id="metaSchools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>로딩 중...</div>
+      <div class="live-indicator"><span class="live-dot"></span>실시간</div>
+      <div class="meta-chip" id="metaManager" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span id="managerName"></span></div>
+      <div class="meta-chip" id="metaUpdated" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="updatedText"></span></div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div id="printBanner" class="no-print" style="display:none;background:#DBEAFE;border:1px solid #4A8ED6;border-radius:12px;padding:16px 20px;margin:28px 0 16px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap"></div>
+<div id="reportContent">
+  <div class="loading-wrap"><div class="loading-spinner"></div><div class="loading-text">데이터를 불러오는 중...</div></div>
+</div>
+<div class="report-footer" style="text-align:left;padding:32px 16px 40px">
+  <div class="footer-inner">
+    <div><img src="https://lh3.googleusercontent.com/d/1bRxTWK1OzoQl4CiX5Wri_dT-swSHxLuU" alt="좋은광고연구소" style="height:19px;object-fit:contain"></div>
+    <div class="footer-info">주식회사 좋은광고연구소 ㅣ goodadlab@goodadlab.co.kr ㅣ 1522-3235</div>
+  </div>
+</div>
+</div>
+</div>
+<script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=gcvbnnigi1"></script>
+<script>
+window.__INITIAL_REPORT_DATA__ = {"status":"ok","updatedAt":"2026년 9월 16일 16시 34분","campDriveUrl":"https://drive.google.com/drive/folders/1ulDBFaprB3N-PX9McDC_EstKR4ow0ZLP","manager":"박시현","stats":{"totalSchools":10,"totalPoster":100,"totalBanner":16,"donePoster":100,"doneBanner":16,"doneSchools":10,"remainSchools":0,"pct":100,"regionText":"경남 2 · 부산 8"},"schools":[{"name":"가야대학교 김해캠퍼스","addr":"경상남도 김해시 삼계로 208","addrClean":"경상남도 김해시 삼계로 208","region":"경남","regionOrd":14,"subAddr":"김해시","pQty":10,"bQty":2,"postDate":"2026년 9월 15일 10시 15분","note":"가락관, 분성관 / 현수막 : 분성관 인근","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1HjQo5OhNru7__SchNYAQFe7I8GSPZhYC=w1200","https://lh3.googleusercontent.com/d/1wZKEMC7ZW566ZuWKwmJ25OyAP84R-61X=w1200","https://lh3.googleusercontent.com/d/1-9Pyh6e9vQCKtJoqy0rZcCG9So0_olsq=w1200","https://lh3.googleusercontent.com/d/1Y1ajfID8melr6v_tykX0ZPlIEVo9Y2gZ=w1200","https://lh3.googleusercontent.com/d/1rvADf_X4ksrXv8VFQVhElch00zk75ytG=w1200","https://lh3.googleusercontent.com/d/1exW3_M6K8SeEkPCgF_ql9g2ivzztkJV-=w1200","https://lh3.googleusercontent.com/d/1LkO2B7bMVfe6o1py7-Mht0waQT0M861a=w1200","https://lh3.googleusercontent.com/d/10lmrGY5eijJiKXDCpnu7yxajdpm9ydDr=w1200","https://lh3.googleusercontent.com/d/1ZLQLPpT_x6wyNK59Jo4istNefUUuK-UP=w1200","https://lh3.googleusercontent.com/d/12A010Wru6LejsR28AinOts7TexgDw_Dn=w1200","https://lh3.googleusercontent.com/d/1x4VQrdsRhMcROiLH0sLzUSSRiP8g_5Im=w1200","https://lh3.googleusercontent.com/d/1GEb35esj8v6H0vexAEwuD6oyE_XZ_2kg=w1200","https://lh3.googleusercontent.com/d/1EdiRfrR5FOw62pAgMqfd3Xuh1eTkvxiu=w1200","https://lh3.googleusercontent.com/d/15R8G5db14giOx1aOktNq0sco1Z88oZxq=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1JQZAK2T0XgCcy4TNsTfjiaEeTfHTNSPT","gps":{"poster":[{"lat":35.269742,"lng":128.872566},{"lat":35.269742299722225,"lng":128.8725661},{"lat":35.26964989972222,"lng":128.8728002},{"lat":35.26964997222222,"lng":128.8728},{"lat":35.2696143,"lng":128.87271509972223},{"lat":35.2729475,"lng":128.87193859972223},{"lat":35.26964399972222,"lng":128.8727407},{"lat":35.2693974,"lng":128.873104},{"lat":35.26964997222222,"lng":128.8728},{"lat":35.269742299722225,"lng":128.8725661},{"lat":35.269742299722225,"lng":128.8725661},{"lat":35.269742299722225,"lng":128.8725661},{"lat":35.269742299722225,"lng":128.8725661}],"banner":[]}},{"name":"김해대학교","addr":"경상남도 김해시 삼안로112번길 198","addrClean":"경상남도 김해시 삼안로112번길 198","region":"경남","regionOrd":14,"subAddr":"김해시","pQty":10,"bQty":2,"postDate":"2026년 9월 15일 09시 28분","note":"학교전역 / 현수막 : 창의관 앞, 운동장 앞","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1iWS1x8wY8d8OZrwIETuYp4jVUXB4jxnM=w1200","https://lh3.googleusercontent.com/d/1fvIkf_edmBzD0vPuOJ9bdCLuyZfip2BT=w1200","https://lh3.googleusercontent.com/d/1RrEEWYPVsGVKERQMJ1nl_jfYWK-4mwfy=w1200","https://lh3.googleusercontent.com/d/1vcxAUbyjrtKJBhlRIcYOurn8OZok6_Ob=w1200","https://lh3.googleusercontent.com/d/133FdC-Xikgh-06kfG-1_oXpsUrwJM3y1=w1200","https://lh3.googleusercontent.com/d/1fWwrf7NQitSPyenHJSCYxpTJs-NJH93O=w1200","https://lh3.googleusercontent.com/d/1AobGyLBm8CBAXnkRo4mf4MJxMLRBNWj_=w1200","https://lh3.googleusercontent.com/d/1C4OVAQQI3By-vHV94o0ilftlRR2sQp9l=w1200","https://lh3.googleusercontent.com/d/1Fb1j7kjGU6XWQ8JDeDP7CA_dxcUGrMvs=w1200","https://lh3.googleusercontent.com/d/1WbUYRwptWCv0pZCsNTnON5ZSsRf5nThM=w1200","https://lh3.googleusercontent.com/d/187ilNFyX02fU6t4ySHgzSG49EIiwAJ3o=w1200","https://lh3.googleusercontent.com/d/1RJZeoZXEA8rBKHJcFa8HuzcrWclHXNFT=w1200","https://lh3.googleusercontent.com/d/1GHic_Bvm5tOcMTJsww-poFsOp30Fx7WT=w1200","https://lh3.googleusercontent.com/d/1VA0ZHHT3EgA2gs2QxnK8va2bcVH49kBP=w1200"],"driveUrl":"https://drive.google.com/drive/folders/14s69G0SKsVgKdQ4puubEJ_4_9HT8m-36","gps":{"poster":[{"lat":35.2542083,"lng":128.91299599972223},{"lat":35.25234809972222,"lng":128.91331429972223},{"lat":35.2542083,"lng":128.91299599972223},{"lat":35.254207972222225,"lng":128.91299597222223},{"lat":35.2545792,"lng":128.9105024},{"lat":35.2532015,"lng":128.9134179},{"lat":35.25234809972222,"lng":128.91331429972223},{"lat":35.25234809972222,"lng":128.91331429972223},{"lat":35.25234809972222,"lng":128.91331429972223},{"lat":35.254207972222225,"lng":128.91299597222223},{"lat":35.25346329972222,"lng":128.913371},{"lat":35.2532136,"lng":128.9132585},{"lat":35.2542083,"lng":128.91299599972223}],"banner":[]}},{"name":"동의과학대학교","addr":"부산광역시 부산진구 양지로 54","addrClean":"부산광역시 부산진구 양지로 54","region":"부산","regionOrd":15,"subAddr":"부산진구","pQty":10,"bQty":2,"postDate":"2026년 9월 16일 13시 06분","note":"진리관, 창조관, 학생회관 / 현수막 : 진리관앞, 정보관 앞","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1RWqaVFIDrZjF9DVce2nh1LGxAXsaQNJD=w1200","https://lh3.googleusercontent.com/d/1MCMoEcSWSYrIL6gjBn-1H5lGsa30GS5o=w1200","https://lh3.googleusercontent.com/d/1gydcXbpI0oJ-2mlcAZVqqhnpqlpuEwCZ=w1200","https://lh3.googleusercontent.com/d/1gxps1lLBdNt2MqfNnRvsvt8aG-pw-wfu=w1200","https://lh3.googleusercontent.com/d/1DOres9miwTuSQyowCW5w8aVLtqEHPlhb=w1200","https://lh3.googleusercontent.com/d/1gQx7PwzR1h9Luw-pQJ6YxXhu5JI_j2R8=w1200","https://lh3.googleusercontent.com/d/1itxSnial4TUPe28NEUDq-w7EjFLjizAL=w1200","https://lh3.googleusercontent.com/d/16TjZ7xWQ-q73n6_Yg_D109Nt2CmQiQf5=w1200","https://lh3.googleusercontent.com/d/1X4s27Gi0x9omTygF5P1SYH0OPPEBP7FJ=w1200","https://lh3.googleusercontent.com/d/1mVjsMbnvvbw7CuSXstihald9PznkEg0C=w1200","https://lh3.googleusercontent.com/d/18rfaxkdcMDxoigDZjDtQZ88BAQCSdR99=w1200","https://lh3.googleusercontent.com/d/1GVk6C3dn7H76XsBQysG_6f8DZ4h4dZaI=w1200","https://lh3.googleusercontent.com/d/1JTJWMwppiXe3QWlrg_GCyNbxXt-amnli=w1200","https://lh3.googleusercontent.com/d/1rCLwA1r9QrSAi4Pe9hLO5TczSRZ0jXG5=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1obGF3wCLd-TQjlAaE0D6Y2wHj5gpQnFG","gps":{"poster":[{"lat":35.1656477,"lng":129.0722776},{"lat":35.16595259972222,"lng":129.07357439999998},{"lat":35.1658903,"lng":129.0735343},{"lat":35.165737,"lng":129.07229897222223},{"lat":35.16564797222222,"lng":129.07227799999998},{"lat":35.1656477,"lng":129.0722776},{"lat":35.165737,"lng":129.07229897222223},{"lat":35.165756,"lng":129.0722969722222},{"lat":35.165737,"lng":129.07229897222223},{"lat":35.1651564,"lng":129.07251399999998},{"lat":35.1656477,"lng":129.0722776},{"lat":35.1661408,"lng":129.072179},{"lat":35.16643497222222,"lng":129.07336899999999}],"banner":[]}},{"name":"동의대학교 가야캠퍼스","addr":"부산광역시 부산진구 엄광로 176","addrClean":"부산광역시 부산진구 엄광로 176","region":"부산","regionOrd":15,"subAddr":"부산진구","pQty":10,"bQty":2,"postDate":"2026년 9월 16일 11시 51분","note":"상경관 현수막 : 공학관 앞 게시대, 자연과학관 앞 버스정류장 옆 게시대","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1ocR9RELXmI3bv5sv9glHNZK-2Ny5WPVD=w1200","https://lh3.googleusercontent.com/d/1ZWLUjvVlVKH25ullfQkcGRJmWWuFtmBJ=w1200","https://lh3.googleusercontent.com/d/1gGh8EzbtUEEpC0tA9znb3ImT9ZgcL1iv=w1200","https://lh3.googleusercontent.com/d/1PLVd-7MZzkWVFr3JrGMG6WIhmZager6V=w1200","https://lh3.googleusercontent.com/d/1T9dreTiYecu4S5N7M__LR1gLh9BFSRd4=w1200","https://lh3.googleusercontent.com/d/1TreQy6DGwshKXYDH40PR1J3IkALt6HpR=w1200","https://lh3.googleusercontent.com/d/1q8JhTY0dJ5WcPQtXzyQ5QJSqLDpUDSTR=w1200","https://lh3.googleusercontent.com/d/1qhj-sEX6kMAfU0e--T1OgNUw7mDBTDFW=w1200","https://lh3.googleusercontent.com/d/1Hj79djRNX9GTogG6Un7yYupNE9NhTVtG=w1200","https://lh3.googleusercontent.com/d/17FzDEmniH2H_RFJHbWtDoPkpcM0T7jJr=w1200","https://lh3.googleusercontent.com/d/1hjKashL7B0M0lu0MPHZ-K5o5CHMET9se=w1200","https://lh3.googleusercontent.com/d/1aHhUL19dkYfNIlmQc3d0mFuTHO4I_1hY=w1200","https://lh3.googleusercontent.com/d/16HzO-abALUrMAEi02zbRFZ5wbWnlIOmz=w1200","https://lh3.googleusercontent.com/d/1g-i2lZ1FnCkbw99m9YwGYZvfolYsK2mj=w1200","https://lh3.googleusercontent.com/d/1Gzo36-PcoggzwzGZGp6dQSbW6SkeYnSA=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1ISCnxk8q-7T82B-3L4aYMx6Lxx0UyKV4","gps":{"poster":[{"lat":35.139820999722225,"lng":129.03274809972223},{"lat":35.1404167,"lng":129.032585},{"lat":35.139733999722225,"lng":129.03284479972223},{"lat":35.14000597222222,"lng":129.032742},{"lat":35.1396127,"lng":129.0330336},{"lat":35.14000597222222,"lng":129.03290797222223},{"lat":35.1396396,"lng":129.0328996},{"lat":35.139642,"lng":129.03286097222224},{"lat":35.1396225,"lng":129.0329504},{"lat":35.1395539,"lng":129.0329585},{"lat":35.14419029972222,"lng":129.0358908},{"lat":35.139595999722225,"lng":129.0328091},{"lat":35.14380299972222,"lng":129.0345842},{"lat":35.139679799999996,"lng":129.03261919972223}],"banner":[]}},{"name":"부산과학기술대학교","addr":"부산광역시 북구 시랑로132번길 88","addrClean":"부산광역시 북구 시랑로132번길 88","region":"부산","regionOrd":15,"subAddr":"북구","pQty":10,"bQty":2,"postDate":"2026년 9월 15일 11시 31분","note":"중앙관 / 현수막 : 제1생활관,  중앙관 앞","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1OkLJdm-Sz1Zn9lQ8gUpo1QTTrQpIi6du=w1200","https://lh3.googleusercontent.com/d/1DKeDoZd58Karq1TGzPdq2hq7CNUhgcGK=w1200","https://lh3.googleusercontent.com/d/1QUsSlHq0RUkFA6cLdUsl3_fagruVU0FL=w1200","https://lh3.googleusercontent.com/d/1UwreQ5T5ob7dBJUS6mQT2GJaHK0Qf8j6=w1200","https://lh3.googleusercontent.com/d/1pDPwKNZYwgm9S69YZSdAo-i67I2aU5EH=w1200","https://lh3.googleusercontent.com/d/1UQhZ0dNA83SF8CRfaV9lxXvhCea2_EKm=w1200","https://lh3.googleusercontent.com/d/114c0yTpp0orbMUCpjJPvnghXs8WkZ6lI=w1200","https://lh3.googleusercontent.com/d/1Hc-ByZ8_APoycLA49ZOhK50fXUcRgprG=w1200","https://lh3.googleusercontent.com/d/1noQ_yuJSyaYVQIDok5MMxx7ka-j3tMaC=w1200","https://lh3.googleusercontent.com/d/1wPMO38d01bCrY1uFE3xKRF0MKP_eo6-n=w1200","https://lh3.googleusercontent.com/d/1RkEiJzLtc3yECRwEYVz6C_0qJtHlST4b=w1200","https://lh3.googleusercontent.com/d/1FlsN91PZmcij5GoVQKY4hRNtKNXfWRHw=w1200","https://lh3.googleusercontent.com/d/1Ggq0lT40WxKQDWsUvohvOeCCbf9h8JwW=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1qGXzc0gXoGoZndvvCazxapm1HvE0m7O6","gps":{"poster":[{"lat":35.19372129972222,"lng":129.0039231},{"lat":35.195917599999994,"lng":129.00383429972223},{"lat":35.195917599999994,"lng":129.00383429972223},{"lat":35.195917599999994,"lng":129.00383429972223},{"lat":35.195917599999994,"lng":129.00383429972223},{"lat":35.19595497222222,"lng":129.00387797222223},{"lat":35.19367789972222,"lng":129.0040777},{"lat":35.195917599999994,"lng":129.00383429972223},{"lat":35.195917599999994,"lng":129.00383429972223},{"lat":35.195917599999994,"lng":129.00383429972223},{"lat":35.193255799999996,"lng":129.00333489972223},{"lat":35.19560719972222,"lng":129.0039806}],"banner":[]}},{"name":"신라대학교","addr":"부산광역시 사상구 백양대로700번길 140","addrClean":"부산광역시 사상구 백양대로700번길 140","region":"부산","regionOrd":15,"subAddr":"사상구","pQty":10,"bQty":2,"postDate":"2026년 9월 15일 12시 18분","note":"학생회관 인문관 / 현수막 : 운동장 인근 유동인구 많은곳","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1ADe9WiqijeRA8n7xuyQzKAPcLEzxPDqO=w1200","https://lh3.googleusercontent.com/d/1D3J9DeFAML22NJxOgRMR9G44lhLiDYb7=w1200","https://lh3.googleusercontent.com/d/1aRgUO7NtmeEHXQ1R8PpsEvCwSSmeK0M_=w1200","https://lh3.googleusercontent.com/d/13jAmHAqHjVjFUoji6jlLcWMSYD_qFzGF=w1200","https://lh3.googleusercontent.com/d/1dDfK9_sF0d1TZNTEzq-ROZ3igFgmtbiM=w1200","https://lh3.googleusercontent.com/d/1RGsrLJzGsxd66TVOwBm2pXjvsojjI-BC=w1200","https://lh3.googleusercontent.com/d/1UEp1hNb1-QChJyR2p33FHzBq-Btns2Kl=w1200","https://lh3.googleusercontent.com/d/1_h2FukKiXp5ky-iUUDSagsthf_knH9EK=w1200","https://lh3.googleusercontent.com/d/12JEpPpgVUJSZEDWwMON4ilsBeCG8PViL=w1200","https://lh3.googleusercontent.com/d/1h3Dw80u5FrtX-8M1IMg_xXMrSoFBpv5F=w1200","https://lh3.googleusercontent.com/d/1rNQ5F3tr8TuaF9F_G4b0HrD9JOF2mSSN=w1200","https://lh3.googleusercontent.com/d/1nfHN7KaSFb0yIzL_DGrFtKaPvFnslE7O=w1200","https://lh3.googleusercontent.com/d/1CxE2R8GZ6_0AimxPVEWPAkhGVIsa9Dxa=w1200","https://lh3.googleusercontent.com/d/1BRMl31lkxrKqpXKecsC8E8HcH40jufl8=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1FUGs-4YwKuELy6Irxqdh6W2WnBl469sR","gps":{"poster":[{"lat":35.16837197222222,"lng":128.9955229722222},{"lat":35.16883839972222,"lng":128.99747839999998},{"lat":35.168371699999994,"lng":128.99552279999997},{"lat":35.16879097222222,"lng":128.9975599722222},{"lat":35.166829199999995,"lng":128.9995658997222},{"lat":35.169013899999996,"lng":128.9970572},{"lat":35.16896797222222,"lng":128.9973009722222},{"lat":35.169029599999995,"lng":128.9969274997222},{"lat":35.168371699999994,"lng":128.99552279999997},{"lat":35.1678627,"lng":128.9954032997222},{"lat":35.16876409972222,"lng":128.99610159999997},{"lat":35.16905189972222,"lng":128.9968748997222},{"lat":35.16903359972222,"lng":128.9968283997222}],"banner":[]}},{"name":"경남정보대학교","addr":"부산광역시 사상구 주례로 45","addrClean":"부산광역시 사상구 주례로 45","region":"부산","regionOrd":15,"subAddr":"사상구","pQty":10,"bQty":0,"postDate":"2026년 9월 15일 15시 18분","note":"학교전역","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1RVoqriepB7zyVuEpIGS5W-WgzblChTeZ=w1200","https://lh3.googleusercontent.com/d/1SxjCOibkfh15ehiEM9hUjaZVUs_XHhFu=w1200","https://lh3.googleusercontent.com/d/13Ppzh5qdFBRSCPKRRBAj5MmlrGEWc5Av=w1200","https://lh3.googleusercontent.com/d/1hdOpTREN05PTgrj1pcAetKlappy5EtTe=w1200","https://lh3.googleusercontent.com/d/1U8r_30qMrOmKY6dhL5JWMNdt_hkzo7TZ=w1200","https://lh3.googleusercontent.com/d/1_xXIrbOpXNHVI0n7UjxzuE6vaf2eW9QG=w1200","https://lh3.googleusercontent.com/d/1CBuemcYp363PxlQXiCVxam44dgvft44c=w1200","https://lh3.googleusercontent.com/d/1xhLmsSCeo3jUNrWnK60kngm89gdWrKp-=w1200","https://lh3.googleusercontent.com/d/1oNkKx7nrS5mPbVJaCRb7EZImRjVxpLQu=w1200","https://lh3.googleusercontent.com/d/1Uq1NmcPtCkiX1bJnjsaBl3EJx6jZqmtf=w1200","https://lh3.googleusercontent.com/d/13Gz_IGZ7vl-R5BBf3DqnpuVSCyfG3ZTp=w1200","https://lh3.googleusercontent.com/d/1jnO-gknTGc3hq7bbIsPxv99geNs7NPIw=w1200"],"driveUrl":"https://drive.google.com/drive/folders/10Nt1aSQ-tgsnGLiSEygHQ6uiiw27J8IB","gps":{"poster":[{"lat":35.147986699722225,"lng":129.0126772},{"lat":35.1475968,"lng":129.0126592},{"lat":35.1476224,"lng":129.0126592},{"lat":35.147596,"lng":129.012664},{"lat":35.147061299722225,"lng":129.0114274},{"lat":35.14732589972222,"lng":129.0127677},{"lat":35.14775269972222,"lng":129.0126739},{"lat":35.147061299722225,"lng":129.0114274},{"lat":35.1470551,"lng":129.01196569972223},{"lat":35.1470551,"lng":129.01196569972223}],"banner":[]}},{"name":"동서대학교","addr":"부산광역시 사상구 주례로 47","addrClean":"부산광역시 사상구 주례로 47","region":"부산","regionOrd":15,"subAddr":"사상구","pQty":10,"bQty":0,"postDate":"2026년 9월 15일 14시 43분","note":"공학관 학생회관","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1Zvkw2Q4pcA0HG-gPal1Q2NocepDWJAoM=w1200","https://lh3.googleusercontent.com/d/1Bdhc3gwxIHGeaC3Sr-KF9w2VsIltD0Ag=w1200","https://lh3.googleusercontent.com/d/1s1lPZkKspJk_Rid_MzKPutsYyx4wBiRv=w1200","https://lh3.googleusercontent.com/d/1QeSmAaHw7CYYhAAuJHHZFOf81pQKtWg3=w1200","https://lh3.googleusercontent.com/d/1DFVbRJY6oFU_RcUCxrosbyIVgGpP7mrL=w1200","https://lh3.googleusercontent.com/d/1CirIJ7Azl-AkGQa4JiEmrWJI3M8_EsVu=w1200","https://lh3.googleusercontent.com/d/1KdiWl8Pu2BxS1DK7iDZViEtIv9O2JVum=w1200","https://lh3.googleusercontent.com/d/1WRIFP3zx0Jr2vBumQL-3gHyiuZZZNyj3=w1200","https://lh3.googleusercontent.com/d/1db78n1TyYLhEd1Q-5o1Db2tGpO_hGstY=w1200","https://lh3.googleusercontent.com/d/1XFwJSegJs1he4oR9FBEpnIxRTalF6HCU=w1200","https://lh3.googleusercontent.com/d/1ZQ6Ept3MQqWSljSeDbnKfkPfL153vT5e=w1200","https://lh3.googleusercontent.com/d/1QLpQMpkGqYX5Eco4Bl_Q4Tv6hKizSAL7=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1Wn-KIk3BgsyU43D5vI3L_Ta0SBaE0sin","gps":{"poster":[{"lat":35.1457685,"lng":129.00947629972222},{"lat":35.1457685,"lng":129.00947629972222},{"lat":35.1456536,"lng":129.0090787},{"lat":35.1456536,"lng":129.0090787},{"lat":35.14576449972222,"lng":129.0095043},{"lat":35.14396969972222,"lng":129.00861689972223},{"lat":35.14404497222222,"lng":129.008505}],"banner":[]}},{"name":"동아대학교 승학캠퍼스","addr":"부산광역시 사하구 낙동대로550번길 37","addrClean":"부산광역시 사하구 낙동대로550번길 37","region":"부산","regionOrd":15,"subAddr":"사하구","pQty":10,"bQty":2,"postDate":"2026년 9월 15일 13시 43분","note":"포스터: 학생회관 / 현수막:도서관 옆길, 공대 4호관 앞길","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1glOoEmKCue8eNs7deZ3opMFQBszHtKWR=w1200","https://lh3.googleusercontent.com/d/1gZAGZhEWkkWzqwhj4UM0aA3uy6LPzQqg=w1200","https://lh3.googleusercontent.com/d/1LgpByzt20g_EZ599nWdGUf75SqtULjIz=w1200","https://lh3.googleusercontent.com/d/1AC8UqgNkY8tQ72Yu12qrjdBP4fzm-T_t=w1200","https://lh3.googleusercontent.com/d/1iRKrDGLHSeX24itPIbns-IMCTdfSIV6p=w1200","https://lh3.googleusercontent.com/d/1WZ79CnXmJgiV6ECnIPxNnPoAN6yNXd-3=w1200","https://lh3.googleusercontent.com/d/17b_9yHWYNg3e6MVBil5z199c588GBDJB=w1200","https://lh3.googleusercontent.com/d/1k1Ppq7k4UWx-93n-RdBNZB4QdDtoZqU2=w1200","https://lh3.googleusercontent.com/d/1Z89wVxhVuJd9YI5l5w9BBUtCWDC_AWsK=w1200","https://lh3.googleusercontent.com/d/1QB4gycy9fUg0QKKSaShcUhUTBMKb9Pqv=w1200","https://lh3.googleusercontent.com/d/15G9KO1k9rzRcw3fHDBvZK5GII2f6nt-V=w1200","https://lh3.googleusercontent.com/d/1YXVTMlUUtm6Kyr00KXM6tlE-q0cUPide=w1200","https://lh3.googleusercontent.com/d/1XQCo-QD0U2dNvwnNrXdwdj6STy3311xp=w1200","https://lh3.googleusercontent.com/d/1y75wdmetNRRsLuZ6zNslPRiK9zDu3f-q=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1ylo_hHmn_CCd0UGcbYGjS36WagRzUK7x","gps":{"poster":[{"lat":35.1156117,"lng":128.96613579972222},{"lat":35.11559689972222,"lng":128.96601539999997},{"lat":35.1155637,"lng":128.9660825997222},{"lat":35.1156117,"lng":128.96613579972222},{"lat":35.115639,"lng":128.96600999999998},{"lat":35.114612,"lng":128.965665},{"lat":35.1156073,"lng":128.9660642997222},{"lat":35.11554579972223,"lng":128.96607469999998},{"lat":35.1164204,"lng":128.96818569972223},{"lat":35.115343199722226,"lng":128.9656866997222},{"lat":35.115008,"lng":128.967744},{"lat":35.1153148,"lng":128.96555659999999}],"banner":[]}},{"name":"부산경상대학교","addr":"부산광역시 연제구 고분로 170","addrClean":"부산광역시 연제구 고분로 170","region":"부산","regionOrd":15,"subAddr":"연제구","pQty":10,"bQty":2,"postDate":"2026년 9월 14일 17시 26분","note":"진리관.학생회관 / 현수막 : 농구장 앞, 진리관 인근","isDone":true,"photos":["https://lh3.googleusercontent.com/d/1h1nZ6qZF73dQ_nYwq7KJucwi2QQACmtp=w1200","https://lh3.googleusercontent.com/d/1K-1tZHT6PkFyxWQOjnCwddaDSz5wH7G4=w1200","https://lh3.googleusercontent.com/d/1Th-FMY39hTbRHMihwUkR1WSXeFZgEW-a=w1200","https://lh3.googleusercontent.com/d/12gNpyJrBI4mLx6zQUkuILj21E3tesHyI=w1200","https://lh3.googleusercontent.com/d/1adwjqlZZ7iNhugfbLggk8hnWioEpsmRu=w1200","https://lh3.googleusercontent.com/d/1UaxibI-u3r0uWknAOJ4QEmZVI8XqTonv=w1200","https://lh3.googleusercontent.com/d/18-_vF8LHlNBAWWnmw9NJqzPvULotrOC4=w1200","https://lh3.googleusercontent.com/d/1J8rw-waBIMDfRFOVlVVgWq0rmC2_vfGF=w1200","https://lh3.googleusercontent.com/d/1Y35JPHHjxyE2nOkkf7ijibWCC_0PEYrm=w1200","https://lh3.googleusercontent.com/d/14VC_7z9XNbJJgauAEdif4EKep7nNjChR=w1200","https://lh3.googleusercontent.com/d/1OrZX1_V3K06VvTuYmI4Khh0AbXjE-2wT=w1200","https://lh3.googleusercontent.com/d/1sdXjMWCmYTpfJ5wiadA0Y92WH3mGWUXL=w1200","https://lh3.googleusercontent.com/d/1q_RN1Fr_rq8FFwAcBPt1wDE5B4xTE7i2=w1200","https://lh3.googleusercontent.com/d/1JGlqrnyqwkWUJ8v3jh-50ILjp7T62ZXn=w1200"],"driveUrl":"https://drive.google.com/drive/folders/1C3FqXPuKRibnEn9lQLegGt2x4-SP9a1Q","gps":{"poster":[{"lat":35.183786999999995,"lng":129.1008649722222},{"lat":35.18530619972222,"lng":129.10075739972223},{"lat":35.185328999999996,"lng":129.1007519722222},{"lat":35.183904399999996,"lng":129.10062859972223},{"lat":35.18378729972222,"lng":129.1008654},{"lat":35.18390397222222,"lng":129.1006289722222},{"lat":35.18445597222222,"lng":129.100007},{"lat":35.18550197222222,"lng":129.100513},{"lat":35.18518139972222,"lng":129.1005394},{"lat":35.185141099999996,"lng":129.1007849},{"lat":35.183786999999995,"lng":129.1008649722222}],"banner":[]}}]};
+window.fetch = function(){
+  return Promise.resolve({
+    json: function(){ return Promise.resolve(window.__INITIAL_REPORT_DATA__); },
+    text: function(){ return Promise.resolve(JSON.stringify(window.__INITIAL_REPORT_DATA__)); }
+  });
+};
+var WEB_APP_URL = "";
+var CAMP_KEY = "와이컴마케팅그룹_K-뉴딜 Microsoft AI 디지털 역량강화 교육과정";
+var NAVER_CLIENT_ID = "gcvbnnigi1";
+var AUTO_REFRESH_SEC = 300;
+
+function escHtml(s){if(!s)return"";return s.toString().replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+
+// 인쇄용 모드: URL에 ?print=1 이 있으면 학교당 사진 4장으로 제한 + eager 로드
+try{window._printMode=(new URLSearchParams(location.search)).get("print")==="1";}catch(e){window._printMode=false;}
+if(window._printMode){
+  document.documentElement.classList.add("print-mode");
+  document.body&&document.body.classList.add("print-mode");
+  document.addEventListener("DOMContentLoaded",function(){
+    var b=document.getElementById("printBanner");if(!b)return;
+    b.style.display="flex";
+    b.innerHTML='<div style="flex:1;min-width:240px"><div style="font-size:14px;font-weight:700;color:#1E3F75;margin-bottom:4px">📄 인쇄용 보고서 모드</div><div style="font-size:12px;color:#374151;line-height:1.5">학교당 사진을 <b>대표 8장</b>으로 제한해 PDF 저장이 빨라지도록 구성했습니다. 전체 사진은 일반 보고서 화면에서 확인 가능합니다.</div></div><button onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px;background:#0D1B3E;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:inherit;white-space:nowrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>인쇄 / PDF 저장 (Ctrl+P)</button>';
+  });
+}
+function openPrintMode(){
+  try{var u=new URL(location.href);u.searchParams.set("print","1");window.open(u.toString(),"_blank");}
+  catch(e){window.open(location.href+(location.search?"&":"?")+"print=1","_blank");}
+}
+// 인쇄 직전 lazy 사진 강제 로드 (Ctrl+P / 메뉴 인쇄 대응)
+window.addEventListener("beforeprint",function(){
+  document.querySelectorAll('img[loading="lazy"]').forEach(function(img){img.loading="eager";});
+});
+
+function loadReportData(){
+  fetch(WEB_APP_URL+"?action=report_data&camp="+encodeURIComponent(CAMP_KEY))
+  .then(function(r){return r.json()})
+  .then(function(json){
+    if(json.status!=="ok"){showError(json.message||"데이터 로딩 실패");return}
+    renderReport(json);
+  })
+  .catch(function(err){showError("네트워크 오류: "+err.message)})
+}
+
+function showError(msg){
+  document.getElementById("reportContent").innerHTML=
+    '<div class="error-wrap"><div style="font-size:48px;margin-bottom:16px">⚠️</div>'
+    +'<div style="font-size:16px;font-weight:700">'+escHtml(msg)+'</div>'
+    +'<button class="refresh-btn" onclick="loadReportData()">다시 시도</button></div>';
+}
+
+function renderReport(data){
+  window._reportData=data;
+  var s=data.stats, schools=data.schools;
+  var mgrEl=document.getElementById("metaManager");if(data.manager){mgrEl.style.display="";document.getElementById("managerName").textContent="담당: "+data.manager;}else{mgrEl.style.display="";document.getElementById("managerName").textContent="좋은광고연구소";}
+  if(data.updatedAt){var updEl=document.getElementById("metaUpdated");updEl.style.display="";document.getElementById("updatedText").textContent="업데이트: "+data.updatedAt;}
+  var schoolsEl=document.getElementById("metaSchools");if(schoolsEl)schoolsEl.textContent=s.totalSchools+"개교 ("+s.regionText+")";
+  var h="";
+  h+='<div class="kpi-grid fade-in">';
+  h+='<div class="kpi-card schools"><div class="kpi-value">'+s.totalSchools+'</div><div class="kpi-label">대상 학교</div></div>';
+  h+='<div class="kpi-card poster"><div class="kpi-value">'+s.totalPoster+'</div><div class="kpi-label">포스터 (장)</div><div class="kpi-sub">완료 '+s.donePoster+' / 잔여 '+(s.totalPoster-s.donePoster)+'</div></div>';
+  h+='<div class="kpi-card banner"><div class="kpi-value">'+s.totalBanner+'</div><div class="kpi-label">현수막 (장)</div><div class="kpi-sub">완료 '+s.doneBanner+' / 잔여 '+(s.totalBanner-s.doneBanner)+'</div></div>';
+  h+='<div class="kpi-card progress"><div class="kpi-value">'+s.pct+'%</div><div class="kpi-label">진행률</div><div class="kpi-sub">'+s.doneSchools+'/'+s.totalSchools+'개교 완료</div></div>';
+  h+='</div>';
+  h+='<div class="progress-section fade-in" style="animation-delay:0.1s"><div class="progress-bar-wrap">';
+  h+='<div class="progress-header"><span class="progress-title">전체 진행 현황</span><span class="progress-pct">'+s.pct+'%</span></div>';
+  h+='<div class="progress-track"><div class="progress-fill" style="width:'+s.pct+'%"></div></div>';
+  h+='<div class="progress-detail"><span><span class="dot dot-done"></span>완료 '+s.doneSchools+'개교</span>';
+  h+='<span><span class="dot dot-remain"></span>잔여 '+s.remainSchools+'개교</span>';
+  h+='<span style="margin-left:auto;color:var(--text-secondary)">최종 업데이트 : '+data.updatedAt+'</span></div></div></div>';
+  var campDriveUrlSaved=data.campDriveUrl||"";
+  h+='<div style="display:flex;justify-content:flex-end;gap:10px;margin-top:14px;flex-wrap:wrap">';
+  if(campDriveUrlSaved){
+    h+='<a href="'+campDriveUrlSaved+'" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:var(--shadow-sm);transition:opacity 0.15s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>전체 원본 사진 다운로드</a>';
+  }
+  if(!window._printMode){
+    h+='<button class="no-print" onclick="openPrintMode()" style="display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;color:#0D1B3E;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;border:1.5px solid #0D1B3E;cursor:pointer;font-family:inherit;box-shadow:var(--shadow-sm);transition:opacity 0.15s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>인쇄용 보고서 (PDF용)</button>';
+  }
+  h+='</div>';
+  var gpsPoints=[];
+  for(var gi=0;gi<schools.length;gi++){
+    var gd=schools[gi].gps;
+    if(gd){
+      var pts=gd.poster||[];
+      for(var gj=0;gj<pts.length;gj++){
+        if(pts[gj].lat&&pts[gj].lng&&schools[gi].isDone)gpsPoints.push({name:schools[gi].name,lat:pts[gj].lat,lng:pts[gj].lng});
+      }
+    }
+  }
+  if(gpsPoints.length>0 && !window._printMode){
+    h+='<div class="section fade-in" style="animation-delay:0.11s"><div class="section-title">부착 위치 현황</div>';
+    h+='<div style="margin:0 16px 14px;padding:14px 16px;background:#FFF8E1;border:1px solid #FFE0B2;border-left:4px solid #E6940A;border-radius:8px;display:flex;gap:12px;align-items:flex-start">';
+    h+='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E6940A" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+    h+='<div style="flex:1;font-size:13px;line-height:1.6;color:#7A5A00"><b style="display:block;font-size:13px;font-weight:800;color:#0D1B3E;margin-bottom:4px">부착 위치 현황 — 시범 운영 안내</b>본 지도는 현재 시범 운영 단계로, 일부 학교의 GPS 정보가 수집되지 않을 수 있는 점 양해 부탁드립니다. 정확한 부착 현장은 아래 <b>학교별 상세 사진</b>을 참고해 주시기 바라며, 지속적인 시스템 안정화를 통해 모든 학교의 위치 정보를 제공할 수 있도록 개선해 나가겠습니다.</div>';
+    h+='</div>';
+    h+='<div class="map-wrap" style="padding:0 16px 16px"><div id="reportMap" style="width:100%;height:520px;border-radius:12px;border:1px solid var(--border);overflow:hidden"></div>';
+    h+='<div style="margin-top:10px;padding:10px 14px;background:#D4EDDA;border:1px solid #D4EDDA;border-radius:8px;font-size:12px;color:#0EA47A;display:flex;align-items:center;gap:8px">';
+    h+='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0EA47A" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>';
+    h+='GPS 및 사진은 1시간 간격으로 자동 업데이트 됩니다.<br><span style="color:#6B7280;font-weight:500">실내 깊은곳에서는 GPS가 수집되지 않습니다.</span>';
+    h+='</div></div></div>';
+  }
+  h+='<div class="section fade-in" style="animation-delay:0.12s"><div class="section-title">전체 학교 요약</div>';
+  h+='<div class="summary-table-wrap"><div style="overflow-x:auto"><table class="summary-table">';
+  h+='<thead><tr><th>No.</th><th>학교이름</th><th>주소</th><th>포스터</th><th>현수막</th><th>부착일시</th><th>상태</th><th>부착장소 및 특이사항</th></tr></thead><tbody>';
+  var SVG_DONE='<span class="school-status status-done" style="display:inline-flex;font-size:12px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#0EA47A"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</span>';
+  var SVG_PENDING='<span class="school-status status-pending" style="display:inline-flex;font-size:12px;padding:2px 8px"><svg width="12" height="12" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="none" stroke="#D1D5DB" stroke-width="2"/></svg>대기</span>';
+  for(var i=0;i<schools.length;i++){
+    var sc=schools[i];
+    var pq=typeof sc.pQty==="number"&&sc.pQty>0?sc.pQty:"-";
+    var bq=typeof sc.bQty==="number"&&sc.bQty>0?sc.bQty:"-";
+    var dateCell=sc.postDate?'<td class="date-text">'+escHtml(sc.postDate)+'</td>':'<td style="color:var(--text-muted)">-</td>';
+    var noteText=sc.note||"";
+    var noteCell=noteText?'<td class="summary-note">'+escHtml(noteText)+'</td>':'<td class="summary-note" style="color:var(--text-muted)">-</td>';
+    h+='<tr><td>'+(i+1)+'</td><td><a href="#school-'+(i+1)+'" style="color:var(--accent);text-decoration:none;font-weight:700;cursor:pointer" onclick="event.preventDefault();var el=document.getElementById(\'school-'+(i+1)+'\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'center\'})">'+escHtml(sc.name)+'</a></td><td class="region-tag">'+escHtml(sc.region+" "+sc.subAddr)+'</td>';
+    h+='<td'+(pq!=="-"?' class="qty-poster"':"")+">"+pq+'</td>';
+    h+='<td'+(bq!=="-"?' class="qty-banner"':"")+">"+bq+'</td>';
+    h+=dateCell+'<td>'+(sc.isDone?SVG_DONE:SVG_PENDING)+'</td>'+noteCell+'</tr>';
+  }
+  h+='</tbody><tfoot><tr><td></td><td>합계 '+s.totalSchools+'개교</td><td></td><td class="qty-poster">'+s.totalPoster+'장</td><td class="qty-banner">'+s.totalBanner+'장</td><td></td><td></td><td></td></tr></tfoot></table></div></div>';
+  h+='</div>';
+  h+='<div class="section fade-in" style="animation-delay:0.15s"><div class="section-title">학교별 부착 결과</div>';
+  var curRegion="", regionCounts={};
+  for(var rc=0;rc<schools.length;rc++)regionCounts[schools[rc].region]=(regionCounts[schools[rc].region]||0)+1;
+  var doneRegionCounts={};
+  for(var drc=0;drc<schools.length;drc++){if(schools[drc].isDone)doneRegionCounts[schools[drc].region]=(doneRegionCounts[schools[drc].region]||0)+1;}
+  var TOGGLE_SVG='<svg class="card-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+  for(var si=0;si<schools.length;si++){
+    var sc2=schools[si];
+    if(sc2.region!==curRegion){if(curRegion)h+='</div>';curRegion=sc2.region;h+='<div class="region-group"><div class="region-label">'+curRegion+' <span class="region-count">'+regionCounts[curRegion]+'개교 (완료 '+(doneRegionCounts[curRegion]||0)+')</span></div>'}
+    var numBg=sc2.isDone?"var(--accent)":"var(--text-muted)";
+    var statusHtml2=sc2.isDone?'<div class="school-status status-done"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#0EA47A"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>완료</div>':'<div class="school-status status-pending"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="none" stroke="#D1D5DB" stroke-width="2"/></svg>대기</div>';
+    var qtyHtml2="";
+    if(sc2.pQty)qtyHtml2+='<div class="qty-item"><span class="qty-label">포스터</span><span class="qty-poster">'+sc2.pQty+'장</span></div>';
+    if(sc2.bQty)qtyHtml2+='<div class="qty-item"><span class="qty-label">현수막</span><span class="qty-banner">'+sc2.bQty+'장</span></div>';
+    var cardClass=sc2.isDone?"school-card card-done":"school-card card-pending";
+    var collapsed=sc2.isDone?"":"collapsed";
+    var toggleOpen=sc2.isDone?"open":"";
+    h+='<div id="school-'+(si+1)+'" class="'+cardClass+'">';
+    h+='<div class="school-card-header" onclick="toggleCard(this)"><div class="school-info"><div class="school-num" style="background:'+numBg+'">' +(si+1)+'</div><div><div class="school-name">'+escHtml(sc2.name)+'</div><div class="school-addr">'+escHtml(sc2.addr)+'</div></div></div><div class="header-qty">'+qtyHtml2+'</div>'+statusHtml2+TOGGLE_SVG+'</div>';
+    h+='<div class="card-body '+collapsed+'">';
+    if(sc2.isDone){
+      var noteText2=sc2.note||"";
+      h+='<div class="attach-info">';
+      if(sc2.postDate){h+='<div class="attach-info-item"><span class="attach-info-label">부착일시</span><span class="attach-info-value">'+escHtml(sc2.postDate)+'</span>';
+        h+='</div>';}
+      if(noteText2)h+='<div class="attach-info-item"><span class="attach-info-label">부착장소 및 특이사항</span><span class="attach-info-value">'+escHtml(noteText2)+'</span></div>';
+      h+='</div>';
+      var photos=sc2.photos||[];
+      if(photos.length>0){
+        var sc2GpsForLink=(sc2.gps&&sc2.gps.poster)||[];
+        h+='<div class="photo-section" style="padding-top:12px"><div class="photo-label" style="display:flex;align-items:center;gap:12px"><span>부착 사진</span>';
+        if(sc2GpsForLink.length>0)h+='<a href="javascript:void(0)" class="drive-link" onclick="event.stopPropagation();openSchoolMap(\''+escHtml(sc2.name)+'\','+JSON.stringify(sc2GpsForLink).replace(/"/g,"&quot;")+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>지도보기</a>';
+        h+='</div><div class="photo-grid">';
+        var maxPhotos=window._printMode?Math.min(photos.length,8):photos.length;
+        var loadingAttr=window._printMode?"eager":"lazy";
+        for(var pi=0;pi<maxPhotos;pi++){h+='<div class="photo-thumb" onclick="openLightbox(\''+photos[pi]+'\')"><img src="'+photos[pi]+'" alt="'+escHtml(sc2.name)+' 부착사진 '+(pi+1)+'" loading="'+loadingAttr+'" decoding="async" onerror="handleImgError(this)"></div>'}
+        h+='</div></div>';
+      }
+    } else {
+      h+='<div class="attach-info"><div class="attach-info-item"><span class="attach-info-label">상태</span><span class="attach-info-value" style="color:var(--text-muted)">부착 대기 중</span></div></div>';
+    }
+    h+='</div></div>';
+  }
+  if(curRegion)h+='</div>';
+  h+='</div>';
+  document.getElementById("reportContent").innerHTML=h;
+  if(gpsPoints.length>0&&typeof naver!=="undefined"&&naver.maps){
+    var mapEl=document.getElementById("reportMap");
+    if(mapEl){
+      var bounds=new naver.maps.LatLngBounds();
+      var map=new naver.maps.Map(mapEl,{center:new naver.maps.LatLng(36.5,127.5),zoom:7,zoomControl:false,mapDataControl:false,scaleControl:false,logoControlOptions:{position:naver.maps.Position.BOTTOM_LEFT}});
+      (function addMapControls(){
+        mapEl.style.position="relative";
+        var btnStyle="position:absolute;right:10px;background:#fff;border:1px solid #D1D5DB;border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.15);z-index:100;padding:0";
+        var fsBtn=document.createElement("button");fsBtn.type="button";fsBtn.title="전체화면";
+        fsBtn.style.cssText=btnStyle+";top:10px";
+        fsBtn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>';
+        var fsExitSvg='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>';
+        var fsEnterSvg=fsBtn.innerHTML;
+        fsBtn.onclick=function(){
+          var doc=document;
+          var isFs=doc.fullscreenElement||doc.webkitFullscreenElement;
+          if(isFs){var ex=doc.exitFullscreen||doc.webkitExitFullscreen;if(ex)ex.call(doc);}
+          else{var req=mapEl.requestFullscreen||mapEl.webkitRequestFullscreen;if(req)req.call(mapEl);else alert("전체화면 지원 안됨");}
+        };
+        function onFsChange(){
+          var isFs=document.fullscreenElement||document.webkitFullscreenElement;
+          fsBtn.innerHTML=isFs?fsExitSvg:fsEnterSvg;
+          setTimeout(function(){try{naver.maps.Event.trigger(map,"resize");}catch(e){}},200);
+        }
+        document.addEventListener("fullscreenchange",onFsChange);
+        document.addEventListener("webkitfullscreenchange",onFsChange);
+        mapEl.appendChild(fsBtn);
+        var locBtn=document.createElement("button");locBtn.type="button";locBtn.title="내 위치";
+        locBtn.style.cssText=btnStyle+";top:58px";
+        locBtn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>';
+        var myLocMarker=null;
+        locBtn.onclick=function(){
+          if(!navigator.geolocation){alert("이 브라우저는 위치 정보를 지원하지 않습니다");return;}
+          locBtn.disabled=true;locBtn.style.opacity="0.5";
+          navigator.geolocation.getCurrentPosition(function(pos){
+            var ll=new naver.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
+            map.setCenter(ll);map.setZoom(15);
+            if(myLocMarker)myLocMarker.setMap(null);
+            var dot=document.createElement("div");
+            dot.style.cssText="width:16px;height:16px;background:#4A8ED6;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 6px rgba(59,130,246,0.2),0 2px 6px rgba(0,0,0,0.3)";
+            myLocMarker=new naver.maps.Marker({position:ll,map:map,icon:{content:dot,anchor:new naver.maps.Point(8,8)},zIndex:999});
+            locBtn.disabled=false;locBtn.style.opacity="1";
+          },function(err){
+            alert("위치를 가져올 수 없습니다. 위치 권한을 확인해 주세요.");
+            locBtn.disabled=false;locBtn.style.opacity="1";
+          },{enableHighAccuracy:true,timeout:10000,maximumAge:0});
+        };
+        mapEl.appendChild(locBtn);
+      })();
+      var activeInfoOverlay=null;
+      var allMarkerDots=[];
+      function getMarkerSize(z){return z<=7?10:z<=9?13:z<=11?16:18;}
+      for(var mi=0;mi<gpsPoints.length;mi++){
+        var pos=new naver.maps.LatLng(gpsPoints[mi].lat,gpsPoints[mi].lng);
+        bounds.extend(pos);
+        (function(pos2,name,map2){
+          var sz=getMarkerSize(map2.getZoom());
+          var color="#0EA47A";
+          var wrap=document.createElement("div");
+          wrap.style.cssText="width:24px;height:24px;display:flex;align-items:center;justify-content:center;cursor:pointer";
+          var dot=document.createElement("div");
+          dot.style.cssText="width:"+sz+"px;height:"+sz+"px;background:"+color+";border:2px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.35);transition:width .25s ease,height .25s ease";
+          wrap.appendChild(dot);
+          allMarkerDots.push(dot);
+          var marker=new naver.maps.Marker({position:pos2,map:map2,icon:{content:wrap,anchor:new naver.maps.Point(12,12)}});
+          var infoEl=document.createElement("div");
+          infoEl.style.cssText="padding:4px 8px;font-size:11px;font-weight:700;white-space:nowrap;background:#fff;border:1px solid #ddd;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.15)";
+          infoEl.textContent=name;
+          var infoOverlay=new naver.maps.Marker({position:pos2,map:map2,icon:{content:infoEl,anchor:new naver.maps.Point(0,30)},visible:false});
+          naver.maps.Event.addListener(marker,"click",function(e){if(activeInfoOverlay)activeInfoOverlay.setVisible(false);if(activeInfoOverlay===infoOverlay){activeInfoOverlay=null}else{infoOverlay.setVisible(true);activeInfoOverlay=infoOverlay}});
+        })(pos,gpsPoints[mi].name,map);
+      }
+      naver.maps.Event.addListener(map,"zoom_changed",function(){var ns=getMarkerSize(map.getZoom());for(var di=0;di<allMarkerDots.length;di++){allMarkerDots[di].style.width=ns+"px";allMarkerDots[di].style.height=ns+"px";}});
+      naver.maps.Event.addListener(map,"click",function(){if(activeInfoOverlay){activeInfoOverlay.setVisible(false);activeInfoOverlay=null}});
+      map.fitBounds(bounds);
+    }
+  }
+}
+
+function buildPlaceholder(text){
+  return '<div class="photo-thumb"><div class="photo-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>'+(text||"")+'</span></div></div>';
+}
+
+function openSchoolMap(name,gpsArr){
+  var existing=document.getElementById("schoolMapOverlay");
+  if(existing)existing.remove();
+  var overlay=document.createElement("div");
+  overlay.id="schoolMapOverlay";
+  overlay.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:2000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)";
+  var popup=document.createElement("div");
+  popup.style.cssText="background:#fff;border-radius:16px;width:90vw;max-width:700px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3)";
+  var header=document.createElement("div");
+  header.style.cssText="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #E5E7EB";
+  var titleDiv=document.createElement("div");
+  titleDiv.style.cssText="font-size:14px;font-weight:800";
+  titleDiv.innerHTML=escHtml(name)+" <span style=\"color:#0EA47A;font-size:12px\">GPS "+gpsArr.length+"건</span>";
+  var closeBtn=document.createElement("button");
+  closeBtn.textContent="\u2715";
+  closeBtn.style.cssText="background:none;border:none;font-size:20px;cursor:pointer;color:#9CA3AF;padding:4px";
+  closeBtn.addEventListener("click",function(){var el=document.getElementById("schoolMapOverlay");if(el)el.remove()});
+  header.appendChild(titleDiv);
+  header.appendChild(closeBtn);
+  var mapDiv=document.createElement("div");
+  mapDiv.style.cssText="width:100%;height:520px";
+  popup.appendChild(header);
+  popup.appendChild(mapDiv);
+  overlay.appendChild(popup);
+  overlay.addEventListener("click",function(e){if(e.target===overlay)overlay.remove()});
+  document.body.appendChild(overlay);
+  var map=new naver.maps.Map(mapDiv,{center:new naver.maps.LatLng(gpsArr[0].lat,gpsArr[0].lng),zoom:15});
+  var bounds=new naver.maps.LatLngBounds();
+  for(var i=0;i<gpsArr.length;i++){
+    var pos=new naver.maps.LatLng(gpsArr[i].lat,gpsArr[i].lng);
+    bounds.extend(pos);
+    var el=document.createElement("div");
+    el.style.cssText="width:16px;height:16px;background:#0EA47A;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)";
+    new naver.maps.Marker({position:pos,map:map,icon:{content:el,anchor:new naver.maps.Point(8,8)}});
+  }
+  if(gpsArr.length>1)map.fitBounds(bounds);
+  var labelEl=document.createElement("div");
+  labelEl.style.cssText="padding:4px 10px;font-size:11px;font-weight:700;background:#fff;border:1px solid #ddd;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,0.1)";
+  labelEl.textContent=name+" ("+gpsArr.length+"건)";
+  new naver.maps.Marker({position:new naver.maps.LatLng(gpsArr[0].lat,gpsArr[0].lng),map:map,icon:{content:labelEl,anchor:new naver.maps.Point(0,30)}});
+}
+
+function handleImgError(img){
+  var src=img.src;
+  var idMatch=src.match(/\/d\/([^=\/]+)/) || src.match(/[?&]id=([^&]+)/);
+  if(idMatch&&!img.dataset.retried){
+    img.dataset.retried="1";
+    img.src="https://drive.google.com/thumbnail?id="+idMatch[1]+"&sz=w1200";
+    return;
+  }
+  // v3.9.7: 재시도도 실패 → Drive에서 삭제된 사진이므로 썸네일 자체를 제거 + 번호 재카운트
+  try{
+    var thumb=img.closest(".photo-thumb");
+    var grid=thumb&&thumb.parentNode;
+    if(thumb)thumb.remove();
+    if(grid){
+      var remaining=grid.querySelectorAll(".photo-thumb img");
+      for(var i=0;i<remaining.length;i++){
+        var alt=remaining[i].alt||"";
+        remaining[i].alt=alt.replace(/\s\d+$/," "+(i+1));
+      }
+      if(remaining.length===0){var sec=grid.closest(".photo-section");if(sec)sec.style.display="none";}
+    }
+  }catch(e){}
+}
+function toggleCard(headerEl){
+  var card=headerEl.parentElement;
+  var body=card.querySelector(".card-body");
+  var toggle=headerEl.querySelector(".card-toggle");
+  if(body.classList.contains("collapsed")){
+    body.classList.remove("collapsed");
+    body.style.maxHeight=body.scrollHeight+"px";
+    if(toggle)toggle.classList.add("open");
+    setTimeout(function(){body.style.maxHeight="none"},350);
+  } else {
+    body.style.maxHeight=body.scrollHeight+"px";
+    body.offsetHeight;
+    body.classList.add("collapsed");
+    if(toggle)toggle.classList.remove("open");
+  }
+}
+function openLightbox(src){var lb=document.getElementById("lightbox");document.getElementById("lightbox-img").src=src;lb.classList.add("show");document.body.style.overflow="hidden"}
+function closeLightbox(){document.getElementById("lightbox").classList.remove("show");document.body.style.overflow=""}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox()});
+
+loadReportData();
+if(!window._printMode){setInterval(loadReportData, AUTO_REFRESH_SEC * 1000);}
+
+</script>
+</body></html>
